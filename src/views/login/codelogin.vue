@@ -20,79 +20,78 @@
 </template>
 
 <script>
-const MSGINIT = '发送验证码'
+const MSGINIT = "发送验证码";
 // const MSGERROR = '验证码发送失败'
-const MSGSCUCCESS = '${time}秒后重发'
-const MSGTIME = 60
-import { isvalidatemobile } from '@/utils/validate'
+const MSGSCUCCESS = "${time}秒后重发";
+const MSGTIME = 60;
+import { isvalidatemobile } from "@/utils/validate";
 export default {
-  name: 'codelogin',
+  name: "codelogin",
   data() {
     const validatePhone = (rule, value, callback) => {
       if (isvalidatemobile(value)[0]) {
-        callback(new Error(isvalidatemobile(value)[1]))
+        callback(new Error(isvalidatemobile(value)[1]));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     const validateCode = (rule, value, callback) => {
       if (value.length !== 4) {
-        callback(new Error('请输入4位数的验证码'))
+        callback(new Error("请输入4位数的验证码"));
       } else {
-        callback()
+        callback();
       }
-    }
+    };
     return {
       msgText: MSGINIT,
       msgTime: MSGTIME,
       msgKey: false,
       loginForm: {
-        phone: '17547400800',
-        code: ''
+        phone: "",
+        code: ""
       },
       loginRules: {
-        phone: [{ required: true, trigger: 'blur', validator: validatePhone }],
-        code: [{ required: true, trigger: 'blur', validator: validateCode }]
+        phone: [{ required: true, trigger: "blur", validator: validatePhone }],
+        code: [{ required: true, trigger: "blur", validator: validateCode }]
       }
-    }
+    };
   },
   created() {},
   mounted() {},
-  computed: {
-  },
+  computed: {},
   props: [],
   methods: {
     handleSend() {
-      if (this.msgKey) return
-      this.msgText = MSGSCUCCESS.replace('${time}', this.msgTime)
-      this.msgKey = true
+      if (this.msgKey) return;
+      this.msgText = MSGSCUCCESS.replace("${time}", this.msgTime);
+      this.msgKey = true;
       const time = setInterval(() => {
-        this.msgTime--
-        this.msgText = MSGSCUCCESS.replace('${time}', this.msgTime)
+        this.msgTime--;
+        this.msgText = MSGSCUCCESS.replace("${time}", this.msgTime);
         if (this.msgTime === 0) {
-          this.msgTime = MSGTIME
-          this.msgText = MSGINIT
-          this.msgKey = false
-          clearInterval(time)
+          this.msgTime = MSGTIME;
+          this.msgText = MSGINIT;
+          this.msgKey = false;
+          clearInterval(time);
         }
-      }, 1000)
+      }, 1000);
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store.dispatch('Login', this.loginForm).then(res => {
-            this.$router.push({ path: '/' })
-          })
+          this.$store.dispatch("Login", this.loginForm).then(res => {
+            this.$router.push({ path: "/" });
+          });
         }
-      })
+      });
     }
   }
-}
+};
 </script>
 
 <style>
-.yanzhengma{
-  display:block;
+.yanzhengma {
+  display: block;
   margin-top: 8px;
 }
 .msg-text {

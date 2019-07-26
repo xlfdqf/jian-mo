@@ -68,24 +68,6 @@ export const constantRouterMap = [
       },
     ]
   },
-  // 树形组件
-  {
-    path: '/treeMen',
-    component: Layout,
-    redirect: 'noredirect',
-    meta: {
-      title: 'treeMen',
-      icon: 'TreeMean'
-    },
-    children: [
-      {
-        path: 'treeMen',
-        name: 'treeMen-demo',
-        component: () => import('@/views/tree/treeMen'),
-        meta: { title: 'treeMen', icon: 'TreeMean' }
-      }
-    ]
-  },
   // 表单
   {
     path: '/form',

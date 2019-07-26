@@ -10,14 +10,14 @@ const permission = {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
-      console.log('state.routers', state.routers)
+      // console.log('state.routers', state.routers)
     }
   },
   actions: {
     GenerateRoutes({ commit }, data) {
       return new Promise(resolve => {
         let accessedRouters = asyncRouterMap
-        console.log('accessedRouters', accessedRouters)
+        // console.log('accessedRouters', accessedRouters)
         commit('SET_ROUTERS', accessedRouters)
         resolve()
       })

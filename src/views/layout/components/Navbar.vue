@@ -3,24 +3,33 @@
   <el-menu class="navbar" mode="horizontal">
     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></nx-hamburger>
     <div class="right-menu">
-     <error-log class="errLog-container right-menu-item"></error-log>
+     <!-- <error-log class="errLog-container right-menu-item"></error-log> -->
       <el-tooltip effect="dark" content="全屏" placement="bottom">
         <nx-full-screen class="screenfull right-menu-item"></nx-full-screen>
       </el-tooltip>
 
-      <nx-lang-select class="international right-menu-item"></nx-lang-select>
+        <!--中英文切换-->
+      <!-- <nx-lang-select class="international right-menu-item"></nx-lang-select> -->
 
-      <el-tooltip effect="dark" content="主题" placement="bottom">
+      <!-- <el-tooltip effect="dark" content="主题" placement="bottom">
         <nx-skin class="theme-switch right-menu-item"></nx-skin>
-      </el-tooltip>
+      </el-tooltip> -->
 
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
-          <img class="user-avatar" src="https://mgbq.github.io/nx-admin-site/home.png">
           <!-- <img class="user-avatar" :src="avatar"> -->
+          <div style="float:right">
+            <div style="color:#21BAA9;margin-left:10px">{{name}}</div>
+          </div>
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu slot="dropdown">
+            <el-dropdown-item >
+            <span style="display:block;">个人中心</span>
+          </el-dropdown-item>
+            <el-dropdown-item >
+            <span style="display:block;">修改密码</span>
+          </el-dropdown-item>
           <el-dropdown-item divided>
             <span @click="logout" style="display:block;">退出</span>
           </el-dropdown-item>

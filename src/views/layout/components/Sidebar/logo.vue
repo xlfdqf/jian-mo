@@ -12,33 +12,35 @@
     </transition>
     <transition-group name="fade">
       <template v-if="!isCollapse">
-        <span class="logo_title is-bold" key="1">{{website.title}} </span>
-        <span class="logo_subtitle" key="2">{{website.author}}</span>
+        <span class="logo_title is-bold" key="1">
+          <img :src="logoimg" width="30" height="30" style="float:left;margin-right:10px;margin-top:15px;"/>
+          <span style="float:left;">{{website.title}} </span>
+        </span>
       </template>
     </transition-group>
   </div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import logoimg from '@/assets/images/home/logo.png'
+import { mapGetters } from "vuex";
+import logoimg from "@/assets/images/home/logo.png";
 export default {
-  name: 'logo',
+  name: "logo",
   data() {
     return {
-      logoimg:logoimg,
-    }
+      logoimg: logoimg
+    };
   },
-  props: ['isCollapse'],
+  props: ["isCollapse"],
   created() {},
   computed: {
-    ...mapGetters(['website']),
+    ...mapGetters(["website"]),
     type: function(val) {
-      return this.website.logo.indexOf('static') !== -1
+      return this.website.logo.indexOf("static") !== -1;
     }
   },
   methods: {}
-}
+};
 </script>
 
 <style scoped="scoped" lang="scss">
@@ -70,7 +72,7 @@ export default {
 }
 .logo_title {
   padding: 0 5px 0 0;
-  color: #42b983;
+  color: #21baa9;
   font-size: 20px;
   &.is-bold {
     font-weight: 700;

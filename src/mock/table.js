@@ -17,7 +17,7 @@ for (let i = 0; i < count; i++) {
 
 export default {
   getUserList: config => {
-    const { name, page = 1, limit = 10 } = param2Obj(config.url)
+    const { name, page = 1, limit = 5 } = param2Obj(config.url)
 
     const mockList = List.filter(user => {
       if (name && user.name.indexOf(name) === -1) return false

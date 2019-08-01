@@ -14,6 +14,13 @@ const userMap = {
     introduction: '普通用户',
     avatar: 'https://mgbq.github.io/nx-admin-site/home.png',
     name: 'editor'
+  },
+  xlf: {
+    code: 0,
+    token: '333',
+    introduction: 'VIP',
+    avatar: 'https://mgbq.github.io/nx-admin-site/home.png',
+    name: 'xlf'
   }
 }
 

@@ -1,269 +1,182 @@
 <template>
-	<section class="app-container">
-		<!--工具条-->
-		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true"  @submit.native.prevent>
-				<el-form-item>
-					<el-button type="primary" v-on:click="getUsers">查询</el-button>
-				</el-form-item>
-				<el-form-item>
-					<el-button type="primary" @click="handleAdd">新增</el-button>
-				</el-form-item>
-			</el-form>
-		</el-col>
-
-		<!--列表-->
-		<el-table :data="users" highlight-current-row @selection-change="selsChange"  stripe style="width: 100%;">
-			<el-table-column type="selection">
-			</el-table-column>
-			<el-table-column type="index">
-			</el-table-column>
-			<el-table-column prop="name" label="姓名">
-			</el-table-column>
-			<el-table-column prop="sex" label="性别" :formatter="formatSex">
-			</el-table-column>
-			<el-table-column prop="age" label="年龄">
-			</el-table-column>
-			<el-table-column prop="birth" label="生日">
-			</el-table-column>
-			<el-table-column prop="addr" label="地址">
-			</el-table-column>
-			<el-table-column label="操作">
-				<template slot-scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">删除</el-button>
-				</template>
-			</el-table-column>
-		</el-table>
-
-		<!--工具条-->
-		<el-col :span="24" class="toolbar">
-			<el-button type="danger" @click="batchRemove" :disabled="this.sels.length===0">批量删除</el-button>
-			<el-pagination  :page-sizes="[10, 20, 30, 40]" layout="total, sizes, prev, pager, next, jumper" @size-change="handleSizeChange" @current-change="handleCurrentChange" :page-size="10" :total="400" style="text-align:center;">
-			</el-pagination>
-
-		</el-col>
-
-		<!--编辑界面-->
-		<el-dialog :title="textMap[dialogStatus]" :visible.sync="dialogFormVisible" :close-on-click-modal="false">
-			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
-				<el-form-item label="姓名" prop="name">
-					<el-input v-model="editForm.name" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="性别">
-					<el-radio-group v-model="editForm.sex">
-						<el-radio class="radio" :label=1>男</el-radio>
-						<el-radio class="radio" :label=0>女</el-radio>
-					</el-radio-group>
-				</el-form-item>
-				<el-form-item label="年龄">
-					<el-input-number v-model="editForm.age" :min="0" :max="200"></el-input-number>
-				</el-form-item>
-				<el-form-item label="生日">
-					<el-date-picker type="date" placeholder="选择日期" v-model="editForm.birth"></el-date-picker>
-				</el-form-item>
-				<el-form-item label="地址">
-					<el-input type="textarea" v-model="editForm.addr"></el-input>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-			 <el-button @click.native="dialogFormVisible=false">取消</el-button>
-			  <el-button v-if="dialogStatus=='create'" type="primary" @click="createData">添加</el-button>
-        <el-button v-else type="primary" @click="updateData">修改</el-button>
-			</div>
-		</el-dialog>
-	</section>
+ <div class="table">
+   <el-card class="box-card">
+   <div class="text item">
+      <!-- height="800" 固定表头 -->
+       <el-table
+    :data="tableData"
+    style="width: 100%"
+    :row-class-name="tableRowClassName"
+    :header-cell-style="{background:'#eef1f6'}" border>
+   <el-table-column
+      prop="type"
+      align="center"
+      width="120"
+    >
+    </el-table-column>
+    <el-table-column
+      prop="good"
+      label="好人"
+      align="center"
+      :formatter="formatGood">
+    </el-table-column>
+      <el-table-column
+        prop="bad"
+        label="坏人"
+        align="center"
+        :formatter="formatBad">
+      </el-table-column>
+       <el-table-column
+          prop="overdue"
+          label="逾期"
+          align="center"
+          :formatter="formatOverdue">
+        </el-table-column>
+        <el-table-column
+          prop="suspicious"
+          label="可疑"
+          align="center"
+          :formatter="formatSuspicious">
+        </el-table-column>
+  </el-table>
+  </div>
+</el-card>
+ </div>
 </template>
 
 <script>
-import util from "@/utils/table.js";
-import {
-  getUserListPage,
-  removeUser,
-  batchRemoveUser,
-  editUser,
-  addUser
-} from "@/api/userTable";
-
 export default {
   data() {
     return {
-      dialogStatus: "",
-      textMap: {
-        update: "Edit",
-        create: "Create"
-      },
-      dialogFormVisible: false,
-      users: [],
-      total: 0,
-      page: 1,
-      sels: [], // 列表选中列
-      editFormRules: {
-        name: [{ required: true, message: "请输入姓名", trigger: "blur" }]
-      },
-      // 编辑界面数据
-      editForm: {
-        id: "0",
-        name: "",
-        sex: 1,
-        age: 0,
-        birth: "",
-        addr: ""
-      },
-
-      addFormVisible: false, // 新增界面是否显示
-      addFormRules: {
-        name: [{ required: true, message: "请输入姓名", trigger: "blur" }]
-      }
+      tableData: [
+        //好人
+        {
+          type: "好人",
+          good: "好人到好人",
+          bad: "好人到坏人",
+          overdue: "好人到逾期",
+          suspicious: "好人到可疑"
+        },
+        {
+          // type: "好人",
+          good: "2016-05-03",
+          bad: "王小虎",
+          overdue: ["第一次", "第二次", "第三次"],
+          suspicious: "上海"
+        },
+        {
+          // type: "好人",
+          good: "2016-05-02",
+          bad: "王小虎",
+          overdue: ["第一次", "第二次", "第三次"],
+          suspicious: "上海"
+        },
+        //坏人
+        {
+          type: "坏人",
+          good: "坏人到好人",
+          bad: "坏人到坏人",
+          overdue: "坏人到逾期",
+          suspicious: "坏人到可疑"
+        },
+        {
+          // type: "坏人",
+          good: "2016-05-02",
+          bad: "王小虎",
+          overdue: ["第一次", "第二次", "第三次"],
+          suspicious: "上海"
+        },
+        //逾期
+        {
+          type: "逾期",
+          good: "逾期到好人",
+          bad: "逾期到坏人",
+          overdue: "逾期到逾期",
+          suspicious: "逾期到可疑"
+        },
+        {
+          //  type: "逾期",
+          good: "2016-05-02",
+          bad: "王小虎",
+          overdue: ["第一次", "第二次", "第三次"],
+          suspicious: "上海"
+        },
+        //可疑
+        {
+          type: "可疑",
+          good: "可疑到好人",
+          bad: "可疑到坏人",
+          overdue: "可疑到逾期",
+          suspicious: "可疑到可疑"
+        },
+        {
+          good: "2016-05-02",
+          bad: "王小虎",
+          overdue: ["第一次", "第二次", "第三次"],
+          suspicious: "上海"
+        }
+      ]
     };
   },
+  mounted() {},
   methods: {
-    // 性别显示转换
-    formatSex: function(row, column) {
-      return row.sex === 1 ? "男" : row.sex === 0 ? "女" : "未知";
+    // 好人格式化
+    formatGood(row) {
+      if (row.good) {
+        return <div style="color:red">{row.good}</div>;
+      }
     },
-    handleCurrentChange(val) {
-      //切换当前页
-      this.page = val;
-      this.getUsers();
+    // 坏人格式化
+    formatBad(row) {
+      if (row.bad) {
+        return <div style="color:red">{row.bad}</div>;
+      }
     },
-    handleSizeChange(val) {
-      //煤业显示条数
-      console.log(val);
-    },
-    // 获取用户列表
-    getUsers() {
-      const para = {
-        page: this.page
-      };
-      getUserListPage(para).then(res => {
-        this.total = res.data.total;
-        this.users = res.data.users;
-      });
-    },
-    // 删除
-    handleDel(index, row) {
-      this.$confirm("确认删除该记录吗?", "提示", {
-        type: "warning"
-      })
-        .then(() => {
-          const para = { id: row.id };
-          removeUser(para).then(res => {
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.getUsers();
+    // 逾期格式化
+    formatOverdue(row) {
+      if (row.overdue) {
+        if (Array.isArray(row.overdue)) {
+          return row.overdue.map((v, i) => {
+            return <div style="color:red">{v}</div>;
           });
-        })
-        .catch(() => {});
-    },
-    // 显示编辑界面
-    handleEdit(index, row) {
-      this.dialogStatus = "update";
-      this.dialogFormVisible = true;
-      this.editForm = Object.assign({}, row);
-    },
-    // 显示新增界面
-    handleAdd() {
-      this.dialogStatus = "create";
-      this.dialogFormVisible = true;
-      this.editForm = {
-        id: "0",
-        name: "",
-        sex: 1,
-        age: 0,
-        birth: "",
-        addr: ""
-      };
-    },
-    // 编辑
-    updateData() {
-      this.$refs.editForm.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {})
-            .then(() => {
-              const para = Object.assign({}, this.editForm);
-              para.birth =
-                !para.birth || para.birth === ""
-                  ? ""
-                  : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
-              editUser(para).then(res => {
-                this.$message({
-                  message: "提交成功",
-                  type: "success"
-                });
-                this.$refs["editForm"].resetFields();
-                this.dialogFormVisible = false;
-                this.getUsers();
-              });
-            })
-            .catch(e => {
-              // 打印一下错误
-              console.log(e);
-            });
+        } else {
+          return <div style="color:red">{row.overdue}</div>;
         }
-      });
+      }
     },
-    // 新增
-    createData: function() {
-      this.$refs.editForm.validate(valid => {
-        if (valid) {
-          this.$confirm("确认提交吗？", "提示", {})
-            .then(() => {
-              this.editForm.id = parseInt(Math.random() * 100).toString(); // mock a id
-              const para = Object.assign({}, this.editForm);
-              console.log(para);
-
-              para.birth =
-                !para.birth || para.birth === ""
-                  ? ""
-                  : util.formatDate.format(new Date(para.birth), "yyyy-MM-dd");
-              addUser(para).then(res => {
-                this.$message({
-                  message: "提交成功",
-                  type: "success"
-                });
-                this.$refs["editForm"].resetFields();
-                this.dialogFormVisible = false;
-                this.getUsers();
-              });
-            })
-            .catch(e => {
-              // 打印一下错误
-              console.log(e);
-            });
-        }
-      });
+    //可疑格式化
+    formatSuspicious(row) {
+      if (row.suspicious) {
+        return <div style="color:red">{row.suspicious}</div>;
+      }
     },
-    // 全选单选多选
-    selsChange(sels) {
-      this.sels = sels;
-    },
-    // 批量删除
-    batchRemove() {
-      var ids = this.sels.map(item => item.id).toString();
-      this.$confirm("确认删除选中记录吗？", "提示", {
-        type: "warning"
-      })
-        .then(() => {
-          const para = { ids: ids };
-          batchRemoveUser(para).then(res => {
-            this.$message({
-              message: "删除成功",
-              type: "success"
-            });
-            this.getUsers();
-          });
-        })
-        .catch(() => {});
+    // 添加单元格整行背景颜色
+    tableRowClassName(row) {
+      // console.log(row);
+      if (
+        row.row.type === "好人" ||
+        row.row.type === "坏人" ||
+        row.row.type === "逾期" ||
+        row.row.type === "可疑"
+      ) {
+        return "bg";
+      } else {
+        return "";
+      }
     }
-  },
-  mounted() {
-    this.getUsers();
   }
 };
 </script>
 
 <style scoped>
+.table {
+  width: 98%;
+  margin: 20px auto;
+}
+.table >>> .bg {
+  background-color: #eef1f6;
+}
+.colr {
+  color: red;
+}
 </style>

@@ -8,7 +8,7 @@
       :collapse="isCollapse"
       background-color="#304156"
       text-color="white"
-      active-text-color="#42b983"
+      active-text-color="#21BAA9"
     >
       <sidebar-item :routes="permission_routers"></sidebar-item>
     </el-menu>
@@ -16,19 +16,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import SidebarItem from './SidebarItem'
-import logo from './logo'
+import { mapGetters } from "vuex";
+import SidebarItem from "./SidebarItem";
+import logo from "./logo";
 export default {
   components: { SidebarItem, logo },
   computed: {
-    ...mapGetters([
-      'sidebar',
-      'permission_routers'
-    ]),
+    ...mapGetters(["sidebar", "permission_routers"]),
     isCollapse() {
-      return !this.sidebar.opened
+      return !this.sidebar.opened;
     }
   }
-}
+};
 </script>

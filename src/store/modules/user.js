@@ -10,9 +10,10 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    browserHeaderTitle: getStore({
-      name: 'browserHeaderTitle'
-    }) || 'NxAdmin'
+    // browserHeaderTitle: getStore({
+    //   name: 'browserHeaderTitle'
+    // }) || 'NxAdmin'
+    browserHeaderTitle: '建模管理系统'
   },
 
   mutations: {
@@ -20,11 +21,11 @@ const user = {
       state.token = token
     },
     SET_USERINFO: (state, { token, name, avatar }) => {
-      console.log(token, name, avatar)
       state.token = token;
       state.name = name;
       state.avatar = avatar;
     },
+    // 设置浏览器标题
     SET_BROWSERHEADERTITLE: (state, action) => {
       state.browserHeaderTitle = action.browserHeaderTitle
     }

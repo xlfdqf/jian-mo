@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import {
   setStore,
@@ -19,11 +19,11 @@ const user = {
     SET_TOKEN: (state, token) => {
       state.token = token
     },
-    SET_NAME: (state, name) => {
-      state.name = name
-    },
-    SET_AVATAR: (state, avatar) => {
-      state.avatar = avatar
+    SET_USERINFO: (state, { token, name, avatar }) => {
+      console.log(token, name, avatar)
+      state.token = token;
+      state.name = name;
+      state.avatar = avatar;
     },
     SET_BROWSERHEADERTITLE: (state, action) => {
       state.browserHeaderTitle = action.browserHeaderTitle
@@ -40,8 +40,7 @@ const user = {
           const data = response
           setToken(data.token)
           commit('SET_TOKEN', data.token)
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
+          commit('SET_USERINFO', { name: data.name, avatar: data.avatar })
           resolve(response)
         }).catch(error => {
           reject(error)

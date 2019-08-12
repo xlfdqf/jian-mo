@@ -47,7 +47,7 @@ export default {
     directivePermission: '按钮权限',
     complexTable: '综合Table',
     treeTable: '树形表格',
-    testTable: '测试表格',
+    testTable: '封装表格',
     errorPages: '错误页面',
     page401: '401',
     page404: '404',

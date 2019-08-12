@@ -13,7 +13,7 @@ const user = {
     // browserHeaderTitle: getStore({
     //   name: 'browserHeaderTitle'
     // }) || 'NxAdmin'
-    browserHeaderTitle: '建模管理系统'
+    browserHeaderTitle: '大圣数据建模系统'
   },
 
   mutations: {

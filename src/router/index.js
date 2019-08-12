@@ -109,22 +109,16 @@ export const constantRouterMap = [
     },
     children: [
       {
-        path: 'complex-table',
-        name: 'complex-table',
-        component: () => import('@/views/table/complex-table'),
-        meta: { title: 'complexTable' }
-      },
-      {
-        path: 'TreeTable',
-        name: 'TreeTable',
-        component: () => import('@/views/table/tree-table/index'),
-        meta: { title: 'treeTable' }
-      },
-      {
         path: 'TestTable',
         name: 'TestTable',
         component: () => import('@/views/table/test-table'),
         meta: { title: 'testTable' }
+      },
+      {
+        path: 'complex-table',
+        name: 'complex-table',
+        component: () => import('@/views/table/complex-table'),
+        meta: { title: 'complexTable' }
       }
     ]
   },

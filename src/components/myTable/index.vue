@@ -1,9 +1,8 @@
 <template>
  <div class="myTable">
-   <!-- @selection-change="handleSelectionChange" -->
-  <el-table ref="multipleTable" :data="dataSource"   stripe style="width: 100%">
-    <!--选择-->
-      <!-- <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column> -->
+  <el-table ref="multipleTable" :data="dataSource"  @selection-change="handleSelectionChange" stripe style="width: 100%">
+    <!--多选框-->
+      <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column>
     <!--序号-->
       <!-- <el-table-column  align="center" v-if="hasIndex" type="index" width="55"></el-table-column> -->
     <!--数据源-->
@@ -25,6 +24,17 @@
     <!--操作栏-->
     <slot name="operate"></slot>
   </el-table>
+  <!-- 分页 -->
+  <el-pagination
+         @size-change="handleSizeChange"
+         @current-change="handleCurrentChange"
+          :currentPage="page.currentPage" 
+          :pageSize="page.pageSize"
+          :total="total"
+          align="right"
+           layout="total, prev, pager, next"  
+        >
+  </el-pagination>
  </div>
 </template>
 
@@ -36,12 +46,17 @@ export default {
     MyRender
   },
   data() {
-    return {};
-    multipleSelection: [];
+    return {
+      page: {
+        currentPage: 1,
+        pageSize: 10
+      }
+    };
   },
   props: {
     dataSource: Array,
     columns: Array,
+    total: Number,
     //是否可以选择
     hasSelection: {
       type: Boolean,
@@ -55,17 +70,22 @@ export default {
       default: function() {
         return false;
       }
+    }
+  },
+  methods: {
+    //多选
+    handleSelectionChange(val) {
+      this.$emit("handleSelectionChange", val);
     },
-    methods: {
-      //将选中的行发送到父组件
-      // handleSelectionChange(val) {
-      //   // this.multipleSelection = val;
-      //   // const selectionArr = [];
-      //   // val.forEach(function(el) {
-      //   //   selectionArr.push(el);
-      //   // });
-      //   this.$emit("handleSelectionChange", val);
-      // },
+    // 每页条数
+    handleSizeChange(val) {
+      this.page.pageSize = val;
+      this.$emit("pageChange", this.page);
+    },
+    // 当前页码
+    handleCurrentChange(val) {
+      this.page.currentPage = val;
+      this.$emit("pageChange", this.page);
     }
   }
 };

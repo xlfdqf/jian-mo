@@ -2,7 +2,9 @@
  <div class="table">
    <el-card class="box-card">
    <div class="text item">
-     <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="true" @handleSelectionChange="handleSelectionChange">
+     <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="true"
+       @handleSelectionChange="handleSelectionChange"
+      :total="total" @pageChange="pageChange">
        <el-table-column slot="operate" label="操作"  align="center">
           <template slot-scope="scope">
             <el-button type="text" @click="edit(scope.row)">查看</el-button>
@@ -11,8 +13,6 @@
           </template>
         </el-table-column>
      </myTable>
-     <!-- 分页-->
-     <pagination :total="total" @pageChange="pageChange"></pagination>
   </div>
 </el-card>
  </div>
@@ -20,9 +20,8 @@
 
 <script>
 import myTable from "@/components/myTable";
-import pagination from "@/components/myTable/pagination.vue";
 export default {
-  components: { myTable, pagination },
+  components: { myTable },
   data() {
     return {
       total: 100,

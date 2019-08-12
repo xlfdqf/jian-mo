@@ -119,7 +119,25 @@ export const constantRouterMap = [
         name: 'complex-table',
         component: () => import('@/views/table/complex-table'),
         meta: { title: 'complexTable' }
-      }
+      },
+      {
+        path: 'fraud-judge',
+        name: 'fraud-judge',
+        component: () => import('@/views/table/fraud-judge'),
+        meta: { title: 'fraudJudge' }
+      },
+      {
+        path: 'transfer-matrix',
+        name: 'transfer-matrix',
+        component: () => import('@/views/table/transfer-matrix'),
+        meta: { title: 'transferMatrix' }
+      },
+      {
+        path: 'score-card',
+        name: 'score-card',
+        component: () => import('@/views/table/score-card'),
+        meta: { title: 'scoreCard' }
+      },
     ]
   },
 ]

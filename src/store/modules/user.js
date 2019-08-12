@@ -10,9 +10,6 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    // browserHeaderTitle: getStore({
-    //   name: 'browserHeaderTitle'
-    // }) || 'NxAdmin'
     browserHeaderTitle: '大圣数据建模系统'
   },
 
@@ -37,7 +34,6 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
-          // console.log("用户信息：", response)
           const data = response
           setToken(data.token)
           commit('SET_TOKEN', data.token)

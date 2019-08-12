@@ -47,6 +47,7 @@ export default {
     pagePermission: 'Page Permission',
     directivePermission: 'Directive Permission',
     complexTable: 'Complex Table',
+    testTable: 'Test Table',
     treeTable: 'Tree Table',
     errorPages: 'Error Pages',
     page401: '401',

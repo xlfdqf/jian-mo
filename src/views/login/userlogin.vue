@@ -96,9 +96,15 @@ export default {
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
-          this.$store.dispatch("Login", this.loginForm).then(res => {
-            this.$router.push({ path: "/dashboard/dashboard" });
-          });
+          this.$store
+            .dispatch("Login", this.loginForm)
+            .then(res => {
+              this.$router.push({ path: "/dashboard/dashboard" });
+            })
+            .catch(err => {
+              alert("登录失败！");
+              this.$message.error(err); //登录失败提示错误
+            });
         }
       });
     }

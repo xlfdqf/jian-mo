@@ -43,4 +43,8 @@ export default {
   transform-style: preserve-3d;
   visibility: visible;
 }
+.el-table td,
+.el-table th {
+  padding: 6px 0px !important;
+}
 </style>

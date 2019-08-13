@@ -1,6 +1,7 @@
 <template>
- <div class="myTable">
-  <el-table ref="multipleTable" :data="dataSource"  @selection-change="handleSelectionChange" stripe style="width: 100%">
+ <div class="table myTable">
+  <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange"  :row-class-name="tableRowClassName"
+   border highlight-current-row :height="height" :header-cell-style="{background:'#F5F7FA'}">
     <!--多选框-->
       <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column>
     <!--序号-->
@@ -16,9 +17,9 @@
                       >
                     <template slot-scope="scope">
                        <my-render v-if="column.render" :row="scope.row" :render="column.render"></my-render>
-                    <span v-else>
-                       {{scope.row[column.prop]}}
-                    </span>
+                       <span v-else>
+                         {{Array.isArray(scope.row[column.prop])?(scope.row[column.prop]).join(''):scope.row[column.prop]}}
+                       </span>
                 </template>
     </el-table-column>
     <!--操作栏-->
@@ -26,13 +27,14 @@
   </el-table>
   <!-- 分页 -->
   <el-pagination
+         v-if="hasPagination"
          @size-change="handleSizeChange"
          @current-change="handleCurrentChange"
-          :currentPage="page.currentPage" 
-          :pageSize="page.pageSize"
-          :total="total"
-          align="right"
-           layout="total, prev, pager, next"  
+         :currentPage="page.currentPage" 
+         :pageSize="page.pageSize"
+         :total="total"
+         align="right"
+         layout="total, prev, pager, next"  
         >
   </el-pagination>
  </div>
@@ -54,6 +56,7 @@ export default {
     };
   },
   props: {
+    height: Number,
     dataSource: Array,
     columns: Array,
     total: Number,
@@ -66,6 +69,13 @@ export default {
     },
     //是否有序列项
     hasIndex: {
+      type: Boolean,
+      default: function() {
+        return false;
+      }
+    },
+    // 是否分页
+    hasPagination: {
       type: Boolean,
       default: function() {
         return false;
@@ -86,7 +96,30 @@ export default {
     handleCurrentChange(val) {
       this.page.currentPage = val;
       this.$emit("pageChange", this.page);
+    },
+    // 选中行(父组件调用的方法)
+    selectedSon(row) {
+      this.$refs.multipleTable.setCurrentRow(row);
+    },
+    // 添加单元格背景颜色
+    tableRowClassName(row) {
+      // console.log(row);
+      if (row.row.weight === "紧急且重要") {
+        alert(row.row.weight);
+        return "bg";
+      } else {
+        return "";
+      }
     }
   }
 };
 </script>
+
+<style scoped>
+.table >>> .bg {
+  background-color: red;
+}
+</style>
+
+
+

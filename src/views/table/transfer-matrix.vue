@@ -1,6 +1,6 @@
 <!--转移矩阵页面-->
 <template>
- <div class="transferMatrix">
+ <div class="table transferMatrix">
     转移矩阵页面
  </div>
 </template>

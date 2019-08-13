@@ -1,8 +1,7 @@
 <template>
  <div class="table">
    <el-card class="box-card">
-   <div class="text item">
-     <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="true"
+     <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="true" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange"
       :total="total" @pageChange="pageChange">
        <el-table-column slot="operate" label="操作"  align="center">
@@ -13,7 +12,6 @@
           </template>
         </el-table-column>
      </myTable>
-  </div>
 </el-card>
  </div>
 </template>
@@ -134,10 +132,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.table {
-  width: 98%;
-  margin: 20px auto;
-}
-</style>

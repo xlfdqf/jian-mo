@@ -30,13 +30,13 @@
           prop="overdue"
           label="逾期"
           align="center"
-          :formatter="formatOverdue">
+          >
         </el-table-column>
         <el-table-column
           prop="suspicious"
           label="可疑"
           align="center"
-          :formatter="formatSuspicious">
+          >
         </el-table-column>
   </el-table>
   </div>

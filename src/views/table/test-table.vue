@@ -51,23 +51,6 @@ export default {
           label: "权重",
           isShow: true
         },
-        // {
-        //   prop: "weight",
-        //   label: "权重",
-        //   isShow: true,
-        //   render: function(v, param) {
-        //     let weight = param.row.weight;
-        //     if (weight) {
-        //       if (Array.isArray(weight)) {
-        //         return weight.map((v, i) => {
-        //           return <div style="color:#F56C6C">{v}</div>;
-        //         });
-        //       } else {
-        //         return <div style="color:#F56C6C">{weight}</div>;
-        //       }
-        //     }
-        //   }
-        // },
         {
           prop: "isoriginal",
           label: "原创",

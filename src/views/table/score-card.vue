@@ -2,7 +2,8 @@
 <template>
  <div class="table scoreCard">
     <el-card class="box-card">
-        <myTable ref="mychild" :columns="columns" :dataSource="dataSource" :hasIndex="false" :hasSelection="false" :hasPagination="false" :height="height">
+        <myTable ref="mychild" :columns="columns" :dataSource="dataSource"  :loading="loading" 
+        :hasSelection="false" :hasPagination="false" :height="height">
            <el-table-column slot="operate" label="操作"  align="center">
               <template slot-scope="scope">
                 <el-button type="text" @click="selected(scope.row)">选中</el-button>
@@ -21,6 +22,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      loading: false,
       height: 800, //表格高度，固定表头
       columns: [
         {

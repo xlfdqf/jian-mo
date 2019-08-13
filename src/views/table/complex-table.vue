@@ -2,7 +2,6 @@
  <div class="table">
    <el-card class="box-card">
    <div class="text item">
-      <!-- height="800" 固定表头 -->
        <el-table
     :data="tableData"
     style="width: 100%"
@@ -175,8 +174,5 @@ export default {
 }
 .table >>> .bg {
   background-color: #eef1f6;
-}
-.colr {
-  color: red;
 }
 </style>

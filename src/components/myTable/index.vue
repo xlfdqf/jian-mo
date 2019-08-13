@@ -1,12 +1,10 @@
 <template>
  <div class="table myTable">
-  <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange"  :row-class-name="tableRowClassName"
-   border highlight-current-row :height="height" :header-cell-style="{background:'#F5F7FA'}">
+  <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange" border highlight-current-row
+    :height="height" v-loading="loading"  element-loading-text="拼命加载中" :header-cell-style="{background:'#F5F7FA'}">
     <!--多选框-->
       <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column>
-    <!--序号-->
-      <!-- <el-table-column  align="center" v-if="hasIndex" type="index" width="55"></el-table-column> -->
-    <!--数据源-->
+      <!--数据源-->
     <el-table-column v-for="column in columns"
                      v-if="column.isShow"
                      :sortable="column.isSort"
@@ -34,8 +32,8 @@
          :pageSize="page.pageSize"
          :total="total"
          align="right"
-         layout="total, prev, pager, next"  
-        >
+         layout="total, prev, pager, next"
+         >
   </el-pagination>
  </div>
 </template>
@@ -60,15 +58,14 @@ export default {
     dataSource: Array,
     columns: Array,
     total: Number,
-    //是否可以选择
-    hasSelection: {
+    loading: {
       type: Boolean,
       default: function() {
         return false;
       }
     },
-    //是否有序列项
-    hasIndex: {
+    //是否可以选择
+    hasSelection: {
       type: Boolean,
       default: function() {
         return false;
@@ -100,25 +97,12 @@ export default {
     // 选中行(父组件调用的方法)
     selectedSon(row) {
       this.$refs.multipleTable.setCurrentRow(row);
-    },
-    // 添加单元格背景颜色
-    tableRowClassName(row) {
-      // console.log(row);
-      if (row.row.weight === "紧急且重要") {
-        alert(row.row.weight);
-        return "bg";
-      } else {
-        return "";
-      }
     }
   }
 };
 </script>
 
 <style scoped>
-.table >>> .bg {
-  background-color: red;
-}
 </style>
 
 

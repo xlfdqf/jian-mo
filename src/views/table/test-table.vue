@@ -58,6 +58,8 @@
 import myTable from "@/components/myTable";
 import moment from "moment";
 import _ from "lodash";
+import { getNewsList } from "@/api/login.js";
+
 export default {
   components: { myTable },
   data() {
@@ -171,6 +173,18 @@ export default {
     },
     reset(formName) {
       this.$refs[formName].resetFields();
+      this.query();
+    },
+    // 测试访问接口
+    query() {
+      let params = { cp: 1, ps: 5 };
+      getNewsList(params)
+        .then(res => {
+          console.log("返回数据：", res);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

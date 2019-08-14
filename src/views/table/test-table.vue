@@ -1,6 +1,44 @@
 <template>
  <div class="table">
    <el-card class="box-card">
+     <!-- 表单 -->
+     <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+        <el-form-item label="审批人:" prop="user">
+          <el-input v-model="testForm.user" placeholder="审批人"></el-input>
+        </el-form-item>
+        <el-form-item label="栏目:" prop="region">
+          <el-select v-model="testForm.region" placeholder="栏目">
+            <el-option label="栏目一" value="栏目一"></el-option>
+            <el-option label="栏目二" value="栏目二"></el-option>
+          </el-select>
+        </el-form-item>
+         <el-form-item label="样本完整度%:" prop="sample1">
+          <el-input v-model="testForm.sample1"></el-input>
+        </el-form-item>
+         <el-form-item>--</el-form-item>
+         <el-form-item prop="sample2">
+           <el-input v-model="testForm.sample2"></el-input>
+        </el-form-item>
+        <el-form-item label="日期:" prop="date">
+           <el-date-picker
+              v-model="testForm.date"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期">
+            </el-date-picker>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
+          <el-button type="default" @click="reset('testForm')">重置</el-button>
+        </el-form-item>
+      </el-form>
+        <el-alert style="width:50%;margin-bottom:5px"
+          title="警告内容"
+          type="warning"
+          show-icon>
+        </el-alert>
+     <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="true" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange"
       :total="total" @pageChange="pageChange">
@@ -18,11 +56,20 @@
 
 <script>
 import myTable from "@/components/myTable";
+import moment from "moment";
+import _ from "lodash";
 export default {
   components: { myTable },
   data() {
     return {
       total: 100,
+      testForm: {
+        user: "",
+        region: "",
+        date: "",
+        sample1: "",
+        sample2: ""
+      },
       columns: [
         {
           prop: "title",
@@ -72,7 +119,7 @@ export default {
           title: "标题1",
           create_name: "王小虎",
           item_name: "栏目1",
-          create_time: "2019-8-7",
+          create_time: "2019-8-12",
           weight: "重要",
           isoriginal: 201
         },
@@ -80,7 +127,7 @@ export default {
           title: "标题2",
           create_name: "王小虎",
           item_name: "栏目3",
-          create_time: "2019-8-7",
+          create_time: "2019-9-23",
           // weight: ["第一次", "第二次", "第三次"],
           weight: "紧急",
           isoriginal: 201
@@ -89,7 +136,7 @@ export default {
           title: "标题3",
           create_name: "王小虎",
           item_name: "栏目3",
-          create_time: "2019-8-7",
+          create_time: "2019-1-1",
           weight: "重要且紧急",
           isoriginal: 200
         }
@@ -111,6 +158,19 @@ export default {
     },
     handleSelectionChange(val) {
       console.log("多选:", val);
+    },
+    onSubmit(formName) {
+      this.$message.error("这是一条错误消息！");
+      let startDate = formName.date[0];
+      let endDate = formName.date[1];
+      console.log(
+        formName,
+        moment(startDate).format("YYYY-MM-DD"),
+        moment(endDate).format("YYYY-MM-DD")
+      );
+    },
+    reset(formName) {
+      this.$refs[formName].resetFields();
     }
   }
 };

@@ -1,5 +1,5 @@
 <template>
- <div class="table myTable">
+ <div class="myTable">
   <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange" border highlight-current-row
     :height="height" v-loading="loading"  element-loading-text="拼命加载中" :header-cell-style="{background:'#F5F7FA'}">
     <!--多选框-->

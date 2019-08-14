@@ -60,4 +60,7 @@ export default {
 .el-table__body tr.hover-row > td {
   background-color: rgb(233, 248, 246) !important;
 }
+.el-date-editor .el-range-separator {
+  width: 6%;
+}
 </style>

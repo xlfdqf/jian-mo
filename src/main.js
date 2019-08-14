@@ -23,9 +23,7 @@ import {
 } from '@/config/env'
 import '@/icons'
 import '@/permission'
-import _ from 'lodash'
 
-Vue.prototype._ = _
 
 Vue.use(VCharts)
 Vue.use(ElementUI, { locale })

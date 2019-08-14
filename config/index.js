@@ -10,7 +10,16 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+      // '/api': {
+      //   target: 'http://10.10.1.242:8245',
+      //   // secure: false, // 如果是https接口，需要配置这个参数
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
@@ -63,7 +72,8 @@ module.exports = {
      * then assetsPublicPath should be set to "/bar/".
      * In most cases please use '/' !!!
      */
-    assetsPublicPath: '/vue-permission/', // If you are deployed on the root path, please use '/'
+    assetsPublicPath: '/',
+    // assetsPublicPath: '/vue-permission/', // If you are deployed on the root path, please use '/'
 
     /**
      * Source Maps

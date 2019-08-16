@@ -8,13 +8,6 @@
         <nx-full-screen class="screenfull right-menu-item"></nx-full-screen>
       </el-tooltip>
 
-        <!--中英文切换-->
-      <!-- <nx-lang-select class="international right-menu-item"></nx-lang-select> -->
-
-      <!-- <el-tooltip effect="dark" content="主题" placement="bottom">
-        <nx-skin class="theme-switch right-menu-item"></nx-skin>
-      </el-tooltip> -->
-
       <el-dropdown class="avatar-container right-menu-item" trigger="click">
         <div class="avatar-wrapper">
           <!-- <img class="user-avatar" :src="avatar"> -->
@@ -24,14 +17,8 @@
           <i class="el-icon-caret-bottom"></i>
         </div>
         <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item >
-            <span style="display:block;">个人中心</span>
-          </el-dropdown-item>
-            <el-dropdown-item >
-            <span style="display:block;">修改密码</span>
-          </el-dropdown-item>
-          <el-dropdown-item divided>
-            <span @click="logout" style="display:block;">退出</span>
+          <el-dropdown-item >
+            <span @click="logout" style="display:block;">退出登录</span>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>

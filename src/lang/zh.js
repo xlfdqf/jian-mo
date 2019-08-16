@@ -65,7 +65,12 @@ export default {
     list: 'list',
     svgicons: 'svg图标',
     fontawesome: 'fontawesome图标',
-    TableMessage: '自定义表格'
+    TableMessage: '自定义表格',
+    sampleManagement: '样本管理',
+    idcardManagement: '身份证管理',
+    telManagement: '手机号管理',
+    telManagementDetail: '手机号详情页',
+    idcardManagementDetail: '身份证详情页'
   },
   permission: {
     roles: '你的权限',

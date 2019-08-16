@@ -1,23 +1,24 @@
 <template>
   <div class="login-container pull-height" @keyup.enter.native="handleLogin">
-    <div class="login-info text-white animated fadeInLeft">
-      <div class="logo" style="margin-top:-426px">
-          <img src="../../assets/images/home/logo.png" width="160px" height="160px" alt="logo" style="vertical-align: middle;" />
+    <div class="login-info text-white animated fadeInLeft" style="margin-left:-100px">
+      <div class="logo" style="margin-top:-300px">
+          <img src="../../assets/images/home/logo2.png" width="300px" height="100px" alt="logo" style="object-fit:contain;vertical-align: middle;" />
       </div>
-      <h2 class="login-info-title">{{website.info.title}}</h2>
+      <h2 class="login-info-title" style="text-align:center">{{website.info.title}}</h2>
     </div>
     <div class="login-border  animated fadeInRight">
       <div class="login-main">
         <h4 class="login-title">登录{{website.title}}
         </h4>
-        <el-tabs v-model="activeName">
+          <userLogin></userLogin>
+        <!-- <el-tabs v-model="activeName">
           <el-tab-pane label="用户密码" name="user">
             <userLogin></userLogin>
           </el-tab-pane>
           <el-tab-pane label="短信验证码" name="code">
             <codeLogin></codeLogin>
           </el-tab-pane>
-        </el-tabs>
+        </el-tabs> -->
       </div>
     </div>
 
@@ -102,7 +103,7 @@ export default {
 .login-title {
   margin: 0 0 20px;
   text-align: center;
-  color: #409eff;
+  color: #21baa9;
   letter-spacing: 3px;
 }
 .login-submit {

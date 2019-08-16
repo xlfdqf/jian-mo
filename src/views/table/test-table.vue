@@ -44,7 +44,7 @@
       :total="total" @pageChange="pageChange">
        <el-table-column slot="operate" label="操作"  align="center">
           <template slot-scope="scope">
-            <el-button type="text" @click="edit(scope.row)">查看</el-button>
+            <el-button type="text" @click="detail(scope.row)">查看</el-button>
             <el-button type="text" @click="edit(scope.row)">编辑</el-button>
             <el-button type="text" @click="deleteUser(scope.row)">删除</el-button>
           </template>
@@ -146,6 +146,17 @@ export default {
     };
   },
   methods: {
+    detail(row) {
+      // 跳转详情页，地址栏显示参数
+      // this.$router.push({
+      //   path: "/table/TestTableDeatil"
+      // });
+      // 地址栏不显示参数
+      this.$router.push({
+        name: "TestTableDeatil",
+        params: { title: row.title }
+      });
+    },
     // 编辑
     edit(row) {
       console.log(row);

@@ -51,6 +51,7 @@ export default {
     scoreCard: '评分卡',
     treeTable: '树形表格',
     testTable: '封装表格',
+    testTableDetail: '封装表格详情',
     errorPages: '错误页面',
     page401: '401',
     page404: '404',

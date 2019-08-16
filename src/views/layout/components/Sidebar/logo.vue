@@ -13,8 +13,8 @@
     <transition-group name="fade">
       <template v-if="!isCollapse">
         <span class="logo_title is-bold" key="1">
-          <img :src="logoimg" width="30" height="30" style="float:left;margin-right:10px;margin-top:15px;"/>
-          <span style="float:left;">{{website.title}} </span>
+          <img :src="logoimg" width="180" height="50" style="object-fit:contain;margin-top:25px;"/>
+          <!-- <span style="float:left;">{{website.title}} </span> -->
         </span>
       </template>
     </transition-group>
@@ -23,7 +23,7 @@
 
 <script>
 import { mapGetters } from "vuex";
-import logoimg from "@/assets/images/home/logo.png";
+import logoimg from "@/assets/images/home/logo2.png";
 export default {
   name: "logo",
   data() {

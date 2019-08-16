@@ -1,13 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 
-// const _import = require('./_import_' + process.env.NODE_ENV)
-// in development-env not use lazy-loading, because lazy-loading too many pages will cause webpack hot update too slow. so only in production use lazy-loading;
-// detail: https://panjiachen.github.io/vue-element-admin-site/#/lazy-loading
-
 Vue.use(Router)
 
-/* Layout */
 import Layout from '../views/layout/Layout'
 //所有权限通用路由表 
 //如首页和登录页和一些不用权限的公用页面
@@ -25,6 +20,7 @@ export const constantRouterMap = [
   {
     path: '/dashboard',
     component: Layout,
+
     meta: { title: 'dashboard', icon: 'dashboard' },
     children: [
       {
@@ -113,6 +109,14 @@ export const constantRouterMap = [
         name: 'TestTable',
         component: () => import('@/views/table/test-table'),
         meta: { title: 'testTable' }
+      },
+      // 封装表格详情页
+      {
+        path: 'TestTableDeatil',
+        name: 'TestTableDeatil',
+        component: () => import('@/views/table/test-table-detail'),
+        meta: { title: 'testTableDetail' },
+        hidden: true
       },
       {
         path: 'complex-table',

@@ -21,7 +21,7 @@
          <!-- <i slot="prefix" class="icon-mima"></i>  -->
       </el-input>
     </el-form-item>
-    <!-- <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox> -->
+    <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox>
     <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
     <el-form-item>
       <el-button type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">登录</el-button>
@@ -156,9 +156,9 @@ export default {
   top: 12px;
   left: 4px;
 }
-.login-form >>> .el-input input {
-  /* border-color: #00eeff !important; */
-}
+/* .login-form >>> .el-input input {
+  border-color: #00eeff !important;
+} */
 .login-form >>> .el-input--suffix .el-input__inner {
   padding-right: 100px !important;
 }

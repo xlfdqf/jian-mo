@@ -4,8 +4,8 @@
    <el-card class="box-card" style="margin-bottom:20px">
       <!-- 表单 -->
      <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-        <el-form-item label="身份证号:" prop="idcard">
-          <el-input v-model="testForm.phone" placeholder="身份证号"></el-input>
+        <el-form-item label="身份证号:" prop="idCard">
+          <el-input v-model="testForm.idCard" placeholder="身份证号"></el-input>
         </el-form-item>
          <el-form-item>
           <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
@@ -37,13 +37,13 @@ export default {
   components: { myTable },
   data() {
     return {
-      total: 100,
+      total: 0,
       testForm: {
-        idcard: ""
+        idCard: ""
       },
       columns: [
         {
-          prop: "username",
+          prop: "name",
           label: "姓名",
           isShow: true //是否显示
         },
@@ -53,24 +53,27 @@ export default {
           isShow: true
         }
       ],
-      dataSource: [
-        {
-          username: "王小虎",
-          idcard: "340824199608021234"
-        },
-        {
-          username: "辛巴",
-          idcard: "340824199608021234"
-        },
-        {
-          username: "马云",
-          idcard: "340824199608021234"
-        }
-      ]
+      dataSource: []
     };
   },
+  mounted() {
+    this.query();
+  },
   methods: {
+    // 查询列表
+    query() {
+      let params = { pageIndex: 1, pageSize: 10 };
+      getNewsList(params)
+        .then(res => {
+          this.total = res.total;
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     detail(row) {
+      console.log(row);
       this.$router.push({
         name: "idcardManagementDetail",
         params: { idcard: row.idcard }
@@ -78,26 +81,31 @@ export default {
     },
     // 页码切换
     pageChange(page) {
-      console.log("页码切换:", page);
-    },
-    handleSelectionChange(val) {
-      console.log("多选:", val);
-    },
-    onSubmit(formName) {},
-    update() {
-      // location.reload();
-    },
-    // 测试访问接口
-    query() {
-      let params = { cp: 1, ps: 5 };
+      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
       getNewsList(params)
         .then(res => {
-          console.log("返回数据：", res);
+          this.dataSource = res.data;
         })
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    // 搜索
+    onSubmit(formName) {
+      let param = { idCard: formName.idCard };
+      getNewsList(param)
+        .then(res => {
+          this.total = res.total;
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    update() {
+      this.query();
+    },
+    handleSelectionChange() {}
   }
 };
 </script>

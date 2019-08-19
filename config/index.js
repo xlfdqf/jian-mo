@@ -10,15 +10,24 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
+    // proxyTable: {
+    //   '/api': {
+    //     target: 'http://10.10.2.8:8080',
+    //     changeOrigin: true,
+    //     pathRewrite: {
+    //       '^/api': ''
+    //     }
+    //   }
+    // },
     proxyTable: {
-      // '/api': {
-      //   target: 'http://10.10.1.242:8245',
-      //   // secure: false, // 如果是https接口，需要配置这个参数
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // }
+      '/api': {
+        target: 'http://10.10.2.8:8080/',
+        // secure: false, // 如果是https接口，需要配置这个参数
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api': ''
+        }
+      }
     },
 
     // Various Dev Server settings

@@ -30,7 +30,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(
   config => {
     const token = store.getters.token;
-    token && (config.headers.Token = token);
+    // token && (config.headers.Token = token);
     return config;
   },
   error => {

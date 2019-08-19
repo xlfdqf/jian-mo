@@ -4,8 +4,8 @@
      <el-card class="box-card"  style="margin-bottom:20px">
           <!-- 表单 -->
      <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-        <el-form-item label="用户手机号:" prop="phone">
-          <el-input v-model="testForm.phone" placeholder="手机号"></el-input>
+        <el-form-item label="用户手机号:" prop="mobile">
+          <el-input v-model="testForm.mobile" placeholder="手机号"></el-input>
         </el-form-item>
          <el-form-item>
           <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
@@ -36,67 +36,76 @@ export default {
   components: { myTable },
   data() {
     return {
-      total: 100,
+      total: 0,
       testForm: {
-        phone: ""
+        mobile: ""
       },
       columns: [
         {
-          prop: "username",
+          prop: "name",
           label: "姓名",
           isShow: true //是否显示
         },
         {
-          prop: "phone",
+          prop: "mobile",
           label: "手机号",
           isShow: true
         }
       ],
-      dataSource: [
-        {
-          username: "王小虎",
-          phone: "17755533101"
-        },
-        {
-          username: "辛巴",
-          phone: "1869493000"
-        },
-        {
-          username: "马云",
-          phone: "17755533101"
-        }
-      ]
+      dataSource: []
     };
   },
+  mounted() {
+    this.query();
+  },
   methods: {
-    detail(row) {
-      this.$router.push({
-        name: "telManagementDetail",
-        params: { username: row.username }
-      });
-    },
-    // 页码切换
-    pageChange(page) {
-      console.log("页码切换:", page);
-    },
-    handleSelectionChange(val) {
-      console.log("多选:", val);
-    },
-    onSubmit(formName) {},
-    reset(formName) {
-      this.$refs[formName].resetFields();
-      this.query();
-    },
-    // 测试访问接口
+    // 查询列表
     query() {
-      let params = { cp: 1, ps: 5 };
+      let params = { pageIndex: 1, pageSize: 10 };
       getNewsList(params)
         .then(res => {
-          console.log("返回数据：", res);
+          this.total = res.total;
+          this.dataSource = res.data;
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    detail(row) {
+      console.log(row);
+      this.$router.push({
+        name: "telManagementDetail",
+        params: { mobile: row.mobile }
+      });
+    },
+    // 页码切换
+    pageChange(page) {
+      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
+      getNewsList(params)
+        .then(res => {
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    handleSelectionChange(val) {
+      console.log("多选:", val);
+    },
+    onSubmit(formName) {
+      let params = { mobile: formName.mobile };
+      getNewsList(params)
+        .then(res => {
+          this.total = res.total;
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    reset(formName) {
+      this.$refs[formName].resetFields();
+      this.query();
     }
   }
 };

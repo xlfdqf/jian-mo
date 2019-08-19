@@ -1,4 +1,4 @@
-<!-- 手身份证详情页面-->
+<!-- 身份证详情页面-->
 <template>
  <div class="table">
    <el-card class="box-card">
@@ -23,7 +23,6 @@
 <script>
 import myTable from "@/components/myTable";
 import { getNewsList } from "@/api/login.js";
-
 export default {
   components: { myTable },
   data() {

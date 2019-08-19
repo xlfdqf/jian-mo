@@ -122,7 +122,7 @@ export const constantRouterMap = [
         meta: { title: 'telManagement' }
       },
       {
-        path: 'telManagementDetail/:username', //手机号管理详情
+        path: 'telManagementDetail/:mobile', //手机号管理详情
         name: 'telManagementDetail',
         component: () => import('@/views/sampleManagement/telManagementDetail'),
         meta: { title: 'telManagementDetail' },

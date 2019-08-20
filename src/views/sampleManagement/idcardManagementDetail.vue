@@ -6,7 +6,7 @@
      <div class="box">
        <!-- <p class="blod" style="text-align:center"><span style="margin-right:30px">基本信息</span>   <span>来源：{{item.title}}</span></p> -->
        <el-collapse v-model="activeNames"  @change="handleChange">
-          <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.index">
+          <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
             <template slot="title">
                基本信息----来源：金盾
             </template>
@@ -41,23 +41,22 @@
            </div>
           </el-collapse-item>
 
-          <el-collapse-item title="贷后邦" name="3">
+        <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
                贷后邦----来源：金盾
             </template>
-            <div :loading="daihoubangLoading" v-for="item in daihoubang" :key="item.index">
-              <el-row>
-                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
+             <el-row> 
+               <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
                 <el-col :span="6"><div class="blod">姓名:{{item.name}}</div></el-col>
                 <el-col :span="6"><div class="blod">性别:{{item.gender}}</div></el-col>
                 <el-col :span="6"><div class="blod">年龄:{{item.age}}</div></el-col>
                 <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
                 <el-col :span="6"><div class="blod">绑定身份证情况:{{item.binding_idcards}}</div></el-col>
                 <el-col :span="6"><div class="blod">绑定号码情况:{{item.binding_phones}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone | filterinTime}}</div></el-col>
                 <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard | filterinTime}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机号记录天数:{{item.record_phone_days}}</div></el-col>
                 <el-col :span="6"><div class="blod">身份证户籍城市:{{item.idcard_city}}</div></el-col>
                 <el-col :span="6"><div class="blod">身份证户籍地区:{{item.idcard_region}}</div></el-col>
@@ -76,11 +75,11 @@
                 <el-col :span="6"><div class="blod">认识间接黑人的直接联系人比例:{{item.sn_order2_blacklist_routers_pct}}</div></el-col>
                 <el-col :span="6"><div class="blod">葫芦分:{{item.sn_score}}</div></el-col>
                 <el-col :span="6"><div class="blod">最近该身份证出现在黑名单中时间:{{item.last_appear_idcard_in_blacklist}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中法院黑名单:{{item.in_court_blacklist}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中网贷黑名单:{{item.in_p2p_blacklist}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证是否命中黑名单:{{item.idcard_in_blacklist}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号是否命中黑名单:{{item.phone_in_blacklist}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中银行黑名单:{{item.in_bank_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中法院黑名单:{{item.in_court_blacklist | isTrue}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中网贷黑名单:{{item.in_p2p_blacklist | isTrue}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证是否命中黑名单:{{item.idcard_in_blacklist | isTrue}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号是否命中黑名单:{{item.phone_in_blacklist | isTrue}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中银行黑名单:{{item.in_bank_blacklist | isTrue}}</div></el-col>
          
                 <el-col :span="6"><div class="blod">最近该手机号出现在黑名单中时间:{{item.last_appear_phone_in_blacklist}}</div></el-col>
                 <el-col :span="6"><div class="blod">线下现金贷出现次数:{{item.offline_cash_loan_cnt}}</div></el-col>
@@ -103,12 +102,9 @@
                 <el-col :span="6"><div class="blod">最近90天查询机构数:{{item.org_cnt_recent_90_days}}</div></el-col>
                 <el-col :span="6"><div class="blod">最近60天查询次数:{{item.search_cnt_recent_60_days}}</div></el-col>
                 <el-col :span="6"><div class="blod">历史查询总机构数:{{item.org_cnt}}</div></el-col>
-                <el-col :span="6"><div class="blod">入库时间:{{item.insTime}}</div></el-col>
-               
-
-            </el-row>
-           </div>
-          </el-collapse-item>
+                <el-col :span="6"><div class="blod">入库时间:{{item.ins_time | filterinTime}}</div></el-col> 
+             </el-row>  
+           </el-collapse-item>  
       </el-collapse>
      </div>
    </el-card>
@@ -162,37 +158,37 @@ export default {
           prop: "mobile",
           label: "紧急联系人号码",
           isShow: true
-        },
-        {
-          prop: "relation",
-          label: "关系",
-          isShow: true,
-          render: function(v, param) {
-            let html = "";
-            if (param.row.relation == "1") {
-              html = "父亲";
-            } else if (param.row.relation == "2") {
-              html = "母亲";
-            } else if (param.row.relation == "3") {
-              html = "儿子";
-            } else if (param.row.relation == "4") {
-              html = "女儿";
-            } else if (param.row.relation == "5") {
-              html = "配偶";
-            } else if (param.row.relation == "6") {
-              html = "朋友";
-            } else {
-              html = "其他";
-            }
-            return html;
-          }
         }
+        // {
+        //   prop: "relation",
+        //   label: "关系",
+        //   isShow: true,
+        //   render: function(v, param) {
+        //     let html = "";
+        //     if (param.row.relation == "1") {
+        //       html = "父亲";
+        //     } else if (param.row.relation == "2") {
+        //       html = "母亲";
+        //     } else if (param.row.relation == "3") {
+        //       html = "儿子";
+        //     } else if (param.row.relation == "4") {
+        //       html = "女儿";
+        //     } else if (param.row.relation == "5") {
+        //       html = "配偶";
+        //     } else if (param.row.relation == "6") {
+        //       html = "朋友";
+        //     } else {
+        //       html = "其他";
+        //     }
+        //     return html;
+        //   }
+        // }
       ],
       basic: [], //基本信息
       emergency: [], //通讯录信息（紧急联系人）
       contact: [], //通讯录信息（联系人）
-      daihoubang: [], //贷后邦
-      juxinli: [] //聚信立
+      juxinli: [], //聚信立
+      daihoubang: [{}] //贷后邦
     };
   },
   filters: {
@@ -210,6 +206,7 @@ export default {
     this.username = row.name;
     this.idcard = row.idcard;
     this.basic = [row];
+    console.log("basic:", this.basic);
   },
   methods: {
     // 折叠面板
@@ -217,26 +214,30 @@ export default {
       let coll = val.map(function(value) {
         return value;
       });
-      let colleName = coll.pop();
+      let colleName = filterCollName(coll.pop());
       let params = {
         idCard: this.idcard,
-        colleName: filterCollName(colleName)
+        colleName: colleName
       };
       this.contactinfoLoading = true;
-      // getNewsDetail(params)
-      //   .then(res => {
-      //     this.contactinfoLoading = false;
-      //     if (res.data[0]) {
-      //       this.emergency = res.data[0].emergency; //紧急联系人
-      //       this.contact = res.data[0].contact; //联系人
-      //     } else {
-      //       this.emergency = [];
-      //       this.contact = [];
-      //     }
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      getNewsDetail(params)
+        .then(res => {
+          this.contactinfoLoading = false;
+          if (colleName === "contactinfo") {
+            if (res.data[0]) {
+              this.emergency = res.data[0].emergency; //紧急联系人
+              this.contact = res.data[0].contact; //联系人
+            } else {
+              this.emergency = [];
+              this.contact = [];
+            }
+          } else if (colleName === "daihoubang") {
+            this.daihoubang = res.data;
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

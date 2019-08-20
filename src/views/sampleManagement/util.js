@@ -39,13 +39,14 @@ export function filterProType(type) {
     return type + '天产品';
 }
 export function isTrue(flag) {
-    if (flag === 0) {
+    if (flag === 0 || flag === 'false') {
         flag = "否";
     } else {
         flag = '是';
     }
     return flag;
 }
+
 export function filterTelecomType(flag) {
     if (flag === 0) {
         flag = "聚信立";
@@ -54,6 +55,7 @@ export function filterTelecomType(flag) {
     }
     return flag;
 }
+// 折叠面板分类
 export function filterCollName(colleName) {
     switch (colleName) {
         case '1':
@@ -62,8 +64,11 @@ export function filterCollName(colleName) {
         case '2':
             colleName = "contactinfo";
             break;
+        case '3':
+            colleName = "daihoubang";
+            break;
         default:
-            colleName = " ";
+            colleName = "basic";
     }
     return colleName;
 }

@@ -65,7 +65,7 @@ axios.interceptors.response.use(
         // 跳转登录页面                
         case 403:
           Message({
-            message: '登录过期，请重新登录',
+            message: '登录过期，请重新登录！',
             duration: 1000,
             forbidClick: true
           });
@@ -86,7 +86,7 @@ axios.interceptors.response.use(
         case 404:
           Message({
             showClose: true,
-            message: '网络请求不存在',
+            message: '网络请求不存在！',
             type: "error"
           });
           break;
@@ -94,7 +94,7 @@ axios.interceptors.response.use(
         case 500:
           Message({
             showClose: true,
-            message: '服务器错误',
+            message: '服务器错误！',
             type: "error"
           });
           break;
@@ -102,7 +102,7 @@ axios.interceptors.response.use(
         case 504:
           Message({
             showClose: true,
-            message: '网关超时',
+            message: '网关超时！',
             type: "error"
           });
           break;
@@ -110,7 +110,7 @@ axios.interceptors.response.use(
         default:
           Message({
             showClose: true,
-            message: error.response.message,
+            message: '未知错误！',
             type: "error"
           });
       }

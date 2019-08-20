@@ -53,35 +53,6 @@ export default {
       username: "",
       mobile: "",
       activeNames: ["1"],
-      list: [
-        {
-          title: "金盾",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
-        },
-        {
-          title: "金盾2",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
-        },
-        {
-          title: "金盾3",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
-        }
-      ],
       basic: [] //基本信息
     };
   },

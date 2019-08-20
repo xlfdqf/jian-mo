@@ -39,7 +39,7 @@ export function filterProType(type) {
     return type + '天产品';
 }
 export function isTrue(flag) {
-    if (flag === 0 || flag === 'false') {
+    if (flag === 0 || flag === 'false' || flag === false) {
         flag = "否";
     } else {
         flag = '是';
@@ -69,6 +69,9 @@ export function filterCollName(colleName) {
             break;
         case '4':
             colleName = "changdaike";
+            break;
+        case '5':
+            colleName = "juxinli_operator_report";
             break;
         default:
             colleName = "basic";

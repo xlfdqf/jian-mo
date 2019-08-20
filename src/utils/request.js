@@ -85,17 +85,33 @@ axios.interceptors.response.use(
         // 404请求不存在                
         case 404:
           Message({
+            showClose: true,
             message: '网络请求不存在',
-            duration: 1500,
-            forbidClick: true
+            type: "error"
+          });
+          break;
+        // 500服务器错误            
+        case 500:
+          Message({
+            showClose: true,
+            message: '服务器错误',
+            type: "error"
+          });
+          break;
+        // 504网关超时                
+        case 504:
+          Message({
+            showClose: true,
+            message: '网关超时',
+            type: "error"
           });
           break;
         // 其他错误，直接抛出错误提示                
         default:
           Message({
+            showClose: true,
             message: error.response.message,
-            duration: 1500,
-            forbidClick: true
+            type: "error"
           });
       }
       return Promise.reject(error.response);

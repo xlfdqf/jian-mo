@@ -18,7 +18,7 @@
      <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="false" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange"
-      :total="total" @pageChange="pageChange">
+      :total="total" @pageChange="pageChange" :loading="loading">
        <el-table-column slot="operate" label="操作"  align="center">
           <template slot-scope="scope">
             <el-button type="text" @click="detail(scope.row)">详情</el-button>
@@ -37,6 +37,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      loading: false,
       total: 0,
       testForm: {
         idCard: ""
@@ -62,9 +63,11 @@ export default {
   methods: {
     // 查询列表
     query() {
+      this.loading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       getNewsList(params)
         .then(res => {
+          this.loading = false;
           this.total = res.total;
           this.dataSource = res.data;
         })
@@ -73,10 +76,11 @@ export default {
         });
     },
     detail(row) {
-      console.log(row);
+      localStorage.setItem("row", JSON.stringify(row));
       this.$router.push({
         name: "idcardManagementDetail",
         params: { idcard: row.idcard }
+        // params: { row: row }
       });
     },
     // 页码切换
@@ -95,7 +99,7 @@ export default {
       let param = { idCard: formName.idCard };
       getNewsList(param)
         .then(res => {
-          this.total = res.total;
+          this.total = 1;
           this.dataSource = res.data;
         })
         .catch(error => {

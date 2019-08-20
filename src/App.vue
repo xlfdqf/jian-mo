@@ -63,4 +63,7 @@ export default {
 .el-date-editor .el-range-separator {
   width: 6%;
 }
+.el-collapse-item__header {
+  font-weight: bold;
+}
 </style>

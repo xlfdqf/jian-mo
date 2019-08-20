@@ -21,12 +21,17 @@ export function logout() {
     method: 'post'
   })
 }
+// //测试接口 get
+// export function getNewsDetail(params) {
+//   return get(`/api/web/showNewBeforeModify`, { newNo: params });
+// }
 
 //身份证（手机号）管理 
 export function getNewsList(params) {
   return post(`api/dsai/list`, params);
 }
-// //测试接口 get
-// export function getNewsDetail(params) {
-//   return get(`/api/web/showNewBeforeModify`, { newNo: params });
-// }
+
+//身份证（手机号）管理详情
+export function getNewsDetail(params) {
+  return post(`api/dsai/detail`, params);
+}

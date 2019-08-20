@@ -2,7 +2,7 @@
 <template>
  <div class="table">
    <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：马云</span> <span>手机号:17755533202</span></h4>
+     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：马云</span> <span>手机号:{{mobile}}</span></h4>
      <div class="box" v-for="item in list" :key="item.index">
        <p class="blod" style="text-align:center"><span style="margin-right:30px">用户行为检测</span>   <span>来源：{{item.title}}</span></p>
        <el-row>
@@ -28,6 +28,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      mobile: "",
       list: [
         {
           title: "金盾",
@@ -61,6 +62,7 @@ export default {
   },
   mounted() {
     console.log(this.$route.params.mobile);
+    let mobile = this.$route.params.mobile;
   },
   methods: {
     // 测试访问接口

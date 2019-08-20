@@ -1,7 +1,7 @@
 <template>
- <div class="myTable">
+ <div class="myTable" v-loading="loading"  element-loading-text="正在加载">
   <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange" border highlight-current-row
-    :height="height" v-loading="loading"  element-loading-text="拼命加载中" :header-cell-style="{background:'#F5F7FA'}">
+    :height="height" :header-cell-style="{background:'#F5F7FA'}">
     <!--多选框-->
       <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column>
       <!--数据源-->
@@ -11,8 +11,7 @@
                      :key="column.prop"
                      :prop="column.prop"
                      :label="column.label"
-                      align="center"
-                      >
+                      align="center">
                     <template slot-scope="scope">
                        <my-render v-if="column.render" :row="scope.row" :render="column.render"></my-render>
                        <span v-else>

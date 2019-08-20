@@ -16,7 +16,7 @@
    <el-card class="box-card">
      <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="false" :hasPagination="true"
-       @handleSelectionChange="handleSelectionChange"
+       @handleSelectionChange="handleSelectionChange" :loading="loading"
       :total="total" @pageChange="pageChange">
        <el-table-column slot="operate" label="操作"  align="center">
           <template slot-scope="scope">
@@ -36,6 +36,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      loading: false,
       total: 0,
       testForm: {
         mobile: ""
@@ -61,9 +62,11 @@ export default {
   methods: {
     // 查询列表
     query() {
+      this.loading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       getNewsList(params)
         .then(res => {
+          this.loading = false;
           this.total = res.total;
           this.dataSource = res.data;
         })
@@ -96,7 +99,7 @@ export default {
       let params = { mobile: formName.mobile };
       getNewsList(params)
         .then(res => {
-          this.total = res.total;
+          this.total = 1;
           this.dataSource = res.data;
         })
         .catch(error => {

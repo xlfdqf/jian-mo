@@ -67,6 +67,9 @@ export function filterCollName(colleName) {
         case '3':
             colleName = "daihoubang";
             break;
+        case '4':
+            colleName = "changdaike";
+            break;
         default:
             colleName = "basic";
     }

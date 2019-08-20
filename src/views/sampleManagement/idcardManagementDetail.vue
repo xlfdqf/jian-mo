@@ -114,7 +114,56 @@
                 </el-col>
              </el-row> 
            </el-collapse-item>  
-      </el-collapse>
+     
+
+       <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
+            <template slot="title">
+               常贷客----来源：金盾
+            </template>
+             <el-row>
+                <el-col :span="6"><div class="blod">证件最近出现日期:{{item.idCardEndTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件最早出现日期:{{item.idCardFirstTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件查询平台数:{{item.idCardMpTimesRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件查询次数级别:{{item.idCardMpTimesType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件1个月内查询平台数:{{item.lastAMonthIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件1个月内查询次数级别:{{item.lastAMonthIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机1个月内查询平台数:{{item.lastAMonthPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机1个月内查询次数级别:{{item.lastAMonthPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件15天内查询平台数:{{item.lastFifteenDayIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件15天内查询次数级别:{{item.lastFifteenDayIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机15天内查询平台数:{{item.lastFifteenDayPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机15天内查询次数级别:{{item.lastFifteenDayPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件7天内查询平台数:{{item.lastSevenDayIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件7天内查询次数级别:{{item.lastSevenDayIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机7天内查询平台数:{{item.lastSevenDayPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机7天内查询次数级别:{{item.lastSevenDayPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件3天内查平台数:{{item.lastThreeDayIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件3天内查询次数级别:{{item.lastThreeDayIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机3天内查询平台数:{{item.lastThreeDayPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机3天内查询次数级别:{{item.lastThreeDayPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件3个月内平台数:{{item.lastThreeMonthIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机3个月内查询平台数:{{item.lastThreeMonthPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机3个月内查询次数级别:{{item.lastThreeMonthPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件2个月内查询平台数:{{item.lastTwoMonthIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件2个月内查询次数级别:{{item.lastTwoMonthIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机2个月内查询平台数:{{item.lastTwoMonthPhoneApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机2个月内查询次数级别:{{item.lastTwoMonthPhoneApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机最近出现日期:{{item.phoneEndTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机最早出现日期:{{item.phoneFirstTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机查询平台数:{{item.phoneMpTimesRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机查询次数级别:{{item.phoneMpTimesType}}</div></el-col>
+                <!-- <el-col :span="6"><div class="blod">平台详情:{{item.platformDetails}}</div></el-col> -->
+                <el-col :span="6"><div class="blod">证件当日查询平台数:{{item.todayIdCardApplicationTimeRange}}</div></el-col>
+                <el-col :span="6"><div class="blod">证件当日查询次数级别:{{item.todayIdCardApplicationTimeType}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机当日查询平台数:{{item.todayPhoneApplicationTimeRange}}</div></el-col>
+               <el-col :span="24"><div class="blod">平台详情: 
+                 <myTable :columns="platformDetailsColumns" :dataSource="platformDetails" :hasIndex="false" 
+                  :hasSelection="false" :hasPagination="false"> </myTable></div>
+                </el-col>
+            </el-row>
+       </el-collapse-item>
+
+     </el-collapse>
      </div>
    </el-card>
  </div>
@@ -198,6 +247,28 @@ export default {
       contact: [], //通讯录信息（联系人）
       juxinli: [], //聚信立
       daihoubang: [{}], //贷后邦
+      changdaike: [{}], //常贷客
+      platformDetailsColumns: [
+        {
+          prop: "platformNo",
+          label: "平台序号",
+          width: 150,
+          isShow: true
+        },
+        {
+          prop: "phoneTime",
+          label: "手机出现日期",
+          width: 150,
+          isShow: true
+        },
+        {
+          prop: "idCardTime",
+          label: "证件出现日期",
+          width: 150,
+          isShow: true
+        }
+      ], //常贷可平台详情表
+      platformDetails: [], //常贷可平台详情数据
       bindidCardColumns: [
         {
           prop: "idcard_gender",
@@ -330,7 +401,6 @@ export default {
     this.username = row.name;
     this.idcard = row.idcard;
     this.basic = [row];
-    console.log("basic:", this.basic);
   },
   methods: {
     // 折叠面板
@@ -354,7 +424,11 @@ export default {
             this.daihoubang = res.data;
             this.bindidCardTable = res.data[0].binding_idcards;
             this.bindMobileTable = res.data[0].binding_phones;
-            console.log("表格:", this.bindidCardTable);
+          } else if (colleName === "changdaike") {
+            this.changdaike = [res.data[0].content];
+            this.platformDetails = res.data[0].content.platformDetails; //常贷客平台详情
+            console.log("platformDetails", this.platformDetails);
+          } else {
           }
         })
         .catch(error => {

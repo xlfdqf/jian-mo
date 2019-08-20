@@ -45,63 +45,65 @@
             <template slot="title">
                贷后邦----来源：金盾
             </template>
-            <div :loading="daihoubangLoading" v-for="item in basic" :key="item.index">
+            <div :loading="daihoubangLoading" v-for="item in daihoubang" :key="item.index">
               <el-row>
-                <el-col :span="6"><div class="blod">身份证号码:</div></el-col>
-                <el-col :span="6"><div class="blod">姓名:{{item.amount_max}}</div></el-col>
-                <el-col :span="6"><div class="blod">性别:{{item.bank_no}}</div></el-col>
-                <el-col :span="6"><div class="blod">年龄:{{item.race}}</div></el-col>
-                <el-col :span="6"><div class="blod">查询人手机号:{{item.company_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">绑定身份证情况:{{item.customer_type | iscustomer}}</div></el-col>
-                <el-col :span="6"><div class="blod">绑定号码情况:{{item.date}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.marital_status | filterMarital}}</div></el-col>
-                <el-col :span="6"><div class="blod">生日日期:{{item.location}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机运营商:{{item.present_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.product_id}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号记录天数:{{item.product_type | filterProType}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证户籍城市:{{item.promotion_channel | isTrue}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证户籍地区:{{item.telecom_type | filterTelecomType}}</div></el-col>
-                <el-col :span="6"><div class="blod">关联手机号数量:{{item.ins_time | filterinTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
+                <el-col :span="6"><div class="blod">姓名:{{item.name}}</div></el-col>
+                <el-col :span="6"><div class="blod">性别:{{item.gender}}</div></el-col>
+                <el-col :span="6"><div class="blod">年龄:{{item.age}}</div></el-col>
+                <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
+                <el-col :span="6"><div class="blod">绑定身份证情况:{{item.binding_idcards}}</div></el-col>
+                <el-col :span="6"><div class="blod">绑定号码情况:{{item.binding_phones}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone}}</div></el-col>
+                <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号记录天数:{{item.record_phone_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证户籍城市:{{item.idcard_city}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证户籍地区:{{item.idcard_region}}</div></el-col>
+                <el-col :span="6"><div class="blod">关联手机号数量:{{item.used_phones_cnt}}</div></el-col>
            
-                <el-col :span="6"><div class="blod">身份证户籍省份:{{item.mobile}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机归属地省份:{{item.amount_max}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证是否是有效身份证:{{item.bank_no}}</div></el-col>
-                <el-col :span="6"><div class="blod">关联身份证数量:{{item.race}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机归属地城市:{{item.company_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证号记录天数:{{item.customer_type | iscustomer}}</div></el-col>
-                <el-col :span="6"><div class="blod">认识间接黑人的直接联系人个数:{{item.date}}</div></el-col>
-                <el-col :span="6"><div class="blod">间接联系人在黑名单中数量(间接黑人):{{item.marital_status | filterMarital}}</div></el-col>
-                <el-col :span="6"><div class="blod">直接联系人在黑名单中数量(直接黑人):{{item.location}}</div></el-col>
-                <el-col :span="6"><div class="blod">直接联系人:{{item.present_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">认识间接黑人的直接联系人比例:{{item.product_id}}</div></el-col>
-                <el-col :span="6"><div class="blod">葫芦分:{{item.product_type | filterProType}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中法院黑名单:{{item.promotion_channel | isTrue}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中网贷黑名单:{{item.telecom_type | filterTelecomType}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证是否命中黑名单:{{item.ins_time | filterinTime}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号是否命中黑名单:{{item.ins_time | filterinTime}}</div></el-col>
-                <el-col :span="6"><div class="blod">是否命中银行黑名单:{{item.ins_time | filterinTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证户籍省份:{{item.idcard_province}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机归属地省份:{{item.phone_province}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证是否是有效身份证:{{item.idcard_validate}}</div></el-col>
+                <el-col :span="6"><div class="blod">关联身份证数量:{{item.used_idcards_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机归属地城市:{{item.phone_city}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证号记录天数:{{item.record_idcard_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">认识间接黑人的直接联系人个数:{{item.sn_order2_blacklist_routers_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">间接联系人在黑名单中数量(间接黑人):{{item.sn_order2_blacklist_contacts_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">直接联系人在黑名单中数量(直接黑人):{{item.sn_order1_blacklist_contacts_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">直接联系人:{{item.sn_order1_contacts_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">认识间接黑人的直接联系人比例:{{item.sn_order2_blacklist_routers_pct}}</div></el-col>
+                <el-col :span="6"><div class="blod">葫芦分:{{item.sn_score}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近该身份证出现在黑名单中时间:{{item.last_appear_idcard_in_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中法院黑名单:{{item.in_court_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中网贷黑名单:{{item.in_p2p_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证是否命中黑名单:{{item.idcard_in_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号是否命中黑名单:{{item.phone_in_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">是否命中银行黑名单:{{item.in_bank_blacklist}}</div></el-col>
          
-                <el-col :span="6"><div class="blod">最近该手机号出现在黑名单中时间:{{item.mobile}}</div></el-col>
-                <el-col :span="6"><div class="blod">线下现金贷出现次数:{{item.amount_max}}</div></el-col>
-                <el-col :span="6"><div class="blod">线上现金贷出现次数:{{item.bank_no}}</div></el-col>
-                <el-col :span="6"><div class="blod">线上消费分期出现次数:{{item.race}}</div></el-col>
-                <el-col :span="6"><div class="blod">信用卡代还出现次数:{{item.company_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">线下消费分期出现次数:{{item.customer_type | iscustomer}}</div></el-col>
-                <el-col :span="6"><div class="blod">其他:{{item.date}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近180天查询次数:{{item.marital_status | filterMarital}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近7天查询次数:{{item.location}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近180天查询机构数:{{item.present_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近90天查询次数:{{item.product_id}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近60天查询机构数:{{item.product_type | filterProType}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近30天查询次数:{{item.promotion_channel | isTrue}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近14天查询次数:{{item.telecom_type | filterTelecomType}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近14天查询机构数:{{item.ins_time | filterinTime}}</div></el-col>
-                 <el-col :span="6"><div class="blod">最近30天查询机构数:{{item.location}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近7天查询机构数:{{item.present_period | filterCompanyPeriod}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近90天查询机构数:{{item.product_id}}</div></el-col>
-                <el-col :span="6"><div class="blod">最近60天查询次数:{{item.product_type | filterProType}}</div></el-col>
-                <el-col :span="6"><div class="blod">历史查询总机构数:{{item.promotion_channel | isTrue}}</div></el-col>
-                <el-col :span="6"><div class="blod">入库时间:{{item.telecom_type | filterTelecomType}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近该手机号出现在黑名单中时间:{{item.last_appear_phone_in_blacklist}}</div></el-col>
+                <el-col :span="6"><div class="blod">线下现金贷出现次数:{{item.offline_cash_loan_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">线上现金贷出现次数:{{item.online_cash_loan_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">线上消费分期出现次数:{{item.online_installment_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">小额快速贷出现次数:{{item.payday_loan_cnt}}</div></el-col>     
+                <el-col :span="6"><div class="blod">信用卡代还出现次数:{{item.credit_card_repayment_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">线下消费分期出现次数:{{item.offline_installment_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">其他:{{item.others_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近180天查询次数:{{item.search_cnt_recent_180_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近7天查询次数:{{item.search_cnt_recent_7_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近180天查询机构数:{{item.org_cnt_recent_180_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近90天查询次数:{{item.search_cnt_recent_90_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近60天查询机构数:{{item.org_cnt_recent_60_day}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近30天查询次数:{{item.search_cnt_recent_30_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近14天查询次数:{{item.search_cnt_recent_14_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近14天查询机构数:{{item.org_cnt_recent_14_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近30天查询机构数:{{item.org_cnt_recent_30_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近7天查询机构数:{{item.org_cnt_recent_7_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近90天查询机构数:{{item.org_cnt_recent_90_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">最近60天查询次数:{{item.search_cnt_recent_60_days}}</div></el-col>
+                <el-col :span="6"><div class="blod">历史查询总机构数:{{item.org_cnt}}</div></el-col>
+                <el-col :span="6"><div class="blod">入库时间:{{item.insTime}}</div></el-col>
                
 
             </el-row>
@@ -115,8 +117,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getNewsList, getNewsDetail } from "@/api/login.js";
-import moment from "moment";
+import { getNewsDetail } from "@/api/login.js";
 import {
   filterMarital,
   filterCompanyPeriod,
@@ -185,35 +186,6 @@ export default {
             }
             return html;
           }
-        }
-      ],
-      list: [
-        {
-          title: "金盾",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
-        },
-        {
-          title: "金盾2",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
-        },
-        {
-          title: "金盾3",
-          num1: 1,
-          num2: 2,
-          num3: 3,
-          website1: 11,
-          website2: 22,
-          website3: 33
         }
       ],
       basic: [], //基本信息

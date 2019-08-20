@@ -11,7 +11,8 @@
                      :key="column.prop"
                      :prop="column.prop"
                      :label="column.label"
-                      align="center">
+                      align="center"
+                      :width="column.width">
                     <template slot-scope="scope">
                        <my-render v-if="column.render" :row="scope.row" :render="column.render"></my-render>
                        <span v-else>
@@ -57,6 +58,7 @@ export default {
     dataSource: Array,
     columns: Array,
     total: Number,
+    width: Number,
     loading: {
       type: Boolean,
       default: function() {

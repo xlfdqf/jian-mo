@@ -2,12 +2,12 @@
 <template>
  <div class="table">
    <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>手机号码:{{mobile}}</span></h4>
+     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard}}</span></h4>
      <div class="box">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
             <template slot="title">
-               基本信息----来源：金盾
+               基本信息
             </template>
             <el-row>
                 <el-col :span="6"><div class="blod">手机号:{{item.mobile}}</div></el-col>
@@ -30,7 +30,7 @@
 
           <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
-               通讯信息----来源：金盾
+               通讯信息
             </template>
             <div :loading="contactinfoLoading">
               <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
@@ -40,9 +40,9 @@
            </div>
           </el-collapse-item>
 
-         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
+        <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
-               贷后邦----来源：金盾
+               贷后邦
             </template>
              <el-row> 
                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
@@ -114,10 +114,11 @@
                 </el-col>
              </el-row> 
            </el-collapse-item>  
+     
 
-          <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
+       <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
             <template slot="title">
-               常贷客----来源：金盾
+               常贷客
             </template>
              <el-row>
                 <el-col :span="6"><div class="blod">证件最近出现日期:{{item.idCardEndTime}}</div></el-col>
@@ -162,7 +163,124 @@
             </el-row>
        </el-collapse-item>
 
-      </el-collapse>
+       <el-collapse-item title="聚信立分析报告" name="5" >
+         <div v-loading="juxinliLoading">
+            <template slot="title">
+               聚信立分析报告
+            </template>
+            <div class="jxlreport" v-for="item in report" :key="item.token">
+              <h4 style="text-align:center">报告基本信息<span style="margin-left:20px">来源：金盾</span></h4>
+              <el-row>
+                  <!-- <el-col :span="6"><div class="blod">报告token:{{item.token}}</div></el-col> -->
+                  <el-col :span="8"><div class="blod">报告编号:{{item.rpt_id}}</div></el-col>
+                  <el-col :span="8"><div class="blod">报告版本:{{item.version}}</div></el-col>
+                  <el-col :span="8"><div class="blod">报告生成时间:{{item.update_time|filterinTime}}</div></el-col>
+              </el-row>
+             </div>
+
+              <div  class="jxlreport">
+              <h4 style="text-align:center">用户申请表检测<span style="margin-left:20px">来源：金盾</span></h4>
+              <el-row>
+                  <el-col :span="24"><div class="blod tit">家庭号码检查：</div></el-col>
+                  <el-col :span="12"><div class="blod">运营商联系号码检查:{{home_phone.check_mobile}}</div></el-col>
+                  <el-col :span="12"><div class="blod">数据值:{{home_phone.key_value}}</div></el-col>
+              </el-row>
+              <el-row>
+                  <el-col :span="24"><div class="blod tit">法院黑名单检查：</div></el-col>
+                  <el-col :span="12"><div class="blod">是否出现:{{court_blacklist.arised | isTrue}}</div></el-col>
+                  <el-col :span="12"><div class="blod">数据值:{{court_blacklist.black_type}}</div></el-col>
+              </el-row>
+               <el-row>
+                  <el-col :span="24"><div class="blod tit">金融服务类机构黑名单检查:</div></el-col>
+                  <el-col :span="12"><div class="blod">是否出现:{{financial_blacklist.arised | isTrue}}</div></el-col>
+                  <el-col :span="12"><div class="blod">数据值:{{financial_blacklist.black_type}}</div></el-col>
+              </el-row>
+              <el-row>
+                  <el-col :span="24"><div class="blod tit">移动电话检查:</div></el-col>
+                  <el-col :span="8"><div class="blod">身份证号检查:{{cell_phone.check_idcard}}</div></el-col>
+                  <el-col :span="8"><div class="blod">注册时间:{{cell_phone.reg_time}}</div></el-col>
+                   <el-col :span="8"><div class="blod">实名认证:{{cell_phone.reliability}}</div></el-col>
+                    <el-col :span="8"><div class="blod">电商使用号码检查:{{cell_phone.check_ebusiness}}</div></el-col>
+                     <el-col :span="8"><div class="blod">姓名检查:{{cell_phone.check_name}}</div></el-col>
+                      <el-col :span="8"><div class="blod">数据值:{{cell_phone.key_value}}</div></el-col>
+              </el-row>
+             </div>
+
+             <div  class="jxlreport" v-if="check_search_info || check_black_info">
+              <h4 style="text-align:center">用户信息检测<span style="margin-left:20px">来源：金盾</span></h4>
+                <el-row>
+                    <el-col :span="24"><div class="blod tit">用户查询信息:</div></el-col>
+                    <el-col :span="24" >查询过该用户的相关企业数量:<span class="blod">{{check_search_info.register_org_cnt}}</span></el-col>
+                    <el-col :span="24">查询过该用户的相关企业类型：<span class="blod">{{check_search_info.searched_org_cnt}}</span></el-col>
+                    <el-col :span="24">电话号码组合过其他姓名：<span class="blod" v-for="item in check_search_info.phone_with_other_names" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">电话号码出现过的公开网站：<span class="blod" v-for="item in check_search_info.arised_open_web" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">身份证组合过其他电话：<span class="blod" v-for="item in check_search_info.idcard_with_other_phones" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">电话号码组合过其他身份证：<span class="blod" v-for="item in check_search_info.phone_with_other_idcards" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">查询过该用户的相关企业类型：<span class="blod" v-for="item in check_search_info.searched_org_type" :key="item.idcard">{{item}}、</span></el-col>
+                    <el-col :span="24">电话号码注册过的相关企业类型：<span class="blod" v-for="item in check_search_info.register_org_type" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">身份证组合过的其他姓名：<span class="blod" v-for="item in check_search_info.idcard_with_other_names" :key="item.idcard">{{item}}</span></el-col>
+                </el-row>
+                <el-row>
+                    <el-col :span="24"><div class="blod tit">用户黑名单信息:</div></el-col>
+                    <el-col :span="8"><div class="blod">直接联系人人数:{{check_black_info.contacts_class1_cnt}}</div></el-col>
+                    <el-col :span="8"><div class="blod">直接联系人中黑名单人数:{{check_black_info.contacts_class1_blacklist_cnt}}</div></el-col>
+                    <el-col :span="8"><div class="blod">间接联系人中黑名单人数:{{check_black_info.contacts_class2_blacklist_cnt}}</div></el-col>
+                    <el-col :span="8"><div class="blod">引起间接黑名单人数:{{check_black_info.contacts_router_cnt}}</div></el-col>
+                    <el-col :span="8"><div class="blod">直接联系人中引起间接黑名单占比:{{check_black_info.contacts_router_ratio}}</div></el-col>
+                    <el-col :span="8"><div class="blod">用户号码联系黑中介分数:{{check_black_info.phone_gray_score}}</div></el-col>
+                </el-row>
+             </div>
+
+            <div  class="jxlreport">
+              <h4 style="text-align:center">用户行为检测<span style="margin-left:20px">来源：金盾</span></h4>
+                <myTable :columns="behavior_checkColumns" :dataSource="behavior_check" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div> 
+
+              <div  class="jxlreport">
+              <h4 style="text-align:center">运营商数据整理<span style="margin-left:20px">来源：金盾</span></h4>
+                <myTable :columns="cell_behaviorColumns" :dataSource="cell_behavior" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div>
+
+               <div  class="jxlreport">
+              <h4 style="text-align:center">联系人区域汇总<span style="margin-left:20px">来源：金盾</span></h4>
+                <myTable :columns="contact_regionColumns" :dataSource="contact_region" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div> 
+
+            <h4 style="text-align:center">常用服务<span style="margin-left:20px">来源：金盾</span></h4>
+              <div  class="jxlreport" v-for="item in main_service" :key="item.company_name">
+                 服务企业类型：{{item.company_type}}<span style="margin-left:30px;">企业名称：{{item.company_name}}</span>
+                <myTable :columns="main_serviceColumns" :dataSource="item.service_details" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div> 
+
+             <div  class="jxlreport">
+              <h4 style="text-align:center">出行分析<span style="margin-left:20px">来源：金盾</span></h4>
+                <myTable :columns="trip_infoColumns" :dataSource="trip_info" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div> 
+
+             <div  class="jxlreport">
+              <h4 style="text-align:center">运营商联系人通话详情<span style="margin-left:20px">来源：金盾</span></h4>
+                <myTable :columns="contact_listColumns" :dataSource="contact_list" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div> 
+
+             </div>
+          </el-collapse-item>
+         
+     
+         <el-collapse-item title="大圣报告" name="6">
+            <template slot="title">
+               大圣报告
+            </template>
+              <myTable :columns="ds_reportColumns" :dataSource="ds_report" :hasIndex="false" 
+              :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+          </el-collapse-item>
+     
+     </el-collapse>
      </div>
    </el-card>
  </div>
@@ -171,6 +289,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getNewsDetail } from "@/api/login.js";
+import moment from "moment";
 import {
   filterMarital,
   filterCompanyPeriod,
@@ -190,7 +309,7 @@ export default {
       juxinliLoading: false,
       activeNames: ["1"],
       username: "",
-      mobile: "",
+      idcard: "",
       //联系人
       contactColumns: [
         {
@@ -216,30 +335,6 @@ export default {
           label: "紧急联系人号码",
           isShow: true
         }
-        // {
-        //   prop: "relation",
-        //   label: "关系",
-        //   isShow: true,
-        //   render: function(v, param) {
-        //     let html = "";
-        //     if (param.row.relation == "1") {
-        //       html = "父亲";
-        //     } else if (param.row.relation == "2") {
-        //       html = "母亲";
-        //     } else if (param.row.relation == "3") {
-        //       html = "儿子";
-        //     } else if (param.row.relation == "4") {
-        //       html = "女儿";
-        //     } else if (param.row.relation == "5") {
-        //       html = "配偶";
-        //     } else if (param.row.relation == "6") {
-        //       html = "朋友";
-        //     } else {
-        //       html = "其他";
-        //     }
-        //     return html;
-        //   }
-        // }
       ],
       basic: [], //基本信息
       emergency: [], //通讯录信息（紧急联系人）
@@ -266,7 +361,7 @@ export default {
           width: 150,
           isShow: true
         }
-      ], //常贷可平台详情表
+      ], //常贷客平台详情表
       platformDetails: [], //常贷可平台详情数据
       bindidCardColumns: [
         {
@@ -382,7 +477,490 @@ export default {
         }
       ], //绑定号码情况表
       bindidCardTable: [], //绑定身份证情况表数据
-      bindMobileTable: [] //绑定号码情况表数据
+      bindMobileTable: [], //绑定号码情况表数据
+      juxinliReport: [], //聚信立分析报告
+      report: [], //报告基本信息
+      user_info_check: [], //用户信息检测
+      home_phone: {}, //用户申请表检测home_phone
+      court_blacklist: {}, //用户申请表检测court_blacklist
+      financial_blacklist: {}, //用户申请表检测court_blacklist
+      home_addr: {}, //用户申请表检测home_addr
+      cell_phone: {}, //用户申请表检测cell_phone
+      check_black_info: {}, //用户申请表检测 用户黑名单查询
+      check_search_info: {}, //用户申请表检测 用户信息查询
+      behavior_check: [], //用户行为检测数据
+      behavior_checkColumns: [
+        {
+          prop: "result",
+          label: "检查结果",
+          isShow: true
+        },
+        {
+          prop: "score",
+          label: "标记",
+          isShow: true
+        },
+        {
+          prop: "evidence",
+          label: "证据",
+          isShow: true
+        },
+        {
+          prop: "check_point_cn",
+          label: "分析点",
+          isShow: true
+        }
+      ], //用户行为检测数据表
+      cell_behavior: [], //运营商数据整理
+      cell_behaviorColumns: [
+        {
+          prop: "cell_operator_zh",
+          label: "运营商（中文）",
+          isShow: true
+        },
+        {
+          prop: "net_flow",
+          label: "流量",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.net_flow.toFixed(2);
+          // }
+        },
+        {
+          prop: "call_out_time",
+          label: "主叫时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.call_out_time.toFixed(2);
+          // }
+        },
+        {
+          prop: "cell_operator",
+          label: "运营商",
+          isShow: true
+        },
+        {
+          prop: "call_in_cnt",
+          label: "被叫次数",
+          isShow: true
+        },
+        {
+          prop: "cell_phone_num",
+          label: "号码",
+          isShow: true
+        },
+        {
+          prop: "sms_cnt",
+          label: "短信数目",
+          isShow: true
+        },
+        {
+          prop: "cell_loc",
+          label: "归属地",
+          isShow: true
+        },
+        {
+          prop: "total_amount",
+          label: "话费消费",
+          isShow: true
+        },
+        {
+          prop: "cell_mth",
+          label: "呼叫次数",
+          isShow: true
+        },
+        {
+          prop: "call_out_cnt",
+          label: "主叫次数",
+          isShow: true
+        },
+        {
+          prop: "call_in_time",
+          label: "被叫时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.call_in_time.toFixed(2);
+          // }
+        }
+      ], //运营商数据整理表
+      contact_regionColumns: [
+        {
+          prop: "region_loc",
+          label: "地区名称",
+          isShow: true
+        },
+        {
+          prop: "region_call_in_time_pct",
+          label: "电话呼入时间百分比",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_in_time_pct.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_in_time",
+          label: "电话呼入时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_in_time.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_out_time_pct",
+          label: "电话呼出时间百分比",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_out_time_pct.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_out_cnt_pct",
+          label: "电话呼出次数百分比",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_out_cnt_pct.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_avg_call_in_time",
+          label: "平均电话呼入时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_avg_call_in_time.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_avg_call_out_time",
+          label: "平均电话呼出时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_avg_call_out_time.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_in_cnt_pct",
+          label: "电话呼入次数百分比",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_in_cnt_pct.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_out_time",
+          label: "电话呼出时间",
+          isShow: true
+          // render: function(v, param) {
+          //   return param.row.region_call_out_time.toFixed(2);
+          // }
+        },
+        {
+          prop: "region_call_out_cnt",
+          label: "电话呼出次数",
+          isShow: true
+        },
+        {
+          prop: "region_call_in_cnt",
+          label: "电话呼入次数",
+          isShow: true
+        }
+      ], //联系人区域汇总表
+      contact_region: [], //联系人区域汇总数据
+      contact_list: [], //运营商联系人通话详情
+      contact_listColumns: [
+        {
+          prop: "contact_afternoon",
+          label: "下午联系次数",
+          isShow: true
+        },
+        {
+          prop: "contact_name",
+          label: "联系人姓名",
+          isShow: true
+        },
+        {
+          prop: "contact_early_morning",
+          label: "凌晨联系次数",
+          isShow: true
+        },
+        {
+          prop: "call_in_len",
+          label: "呼入时间",
+          isShow: true,
+          render: function(v, param) {
+            return param.row.call_in_len.toFixed(2);
+          }
+        },
+        {
+          prop: "contact_all_day",
+          label: "是否全天联系",
+          isShow: true,
+          render: function(v, param) {
+            let html = "";
+            if (param.row.idcard_validate == "1") {
+              html = "是";
+            } else {
+              html = "否";
+            }
+            return html;
+          }
+        },
+        {
+          prop: "call_in_cnt",
+          label: "呼入次数",
+          isShow: true
+        },
+        {
+          prop: "call_out_len",
+          label: "呼出时间",
+          isShow: true,
+          render: function(v, param) {
+            return param.row.call_out_len.toFixed(2);
+          }
+        },
+        {
+          prop: "contact_1m",
+          label: "最近一月联系次数",
+          isShow: true
+        },
+        {
+          prop: "call_len",
+          label: "呼叫时长",
+          isShow: true,
+          render: function(v, param) {
+            return param.row.call_len.toFixed(2);
+          }
+        },
+        {
+          prop: "contact_3m",
+          label: "最近三月联系次数",
+          isShow: true
+        },
+        {
+          prop: "phone_num_loc",
+          label: "号码归属地",
+          isShow: true
+        },
+        {
+          prop: "p_relation",
+          label: "关系推测",
+          isShow: true
+        },
+        {
+          prop: "call_cnt",
+          label: "呼叫次数",
+          isShow: true
+        },
+        {
+          prop: "contact_1w",
+          label: "最近一周联系次数",
+          isShow: true
+        },
+        {
+          prop: "contact_night",
+          label: "晚上联系次数",
+          isShow: true
+        },
+        {
+          prop: "contact_noon",
+          label: "中午联系次数",
+          isShow: true
+        },
+        {
+          prop: "contact_weekday",
+          label: "周中联系次数",
+          isShow: true
+        },
+        {
+          prop: "call_out_cnt",
+          label: "呼出次数",
+          isShow: true
+        },
+        {
+          prop: "contact_weekend",
+          label: "周末联系次数",
+          isShow: true
+        },
+        {
+          prop: "phone_num",
+          label: "号码",
+          isShow: true
+        },
+        {
+          prop: "contact_holiday",
+          label: "节假日联系次数",
+          isShow: true
+        },
+        {
+          prop: "contact_3m_plus",
+          label: "三个月以上联系次数",
+          isShow: true
+        },
+        {
+          prop: "needs_type",
+          label: "需求类别",
+          isShow: true
+        },
+        {
+          prop: "contact_morning",
+          label: "上午联系次数",
+          isShow: true
+        }
+      ], //运营商联系人通话详情表
+      main_serviceColumns: [
+        // {
+        //   prop: "company_type",
+        //   label: "服务企业类型",
+        //   isShow: true
+        // },
+        // {
+        //   prop: "company_name",
+        //   label: "企业名称",
+        //   isShow: true
+        // },
+        {
+          prop: "interact_mth",
+          label: "互动月份",
+          isShow: true
+        },
+        {
+          prop: "interact_cnt",
+          label: "互动次数",
+          isShow: true
+        }
+      ], //常用服务表
+      main_service: [], //常用服务数据
+      trip_info: [], //出行分析
+      trip_infoColumns: [
+        {
+          prop: "trip_type",
+          label: "出行时间类型",
+          isShow: true
+        },
+        {
+          prop: "trip_leave",
+          label: "出发地",
+          isShow: true
+        },
+        {
+          prop: "trip_dest",
+          label: "目的地",
+          isShow: true
+        },
+        {
+          prop: "trip_start_time",
+          label: "出行开始时间",
+          isShow: true
+        },
+        {
+          prop: "trip_end_time",
+          label: "出行结束时间",
+          isShow: true
+        }
+      ], //出行分析表
+      ds_reportColumns: [
+        {
+          prop: "name",
+          label: "姓名",
+          isShow: true
+        },
+        {
+          prop: "mobile",
+          label: "手机号码",
+          width: 150,
+          isShow: true
+        },
+        {
+          prop: "idcard",
+          label: "身份证号",
+          width: 180,
+          isShow: true
+        },
+        {
+          prop: "order_no",
+          label: "接口返回的唯一订单号",
+          width: 180,
+          isShow: true
+        },
+        {
+          prop: "extension_periods",
+          label: "展期期数",
+          isShow: true
+        },
+        {
+          prop: "orderno",
+          label: "订单号",
+          width: 180,
+          isShow: true
+        },
+        {
+          prop: "overdue_day",
+          label: "逾期天数",
+          isShow: true
+        },
+        {
+          prop: "settle",
+          label: "是否已经结清",
+          isShow: true
+        },
+        {
+          prop: "ins_time",
+          label: "入库时间",
+          width: 180,
+          isShow: true,
+          render: function(v, param) {
+            return moment(param.row.ins_time).format("YYYY-MM-DD HH:MM:SS");
+          }
+        },
+        {
+          prop: "extension_time",
+          label: "发生展期时间（秒）",
+          isShow: true
+        },
+        {
+          prop: "unpay",
+          label: "未还款金额(分)",
+          isShow: true
+        },
+        {
+          prop: "report_time",
+          label: "上报的时间",
+          width: 180,
+          isShow: true
+        },
+        {
+          prop: "extension_pay_due_time",
+          label: "展期后应还日期",
+          isShow: true
+        },
+        {
+          prop: "pay_finish_time",
+          label: "实际还款时间",
+          isShow: true
+        },
+        {
+          prop: "pay_due_time",
+          label: "应还款时间",
+          width: 180,
+          isShow: true
+        },
+        {
+          prop: "is_extension",
+          label: "是否展期",
+          isShow: true
+        },
+        {
+          prop: "payed",
+          label: "已经还款金额（分）",
+          isShow: true
+        },
+        {
+          prop: "loan_time",
+          label: "放款日期",
+          width: 180,
+          isShow: true
+        }
+      ], //大圣报告表
+      ds_report: [] //大圣报告
     };
   },
   filters: {
@@ -413,17 +991,23 @@ export default {
         colleName: colleName
       };
       this.contactinfoLoading = true;
+      this.juxinliLoading = true;
       getNewsDetail(params)
         .then(res => {
           this.contactinfoLoading = false;
           if (colleName === "contactinfo") {
-            this.emergency = res.data[0].emergency; //紧急联系人
-            this.contact = res.data[0].contact; //联系人
+            if (res.data[0]) {
+              this.emergency = res.data[0].emergency; //紧急联系人
+              this.contact = res.data[0].contact; //联系人
+            } else {
+              this.emergency = [];
+              this.contact = [];
+            }
           } else if (colleName === "daihoubang") {
             if (res.data[0]) {
               this.daihoubang = res.data;
-              this.bindidCardTable = res.data[0].binding_idcards;
-              this.bindMobileTable = res.data[0].binding_phones;
+              this.bindidCardTable = res.data[0].binding_idcards; //绑定身份证
+              this.bindMobileTable = res.data[0].binding_phones; //绑定号码
             } else {
               this.daihoubang = [{}];
             }
@@ -432,9 +1016,70 @@ export default {
               this.changdaike = [res.data[0].content];
               this.platformDetails = res.data[0].content.platformDetails; //常贷客平台详情
             } else {
-              this.platformDetails = [{}];
+              this.changdaike = [{}];
+              this.platformDetails = [];
             }
-          } else {
+          } else if (colleName === "juxinli_operator_report") {
+            this.juxinliLoading = false;
+            if (res.data[0]) {
+              let content = res.data[0].content;
+              this.report = [content.report]; //报告基本信息
+              this.home_phone = content.home_phone.check_points; //用户申请表检测home_phone
+              this.court_blacklist =
+                content.id_card.check_points.court_blacklist; //id_card  court_blacklist
+              this.financial_blacklist =
+                content.id_card.check_points.financial_blacklist; //id_card   financial_blacklist
+              this.home_addr = content.home_addr.check_points; //home_addr
+              this.cell_phone = content.cell_phone.check_points; //cell_phone
+              if (content.user_info_check instanceof Object) {
+                this.check_search_info =
+                  content.user_info_check.check_search_info; //用户信息查询
+                this.check_black_info =
+                  content.user_info_check.check_black_info; //check_black_info 用户黑名单信息
+              } else {
+                this.check_black_info = {};
+                this.user_info_check = {};
+              }
+              this.behavior_check = content.behavior_check; //用户行为检测
+              this.cell_behavior = content.cell_behavior[0].behavior; //运营商数据整理
+              this.contact_region = content.contact_region; //联系人区域汇总
+              this.contact_list = content.contact_list; //运营商联系人通话详情
+              this.main_service = content.main_service; //常用服务
+              this.trip_info = content.trip_info; //出行分析
+              // let main_service = content.main_service.map(item => {
+              //   item.service_details.forEach((val, index) => {
+              //     Object.assign(
+              //       val,
+              //       {
+              //         company_type: item.company_type
+              //       },
+              //       { company_name: item.company_name }
+              //     );
+              //   });
+              //   console.log(obj);
+              // });
+              // console.log(main_service);
+            } else {
+              this.report = [];
+              this.home_phone = {};
+              this.court_blacklist = {};
+              this.financial_blacklist = {};
+              this.home_addr = {};
+              this.cell_phone = {};
+              this.check_black_info = {};
+              this.behavior_check = [];
+              this.cell_behavior = [];
+              this.contact_region = [];
+              this.contact_list = [];
+              this.main_service = [];
+              this.trip_info = [];
+            }
+          } else if (colleName === "ds_report") {
+            if (res.data) {
+              this.ds_report = res.data;
+            } else {
+              this.ds_report = [];
+            }
           }
         })
         .catch(error => {
@@ -456,7 +1101,14 @@ export default {
   margin-bottom: 30px;
 }
 .blod {
-  font-weight: bold;
+  /* font-weight: bold; */
   padding-bottom: 20px;
+}
+.jxlreport {
+  border: 1px solid#dddddd;
+  margin-bottom: 10px;
+}
+.tit {
+  font-weight: bold;
 }
 </style>

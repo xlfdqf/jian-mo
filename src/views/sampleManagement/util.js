@@ -73,6 +73,9 @@ export function filterCollName(colleName) {
         case '5':
             colleName = "juxinli_operator_report";
             break;
+        case '6':
+            colleName = "ds_report";
+            break;
         default:
             colleName = "basic";
     }

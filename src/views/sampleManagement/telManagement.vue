@@ -75,7 +75,6 @@ export default {
         });
     },
     detail(row) {
-      console.log(row);
       localStorage.setItem("mobileRow", JSON.stringify(row));
       this.$router.push({
         name: "telManagementDetail",

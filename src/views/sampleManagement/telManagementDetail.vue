@@ -2,12 +2,12 @@
 <template>
  <div class="table">
    <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard}}</span></h4>
+     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>手机号码:{{mobile}}</span></h4>
      <div class="box">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
             <template slot="title">
-               基本信息
+               基本信息 
             </template>
             <el-row>
                 <el-col :span="6"><div class="blod">手机号:{{item.mobile}}</div></el-col>
@@ -30,9 +30,9 @@
 
           <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
-               通讯信息
+               通讯信息<span style="margin-left:20px;" v-if="contactinSource">来源：{{contactinSource}}</span>
             </template>
-            <div :loading="contactinfoLoading">
+            <div>
               <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"> </myTable>
               <myTable :columns="contactColumns" :dataSource="contact" :hasIndex="false" 
@@ -42,7 +42,7 @@
 
         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
-               贷后邦
+               贷后邦<span style="margin-left:20px;" v-if="daihoubangSource">来源：{{daihoubangSource}}</span>
             </template>
              <el-row> 
                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
@@ -118,7 +118,7 @@
 
        <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
             <template slot="title">
-               常贷客
+               常贷客<span style="margin-left:20px;" v-if="changdaikeSource">来源：{{changdaikeSource}}</span>
             </template>
              <el-row>
                 <el-col :span="6"><div class="blod">证件最近出现日期:{{item.idCardEndTime}}</div></el-col>
@@ -163,13 +163,12 @@
             </el-row>
        </el-collapse-item>
 
-       <el-collapse-item title="聚信立分析报告" name="5" >
-         <div v-loading="juxinliLoading">
+       <el-collapse-item title="聚信立分析报告" name="5" v-loading="loading">
             <template slot="title">
-               聚信立分析报告
+               聚信立分析报告<span style="margin-left:20px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
             </template>
             <div class="jxlreport" v-for="item in report" :key="item.token">
-              <h4 style="text-align:center">报告基本信息<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">报告基本信息</h4>
               <el-row>
                   <!-- <el-col :span="6"><div class="blod">报告token:{{item.token}}</div></el-col> -->
                   <el-col :span="8"><div class="blod">报告编号:{{item.rpt_id}}</div></el-col>
@@ -179,7 +178,7 @@
              </div>
 
               <div  class="jxlreport">
-              <h4 style="text-align:center">用户申请表检测<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">用户申请表检测</h4>
               <el-row>
                   <el-col :span="24"><div class="blod tit">家庭号码检查：</div></el-col>
                   <el-col :span="12"><div class="blod">运营商联系号码检查:{{home_phone.check_mobile}}</div></el-col>
@@ -232,24 +231,24 @@
              </div>
 
             <div  class="jxlreport">
-              <h4 style="text-align:center">用户行为检测<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">用户行为检测</h4>
                 <myTable :columns="behavior_checkColumns" :dataSource="behavior_check" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
               <div  class="jxlreport">
-              <h4 style="text-align:center">运营商数据整理<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">运营商数据整理</h4>
                 <myTable :columns="cell_behaviorColumns" :dataSource="cell_behavior" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div>
 
                <div  class="jxlreport">
-              <h4 style="text-align:center">联系人区域汇总<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">联系人区域汇总</h4>
                 <myTable :columns="contact_regionColumns" :dataSource="contact_region" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
-            <h4 style="text-align:center">常用服务<span style="margin-left:20px">来源：金盾</span></h4>
+            <h4 style="text-align:center">常用服务</h4>
               <div  class="jxlreport" v-for="item in main_service" :key="item.company_name">
                  服务企业类型：{{item.company_type}}<span style="margin-left:30px;">企业名称：{{item.company_name}}</span>
                 <myTable :columns="main_serviceColumns" :dataSource="item.service_details" :hasIndex="false" 
@@ -257,24 +256,21 @@
              </div> 
 
              <div  class="jxlreport">
-              <h4 style="text-align:center">出行分析<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">出行分析</h4>
                 <myTable :columns="trip_infoColumns" :dataSource="trip_info" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
              <div  class="jxlreport">
-              <h4 style="text-align:center">运营商联系人通话详情<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">运营商联系人通话详情</h4>
                 <myTable :columns="contact_listColumns" :dataSource="contact_list" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
-
-             </div>
           </el-collapse-item>
          
-     
          <el-collapse-item title="大圣报告" name="6">
             <template slot="title">
-               大圣报告
+               大圣报告<span style="margin-left:20px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
             </template>
               <myTable :columns="ds_reportColumns" :dataSource="ds_report" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
@@ -304,12 +300,11 @@ export default {
   components: { myTable },
   data() {
     return {
-      contactinfoLoading: false,
-      daihoubangLoading: false,
-      juxinliLoading: false,
+      loading: false,
       activeNames: ["1"],
       username: "",
       idcard: "",
+      mobile: "",
       //联系人
       contactColumns: [
         {
@@ -960,7 +955,12 @@ export default {
           isShow: true
         }
       ], //大圣报告表
-      ds_report: [] //大圣报告
+      ds_report: [], //大圣报告
+      contactinSource: localStorage.getItem("contactinSource"),
+      daihoubangSource: localStorage.getItem("daihoubangSource"),
+      changdaikeSource: localStorage.getItem("changdaikeSource"),
+      juxinliSource: localStorage.getItem("juxinliSource"),
+      ds_reportSource: localStorage.getItem("ds_reportSource")
     };
   },
   filters: {
@@ -975,6 +975,7 @@ export default {
   },
   mounted() {
     let row = JSON.parse(localStorage.getItem("mobileRow"));
+    // console.log(row);
     this.username = row.name;
     this.mobile = row.mobile;
     this.basic = [row];
@@ -990,13 +991,18 @@ export default {
         mobile: this.mobile,
         colleName: colleName
       };
-      this.contactinfoLoading = true;
-      this.juxinliLoading = true;
+      if (colleName === "juxinli_operator_report") {
+        this.loading = true;
+      }
       getNewsDetail(params)
         .then(res => {
-          this.contactinfoLoading = false;
+          if (colleName === "basic") {
+            this.loading = false;
+          }
           if (colleName === "contactinfo") {
             if (res.data[0]) {
+              localStorage.setItem("contactinSource", res.data[0].source);
+              this.contactinSource = localStorage.getItem("contactinSource"); //来源
               this.emergency = res.data[0].emergency; //紧急联系人
               this.contact = res.data[0].contact; //联系人
             } else {
@@ -1006,6 +1012,8 @@ export default {
           } else if (colleName === "daihoubang") {
             if (res.data[0]) {
               this.daihoubang = res.data;
+              localStorage.setItem("daihoubangSource", res.data[0].source);
+              this.daihoubangSource = localStorage.getItem("daihoubangSource"); //来源
               this.bindidCardTable = res.data[0].binding_idcards; //绑定身份证
               this.bindMobileTable = res.data[0].binding_phones; //绑定号码
             } else {
@@ -1013,6 +1021,8 @@ export default {
             }
           } else if (colleName === "changdaike") {
             if (res.data[0]) {
+              localStorage.setItem("changdaikeSource", res.data[0].source);
+              this.changdaikeSource = localStorage.getItem("changdaikeSource"); //来源
               this.changdaike = [res.data[0].content];
               this.platformDetails = res.data[0].content.platformDetails; //常贷客平台详情
             } else {
@@ -1020,9 +1030,11 @@ export default {
               this.platformDetails = [];
             }
           } else if (colleName === "juxinli_operator_report") {
-            this.juxinliLoading = false;
+            this.loading = false;
             if (res.data[0]) {
               let content = res.data[0].content;
+              localStorage.setItem("juxinliSource", res.data[0].source);
+              this.juxinliSource = localStorage.getItem("juxinliSource"); //来源
               this.report = [content.report]; //报告基本信息
               this.home_phone = content.home_phone.check_points; //用户申请表检测home_phone
               this.court_blacklist =
@@ -1046,19 +1058,6 @@ export default {
               this.contact_list = content.contact_list; //运营商联系人通话详情
               this.main_service = content.main_service; //常用服务
               this.trip_info = content.trip_info; //出行分析
-              // let main_service = content.main_service.map(item => {
-              //   item.service_details.forEach((val, index) => {
-              //     Object.assign(
-              //       val,
-              //       {
-              //         company_type: item.company_type
-              //       },
-              //       { company_name: item.company_name }
-              //     );
-              //   });
-              //   console.log(obj);
-              // });
-              // console.log(main_service);
             } else {
               this.report = [];
               this.home_phone = {};
@@ -1076,6 +1075,8 @@ export default {
             }
           } else if (colleName === "ds_report") {
             if (res.data) {
+              localStorage.setItem("ds_reportSource", res.data[0].source);
+              this.ds_reportSource = localStorage.getItem("ds_reportSource"); //来源
               this.ds_report = res.data;
             } else {
               this.ds_report = [];

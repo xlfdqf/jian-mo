@@ -206,7 +206,7 @@
              </div>
 
              <div  class="jxlreport" v-if="check_search_info || check_black_info">
-              <h4 style="text-align:center">用户信息检测<span style="margin-left:20px">来源：金盾</span></h4>
+              <h4 style="text-align:center">用户信息检测</h4>
                 <el-row>
                     <el-col :span="24"><div class="blod tit">用户查询信息:</div></el-col>
                     <el-col :span="24" >查询过该用户的相关企业数量:<span class="blod">{{check_search_info.register_org_cnt}}</span></el-col>
@@ -220,7 +220,7 @@
                     <el-col :span="24">身份证组合过的其他姓名：<span class="blod" v-for="item in check_search_info.idcard_with_other_names" :key="item.idcard">{{item}}</span></el-col>
                 </el-row>
                 <el-row>
-                    <el-col :span="24"><div class="blod tit">用户黑名单信息:</div></el-col>
+                    <el-col :span="24"><div class="blod tit" style="margin-top:10px;">用户黑名单信息:</div></el-col>
                     <el-col :span="8"><div class="blod">直接联系人人数:{{check_black_info.contacts_class1_cnt}}</div></el-col>
                     <el-col :span="8"><div class="blod">直接联系人中黑名单人数:{{check_black_info.contacts_class1_blacklist_cnt}}</div></el-col>
                     <el-col :span="8"><div class="blod">间接联系人中黑名单人数:{{check_black_info.contacts_class2_blacklist_cnt}}</div></el-col>

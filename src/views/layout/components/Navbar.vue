@@ -12,7 +12,7 @@
         <div class="avatar-wrapper">
           <!-- <img class="user-avatar" :src="avatar"> -->
           <div style="float:right">
-            <div style="color:#21BAA9;margin-left:10px">{{name}}</div>
+            <div style="color:#21BAA9;margin-left:10px">admin{{name}}</div>
           </div>
           <i class="el-icon-caret-bottom"></i>
         </div>

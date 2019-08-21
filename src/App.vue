@@ -66,16 +66,16 @@ export default {
 /* .el-collapse-item__header {
 } */
 /* 解决出现滚动条浏览器抖动 */
-html,
+/* html,
 body {
   overflow-y: scroll;
-}
-html,
+} */
+/* html,
 body {
   overflow: scroll;
   min-height: 101%;
 }
 html {
   overflow: -moz-scrollbars-vertical;
-}
+} */
 </style>

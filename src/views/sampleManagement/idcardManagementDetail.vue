@@ -279,12 +279,16 @@
      </el-collapse>
      </div>
    </el-card>
+    <el-tooltip placement="top" content="回到顶部">
+      <nx-back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></nx-back-to-top>
+    </el-tooltip>
  </div>
 </template>
 
 <script>
 import myTable from "@/components/myTable";
 import { getNewsDetail } from "@/api/login.js";
+import nxBackToTop from "@/components/nx-back-to-top";
 import moment from "moment";
 import {
   filterMarital,
@@ -297,9 +301,18 @@ import {
   filterCollName
 } from "./util.js";
 export default {
-  components: { myTable },
+  components: { myTable, nxBackToTop },
   data() {
     return {
+      myBackToTopStyle: {
+        right: "50px",
+        bottom: "50px",
+        width: "40px",
+        height: "40px",
+        "border-radius": "4px",
+        "line-height": "45px", // 请保持与高度一致以垂直居中 Please keep consistent with height to center vertically
+        background: "#e7eaf1" // 按钮的背景颜色 The background color of the button
+      },
       loading: false,
       activeNames: ["1"],
       username: "",
@@ -489,11 +502,11 @@ export default {
           label: "检查结果",
           isShow: true
         },
-        {
-          prop: "score",
-          label: "标记",
-          isShow: true
-        },
+        // {
+        //   prop: "score",
+        //   label: "标记",
+        //   isShow: true
+        // },
         {
           prop: "evidence",
           label: "证据",

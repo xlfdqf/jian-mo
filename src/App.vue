@@ -63,14 +63,13 @@ export default {
 .el-date-editor .el-range-separator {
   width: 6%;
 }
-/* .el-collapse-item__header {
-} */
+
 /* 解决出现滚动条浏览器抖动 */
 /* html,
 body {
   overflow-y: scroll;
-} */
-/* html,
+} 
+html,
 body {
   overflow: scroll;
   min-height: 101%;
@@ -78,4 +77,7 @@ body {
 html {
   overflow: -moz-scrollbars-vertical;
 } */
+.el-collapse-item__arrow {
+  float: left;
+}
 </style>

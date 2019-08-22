@@ -248,10 +248,15 @@
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
-            <h4 style="text-align:center">常用服务</h4>
+            <!-- <h4 style="text-align:center">常用服务</h4>
               <div  class="jxlreport" v-for="item in main_service" :key="item.company_name">
                  服务企业类型：{{item.company_type}}<span style="margin-left:30px;">企业名称：{{item.company_name}}</span>
                 <myTable :columns="main_serviceColumns" :dataSource="item.service_details" :hasIndex="false" 
+                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
+             </div>  -->
+              <h4 style="text-align:center">常用服务</h4>
+              <div  class="jxlreport">
+                <myTable :columns="main_serviceColumns" :dataSource="main_service" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
@@ -814,16 +819,21 @@ export default {
         }
       ], //运营商联系人通话详情表
       main_serviceColumns: [
-        // {
-        //   prop: "company_type",
-        //   label: "服务企业类型",
-        //   isShow: true
-        // },
-        // {
-        //   prop: "company_name",
-        //   label: "企业名称",
-        //   isShow: true
-        // },
+        {
+          prop: "company_type",
+          label: "服务企业类型",
+          isShow: true
+        },
+        {
+          prop: "company_name",
+          label: "企业名称",
+          isShow: true
+        },
+        {
+          prop: "total_service_cnt",
+          label: "总互动次数",
+          isShow: true
+        },
         {
           prop: "interact_mth",
           label: "互动月份",
@@ -1067,8 +1077,21 @@ export default {
               this.cell_behavior = content.cell_behavior[0].behavior; //运营商数据整理
               this.contact_region = content.contact_region; //联系人区域汇总
               this.contact_list = content.contact_list; //运营商联系人通话详情
-              this.main_service = content.main_service; //常用服务
+              // this.main_service = content.main_service; //常用服务
               this.trip_info = content.trip_info; //出行分析
+              let newObj = [];
+              content.main_service.forEach(item => {
+                item.service_details.forEach(val => {
+                  newObj.push(
+                    Object.assign(val, {
+                      company_type: item.company_type,
+                      company_name: item.company_name,
+                      total_service_cnt: item.total_service_cnt
+                    })
+                  );
+                });
+              });
+              this.main_service = newObj;
             } else {
               this.report = [];
               this.home_phone = {};

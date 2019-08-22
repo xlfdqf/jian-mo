@@ -1,10 +1,6 @@
 <!--柱状图组件 -->
 <template>
-  <div>
-    <p class="warn-content">
-      <a href="https://v-charts.js.org/#/" target="_blank">charts组件参考v-charts
-      </a>
-    </p>
+  <div class="charts">
     <ve-histogram :data="chartData"></ve-histogram>
   </div>
 </template>
@@ -28,3 +24,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+/* .charts {
+  background-color: #344b58 !important;
+} */
+</style>

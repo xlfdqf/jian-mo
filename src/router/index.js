@@ -31,39 +31,39 @@ export const constantRouterMap = [
     ]
   },
   // 图表
-  // {
-  //   path: '/charts',
-  //   component: Layout,
-  //   redirect: '/charts/DiscountFigure',
-  //   name: 'charts',
-  //   meta: { title: 'charts', icon: 'chart' },
-  //   children: [
-  //     {
-  //       path: 'DiscountFigure',
-  //       name: 'DiscountFigure',
-  //       component: () => import('@/views/charts/DiscountFigure'),
-  //       meta: { title: 'DiscountFigure', icon: 'discounting' }
-  //     },
-  //     {
-  //       path: 'columnar',
-  //       name: 'columnar',
-  //       component: () => import('@/views/charts/columnar'),
-  //       meta: { title: 'columnar', icon: 'columnar' }
-  //     },
-  //     {
-  //       path: 'pieChart',
-  //       name: 'pieChart',
-  //       component: () => import('@/views/charts/pieChart'),
-  //       meta: { title: 'pieChart', icon: 'pieChart' }
-  //     },
-  //     {
-  //       path: 'funnelCharts',
-  //       name: 'funnelCharts',
-  //       component: () => import('@/views/charts/funnelCharts'),
-  //       meta: { title: 'funnelCharts', icon: 'funnelCharts' }
-  //     },
-  //   ]
-  // },
+  {
+    path: '/charts',
+    component: Layout,
+    redirect: '/charts/DiscountFigure',
+    name: 'charts',
+    meta: { title: 'charts', icon: 'chart' },
+    children: [
+      {
+        path: 'DiscountFigure',
+        name: 'DiscountFigure',
+        component: () => import('@/views/charts/DiscountFigure'),
+        meta: { title: 'DiscountFigure', icon: 'discounting' }
+      },
+      {
+        path: 'columnar',
+        name: 'columnar',
+        component: () => import('@/views/charts/columnar'),
+        meta: { title: 'columnar', icon: 'columnar' }
+      },
+      {
+        path: 'pieChart',
+        name: 'pieChart',
+        component: () => import('@/views/charts/pieChart'),
+        meta: { title: 'pieChart', icon: 'pieChart' }
+      },
+      {
+        path: 'funnelCharts',
+        name: 'funnelCharts',
+        component: () => import('@/views/charts/funnelCharts'),
+        meta: { title: 'funnelCharts', icon: 'funnelCharts' }
+      },
+    ]
+  },
   // 表单
   // {
   //   path: '/form',
@@ -130,6 +130,49 @@ export const constantRouterMap = [
       },
     ]
   },
+  // 特征管理
+  {
+    path: '/characteristics',
+    component: Layout,
+    redirect: '/characteristics/characteristicSource',
+    name: 'characteristics',
+    meta: {
+      title: 'characteristics',
+      icon: 'table'
+    },
+    children: [
+      {
+        path: 'characteristicSource',//特征来源
+        name: 'characteristicSource',
+        component: () => import('@/views/characteristics/characteristicSource'),
+        meta: { title: 'characteristicSource' }
+      }, {
+        path: 'discreteAnalysis',//特征离散分析
+        name: 'discreteAnalysis',
+        component: () => import('@/views/characteristics/discreteAnalysis'),
+        meta: { title: 'discreteAnalysis' }
+      }, {
+        path: 'featureBox',//特征分箱
+        name: 'featureBox',
+        component: () => import('@/views/characteristics/featureBox'),
+        meta: { title: 'featureBox' }
+      }, {
+        path: 'IVvalue',//特征iv值
+        name: 'IVvalue',
+        component: () => import('@/views/characteristics/IVvalue'),
+        meta: { title: 'IVvalue' }
+      }, {
+        path: 'analysisDistribution',//特征分布分析
+        name: 'analysisDistribution',
+        component: () => import('@/views/characteristics/analysisDistribution'),
+        meta: { title: 'analysisDistribution' }
+      }, {
+        path: 'correlationModel',//特征关联模型
+        name: 'correlationModel',
+        component: () => import('@/views/characteristics/correlationModel'),
+        meta: { title: 'correlationModel' }
+      }]
+  }
   // 表格
   // {
   //   path: '/table',

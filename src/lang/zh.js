@@ -70,7 +70,14 @@ export default {
     idcardManagement: '身份证管理',
     telManagement: '手机号管理',
     telManagementDetail: '手机号详情页',
-    idcardManagementDetail: '身份证详情页'
+    idcardManagementDetail: '身份证详情页',
+    characteristics: '特征管理',
+    characteristicSource: '特征来源',
+    discreteAnalysis: '特征离散分析',
+    featureBox: '特征分箱',
+    IVvalue: '特征iv值',
+    analysisDistribution: '特征分布分析',
+    correlationModel: '特征关联模型',
   },
   permission: {
     roles: '你的权限',

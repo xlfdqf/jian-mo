@@ -177,7 +177,7 @@
               </el-row>
              </div>
 
-              <div  class="jxlreport">
+              <!-- <div  class="jxlreport">
               <h4 style="text-align:center">用户申请表检测</h4>
               <el-row>
                   <el-col :span="24"><div class="blod tit">家庭号码检查：</div></el-col>
@@ -203,21 +203,44 @@
                      <el-col :span="8"><div class="blod">姓名检查:{{cell_phone.check_name}}</div></el-col>
                       <el-col :span="8"><div class="blod">数据值:{{cell_phone.key_value}}</div></el-col>
               </el-row>
+             </div> -->
+            <div  class="jxlreport">
+              <h4 style="text-align:center">用户申请表检测</h4>
+              <el-row>
+                  <el-col :span="12"><div class="blod tit">姓名：{{username}}</div></el-col>
+                  <el-col :span="12"><div class="blod">身份证号{{idcard}}</div></el-col>
+                  <el-col :span="12"><div class="blod">{{id_card.gender}}/{{id_card.age}}/出生地：{{id_card.province}}{{id_card.city}}{{id_card.region}}</div></el-col>
+                  <el-col :span="12"><div class="blod">姓名+身份证出现在法院黑名单:{{court_blacklist.black_type}}</div></el-col>
+                  <el-col :span="12"><div class="blod">姓名+身份证出现在金融服务类机构黑名单:{{financial_blacklist.black_type}}</div></el-col>
+                  <el-col :span="24"><div class="blod tit">手机号码:{{cell_phone.key_value}}</div></el-col>
+                  <el-col :span="12"><div class="blod">{{cell_phone.website}},{{cell_phone.reliability}},注册时间:{{cell_phone.reg_time}}</div></el-col>
+                  <el-col :span="12"><div class="blod">{{cell_phone.check_name}}</div></el-col>
+                  <el-col :span="12"><div class="blod">{{cell_phone.check_idcard}}</div></el-col>
+                  <el-col :span="12"><div class="blod">申请人姓名+手机号码出现在金融服务类机构黑名单:{{financial_blacklist.black_type}}</div></el-col>
+                 <el-col :span="24"><div class="blod tit">居住地址：{{home_addr.key_value}}</div></el-col>
+                 <el-col :span="12"><div class="blod">居住地址可通过地图定位技术精确定位到:{{home_addr.check_addr}}</div></el-col>
+                 <el-col :span="12"><div class="blod">居住地址可通过地图定位技术精确定位到:{{home_addr.check_addr}}</div></el-col>
+                 <el-col :span="12"><div class="blod">{{home_addr.check_ebusiness}}</div></el-col>
+                  <el-col :span="24"><div class="blod tit">家庭电话：{{home_phone.key_value}}</div></el-col>
+                   <el-col :span="12"><div class="blod">{{home_phone.check_mobile}}</div></el-col>
+                   <!-- <el-col :span="24"><div class="blod tit">联系人：</div></el-col> -->
+                     <!-- <el-col :span="24"><div class="blod tit">京东商城：</div></el-col> -->
+              </el-row>
              </div>
 
              <div  class="jxlreport" v-if="check_search_info || check_black_info">
               <h4 style="text-align:center">用户信息检测</h4>
                 <el-row>
                     <el-col :span="24"><div class="blod tit">用户查询信息:</div></el-col>
-                    <el-col :span="24" >查询过该用户的相关企业数量:<span class="blod">{{check_search_info.register_org_cnt}}</span></el-col>
-                    <el-col :span="24">查询过该用户的相关企业类型：<span class="blod">{{check_search_info.searched_org_cnt}}</span></el-col>
-                    <el-col :span="24">电话号码组合过其他姓名：<span class="blod" v-for="item in check_search_info.phone_with_other_names" :key="item.idcard">{{item}}</span></el-col>
-                    <el-col :span="24">电话号码出现过的公开网站：<span class="blod" v-for="item in check_search_info.arised_open_web" :key="item.idcard">{{item}}</span></el-col>
-                    <el-col :span="24">身份证组合过其他电话：<span class="blod" v-for="item in check_search_info.idcard_with_other_phones" :key="item.idcard">{{item}}</span></el-col>
-                    <el-col :span="24">电话号码组合过其他身份证：<span class="blod" v-for="item in check_search_info.phone_with_other_idcards" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="12" >查询过该用户的相关企业数量:<span class="blod">{{check_search_info.register_org_cnt}}</span></el-col>
+                    <el-col :span="12">查询过该用户的相关企业类型：<span class="blod">{{check_search_info.searched_org_cnt}}</span></el-col>
+                    <el-col :span="12">电话号码组合过其他姓名：<span class="blod" v-for="item in check_search_info.phone_with_other_names" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="12">电话号码出现过的公开网站：<span class="blod" v-for="item in check_search_info.arised_open_web" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="12">身份证组合过其他电话：<span class="blod" v-for="item in check_search_info.idcard_with_other_phones" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="12">电话号码组合过其他身份证：<span class="blod" v-for="item in check_search_info.phone_with_other_idcards" :key="item.idcard">{{item}}</span></el-col>
+                    <el-col :span="24">身份证组合过的其他姓名：<span class="blod" v-for="item in check_search_info.idcard_with_other_names" :key="item.idcard">{{item}}</span></el-col>
                     <el-col :span="24">查询过该用户的相关企业类型：<span class="blod" v-for="item in check_search_info.searched_org_type" :key="item.idcard">{{item}}、</span></el-col>
                     <el-col :span="24">电话号码注册过的相关企业类型：<span class="blod" v-for="item in check_search_info.register_org_type" :key="item.idcard">{{item}}</span></el-col>
-                    <el-col :span="24">身份证组合过的其他姓名：<span class="blod" v-for="item in check_search_info.idcard_with_other_names" :key="item.idcard">{{item}}</span></el-col>
                 </el-row>
                 <el-row>
                     <el-col :span="24"><div class="blod tit" style="margin-top:10px;">用户黑名单信息:</div></el-col>
@@ -352,6 +375,7 @@ export default {
       report: [], //报告基本信息
       user_info_check: [], //用户信息检测
       home_phone: {}, //用户申请表检测home_phone
+      id_card: {},
       court_blacklist: {}, //用户申请表检测court_blacklist
       financial_blacklist: {}, //用户申请表检测court_blacklist
       home_addr: {}, //用户申请表检测home_addr
@@ -452,6 +476,7 @@ export default {
               this.juxinliSource = localStorage.getItem("juxinliSource"); //来源
               this.report = [content.report]; //报告基本信息
               this.home_phone = content.home_phone.check_points; //用户申请表检测home_phone
+              this.id_card = content.id_card.check_points; //id_card
               this.court_blacklist =
                 content.id_card.check_points.court_blacklist; //id_card  court_blacklist
               this.financial_blacklist =

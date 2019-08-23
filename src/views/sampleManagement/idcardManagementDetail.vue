@@ -179,7 +179,7 @@
               <h4 style="text-align:center">用户申请表检测</h4>
               <el-row>
                   <el-col :span="12"><div class="blod tit">姓名：{{username}}</div></el-col>
-                  <el-col :span="12"><div class="blod">身份证号{{idcard | formatIdcard}}</div></el-col>
+                  <el-col :span="12"><div class="blod">身份证号{{idcard}}</div></el-col>
                   <el-col :span="12"><div class="blod">{{id_card.gender}}/{{id_card.age}}/出生地：{{id_card.province}}{{id_card.city}}{{id_card.region}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在法院黑名单:{{court_blacklist.black_type}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在金融服务类机构黑名单:{{financial_blacklist.black_type}}</div></el-col>

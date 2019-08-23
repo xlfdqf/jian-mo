@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import VCharts from 'v-charts'
+import echarts from 'echarts';
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import '../static/css/iconfont/1.0.0/index.css'
@@ -25,7 +26,7 @@ import '@/icons'
 import '@/permission'
 
 
-Vue.use(VCharts)
+Vue.use(VCharts, echarts)
 Vue.use(ElementUI, { locale })
 iconfontVersion.forEach(ele => {
   loadStyle(iconfontUrl.replace('$key', ele))

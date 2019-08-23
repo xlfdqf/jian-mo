@@ -21,6 +21,7 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
+          <div ref="chart2" style="width:1700px;height: 500px"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -29,6 +30,7 @@
 </template>
 
 <script>
+import echarts from "echarts";
 import myTable from "@/components/myTable";
 import { getNewsList } from "@/api/login.js";
 import {} from "./util.js";
@@ -89,11 +91,30 @@ export default {
           isShow: true
         }
       ],
-      dataSource: []
+      dataSource: [],
+      chartDataOne: [
+        [655, 850, 940, 980, 1070], //[655, 850, 940, 980, 1070]分别是表示下边缘,下四分位数，中位数，上四位数，上边缘
+        [760, 800, 845, 885, 960],
+        [780, 840, 855, 880, 940],
+        [720, 767.5, 815, 865, 920],
+        [740, 807.5, 810, 870, 950]
+      ],
+      outliers: [
+        //异常值数据
+        [0, 650], // 0代表第几个字段
+        [0, 620],
+        [2, 720],
+        [2, 720],
+        [2, 950],
+        [2, 970]
+      ],
+      xAxisData: []
+      // xAxisData: ["年龄", "籍贯", "星座", "芝麻分",'婚姻状况']
     };
   },
   mounted() {
     // this.query();
+    this.initEchart();
   },
   methods: {
     // 切换tab
@@ -129,6 +150,86 @@ export default {
     // 搜索
     onSubmit(testForm) {
       // console.log(testForm);
+    },
+    // 初始化相信图
+    initEchart() {
+      let xAxisData = this.getXAxisData(this.chartDataOne.length);
+
+      let chart2 = this.$refs.chart2;
+      let echart = echarts.init(chart2);
+      echart.setOption({
+        title: [
+          {
+            text: "箱线图",
+            left: "center"
+          }
+        ],
+        tooltip: {
+          trigger: "item",
+          axisPointer: {
+            type: "shadow"
+          }
+        },
+        grid: {
+          left: "10%",
+          right: "10%",
+          bottom: "15%"
+        },
+        xAxis: {
+          type: "category",
+          data: xAxisData,
+          boundaryGap: true,
+          nameGap: 30,
+          splitArea: {
+            show: false
+          },
+          axisLabel: {
+            formatter: "{value}"
+          },
+          splitLine: {
+            show: false
+          }
+        },
+        yAxis: {
+          type: "value",
+          name: "Y轴值",
+          splitArea: {
+            show: true
+          }
+        },
+        series: [
+          {
+            name: "boxplot",
+            type: "boxplot",
+            data: this.chartDataOne,
+            tooltip: {
+              formatter: function(param) {
+                return [
+                  "特征字段 " + param.name + ": ",
+                  "上边缘: " + param.data[5],
+                  "上四位数: " + param.data[4],
+                  "中位数: " + param.data[3],
+                  "下四分位数: " + param.data[2],
+                  "下边缘: " + param.data[1]
+                ].join("<br/>");
+              }
+            }
+          },
+          {
+            name: "outlier",
+            type: "scatter",
+            data: this.outliers // 异常值数据
+          }
+        ]
+      });
+    },
+    // 获取x轴标题
+    getXAxisData(length) {
+      let xAxisData = [];
+      for (let i = 0; i < length; i++) {
+        xAxisData.push("名称" + i);
+      }
+      return xAxisData;
     }
   }
 };

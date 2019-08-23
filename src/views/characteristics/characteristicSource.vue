@@ -23,7 +23,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getNewsList } from "@/api/login.js";
+import { getFeatureSource } from "@/api/login.js";
 import {} from "./util.js";
 
 export default {
@@ -53,13 +53,13 @@ export default {
           isShow: true
         }
       ],
-      dataSource: []
+      dataSource: [],
       //所需格式
-      // dataSource: [
-      //   { a: "年龄", b: "四要素", c: "同盾" },
-      //   { a: "芝麻分", b: "四要素", c: "同盾" },
-      //   { a: "星座", b: "四要素", c: "同盾" }
-      // ]
+      dataSource: [
+        { a: "年龄", b: "四要素", c: "同盾" },
+        { a: "芝麻分", b: "四要素", c: "同盾" },
+        { a: "星座", b: "四要素", c: "同盾" }
+      ]
     };
   },
   mounted() {
@@ -70,7 +70,7 @@ export default {
     query() {
       this.loading = true;
       let params = { pageIndex: 1, pageSize: 10 };
-      // getNewsList(params)
+      // getFeatureSource(params)
       //   .then(res => {
       //     this.loading = false;
       //     this.total = res.total;
@@ -84,7 +84,7 @@ export default {
     pageChange(page) {
       console.log(page);
       let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getNewsList(params)
+      // getFeatureSource(params)
       //   .then(res => {
       //     this.dataSource = res.data;
       //   })

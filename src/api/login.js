@@ -30,8 +30,31 @@ export function logout() {
 export function getNewsList(params) {
   return post(`api/dsai/list`, params);
 }
-
 //身份证（手机号）管理详情
 export function getNewsDetail(params) {
   return post(`api/dsai/detail`, params);
+}
+// 特征来源
+export function getFeatureSource(params) {
+  // return post(`api/dsai/detail`, params);
+}
+// 特征离散分析
+export function getDiscreteAnalysis(params) {
+  // return post(`api/dsai/detail`, params);
+}
+// 特征分箱
+export function getFeatureBox(params) {
+  // return post(`api/dsai/detail`, params);
+}
+// 特征IV值
+export function getIVvalue(params) {
+  // return post(`api/dsai/detail`, params);
+}
+// 特征分布分析
+export function getAnalysisDistribution(params) {
+  // return post(`api/dsai/detail`, params);
+}
+// 特征关联模型
+export function getCorrelationModel(params) {
+  // return post(`api/dsai/detail`, params);
 }

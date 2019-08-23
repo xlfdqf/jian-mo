@@ -8,7 +8,7 @@
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="2">  <!-- 需分页 -->
+        <el-tab-pane label="图表" name="2" class="bg">  <!-- 需分页 -->
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
                   <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
@@ -30,7 +30,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getNewsList } from "@/api/login.js";
+import { getFeatureBox } from "@/api/login.js";
 import {} from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
@@ -70,16 +70,31 @@ export default {
         {
           prop: "b",
           label: "特征分箱结果",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.b.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         },
         {
           prop: "c",
           label: "每箱iv值",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.c.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         }
       ],
-      dataSource: [],
-      // 循环所需数据格式
+      // 表格所需数据格式
+      dataSource: [
+        { a: "年龄", b: ["0-10", "10-19", "20-29"], c: [0.5, 0.32, 0.4] },
+        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
+        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] }
+      ],
+      // echart所需数据格式
       chartData: [
         {
           id: 1,
@@ -130,7 +145,7 @@ export default {
     queryTable() {
       this.loading = true;
       let params = { pageIndex: 1, pageSize: 10 };
-      // getNewsList(params)
+      // getFeatureBox(params)
       //   .then(res => {
       //     this.loading = false;
       //     this.total = res.total;
@@ -146,7 +161,7 @@ export default {
     pageChange(page) {
       console.log(page);
       let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getNewsList(params)
+      // getFeatureBox(params)
       //   .then(res => {
       //     this.dataSource = res.data;
       //   })
@@ -182,5 +197,9 @@ export default {
   text-align: center;
   font-size: 14px;
   margin-top: -40px;
+}
+.table >>> .bg {
+  background-color: #344b58 !important;
+  color: #888;
 }
 </style>

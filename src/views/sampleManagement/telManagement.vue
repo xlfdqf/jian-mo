@@ -31,6 +31,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getNewsList } from "@/api/login.js";
+import { formatPhone } from "./util.js";
 
 export default {
   components: { myTable },
@@ -50,7 +51,10 @@ export default {
         {
           prop: "mobile",
           label: "手机号",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return formatPhone(param.row.mobile);
+          }
         }
       ],
       dataSource: []

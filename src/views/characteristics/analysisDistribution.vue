@@ -30,7 +30,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getNewsList } from "@/api/login.js";
+import { getAnalysisDistribution } from "@/api/login.js";
 import {} from "./util.js";
 
 export default {
@@ -61,20 +61,54 @@ export default {
         {
           prop: "b",
           label: "特征分箱结果",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.b.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         },
         {
           prop: "c",
           label: "每箱个数",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.c.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         },
         {
           prop: "d",
           label: "每箱比例",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.d.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         }
       ],
-      dataSource: [],
+      dataSource: [
+        {
+          a: "年龄",
+          b: ["0-10", "10-19", "20-29"],
+          c: [50, 33, 78],
+          d: [0.5, 0.32, 0.4]
+        },
+        {
+          a: "籍贯",
+          b: ["北京", "上海", "浙江"],
+          c: [50, 33, 78],
+          d: [0.5, 0.32, 0.4]
+        },
+        {
+          a: "星座",
+          b: ["巨蟹", "双子", "天蝎"],
+          c: [50, 33, 78],
+          d: [0.5, 0.32, 0.4]
+        }
+      ],
       // 循环所需数据格式
       chartData: [
         {
@@ -126,7 +160,7 @@ export default {
     queryTable() {
       this.loading = true;
       let params = { pageIndex: 1, pageSize: 10 };
-      // getNewsList(params)
+      // getAnalysisDistribution(params)
       //   .then(res => {
       //     this.loading = false;
       //     this.total = res.total;

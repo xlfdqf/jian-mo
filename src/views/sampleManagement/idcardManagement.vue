@@ -32,6 +32,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getNewsList } from "@/api/login.js";
+import { formatPhone, formatIdcard } from "./util.js";
 
 export default {
   components: { myTable },
@@ -51,7 +52,10 @@ export default {
         {
           prop: "idcard",
           label: "身份证",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return formatIdcard(param.row.idcard);
+          }
         }
       ],
       dataSource: []

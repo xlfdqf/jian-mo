@@ -1,5 +1,12 @@
 import moment from "moment";
 
+export function formatPhone(phone) {
+    return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
+}
+export function formatIdcard(idcard) {
+    return idcard.replace(/(\d{4})\d*([0-9a-zA-Z]{4})/, "$1******$2");
+}
+
 export function filterMarital(marital) {
     switch (marital) {
         case 1:
@@ -95,7 +102,10 @@ export const contactColumns = [
     {
         prop: "contact_phone",
         label: "联系人号码",
-        isShow: true
+        isShow: true,
+        render: function (v, param) {
+            return formatPhone(param.row.contact_phone);
+        }
     }
 ]
 //紧急联系人
@@ -108,7 +118,10 @@ export const emergencyColumns = [
     {
         prop: "mobile",
         label: "紧急联系人号码",
-        isShow: true
+        isShow: true,
+        render: function (v, param) {
+            return formatPhone(param.row.mobile);
+        }
     }
 ]
 //常贷客平台详情表
@@ -618,13 +631,19 @@ export const ds_reportColumns = [
         prop: "mobile",
         label: "手机号码",
         width: 150,
-        isShow: true
+        isShow: true,
+        render: function (v, param) {
+            return formatPhone(param.row.mobile);
+        }
     },
     {
         prop: "idcard",
         label: "身份证号",
         width: 180,
-        isShow: true
+        isShow: true,
+        render: function (v, param) {
+            return formatIdcard(param.row.idcard);
+        }
     },
     {
         prop: "order_no",

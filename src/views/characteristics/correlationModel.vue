@@ -30,7 +30,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getNewsList } from "@/api/login.js";
+import { getCorrelationModel } from "@/api/login.js";
 import {} from "./util.js";
 
 export default {
@@ -91,7 +91,7 @@ export default {
     query() {
       // this.loading = true;
       // let params = { pageIndex: 1, pageSize: 10 };
-      // getNewsList(params)
+      // getCorrelationModel(params)
       //   .then(res => {
       //     this.loading = false;
       //     this.total = res.total;
@@ -105,7 +105,7 @@ export default {
     pageChange(page) {
       console.log(page);
       let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getNewsList(params)
+      // getCorrelationModel(params)
       //   .then(res => {
       //     this.dataSource = res.data;
       //   })

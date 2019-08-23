@@ -2,7 +2,7 @@
 <template>
  <div class="table">
    <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard}}</span></h4>
+     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard | formatIdcard}}</span></h4>
      <div class="box">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
@@ -10,7 +10,7 @@
                基本信息 
             </template>
             <el-row>
-                <el-col :span="6"><div class="blod">手机号:{{item.mobile}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号:{{item.mobile | formatPhone}}</div></el-col>
                 <el-col :span="6"><div class="blod">借款金额:{{item.amount_max}}</div></el-col>
                 <el-col :span="6"><div class="blod">银行卡号:{{item.bank_no}}</div></el-col>
                 <el-col :span="6"><div class="blod">民族:{{item.race}}</div></el-col>
@@ -50,8 +50,6 @@
                 <el-col :span="6"><div class="blod">性别:{{item.gender}}</div></el-col>
                 <el-col :span="6"><div class="blod">年龄:{{item.age}}</div></el-col>
                 <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
-                <!-- <el-col :span="6"><div class="blod">绑定身份证情况:{{item.binding_idcards}}</div></el-col> -->
-                <!-- <el-col :span="6"><div class="blod">绑定号码情况:{{item.binding_phones}}</div></el-col> -->
                 <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone | filterinTime}}</div></el-col>
                 <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
@@ -177,38 +175,11 @@
               </el-row>
              </div>
 
-              <!-- <div  class="jxlreport">
-              <h4 style="text-align:center">用户申请表检测</h4>
-              <el-row>
-                  <el-col :span="24"><div class="blod tit">家庭号码检查：</div></el-col>
-                  <el-col :span="12"><div class="blod">运营商联系号码检查:{{home_phone.check_mobile}}</div></el-col>
-                  <el-col :span="12"><div class="blod">数据值:{{home_phone.key_value}}</div></el-col>
-              </el-row>
-              <el-row>
-                  <el-col :span="24"><div class="blod tit">法院黑名单检查：</div></el-col>
-                  <el-col :span="12"><div class="blod">是否出现:{{court_blacklist.arised | isTrue}}</div></el-col>
-                  <el-col :span="12"><div class="blod">数据值:{{court_blacklist.black_type}}</div></el-col>
-              </el-row>
-               <el-row>
-                  <el-col :span="24"><div class="blod tit">金融服务类机构黑名单检查:</div></el-col>
-                  <el-col :span="12"><div class="blod">是否出现:{{financial_blacklist.arised | isTrue}}</div></el-col>
-                  <el-col :span="12"><div class="blod">数据值:{{financial_blacklist.black_type}}</div></el-col>
-              </el-row>
-              <el-row>
-                  <el-col :span="24"><div class="blod tit">移动电话检查:</div></el-col>
-                  <el-col :span="8"><div class="blod">身份证号检查:{{cell_phone.check_idcard}}</div></el-col>
-                  <el-col :span="8"><div class="blod">注册时间:{{cell_phone.reg_time}}</div></el-col>
-                   <el-col :span="8"><div class="blod">实名认证:{{cell_phone.reliability}}</div></el-col>
-                    <el-col :span="8"><div class="blod">电商使用号码检查:{{cell_phone.check_ebusiness}}</div></el-col>
-                     <el-col :span="8"><div class="blod">姓名检查:{{cell_phone.check_name}}</div></el-col>
-                      <el-col :span="8"><div class="blod">数据值:{{cell_phone.key_value}}</div></el-col>
-              </el-row>
-             </div> -->
             <div  class="jxlreport">
               <h4 style="text-align:center">用户申请表检测</h4>
               <el-row>
                   <el-col :span="12"><div class="blod tit">姓名：{{username}}</div></el-col>
-                  <el-col :span="12"><div class="blod">身份证号{{idcard}}</div></el-col>
+                  <el-col :span="12"><div class="blod">身份证号{{idcard | formatIdcard}}</div></el-col>
                   <el-col :span="12"><div class="blod">{{id_card.gender}}/{{id_card.age}}/出生地：{{id_card.province}}{{id_card.city}}{{id_card.region}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在法院黑名单:{{court_blacklist.black_type}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在金融服务类机构黑名单:{{financial_blacklist.black_type}}</div></el-col>
@@ -222,9 +193,7 @@
                  <el-col :span="12"><div class="blod">居住地址可通过地图定位技术精确定位到:{{home_addr.check_addr}}</div></el-col>
                  <el-col :span="12"><div class="blod">{{home_addr.check_ebusiness}}</div></el-col>
                   <el-col :span="24"><div class="blod tit">家庭电话：{{home_phone.key_value}}</div></el-col>
-                   <el-col :span="12"><div class="blod">{{home_phone.check_mobile}}</div></el-col>
-                   <!-- <el-col :span="24"><div class="blod tit">联系人：</div></el-col> -->
-                     <!-- <el-col :span="24"><div class="blod tit">京东商城：</div></el-col> -->
+                  <el-col :span="12"><div class="blod">{{home_phone.check_mobile}}</div></el-col>
               </el-row>
              </div>
 
@@ -319,6 +288,8 @@ import { getNewsDetail } from "@/api/login.js";
 import nxBackToTop from "@/components/nx-back-to-top";
 import moment from "moment";
 import {
+  formatPhone,
+  formatIdcard,
   contactColumns, //联系人表
   emergencyColumns,
   platformDetailsColumns,
@@ -404,6 +375,8 @@ export default {
     };
   },
   filters: {
+    formatPhone,
+    formatIdcard,
     filterMarital,
     filterCompanyPeriod,
     iscustomer,

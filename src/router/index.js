@@ -31,39 +31,39 @@ export const constantRouterMap = [
     ]
   },
   // 图表
-  {
-    path: '/charts',
-    component: Layout,
-    redirect: '/charts/DiscountFigure',
-    name: 'charts',
-    meta: { title: 'charts', icon: 'chart' },
-    children: [
-      {
-        path: 'DiscountFigure',
-        name: 'DiscountFigure',
-        component: () => import('@/views/charts/DiscountFigure'),
-        meta: { title: 'DiscountFigure', icon: 'discounting' }
-      },
-      {
-        path: 'columnar',
-        name: 'columnar',
-        component: () => import('@/views/charts/columnar'),
-        meta: { title: 'columnar', icon: 'columnar' }
-      },
-      {
-        path: 'pieChart',
-        name: 'pieChart',
-        component: () => import('@/views/charts/pieChart'),
-        meta: { title: 'pieChart', icon: 'pieChart' }
-      },
-      {
-        path: 'funnelCharts',
-        name: 'funnelCharts',
-        component: () => import('@/views/charts/funnelCharts'),
-        meta: { title: 'funnelCharts', icon: 'funnelCharts' }
-      },
-    ]
-  },
+  // {
+  //   path: '/charts',
+  //   component: Layout,
+  //   redirect: '/charts/DiscountFigure',
+  //   name: 'charts',
+  //   meta: { title: 'charts', icon: 'chart' },
+  //   children: [
+  //     {
+  //       path: 'DiscountFigure',
+  //       name: 'DiscountFigure',
+  //       component: () => import('@/views/charts/DiscountFigure'),
+  //       meta: { title: 'DiscountFigure', icon: 'discounting' }
+  //     },
+  //     {
+  //       path: 'columnar',
+  //       name: 'columnar',
+  //       component: () => import('@/views/charts/columnar'),
+  //       meta: { title: 'columnar', icon: 'columnar' }
+  //     },
+  //     {
+  //       path: 'pieChart',
+  //       name: 'pieChart',
+  //       component: () => import('@/views/charts/pieChart'),
+  //       meta: { title: 'pieChart', icon: 'pieChart' }
+  //     },
+  //     {
+  //       path: 'funnelCharts',
+  //       name: 'funnelCharts',
+  //       component: () => import('@/views/charts/funnelCharts'),
+  //       meta: { title: 'funnelCharts', icon: 'funnelCharts' }
+  //     },
+  //   ]
+  // },
   // 表单
   // {
   //   path: '/form',

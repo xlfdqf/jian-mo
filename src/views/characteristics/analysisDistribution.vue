@@ -2,21 +2,22 @@
 <template>
   <div class="table">
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card">
-        <el-tab-pane label="报表" name="first">
+        <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
               :hasSelection="false" :hasPagination="true" v-loading="loading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="second">
-             <el-row>
-                <el-col :span="8"><div> <ve-histogram :data="chartData"></ve-histogram></div></el-col>
-            </el-row>
+        <el-tab-pane label="图表" name="2">
+             <el-row >
+                <div v-for="item in chartData" :key="item.id">
+                  <el-col :span="12"><div> <ve-histogram :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                </div>
+              </el-row>
         </el-tab-pane>
-
         <!-- 柱状图表 end -->
-      </el-tabs>
 
+      </el-tabs>
   </div>
 </template>
 
@@ -28,9 +29,19 @@ import {} from "./util.js";
 export default {
   components: { myTable },
   data() {
+    // 图表背景颜色
+    this.grid = {
+      // show: true,
+      // top: 50,
+      // left: 10,
+      // backgroundColor: "#344B58",
+      // borderColor: "#000"
+    };
     return {
       loading: false,
-      activeName: "second",
+      chartLoading: false,
+      dataEmpty: false, //暂无数据
+      activeName: "1",
       columns: [
         {
           prop: "a",
@@ -53,24 +64,43 @@ export default {
           isShow: true
         }
       ],
-      columns2: [
-        {
-          prop: "a",
-          label: "特征字段",
-          isShow: true
-        }
-      ],
-      dataSource2: [{ a: "1" }],
       dataSource: [],
-      chartData: {
-        columns: ["特征分箱结果", "每箱个数", "每箱比例"],
-        rows: [
-          { 特征分箱结果: "0-10岁", 每箱个数: 5, 每箱比例: 11.56 },
-          { 特征分箱结果: "11-20岁", 每箱个数: 10, 每箱比例: 78.54 },
-          { 特征分箱结果: "21-30岁", 每箱个数: 80, 每箱比例: 44.34 },
-          { 特征分箱结果: "31-40岁", 每箱个数: 53, 每箱比例: 99.9 }
-        ]
-      }
+      // 循环所需数据格式
+      chartData: [
+        {
+          id: 1,
+          name: "年龄",
+          columns: ["特征分箱结果", "每箱个数", "每箱比例"],
+          rows: [
+            { 特征分箱结果: "0-10岁", 每箱个数: 5, 每箱比例: 11.56 },
+            { 特征分箱结果: "11-20岁", 每箱个数: 10, 每箱比例: 78.54 },
+            { 特征分箱结果: "21-30岁", 每箱个数: 80, 每箱比例: 44.34 },
+            { 特征分箱结果: "31-40岁", 每箱个数: 53, 每箱比例: 99.9 }
+          ]
+        },
+        {
+          id: 2,
+          name: "籍贯",
+          columns: ["特征分箱结果", "每箱个数", "每箱比例"],
+          rows: [
+            { 特征分箱结果: "上海", 每箱个数: 12, 每箱比例: 11.56 },
+            { 特征分箱结果: "北京", 每箱个数: 65, 每箱比例: 78.54 },
+            { 特征分箱结果: "重庆", 每箱个数: 88, 每箱比例: 44.34 },
+            { 特征分箱结果: "安庆", 每箱个数: 33, 每箱比例: 99.9 }
+          ]
+        },
+        {
+          id: 3,
+          name: "星座",
+          columns: ["特征分箱结果", "每箱个数", "每箱比例"],
+          rows: [
+            { 特征分箱结果: "巨蟹", 每箱个数: 56, 每箱比例: 11.56 },
+            { 特征分箱结果: "天蝎", 每箱个数: 66, 每箱比例: 78.54 },
+            { 特征分箱结果: "双子", 每箱个数: 22, 每箱比例: 44.34 },
+            { 特征分箱结果: "处女", 每箱个数: 9, 每箱比例: 99.9 }
+          ]
+        }
+      ]
     };
   },
   mounted() {
@@ -80,7 +110,7 @@ export default {
   methods: {
     // 切换tab
     handleClick(tab, event) {
-      // console.log(tab.name);
+      console.log(tab.name);
     },
     // 查询报表
     queryTable() {
@@ -110,9 +140,28 @@ export default {
       //     console.log(error);
       //   });
     }
+  },
+  // 解决初次点击tab charts不显示问题
+  watch: {
+    activeName(v) {
+      this.$nextTick(_ => {
+        let ref = this.$refs[`chart${v}`];
+        if (ref) {
+          ref.forEach(item => {
+            item.echarts.resize();
+          });
+        } else {
+        }
+      });
+    }
   }
 };
 </script>
 
 <style scoped>
+.tit {
+  text-align: center;
+  font-size: 14px;
+  margin-top: -40px;
+}
 </style>

@@ -5,7 +5,7 @@
       <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
             <el-form-item label="特征字段:" prop="featureField">
-              <el-input v-model="testForm.featureField" placeholder="特征字段"></el-input>
+              <el-input v-model="testForm.featureField"></el-input>
             </el-form-item>
             <el-form-item>
               <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>

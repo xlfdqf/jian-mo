@@ -77,7 +77,17 @@ body {
 html {
   overflow: -moz-scrollbars-vertical;
 } */
+/* 分页颜色 */
 .el-collapse-item__arrow {
   float: left;
+}
+.el-pager li.active {
+  color: #21baa9;
+}
+.el-pager li:hover {
+  color: #21baa9;
+}
+.el-pagination button:hover {
+  color: #21baa9;
 }
 </style>

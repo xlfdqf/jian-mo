@@ -13,9 +13,9 @@
           </el-form>
       </el-card>
 
-      <el-card class="box-card" style="margin-bottom:20px">
+      <el-card class="box-card">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>
 
   </div>
@@ -31,7 +31,7 @@ export default {
   data() {
     return {
       loading: false,
-      total: 0,
+      total: 100,
       activeName: "first",
       testForm: {
         datasource: ""

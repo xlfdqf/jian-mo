@@ -14,13 +14,13 @@
       </el-card>
 
       <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
-        <el-tab-pane label="报表" name="first">
+        <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" v-loading="loading"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="second">
+        <el-tab-pane label="图表" name="2">
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -37,8 +37,10 @@ export default {
   components: { myTable },
   data() {
     return {
-      activeName: "first",
-      loading: false,
+      activeName: "1",
+      tableTotal: 100,
+      tableLoading: false,
+      chartLoading: false,
       testForm: {
         featureField: ""
       },

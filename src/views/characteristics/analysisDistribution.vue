@@ -4,16 +4,23 @@
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" v-loading="loading"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
-                  <el-col :span="12"><div> <ve-histogram :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                  <el-col :span="8"><div> <ve-histogram :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
+              <el-pagination
+                @current-change="handleCurrentChange"
+                :currentPage="currentPage"
+                layout="prev, pager, next"
+                :total="chartTotal"
+                align="right">
+              </el-pagination>
         </el-tab-pane>
         <!-- 柱状图表 end -->
 
@@ -38,10 +45,13 @@ export default {
       // borderColor: "#000"
     };
     return {
-      loading: false,
+      tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据
       activeName: "1",
+      tableTotal: 100,
+      chartTotal: 100,
+      currentPage: 1,
       columns: [
         {
           prop: "a",
@@ -139,6 +149,11 @@ export default {
       //   .catch(error => {
       //     console.log(error);
       //   });
+    },
+    // 图表分页
+    handleCurrentChange(e) {
+      // console.log(e);
+      let params = { pageSize: 9, pageIndex: e };
     }
   },
   // 解决初次点击tab charts不显示问题

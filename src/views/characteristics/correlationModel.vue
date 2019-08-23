@@ -22,7 +22,7 @@
 
       <el-card class="box-card">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>
 
   </div>
@@ -37,6 +37,8 @@ export default {
   components: { myTable },
   data() {
     return {
+      loading: false,
+      total: 100,
       testForm: {
         transferFactor: "",
         initialJudgment: "",

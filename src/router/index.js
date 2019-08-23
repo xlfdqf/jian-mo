@@ -109,7 +109,7 @@ export const constantRouterMap = [
         meta: { title: 'idcardManagement' }
       },
       {
-        path: 'idcardManagementDetail/:idcard', //身份证管理详情
+        path: 'idcardManagementDetail', //身份证管理详情
         name: 'idcardManagementDetail',
         component: () => import('@/views/sampleManagement/idcardManagementDetail'),
         meta: { title: 'idcardManagementDetail' },
@@ -122,7 +122,7 @@ export const constantRouterMap = [
         meta: { title: 'telManagement' }
       },
       {
-        path: 'telManagementDetail/:mobile', //手机号管理详情
+        path: 'telManagementDetail', //手机号管理详情
         name: 'telManagementDetail',
         component: () => import('@/views/sampleManagement/telManagementDetail'),
         meta: { title: 'telManagementDetail' },

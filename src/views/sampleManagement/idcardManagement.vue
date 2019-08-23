@@ -82,8 +82,8 @@ export default {
     detail(row) {
       localStorage.setItem("row", JSON.stringify(row));
       this.$router.push({
-        name: "idcardManagementDetail",
-        params: { idcard: row.idcard }
+        name: "idcardManagementDetail"
+        // params: { idcard: row.idcard }
         // params: { row: row }
       });
     },

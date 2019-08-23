@@ -81,8 +81,8 @@ export default {
     detail(row) {
       localStorage.setItem("mobileRow", JSON.stringify(row));
       this.$router.push({
-        name: "telManagementDetail",
-        params: { mobile: row.mobile }
+        name: "telManagementDetail"
+        // params: { mobile: row.mobile }
       });
     },
     // 页码切换

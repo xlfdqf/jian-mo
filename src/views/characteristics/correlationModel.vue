@@ -83,7 +83,7 @@ export default {
       dataSource: []
     };
   },
-  mounted() {
+  created() {
     // this.query();
   },
   methods: {

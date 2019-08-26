@@ -81,7 +81,7 @@ export default {
       }
     };
   },
-  mounted() {
+  created() {
     // this.queryTable();
     // this.queryEcharts();
   },

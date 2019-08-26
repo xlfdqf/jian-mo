@@ -99,20 +99,20 @@ export default {
         [720, 767.5, 815, 865, 920],
         [740, 807.5, 810, 870, 950]
       ],
+      //异常值数据
       outliers: [
-        //异常值数据
         [0, 650], // 0代表第几个字段
-        [0, 620],
+        [1, 620],
         [2, 720],
-        [2, 720],
-        [2, 950],
-        [2, 970]
+        [3, 720],
+        [4, 950],
+        [5, 970]
       ],
       xAxisData: []
-      // xAxisData: ["年龄", "籍贯", "星座", "芝麻分",'婚姻状况']
+      // xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
     };
   },
-  mounted() {
+  created() {
     // this.query();
     this.initEchart();
   },
@@ -205,9 +205,9 @@ export default {
             tooltip: {
               formatter: function(param) {
                 return [
-                  "特征字段 " + param.name + ": ",
+                  "特征字段 :" + param.name,
                   "上边缘: " + param.data[5],
-                  "上四位数: " + param.data[4],
+                  "上四分位数: " + param.data[4],
                   "中位数: " + param.data[3],
                   "下四分位数: " + param.data[2],
                   "下边缘: " + param.data[1]

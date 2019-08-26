@@ -62,7 +62,8 @@ export default {
       ]
     };
   },
-  mounted() {
+  created() {
+    alert("111");
     // this.query();
   },
   methods: {

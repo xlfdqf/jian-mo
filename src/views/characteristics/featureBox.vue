@@ -1,6 +1,18 @@
 <!--特征分箱页面 -->
 <template>
   <div class="table">
+         <!-- 表单 -->
+      <el-card class="box-card" style="margin-bottom:20px">
+          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+            <el-form-item label="特征字段:" prop="featureField">
+              <el-input v-model="testForm.featureField"></el-input>
+            </el-form-item>
+            <el-form-item>
+              <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
+            </el-form-item>
+          </el-form>
+      </el-card>
+
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
@@ -63,6 +75,7 @@ export default {
       tableTotal: 100,
       chartTotal: 100,
       currentPage: 1,
+      testForm: { featureField: "" },
       columns: [
         {
           prop: "a",
@@ -185,6 +198,9 @@ export default {
     handleCurrentChange(e) {
       console.log("当前页：", e);
       let params = { pageSize: 9, pageIndex: e };
+    },
+    onSubmit(testForm) {
+      console.log(testForm);
     }
   },
   // 解决初次点击tab charts不显示问题

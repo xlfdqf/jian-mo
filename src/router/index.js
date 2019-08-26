@@ -99,7 +99,7 @@ export const constantRouterMap = [
     name: 'sampleManagement',
     meta: {
       title: 'sampleManagement',
-      icon: 'table'
+      icon: 'sampleManagement'
     },
     children: [
       {
@@ -130,6 +130,7 @@ export const constantRouterMap = [
       },
     ]
   },
+  //模型管理
   // 特征管理
   {
     path: '/characteristics',
@@ -138,7 +139,7 @@ export const constantRouterMap = [
     name: 'characteristics',
     meta: {
       title: 'characteristics',
-      icon: 'table'
+      icon: 'characteristics'
     },
     children: [
       {

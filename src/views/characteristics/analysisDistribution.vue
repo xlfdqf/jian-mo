@@ -31,7 +31,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getAnalysisDistribution } from "@/api/login.js";
-import {} from "./util.js";
+import { tabType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
@@ -61,6 +61,7 @@ export default {
       tableTotal: 100,
       chartTotal: 100,
       currentPage: 1,
+      tab: "",
       columns: [
         {
           prop: "a",
@@ -162,8 +163,9 @@ export default {
   },
   methods: {
     // 切换tab
-    handleClick(tab, event) {
-      console.log(tab.name);
+    handleClick(tab) {
+      this.tab = tabType(tab.name);
+      console.log(this.tab);
     },
     // 查询报表
     queryTable() {

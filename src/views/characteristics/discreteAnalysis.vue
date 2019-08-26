@@ -33,7 +33,7 @@
 import echarts from "echarts";
 import myTable from "@/components/myTable";
 import { getDiscreteAnalysis } from "@/api/login.js";
-import {} from "./util.js";
+import { tabType } from "./util.js";
 
 export default {
   components: { myTable },
@@ -45,6 +45,7 @@ export default {
       tableTotal: 100,
       tableLoading: false,
       chartLoading: false,
+      tab: "",
       testForm: {
         featureField: ""
       },
@@ -115,13 +116,15 @@ export default {
     };
   },
   mounted() {
+    // console.log(tabType(1));
     // this.query();
     this.initEchart();
   },
   methods: {
     // 切换tab
-    handleClick(tab, event) {
-      // console.log(tab.name);
+    handleClick(tab) {
+      this.tab = tabType(tab.name);
+      console.log(this.tab);
     },
     // 查询列表
     query() {

@@ -21,7 +21,7 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
-          <div ref="chart2" style="width:1700px;height: 500px" v-loading="chartLoading"></div>
+          <div ref="chart2" style="width:1700px;height: 500px;left:-110px;" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -108,8 +108,7 @@ export default {
         [1, 620],
         [2, 720],
         [3, 720],
-        [4, 950],
-        [5, 970]
+        [4, 950]
       ],
       xAxisData: []
       // xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]

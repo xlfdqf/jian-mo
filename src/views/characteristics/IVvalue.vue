@@ -17,7 +17,7 @@
         <el-row>
           <el-col :span="12"><div>
               <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" :loading="tableLoading"> </myTable></div>
+              :hasSelection="false" :hasPagination="true"  @pageChange="pageChange" :total="total" :loading="tableLoading" > </myTable></div>
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
@@ -50,7 +50,7 @@ export default {
     return {
       tableLoading: false,
       chartLoading: false,
-      c: false,
+      total: 100,
       testForm: {
         featureField: ""
       },

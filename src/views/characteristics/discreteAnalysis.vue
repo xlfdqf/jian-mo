@@ -112,7 +112,7 @@ export default {
       // xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
     };
   },
-  created() {
+  mounted() {
     // this.query();
     this.initEchart();
   },

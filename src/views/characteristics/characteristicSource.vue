@@ -63,7 +63,6 @@ export default {
     };
   },
   created() {
-    alert("111");
     // this.query();
   },
   methods: {

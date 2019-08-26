@@ -15,7 +15,7 @@
 
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card">
         <el-tab-pane label="报表" name="1">
-             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
+             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
@@ -23,7 +23,7 @@
         <el-tab-pane label="图表" name="2" class="bg">  <!-- 需分页 -->
            <div v-loading="chartLoading">
              <el-row>
-                <div v-for="item in chartData" :key="item.id">
+                <div v-for="item in chartData" :key="item.name">
                   <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
@@ -68,6 +68,7 @@ export default {
       }
     ];
     return {
+      height: 600,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据
@@ -108,12 +109,15 @@ export default {
       dataSource: [
         { a: "年龄", b: ["0-10", "10-19", "20-29"], c: [0.5, 0.32, 0.4] },
         { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
+        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] },
+        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
+        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] },
+        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
         { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] }
       ],
       // echart所需数据格式
       chartData: [
         {
-          id: 1,
           name: "年龄",
           columns: ["特征分箱结果", "每箱iv值"],
           rows: [
@@ -124,7 +128,6 @@ export default {
           ]
         },
         {
-          id: 2,
           name: "籍贯",
           columns: ["特征分箱结果", "每箱iv值"],
           rows: [
@@ -135,7 +138,6 @@ export default {
           ]
         },
         {
-          id: 3,
           name: "星座",
           columns: ["特征分箱结果", "每箱iv值"],
           rows: [

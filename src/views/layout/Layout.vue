@@ -54,6 +54,7 @@ export default {
   @include clearfix;
   position: relative;
   height: 100%;
+  // height: 1120px;
   width: 100%;
 }
 .drawer-bg {

@@ -11,7 +11,7 @@
         <el-tab-pane label="图表" name="2">
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
-                  <el-col :span="8"><div> <ve-histogram :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
               <el-pagination
@@ -32,6 +32,7 @@
 import myTable from "@/components/myTable";
 import { getAnalysisDistribution } from "@/api/login.js";
 import {} from "./util.js";
+import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
   components: { myTable },
@@ -44,6 +45,14 @@ export default {
       // backgroundColor: "#344B58",
       // borderColor: "#000"
     };
+    // 区域缩放
+    this.dataZoom = [
+      {
+        type: "slider",
+        start: 0,
+        end: 20
+      }
+    ];
     return {
       tableLoading: false,
       chartLoading: false,

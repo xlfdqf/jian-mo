@@ -198,8 +198,8 @@ export default {
   font-size: 14px;
   margin-top: -40px;
 }
-.table >>> .bg {
+/* .table >>> .bg {
   background-color: #344b58 !important;
   color: #888;
-}
+} */
 </style>

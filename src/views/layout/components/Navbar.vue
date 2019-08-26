@@ -1,6 +1,8 @@
 <!--顶部导航部分 -->
 <template>
+  <!-- style="background-color:#080920" -->
   <el-menu class="navbar" mode="horizontal">
+    <!-- 收起/展开左侧导航按钮 -->
     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></nx-hamburger>
     <div class="right-menu">
      <!-- <error-log class="errLog-container right-menu-item"></error-log> -->

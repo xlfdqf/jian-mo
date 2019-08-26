@@ -21,7 +21,7 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
-          <div ref="chart2" style="width:1700px;height: 500px"></div>
+          <div ref="chart2" style="width:1700px;height: 500px" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -39,6 +39,8 @@ export default {
   components: { myTable },
   data() {
     return {
+      tableLoading: false,
+      chartLoading: false,
       activeName: "1",
       tableTotal: 100,
       tableLoading: false,
@@ -123,11 +125,11 @@ export default {
     },
     // 查询列表
     query() {
-      this.loading = true;
+      this.tableLoading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       // getDiscreteAnalysis(params)
       //   .then(res => {
-      //     this.loading = false;
+      //     this.tableLoading = false;
       //     this.total = res.total;
       //     this.dataSource = res.data;
       //   })
@@ -153,10 +155,20 @@ export default {
     },
     // 初始化相信图
     initEchart() {
+      // this.chartLoading = true;
       let xAxisData = this.getXAxisData(this.chartDataOne.length);
 
       let chart2 = this.$refs.chart2;
       let echart = echarts.init(chart2);
+      // 获取箱线图数据
+      // getxiangxiantu(params)
+      //   .then(res => {
+      // this.chartLoading = false;
+      //     this.dataSource = res.data;
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
       echart.setOption({
         title: [
           {

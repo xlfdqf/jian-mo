@@ -167,11 +167,11 @@ export default {
     },
     // 查询报表
     queryTable() {
-      this.loading = true;
+      this.tableLoading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       // getAnalysisDistribution(params)
       //   .then(res => {
-      //     this.loading = false;
+      //     this.tableLoading = false;
       //     this.total = res.total;
       //     this.dataSource = res.data;
       //   })
@@ -180,7 +180,17 @@ export default {
       //   });
     },
     //查询图表
-    queryEcharts() {},
+    queryEcharts() {
+      // this.chartLoading = true;
+      // getAnalysisDistributionChart(params)
+      //   .then(res => {
+      //     this.chartLoading = false;
+      //     this.dataSource = res.data;
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    },
     // 页码切换
     pageChange(page) {
       console.log(page);

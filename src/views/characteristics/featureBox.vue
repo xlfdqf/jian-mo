@@ -9,9 +9,10 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2" class="bg">  <!-- 需分页 -->
-             <el-row >
+           <div v-loading="chartLoading">
+             <el-row>
                 <div v-for="item in chartData" :key="item.id">
-                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
               <el-pagination
@@ -21,6 +22,7 @@
                 :total="chartTotal"
                 align="right">
               </el-pagination>
+           </div>
         </el-tab-pane>
         <!-- 柱状图表 end -->
 
@@ -143,11 +145,11 @@ export default {
     },
     // 查询报表
     queryTable() {
-      this.loading = true;
+      this.tableLoading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       // getFeatureBox(params)
       //   .then(res => {
-      //     this.loading = false;
+      //     this.tableLoading = false;
       //     this.total = res.total;
       //     this.dataSource = res.data;
       //   })
@@ -155,8 +157,18 @@ export default {
       //     console.log(error);
       //   });
     },
-    //查询图表
-    queryEcharts() {},
+    //查询分箱图表
+    queryEcharts() {
+      // this.chartLoading = true;
+      // getFeatureBoxChart(params)
+      //   .then(res => {
+      // this.chartLoading = false;
+      //     this.dataSource = res.data;
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    },
     // 表格页码切换
     pageChange(page) {
       console.log(page);

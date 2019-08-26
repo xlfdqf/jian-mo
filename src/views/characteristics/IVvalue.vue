@@ -17,11 +17,11 @@
         <el-row>
           <el-col :span="12"><div>
               <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true"> </myTable></div>
+              :hasSelection="false" :hasPagination="true" :loading="tableLoading"> </myTable></div>
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
-             <ve-bar :data="chartData" :settings="chartSettings"></ve-bar> <!--排序条形图-->
+             <ve-bar :data="chartData" :settings="chartSettings" v-loading="chartLoading"></ve-bar> <!--排序条形图-->
           </div>
           </el-col>
           <!-- 图表 end -->
@@ -48,7 +48,9 @@ export default {
       }
     };
     return {
-      loading: false,
+      tableLoading: false,
+      chartLoading: false,
+      c: false,
       testForm: {
         featureField: ""
       },
@@ -83,16 +85,16 @@ export default {
   },
   created() {
     // this.queryTable();
-    // this.queryEcharts();
+    this.queryEcharts();
   },
   methods: {
-    // 查询报表
+    // 查询列表
     queryTable() {
-      this.loading = true;
+      this.tableLoading = true;
       let params = { pageIndex: 1, pageSize: 10 };
       // getIVvalue(params)
       //   .then(res => {
-      //     this.loading = false;
+      //     this.tableLoading = false;
       //     this.total = res.total;
       //     this.dataSource = res.data;
       //   })
@@ -101,7 +103,17 @@ export default {
       //   });
     },
     //查询图表
-    queryEcharts() {},
+    queryEcharts() {
+      // this.chartLoading = true;
+      // getIVvalueChart(params)
+      //   .then(res => {
+      //     this.chartLoading=false;
+      //     this.dataSource = res.data;
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    },
     // 页码切换
     pageChange(page) {
       console.log(page);

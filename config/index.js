@@ -21,7 +21,8 @@ module.exports = {
     // },
     proxyTable: {
       '/api': {
-        target: 'http://10.10.2.8:8080/',
+        // target: 'http://10.10.2.8:8080/',
+        target: ' http://10.10.2.8:3300/',
         // secure: false, // 如果是https接口，需要配置这个参数
         changeOrigin: true,
         pathRewrite: {
@@ -31,8 +32,8 @@ module.exports = {
     },
 
     // Various Dev Server settings
-    host: '10.10.2.158', // can be overwritten by process.env.HOST
-    port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
+    host: 'localhost', // can be overwritten by process.env.HOST
+    port: 3300, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,
     notifyOnErrors: false,

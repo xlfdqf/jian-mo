@@ -15,12 +15,12 @@ const userMap = {
     avatar: 'https://mgbq.github.io/nx-admin-site/home.png',
     name: 'editor'
   },
-  xlf: {
+  payee: {
     code: 0,
     token: '333',
     introduction: 'VIP',
     avatar: 'https://mgbq.github.io/nx-admin-site/home.png',
-    name: 'xlf'
+    name: 'payee'
   }
 }
 

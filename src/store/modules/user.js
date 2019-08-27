@@ -34,6 +34,7 @@ const user = {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
         login(username, userInfo.password).then(response => {
+          console.log(response)
           const data = response
           setToken(data.data.token)
           commit('SET_TOKEN', data.data.token)

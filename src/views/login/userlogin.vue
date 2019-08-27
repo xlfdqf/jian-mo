@@ -54,8 +54,8 @@ export default {
           label: "editor"
         },
         {
-          value: "xlf",
-          label: "xlf"
+          value: "payee",
+          label: "payee"
         }
       ],
       loginForm: {
@@ -103,7 +103,7 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(res => {
-              this.$router.push({ path: "/dashboard/dashboard" });
+              // this.$router.push({ path: "/dashboard/dashboard" });
             })
             .catch(err => {
               alert("登录失败！");

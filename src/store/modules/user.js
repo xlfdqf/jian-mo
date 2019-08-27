@@ -1,4 +1,4 @@
-import { login, logout } from '@/api/login'
+import { login, logout, getLogin } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import {
   setStore,
@@ -31,9 +31,14 @@ const user = {
   actions: {
     // 登录 获取用户信息
     Login({ commit }, userInfo) {
-      const username = userInfo.username.trim()
+      let param = {
+        username: userInfo.username,
+        password: userInfo.password,
+        randomStr: "051307229000357",
+        code: "aaa8" //验证码
+      }
       return new Promise((resolve, reject) => {
-        login(username, userInfo.password).then(response => {
+        getLogin(param).then(response => {
           console.log(response)
           const data = response
           setToken(data.data.token)

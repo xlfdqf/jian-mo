@@ -103,11 +103,11 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(res => {
-              // this.$router.push({ path: "/dashboard/dashboard" });
+              this.$router.push({ path: "/dashboard/dashboard" });
             })
             .catch(err => {
               alert("登录失败！");
-              this.$message.error(err); //登录失败提示错误
+              this.$message.error(err);
             });
         }
       });

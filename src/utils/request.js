@@ -30,7 +30,7 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 axios.interceptors.request.use(
   config => {
     const token = store.getters.token;
-    // token && (config.headers.Token = token);
+    token && (config.headers.Authorization = token);
     return config;
   },
   error => {
@@ -54,9 +54,17 @@ axios.interceptors.response.use(
         // 未登录则跳转登录页面，并携带当前页面的路径                
         // 在登录成功后返回当前页面，这一步需要在登录页操作。                
         case 401:
-          router.replace({
-            path: '/login',
-            query: { redirect: router.currentRoute.fullPath }
+          Message({
+            showClose: true,
+            message: '登录过期,请重新登录！',
+            type: "error"
+          });
+          // router.replace({
+          //   path: '/login',
+          //   query: { redirect: router.currentRoute.fullPath }
+          // });
+          this.$router.push({
+            name: "login"
           });
           break;
         // 403 token过期                

@@ -72,7 +72,7 @@ export default {
         .then(res => {
           this.loading = false;
           this.total = res.total;
-          this.dataSource = res.data;
+          this.dataSource = res.data.data;
         })
         .catch(error => {
           console.log(error);
@@ -90,7 +90,7 @@ export default {
       let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
       getNewsList(params)
         .then(res => {
-          this.dataSource = res.data;
+          this.dataSource = res.data.data;
         })
         .catch(error => {
           console.log(error);
@@ -104,7 +104,7 @@ export default {
       getNewsList(params)
         .then(res => {
           this.total = 1;
-          this.dataSource = res.data;
+          this.dataSource = res.data.data;
         })
         .catch(error => {
           console.log(error);

@@ -78,6 +78,8 @@ export default {
     IVvalue: '特征iv值',
     analysisDistribution: '特征分布分析',
     correlationModel: '特征关联模型',
+    testChart: 'test'
+
   },
   permission: {
     roles: '你的权限',

@@ -23,8 +23,12 @@
         <el-tab-pane label="图表" name="2" class="bg">  <!-- 需分页 -->
            <div v-loading="chartLoading">
              <el-row>
-                <div v-for="item in chartData" :key="item.name">
-                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                <div v-for="item in ddd" :key='item.name'>
+                  <el-col :span="8"><div>
+                    <!-- <keep-alive> -->
+                       <ve-histogram :settings="chartSettings" :data="item" ref="chart2"></ve-histogram>
+                    <!-- </keep-alive> -->
+                    <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
               <el-pagination
@@ -45,28 +49,17 @@
 <script>
 import myTable from "@/components/myTable";
 import { getFeatureBox } from "@/api/login.js";
-import { tabType } from "./util.js";
+import { tabType, dataType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
   components: { myTable },
   data() {
-    // 图表背景颜色
-    this.grid = {
-      // show: true,
-      // top: 50,
-      // left: 10,
-      // backgroundColor: "#344B58",
-      // borderColor: "#000"
-    };
-    // 区域缩放
-    this.dataZoom = [
-      {
-        type: "slider",
-        start: 0,
-        end: 20
+    this.chartSettings = {
+      labelMap: {
+        c: "每箱iv值"
       }
-    ];
+    };
     return {
       height: 600,
       tableLoading: false,
@@ -116,49 +109,65 @@ export default {
         { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] }
       ],
       // echart所需数据格式
-      chartData: [
-        {
-          name: "年龄",
-          columns: ["特征分箱结果", "每箱iv值"],
-          rows: [
-            { 特征分箱结果: "0-10岁", 每箱iv值: 5 },
-            { 特征分箱结果: "11-20岁", 每箱iv值: 10 },
-            { 特征分箱结果: "21-30岁", 每箱iv值: 80 },
-            { 特征分箱结果: "31-40岁", 每箱iv值: 53 }
-          ]
-        },
-        {
-          name: "籍贯",
-          columns: ["特征分箱结果", "每箱iv值"],
-          rows: [
-            { 特征分箱结果: "上海", 每箱iv值: 5 },
-            { 特征分箱结果: "安徽", 每箱iv值: 10 },
-            { 特征分箱结果: "江苏", 每箱iv值: 80 },
-            { 特征分箱结果: "北京", 每箱iv值: 53 }
-          ]
-        },
-        {
-          name: "星座",
-          columns: ["特征分箱结果", "每箱iv值"],
-          rows: [
-            { 特征分箱结果: "巨蟹", 每箱iv值: 5 },
-            { 特征分箱结果: "天蝎", 每箱iv值: 10 },
-            { 特征分箱结果: "双子", 每箱iv值: 80 },
-            { 特征分箱结果: "白羊", 每箱iv值: 53 }
-          ]
-        }
-      ]
+      chartData: [],
+      ddd: []
     };
   },
-  created() {
-    // this.queryTable();
-    // this.queryEcharts();
-  },
+  mounted() {},
   methods: {
+    filterData(data, dataType) {
+      const newDataType = dataType.map(({ featurename, value, key }) => {
+        return {
+          name: value,
+          row: []
+        };
+      });
+      data.forEach(item => {
+        newDataType.forEach(t => {
+          if (item["name"] === t["name"]) {
+            t.row.push({ b: item.b, c: item.c });
+            Object.assign(t, { columns: ["b", "c"] });
+          }
+        });
+      });
+      return newDataType;
+    },
     // 切换tab
     handleClick(tab) {
       this.tab = tabType(tab.name);
-      console.log(this.tab);
+      if (this.tab === "chart") {
+        const tb = [
+          {
+            name: "年龄",
+            columns: ["b", "c"],
+            rows: [{ b: "0-10岁", c: 10 }, { b: "11-20岁", c: 10 }]
+          },
+          {
+            name: "籍贯省",
+            columns: ["b", "c"],
+            rows: [{ b: "上海", c: 5 }, { b: "安徽", c: 10 }]
+          },
+          {
+            name: "星座",
+            columns: ["b", "c"],
+            rows: [{ b: "巨蟹", c: 5 }, { b: "天蝎", c: 10 }]
+          }
+        ];
+        this.chartData = tb;
+        console.log("tb:", this.chartData);
+
+        let data = [
+          { b: "0-10岁", c: 0, name: "年龄" },
+          { b: "12-30岁", c: 23, name: "年龄" },
+          { b: "北京", c: 87, name: "籍贯省" },
+          { b: "安徽", c: 44, name: "籍贯省" },
+          { b: "巨蟹", c: 66, name: "星座" },
+          { b: "天蝎", c: 88, name: "星座" }
+        ];
+        const tb2 = this.filterData(data, dataType);
+        this.ddd = tb2;
+        console.log("tb2:", this.ddd);
+      }
     },
     // 查询报表
     queryTable() {

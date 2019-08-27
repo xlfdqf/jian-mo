@@ -11,3 +11,39 @@ export function tabType(tab) {
     }
     return tab;
 }
+
+// 特征字段
+export const dataType = [
+    {
+        featurename: "age",
+        value: "年龄",
+    },
+    // {
+    //     featurename: "nation",
+    //     value: "民族",
+    // },
+    // {
+    //     featurename: "score",
+    //     value: "芝麻分",
+    // },
+    {
+        featurename: 'constellation',
+        value: "星座",
+    },
+    // {
+    //     featurename: 'education',
+    //     value: "学历",
+    // },
+    // {
+    //     featurename: 'province',
+    //     value: "户籍省",
+    // },
+    {
+        featurename: 'native_province',
+        value: "籍贯省",
+    },
+    // {
+    //     featurename: 'sex',
+    //     value: "性别",
+    // }
+]

@@ -1,16 +1,15 @@
 <template>
   <div class="login-container pull-height" @keyup.enter.native="handleLogin">
-    <div class="login-info text-white animated fadeInLeft" style="margin-left:-100px">
-      <div class="logo" style="margin-top:-300px">
-          <img src="../../assets/images/home/logo2.png" width="300px" height="100px" alt="logo" style="object-fit:contain;vertical-align: middle;" />
-          <!-- <img src="../../assets/images/home/peitu.png" alt="logo" style="object-fit:contain;vertical-align: middle;" /> -->
+   
+    <div class="login-info text-white animated fadeInLeft">
+      <div class="logo">
+          <!-- <img src="../../assets/images/home/logo2.png" width="300px" height="100px" alt="logo" style="object-fit:contain;vertical-align: middle;" /> -->
+          <img src="../../assets/images/home/peitu.png" alt="logo" style="width:400px;height:500px;" />
       </div>
-      <h2 class="login-info-title" style="text-align:center">{{website.info.title}}</h2>
+      <!-- <h2 class="login-info-title" style="text-align:center">{{website.info.title}}</h2> -->
     </div>
     <div class="login-border  animated fadeInRight">
       <div class="login-main">
-        <h4 class="login-title">登录{{website.title}}
-        </h4>
           <userLogin></userLogin>
         <!-- <el-tabs v-model="activeName">
           <el-tab-pane label="用户密码" name="user">
@@ -22,7 +21,7 @@
         </el-tabs> -->
       </div>
     </div>
-
+   <p class="tit">智能大数据中台辅助决策系统</p>
   </div>
 </template>
 <script>
@@ -51,6 +50,15 @@ export default {
 </script>
 
 <style lang="scss">
+.tit {
+  background: linear-gradient(to bottom, #9be2f1, #60b2cd);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+  font-size: 40px;
+  position: absolute;
+  top: 0px;
+}
 .login-container {
   display: flex;
   align-items: center;
@@ -83,18 +91,19 @@ export default {
   font-size: 14px;
 }
 .login-border {
+  background-image: url("../../assets/images/home/login-box.png");
   display: flex;
   justify-content: center;
   flex-direction: column;
   padding: 30px 50px 25px 50px;
-  background-color: #fff;
+  // background-color: #fff;
   border-radius: 6px;
-  box-shadow: 1px 1px 2px #eee;
+  // box-shadow: 1px 1px 2px #eee;
 }
 .login-main {
   border-radius: 3px;
   box-sizing: border-box;
-  background-color: #fff;
+  // background-color: #fff;
 }
 .login-main > h3 {
   margin-bottom: 20px;

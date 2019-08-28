@@ -1,30 +1,30 @@
 <template>
   <el-form class="login-form" status-icon :rules="loginRules" ref="loginForm" :model="loginForm" label-width="0">
     <el-form-item prop="username" style="position:relative">
-      <!-- <el-input size="small" @keyup.enter.native="handleLogin" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名">
+      <el-input size="small" @keyup.enter.native="handleLogin" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名">
         <i slot="prefix" class="icon-yonghu"></i>
-      </el-input> -->
+      </el-input>
        <!-- <img class="pwdimg" src="../../assets/images/toux.png"/> -->
-        <el-select size="small" v-model="loginForm.username" placeholder="请选择用户" auto-complete="off">
+        <!-- <el-select size="small" v-model="loginForm.username" placeholder="请选择用户" auto-complete="off">
           <el-option
             v-for="item in options"
             :key="item.value"
             :label="item.label"
             :value="item.value">
           </el-option>
-        </el-select>
+        </el-select> -->
     </el-form-item>
     <el-form-item prop="password" style="position:relative">
-       <!-- <img class="pwdimg" src="../../assets/images/suo.png"/> -->
       <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码">
         <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"></i>
-         <!-- <i slot="prefix" class="icon-mima"></i>  -->
+         <i slot="prefix" class="icon-mima"></i> 
       </el-input>
     </el-form-item>
     <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox>
     <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
-    <el-form-item>
-      <el-button type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">登录</el-button>
+    <el-form-item class="login-btn" @click.native.prevent="handleLogin">
+      <img src="@/assets/images/home/login-btn.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px">登录</span>
+      <!-- <el-button type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">登录</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -132,22 +132,12 @@ export default {
 };
 </script>
 <style scoped>
-/* 自定义图标 */
-/* select {
-  appearance: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  border: 1px solid #dcdcdc;
-  border-radius: 3px;
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  padding: 0 30px 0 30px;
-  background: url("../../assets/images/select.png") no-repeat scroll right
-    center transparent;
-} */
+.login-btn {
+  position: relative;
+}
+.login-btn:hover {
+  cursor: pointer;
+}
 .pwdimg {
   border-style: none;
   position: absolute;
@@ -156,10 +146,23 @@ export default {
   top: 12px;
   left: 4px;
 }
-/* .login-form >>> .el-input input {
-  border-color: #00eeff !important;
-} */
 .login-form >>> .el-input--suffix .el-input__inner {
   padding-right: 100px !important;
+}
+.login-form >>> .el-input__inner {
+  background-color: #152c6f;
+  border: 1px solid #2060a2;
+  color: aqua;
+}
+.login-form >>> .el-checkbox__inner {
+  background-color: #152c6f;
+  border: 1px solid #2060a2;
+  color: aqua;
+}
+.login-form >>> .el-checkbox {
+  color: #ccc;
+}
+.login-form >>> .el-checkbox__input.is-checked + .el-checkbox__label {
+  color: #1bc2d6;
 }
 </style>

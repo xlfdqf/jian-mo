@@ -26,7 +26,7 @@
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>
                     <!-- <keep-alive> -->
-                       <ve-histogram :settings="chartSettings" :data="item" ref="chart2"></ve-histogram>
+                       <ve-histogram :settings="chartSettings" :extend="extend" :data="item" ref="chart2"></ve-histogram>
                     <!-- </keep-alive> -->
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
@@ -58,6 +58,11 @@ export default {
     this.chartSettings = {
       labelMap: {
         c: "每箱iv值"
+      }
+    };
+    this.extend = {
+      series: {
+        label: { show: true, position: "top" }
       }
     };
     return {
@@ -128,7 +133,7 @@ export default {
       ]
     };
   },
-  mounted() {},
+  created() {},
   methods: {
     // 过滤图表数据
     filterData(data, dataType) {

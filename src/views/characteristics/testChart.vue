@@ -24,7 +24,7 @@ export default {
       chart: null
     };
   },
-  mounted() {
+  created() {
     this.chart = echarts.init(this.$refs.chart);
     this.chart.setOption({
       tooltip: {},

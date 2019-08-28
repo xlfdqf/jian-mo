@@ -21,7 +21,7 @@
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
-             <ve-bar :data="chartData" :settings="chartSettings" v-loading="chartLoading"></ve-bar> <!--排序条形图-->
+             <ve-bar :data="chartData" :settings="chartSettings" :extend="extend" v-loading="chartLoading"></ve-bar> <!--排序条形图-->
           </div>
           </el-col>
           <!-- 图表 end -->
@@ -45,6 +45,11 @@ export default {
       dataOrder: {
         label: "IV值",
         order: "desc"
+      }
+    };
+    this.extend = {
+      series: {
+        label: { show: true, position: "right" }
       }
     };
     return {

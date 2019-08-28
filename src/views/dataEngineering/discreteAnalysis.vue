@@ -33,7 +33,7 @@
 import echarts from "echarts";
 import myTable from "@/components/myTable";
 import { getDiscreteAnalysis } from "@/api/login.js";
-import {} from "../sampleManagement/util.js";
+import { tabType } from "../characteristics/util.js";
 
 export default {
   components: { myTable },
@@ -114,7 +114,7 @@ export default {
       // xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
     };
   },
-  created() {
+  mounted() {
     // console.log(tabType(1));
     // this.query();
     this.initEchart();

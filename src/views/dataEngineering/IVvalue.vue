@@ -35,7 +35,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getIVvalue } from "@/api/login.js";
-import {} from "./util.js";
+import {} from "../sampleManagement/util.js";
 
 export default {
   components: { myTable },

@@ -1,10 +1,12 @@
 <template>
   <div class="app-wrapper" :class="classObj">
+     <navbar></navbar>
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"></div>
     <sidebar class="sidebar-container"></sidebar>
-    <div class="main-container"  style="background-color:#F0F2F5;">
-      <navbar></navbar>
-      <tags-view></tags-view>
+    <div class="main-container"  style="background: #080920;">
+        <!-- background-color:#F0F2F5; -->
+     
+      <!-- <tags-view></tags-view> -->
       <app-main></app-main>
     </div>
   </div>
@@ -49,8 +51,8 @@ export default {
 <style rel="stylesheet/scss" lang="scss" scoped>
 @import "src/styles/mixin.scss";
 .app-wrapper {
-  // background: #080920;
-  background: #1f2d3d;
+  background: #080920;
+  // background: #1f2d3d;
   @include clearfix;
   position: relative;
   height: 100%;

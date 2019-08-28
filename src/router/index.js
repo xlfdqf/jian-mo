@@ -130,8 +130,30 @@ export const constantRouterMap = [
       },
     ]
   },
-  //模型管理
-  // 特征管理
+  //数据工程
+  {
+    path: '/dataEngineering',
+    component: Layout,
+    redirect: '/dataEngineering/discreteAnalysis',
+    name: 'dataEngineering',
+    meta: {
+      title: 'dataEngineering',
+      icon: 'characteristics'
+    },
+    children: [
+      {
+        path: 'discreteAnalysis',//特征离散分析
+        name: 'discreteAnalysis',
+        component: () => import('@/views/dataEngineering/discreteAnalysis'),
+        meta: { title: 'discreteAnalysis' }
+      }, {
+        path: 'IVvalue',//特征iv值
+        name: 'IVvalue',
+        component: () => import('@/views/dataEngineering/IVvalue'),
+        meta: { title: 'IVvalue' }
+      }]
+  },
+  // 特征工程
   {
     path: '/characteristics',
     component: Layout,
@@ -148,20 +170,10 @@ export const constantRouterMap = [
         component: () => import('@/views/characteristics/characteristicSource'),
         meta: { title: 'characteristicSource' }
       }, {
-        path: 'discreteAnalysis',//特征离散分析
-        name: 'discreteAnalysis',
-        component: () => import('@/views/characteristics/discreteAnalysis'),
-        meta: { title: 'discreteAnalysis' }
-      }, {
         path: 'featureBox',//特征分箱
         name: 'featureBox',
         component: () => import('@/views/characteristics/featureBox'),
         meta: { title: 'featureBox' }
-      }, {
-        path: 'IVvalue',//特征iv值
-        name: 'IVvalue',
-        component: () => import('@/views/characteristics/IVvalue'),
-        meta: { title: 'IVvalue' }
       }, {
         path: 'analysisDistribution',//特征分布分析
         name: 'analysisDistribution',

@@ -71,13 +71,14 @@ export default {
     telManagement: '手机号管理',
     telManagementDetail: '手机号详情页',
     idcardManagementDetail: '身份证详情页',
-    characteristics: '特征管理',
+    characteristics: '特征工程',
     characteristicSource: '特征来源',
-    discreteAnalysis: '特征离散分析',
     featureBox: '特征分箱',
-    IVvalue: '特征iv值',
     analysisDistribution: '特征分布分析',
     correlationModel: '特征关联模型',
+    dataEngineering: '数据工程',
+    discreteAnalysis: '特征离散分析',
+    IVvalue: '特征iv值',
     testChart: 'test'
 
   },

@@ -1,7 +1,7 @@
 <!--顶部导航部分 -->
 <template>
   <!-- style="background-color:#080920" -->
-  <el-menu class="navbar" mode="horizontal">
+  <el-menu class="navbar" mode="horizontal" style="background-color:#09163F;border-bottom:none;">
     <!-- 收起/展开左侧导航按钮 -->
     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></nx-hamburger>
     <div class="right-menu">
@@ -62,8 +62,8 @@ export default {
 
 <style rel="stylesheet/scss" lang="scss" scoped>
 .navbar {
-  height: 50px;
-  line-height: 50px;
+  height: 70px;
+  line-height: 70px;
   border-radius: 0px !important;
   .hamburger-container {
     line-height: 58px;
@@ -102,7 +102,7 @@ export default {
       vertical-align: 15px;
     }
     .avatar-container {
-      height: 50px;
+      height: 60px;
       margin-right: 30px;
       .avatar-wrapper {
         cursor: pointer;

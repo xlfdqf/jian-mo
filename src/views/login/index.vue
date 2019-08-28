@@ -3,6 +3,7 @@
     <div class="login-info text-white animated fadeInLeft" style="margin-left:-100px">
       <div class="logo" style="margin-top:-300px">
           <img src="../../assets/images/home/logo2.png" width="300px" height="100px" alt="logo" style="object-fit:contain;vertical-align: middle;" />
+          <!-- <img src="../../assets/images/home/peitu.png" alt="logo" style="object-fit:contain;vertical-align: middle;" /> -->
       </div>
       <h2 class="login-info-title" style="text-align:center">{{website.info.title}}</h2>
     </div>
@@ -68,7 +69,8 @@ export default {
   top: 0;
   width: 100%;
   height: 100%;
-  background-image: url("../../assets/images/top_images/login.png");
+  // background-image: url("../../assets/images/top_images/login.png");
+  background-image: url("../../assets/images/top_images/loginBg.png");
   background-size: cover;
 }
 .login-info {

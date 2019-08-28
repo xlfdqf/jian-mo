@@ -32,12 +32,12 @@ export default {
 };
 </script>
 <style scoped>
-/* .imgs {
+.imgs {
   z-index: 999999 !important;
   background: url("~@/assets/images/home/sideBar.png") no-repeat;
   background-size: contain;
   height: 1200px;
   margin-top: 100px;
-} */
+}
 </style>
 

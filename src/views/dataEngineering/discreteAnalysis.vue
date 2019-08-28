@@ -33,7 +33,7 @@
 import echarts from "echarts";
 import myTable from "@/components/myTable";
 import { getDiscreteAnalysis } from "@/api/login.js";
-import { tabType } from "./util.js";
+import {} from "../sampleManagement/util.js";
 
 export default {
   components: { myTable },

@@ -61,17 +61,18 @@ axios.interceptors.response.use(
             type: "error"
           });
           // 清除token                    
-          setToken();
+          setToken('');
           store.commit('SET_TOKEN', '');
           // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
           setTimeout(() => {
-            router.replace({
+            this.$router.replace({
               path: '/login',
               query: {
                 redirect: router.currentRoute.fullPath
               }
             });
           }, 1000);
+          // this.$router.push('/login')
           break;
         // 404请求不存在                
         case 404:

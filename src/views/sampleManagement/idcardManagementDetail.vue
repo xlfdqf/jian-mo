@@ -422,30 +422,31 @@ export default {
               this.contact = [];
             }
           } else if (colleName === "daihoubang") {
-            if (res.data[0]) {
-              this.daihoubang = res.data;
+            if (res.data.data[0]) {
+              this.daihoubang = res.data.data;
               localStorage.setItem("daihoubangSource", res.data[0].source);
+              this.bindidCardTable = res.data.data[0].binding_idcards; //绑定身份证
+              this.bindMobileTable = res.data.data[0].binding_phones; //绑定号码
+              console.log(this.bindidCardTable);
               this.daihoubangSource = localStorage.getItem("daihoubangSource"); //来源
-              this.bindidCardTable = res.data[0].binding_idcards; //绑定身份证
-              this.bindMobileTable = res.data[0].binding_phones; //绑定号码
             } else {
               this.daihoubang = [{}];
             }
           } else if (colleName === "changdaike") {
-            if (res.data[0]) {
-              localStorage.setItem("changdaikeSource", res.data[0].source);
+            if (res.data.data[0]) {
+              localStorage.setItem("changdaikeSource", res.data.data[0].source);
               this.changdaikeSource = localStorage.getItem("changdaikeSource"); //来源
-              this.changdaike = [res.data[0].content];
-              this.platformDetails = res.data[0].content.platformDetails; //常贷客平台详情
+              this.changdaike = [res.data.data[0].content];
+              this.platformDetails = res.data.data[0].content.platformDetails; //常贷客平台详情
             } else {
               this.changdaike = [{}];
               this.platformDetails = [];
             }
           } else if (colleName === "juxinli_operator_report") {
             this.loading = false;
-            if (res.data[0]) {
-              let content = res.data[0].content;
-              localStorage.setItem("juxinliSource", res.data[0].source);
+            if (res.data.data[0]) {
+              let content = res.data.data[0].content;
+              localStorage.setItem("juxinliSource", res.data.data[0].source);
               this.juxinliSource = localStorage.getItem("juxinliSource"); //来源
               this.report = [content.report]; //报告基本信息
               this.home_phone = content.home_phone.check_points; //用户申请表检测home_phone

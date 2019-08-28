@@ -72,7 +72,7 @@ export default {
       getNewsList(params)
         .then(res => {
           this.loading = false;
-          this.total = res.total;
+          this.total = res.data.total.total;
           this.dataSource = res.data.data;
         })
         .catch(error => {
@@ -83,8 +83,6 @@ export default {
       localStorage.setItem("row", JSON.stringify(row));
       this.$router.push({
         name: "idcardManagementDetail"
-        // params: { idcard: row.idcard }
-        // params: { row: row }
       });
     },
     // 页码切换

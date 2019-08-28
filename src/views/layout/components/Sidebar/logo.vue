@@ -13,7 +13,7 @@
     <transition-group name="fade">
       <template v-if="!isCollapse">
         <span class="logo_title is-bold" key="1">
-          <img :src="logoimg" width="180" height="50" style="object-fit:contain;margin-top:25px;"/>
+          <!-- <img :src="logoimg" width="180" height="50" style="object-fit:contain;margin-top:25px;"/> -->
           <!-- <span style="float:left;">{{website.title}} </span> -->
         </span>
       </template>

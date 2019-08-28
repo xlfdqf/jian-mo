@@ -5,16 +5,17 @@
       <!-- 表单 -->
      <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
         <el-form-item label="身份证号:" prop="idCard">
-          <el-input v-model="testForm.idCard" placeholder="身份证号"></el-input>
+          <el-input v-model="testForm.idCard"></el-input>
         </el-form-item>
          <el-form-item>
-          <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
-          <el-button type="primary" @click="update">一键更新</el-button>
+          <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
+          <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
+          <!-- <el-button type="primary" @click="update">一键更新</el-button> -->
         </el-form-item>
       </el-form>
    </el-card>
-
-   <el-card>
+   <!-- <p style="color:#27a2c6;font-size:20px;">数据列表</p> -->
+   <el-card class="box-card2">
      <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="false" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange"
@@ -98,6 +99,7 @@ export default {
     },
     // 搜索
     onSubmit(formName) {
+      alert("111");
       let param = { idCard: formName.idCard };
       getNewsList(param)
         .then(res => {
@@ -121,8 +123,28 @@ export default {
   background-image: url("../../assets/images/home/topBg.png");
   background-size: cover;
 }
+.table >>> .box-card2 {
+  background-color: #041434;
+}
 .table >>> .el-card {
   background-color: #080920;
   border: none;
+}
+.table >>> .el-input__inner {
+  background-color: #081d49;
+  border: 1px solid #27a2c6;
+  color: aqua;
+}
+.table >>> .el-form-item__label {
+  color: #27a2c6;
+}
+.search {
+  position: relative;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #27a2c6;
 }
 </style>

@@ -1,9 +1,10 @@
 #app {
   // 主体区域
   .main-container {
+    margin-top:30px;
     min-height: 100%;
     transition: margin-left .28s;
-    margin-left: 210px;
+    margin-left: 250px;
   } // 侧边栏
   .sidebar-container {
     transition: width 0.28s;
@@ -82,7 +83,7 @@
   .sidebar-container .nest-menu .el-submenu>.el-submenu__title,
   .sidebar-container .el-submenu .el-menu-item {
     min-width: 180px !important;
-    background-color: $subMenuBg !important;
+    background-color: #041333 !important;
     &:hover {
       background-color: $menuHover !important;
     }

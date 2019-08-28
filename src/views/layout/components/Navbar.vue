@@ -3,8 +3,11 @@
   <!-- style="background-color:#080920" -->
   <el-menu class="navbar" mode="horizontal" style="background-color:#09163F;border-bottom:none;">
     <!-- 收起/展开左侧导航按钮 -->
-    <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened"></nx-hamburger>
+    <img src="@/assets/images/home/logo2.png" width="180" height="50" style="object-fit:contain;margin-top:10px;float:left;"/> 
+    <img src="@/assets/images/home/logotit.png" style="margin-top:20px;float:left;"/> 
+     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened" style="float:left;margin-top:5px;"></nx-hamburger>
     <div class="right-menu">
+     
      <!-- <error-log class="errLog-container right-menu-item"></error-log> -->
       <el-tooltip effect="dark" content="全屏" placement="bottom">
         <nx-full-screen class="screenfull right-menu-item"></nx-full-screen>

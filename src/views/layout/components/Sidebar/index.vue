@@ -1,15 +1,15 @@
 <template>
 <div  class="imgs">
   <el-scrollbar wrapClass="scrollbar-wrapper">
-    <logo :isCollapse="isCollapse"></logo>
+    <!-- <logo :isCollapse="isCollapse"></logo> -->
     <el-menu
       mode="vertical"
       :show-timeout="200"
       :default-active="$route.path"
       :collapse="isCollapse"
-      background-color="#304156"
+      background-color="#04142F"
       text-color="white"
-      active-text-color="#21BAA9"
+      active-text-color="aqua"
     >
       <sidebar-item :routes="permission_routers"></sidebar-item>
     </el-menu>
@@ -38,6 +38,7 @@ export default {
   background-size: contain;
   height: 1200px;
   margin-top: 100px;
+  margin-left: 20px;
 }
 </style>
 

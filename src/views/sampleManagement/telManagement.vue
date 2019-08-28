@@ -13,7 +13,7 @@
         </el-form-item>
       </el-form>
      </el-card>
-   <el-card class="box-card">
+   <el-card>
      <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="false" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange" :loading="loading"
@@ -117,3 +117,13 @@ export default {
   }
 };
 </script>
+<style scoped>
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+</style>

@@ -5,11 +5,12 @@
           <!-- 表单 -->
      <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
         <el-form-item label="用户手机号:" prop="mobile">
-          <el-input v-model="testForm.mobile" placeholder="手机号"></el-input>
+          <el-input v-model="testForm.mobile"></el-input>
         </el-form-item>
          <el-form-item>
-          <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
-          <el-button type="default" @click="reset('testForm')">重置</el-button>
+            <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
+          <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
+          <!-- <el-button type="default" @click="reset('testForm')">重置</el-button> -->
         </el-form-item>
       </el-form>
      </el-card>
@@ -118,12 +119,43 @@ export default {
 };
 </script>
 <style scoped>
-.box-card {
+/* .box-card {
   background-image: url("../../assets/images/home/topBg.png");
   background-size: cover;
 }
 .table >>> .el-card {
   background-color: #080920;
   border: none;
+} */
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #041434;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.table >>> .el-input__inner {
+  background-color: #081d49;
+  border: 1px solid #27a2c6;
+  color: aqua;
+}
+.table >>> .el-form-item__label {
+  color: #27a2c6;
+}
+.search {
+  position: relative;
+}
+.search:hover {
+  cursor: pointer;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #27a2c6;
 }
 </style>

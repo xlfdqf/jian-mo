@@ -4,8 +4,9 @@
   <el-menu class="navbar" mode="horizontal" style="background-color:#09163F;border-bottom:none;">
     <!-- 收起/展开左侧导航按钮 -->
     <img src="@/assets/images/home/logo2.png" width="180" height="50" style="object-fit:contain;margin-top:10px;float:left;"/> 
-    <img src="@/assets/images/home/logotit.png" style="margin-top:20px;float:left;"/> 
-     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened" style="float:left;margin-top:5px;"></nx-hamburger>
+    <span class="tit">智能大数据中台辅助决策系统</span>
+    <!-- <img src="@/assets/images/home/logotit.png" style="margin-top:20px;float:left;"/>  -->
+     <nx-hamburger class="hamburger-container" :toggleClick="toggleSideBar" :isActive="sidebar.opened" style="float:left;margin-top:12px;"></nx-hamburger>
     <div class="right-menu">
      
      <!-- <error-log class="errLog-container right-menu-item"></error-log> -->
@@ -68,6 +69,14 @@ export default {
   height: 70px;
   line-height: 70px;
   border-radius: 0px !important;
+  .tit {
+    background: linear-gradient(to bottom, #9be2f1, #60b2cd);
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: bold;
+    font-size: 20px;
+    float: left;
+  }
   .hamburger-container {
     line-height: 58px;
     height: 50px;

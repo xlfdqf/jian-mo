@@ -12,32 +12,32 @@
 
 <script>
 export default {
-  name: 'nx-share',
+  name: "nx-share",
   props: {
     items: {
       type: Array
     },
     title: {
       type: String,
-      default: 'vue'
+      default: "vue"
     }
   },
   data() {
     return {
       isActive: false
-    }
+    };
   },
   methods: {
     clickTitle() {
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
     }
   }
-}
+};
 </script>
 
 <style rel="stylesheet/scss" lang="scss" >
 $n: 6; //和items.length 相同
-$t: .1s;
+$t: 0.1s;
 .share-dropdown-menu {
   width: 250px;
   position: relative;
@@ -53,7 +53,7 @@ $t: .1s;
     font-size: 20px;
     text-align: center;
     z-index: 2;
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
   }
   &-wrapper {
     position: relative;
@@ -76,7 +76,7 @@ $t: .1s;
     @for $i from 1 through $n {
       &:nth-of-type(#{$i}) {
         z-index: -1;
-        transition-delay: $i*$t;
+        transition-delay: $i * $t;
         transform: translate3d(0, -60px, 0);
       }
     }
@@ -88,8 +88,8 @@ $t: .1s;
     .share-dropdown-menu-item {
       @for $i from 1 through $n {
         &:nth-of-type(#{$i}) {
-         transition-delay: ($n - $i)*$t;
-          transform: translate3d(0, ($i - 1)*60px, 0);
+          transition-delay: ($n - $i) * $t;
+          transform: translate3d(0, ($i - 1) * 60px, 0);
         }
       }
     }

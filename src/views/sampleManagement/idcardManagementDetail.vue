@@ -1,8 +1,11 @@
 <!-- 身份证详情页面-->
 <template>
  <div class="table">
-   <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard | formatIdcard}}</span></h4>
+   <el-card class="box-card" style="margin-bottom:40px">
+      <h4 style="text-align:center;color:#7ECBE0"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard | formatIdcard}}</span></h4>
+   </el-card>
+
+   <el-card  class="box-card2">
      <div class="box">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
@@ -30,7 +33,7 @@
 
           <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
-               通讯信息<span style="margin-left:20px;" v-if="contactinSource">来源：{{contactinSource}}</span>
+               通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="contactinSource">来源：{{contactinSource}}</span>
             </template>
             <div>
               <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
@@ -42,7 +45,7 @@
 
         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
-               贷后邦<span style="margin-left:20px;" v-if="daihoubangSource">来源：{{daihoubangSource}}</span>
+               贷后邦<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="daihoubangSource">来源：{{daihoubangSource}}</span>
             </template>
              <el-row> 
                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
@@ -116,7 +119,7 @@
 
        <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
             <template slot="title">
-               常贷客<span style="margin-left:20px;" v-if="changdaikeSource">来源：{{changdaikeSource}}</span>
+               常贷客<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="changdaikeSource">来源：{{changdaikeSource}}</span>
             </template>
              <el-row>
                 <el-col :span="6"><div class="blod">证件最近出现日期:{{item.idCardEndTime}}</div></el-col>
@@ -163,7 +166,7 @@
 
        <el-collapse-item title="聚信立分析报告" name="5" v-loading="loading">
             <template slot="title">
-               聚信立分析报告<span style="margin-left:20px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
+               聚信立分析报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
             </template>
             <div class="jxlreport" v-for="item in report" :key="item.token">
               <h4 style="text-align:center">报告基本信息</h4>
@@ -267,7 +270,7 @@
          
          <el-collapse-item title="大圣报告" name="6">
             <template slot="title">
-               大圣报告<span style="margin-left:20px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
+               大圣报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
             </template>
               <myTable :columns="ds_reportColumns" :dataSource="ds_report" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
@@ -521,12 +524,40 @@ export default {
 </script>
 
 <style scoped>
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #041334 !important;
+  border: 1px solid #0c234c !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.table >>> .el-collapse-item__header {
+  background-color: #041334;
+  color: aqua;
+  border: none;
+}
+.table >>> .el-collapse {
+  border: none;
+}
+.table >>> .el-collapse-item__wrap {
+  background-color: #041334;
+  border: none;
+}
+.table >>> .el-collapse-item__content {
+  color: #7ecbe0;
+  border: none;
+}
 .box {
   width: auto;
   height: auto;
-  border: 1px solid #dddddd;
+  /* border: 1px solid #dddddd; */
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
   margin-bottom: 30px;
 }
@@ -535,7 +566,7 @@ export default {
   padding-bottom: 20px;
 }
 .jxlreport {
-  border: 1px solid#dddddd;
+  /* border: 1px solid#dddddd; */
   margin-bottom: 10px;
 }
 .tit {

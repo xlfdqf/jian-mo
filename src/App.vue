@@ -90,4 +90,8 @@ html {
 .el-pagination button:hover {
   color: #21baa9;
 }
+/* #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:focus,
+#app .sidebar-container .el-submenu .el-menu-item:focus {
+  background-color: #0e3659 !important;
+} */
 </style>

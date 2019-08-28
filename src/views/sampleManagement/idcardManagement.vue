@@ -141,6 +141,9 @@ export default {
 .search {
   position: relative;
 }
+.search:hover {
+  cursor: pointer;
+}
 .searchBtn {
   position: absolute;
   top: -4px;

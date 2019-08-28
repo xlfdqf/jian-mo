@@ -184,12 +184,14 @@ export const constantRouterMap = [
         name: 'correlationModel',
         component: () => import('@/views/characteristics/correlationModel'),
         meta: { title: 'correlationModel' }
-      }, {
-        path: 'testChart',
-        name: 'testChart',
-        component: () => import('@/views/characteristics/testChart'),
-        meta: { title: 'testChart' }
-      }]
+      },
+      // {
+      //   path: 'testChart',
+      //   name: 'testChart',
+      //   component: () => import('@/views/characteristics/testChart'),
+      //   meta: { title: 'testChart' }
+      // }
+    ]
   }
   // 表格
   // {

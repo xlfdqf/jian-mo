@@ -1,7 +1,7 @@
 <!--特征分布分析页面 -->
 <template>
   <div class="table">
-      <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card">
+      <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
               :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
@@ -11,7 +11,7 @@
         <el-tab-pane label="图表" name="2">
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
-                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :grid="grid" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                  <el-col :span="8"><div> <ve-histogram :data-zoom="dataZoom" :settings="chartSettings" :extend="chartExtend" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
               <el-pagination
@@ -37,13 +37,26 @@ import "echarts/lib/component/dataZoom"; //区域缩放组件
 export default {
   components: { myTable },
   data() {
-    // 图表背景颜色
-    this.grid = {
-      // show: true,
-      // top: 50,
-      // left: 10,
-      // backgroundColor: "#344B58",
-      // borderColor: "#000"
+    this.chartExtend = {
+      xAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      yAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      legend: {
+        textStyle: {
+          color: "rgb(126, 203, 224)" //图例字体颜色
+        }
+      }
     };
     // 区域缩放
     this.dataZoom = [
@@ -233,5 +246,24 @@ export default {
   text-align: center;
   font-size: 14px;
   margin-top: -40px;
+}
+.table >>> .box-card2 {
+  background-color: #091938 !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.search {
+  position: relative;
+}
+.search:hover {
+  cursor: pointer;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #7ecbe0;
 }
 </style>

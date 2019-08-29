@@ -8,12 +8,13 @@
               <el-input v-model="testForm.featureField"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
+              <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
+               <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
       </el-card>
 
-      <el-card class="box-card">
+      <el-card class="box-card2">
         <el-row>
           <el-col :span="12"><div>
               <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
@@ -21,7 +22,7 @@
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
-             <ve-bar :data="chartData" :settings="chartSettings" :extend="extend" v-loading="chartLoading"></ve-bar> <!--排序条形图-->
+             <ve-bar :data="chartData" :settings="chartSettings" :extend="chartExtend"  v-loading="chartLoading"></ve-bar> <!--排序条形图-->
           </div>
           </el-col>
           <!-- 图表 end -->
@@ -40,6 +41,35 @@ import {} from "../sampleManagement/util.js";
 export default {
   components: { myTable },
   data() {
+    this.chartExtend = {
+      series: {
+        color: "rgb(126, 203, 224)" //柱子背景颜色
+      },
+      xAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      yAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      legend: {
+        textStyle: {
+          color: "rgb(126, 203, 224)" //图例字体颜色
+        }
+      }
+    };
+    this.chartSettings = {
+      labelMap: {
+        c: "每箱iv值"
+      }
+    };
     this.chartSettings = {
       metrics: ["IV值"],
       dataOrder: {
@@ -136,4 +166,27 @@ export default {
 </script>
 
 <style scoped>
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #091938 !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.search {
+  position: relative;
+}
+.search:hover {
+  cursor: pointer;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #7ecbe0;
+}
 </style>

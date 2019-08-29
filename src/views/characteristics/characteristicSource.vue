@@ -8,7 +8,7 @@
               <el-input v-model="testForm.datasource"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
+             <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
       </el-card>
@@ -102,4 +102,27 @@ export default {
 </script>
 
 <style scoped>
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #091938 !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.search {
+  position: relative;
+}
+.search:hover {
+  cursor: pointer;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #7ecbe0;
+}
 </style>

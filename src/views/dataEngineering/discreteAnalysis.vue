@@ -20,7 +20,7 @@
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="2">
+        <el-tab-pane label="图表" name="2" class="bg">
           <div ref="chart2" style="width:1280px;height: 500px;" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
@@ -110,8 +110,8 @@ export default {
         [3, 720],
         [4, 950]
       ],
-      xAxisData: []
-      // xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
+      // xAxisData: []
+      xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
     };
   },
   mounted() {
@@ -175,7 +175,13 @@ export default {
         title: [
           {
             text: "箱线图",
-            left: "center"
+            left: "center",
+            textStyle: {
+              color: "rgb(126, 203, 224)"
+              // fontStyle: "normal", //主标题文字字体风格，默认normal，有italic(斜体),oblique(斜体)
+              // fontWeight: "lighter", //可选normal(正常)，bold(加粗)，bolder(加粗)，lighter(变细)，100|200|300|400|500...
+              // fontFamily: "san-serif", //主题文字字体，默认微软雅黑
+            }
           }
         ],
         tooltip: {
@@ -191,13 +197,16 @@ export default {
         },
         xAxis: {
           type: "category",
-          data: xAxisData,
+          data: this.xAxisData,
           boundaryGap: true,
           nameGap: 30,
           splitArea: {
             show: false
           },
           axisLabel: {
+            textStyle: {
+              color: "rgb(126, 203, 224)"
+            },
             formatter: "{value}"
           },
           splitLine: {
@@ -206,9 +215,14 @@ export default {
         },
         yAxis: {
           type: "value",
-          name: "Y轴值",
+          // name: "Y轴值",
           splitArea: {
             show: true
+          },
+          axisLabel: {
+            textStyle: {
+              color: "rgb(126, 203, 224)"
+            }
           }
         },
         series: [
@@ -254,4 +268,7 @@ export default {
 </script>
 
 <style scoped>
+.table .bg {
+  background-color: #041332;
+}
 </style>

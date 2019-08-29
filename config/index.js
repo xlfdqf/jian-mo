@@ -32,7 +32,7 @@ module.exports = {
     },
 
     // host: 'localhost',
-    // host: '10.10.2.158', // can be overwritten by process.env.HOST
+    host: '10.10.2.158', // can be overwritten by process.env.HOST
     port: 3300, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: true,
     errorOverlay: true,

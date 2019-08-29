@@ -20,13 +20,13 @@
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="2" class="bg">  <!-- 需分页 -->
+        <el-tab-pane label="图表" name="2" class="bg" >  <!-- 需分页 -->
            <div v-loading="chartLoading">
              <el-row>
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>
                     <!-- <keep-alive> -->
-                       <ve-histogram :settings="chartSettings" :extend="extend" :data="item" ref="chart2"></ve-histogram>
+                       <ve-histogram :settings="chartSettings" :extend="extend"  :yAxis="yAxis" :grid="grid" :data="item" ref="chart2" :options="orgOptions"></ve-histogram>
                     <!-- </keep-alive> -->
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
@@ -55,6 +55,23 @@ import "echarts/lib/component/dataZoom"; //区域缩放组件
 export default {
   components: { myTable },
   data() {
+    this.xAxis = {
+      axisLabel: {
+        color: "#fff"
+      }
+    };
+    this.yAxis = {
+      axisLabel: {
+        color: "#fff"
+      }
+    };
+    this.grid = {
+      show: true,
+      top: 50,
+      left: 10,
+      backgroundColor: "#041332",
+      borderColor: "#000"
+    };
     this.chartSettings = {
       labelMap: {
         c: "每箱iv值"
@@ -66,6 +83,7 @@ export default {
       }
     };
     return {
+      orgOptions: {},
       height: 600,
       tableLoading: false,
       chartLoading: false,
@@ -133,7 +151,7 @@ export default {
       ]
     };
   },
-  created() {},
+  mounted() {},
   methods: {
     // 过滤图表数据
     filterData(data, dataType) {
@@ -239,9 +257,9 @@ export default {
   text-align: center;
   font-size: 14px;
   margin-top: -40px;
+  color: #fff;
 }
-/* .table >>> .bg {
-  background-color: #344b58 !important;
-  color: #888;
-} */
+.table .bg {
+  background-color: #041332;
+}
 </style>

@@ -243,6 +243,7 @@ export default {
                 ].join("<br/>");
               }
             }
+            // background: "#091938" //柱子背景颜色
           },
           {
             name: "outlier",

@@ -15,7 +15,8 @@
 
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1">
-             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
+          <!-- :height="height" -->
+             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
               :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
@@ -49,7 +50,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getFeatureBox } from "@/api/login.js";
-import { tabType, dataType } from "./util.js";
+import { tabType, dataType, featureType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
@@ -93,7 +94,7 @@ export default {
     };
     return {
       orgOptions: {},
-      height: 600,
+      // height: 200,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据
@@ -161,9 +162,72 @@ export default {
     };
   },
   mounted() {
-    this.queryTable();
+    // this.queryTable();
+    const data = [
+      {
+        id: 1,
+        featureField: "年龄",
+        binSplit: "0-18",
+        iv: 0.5
+      },
+      {
+        id: 2,
+        featureField: "星座",
+        binSplit: "射手座",
+        iv: 0.3
+      },
+      {
+        id: 3,
+        featureField: "籍贯",
+        binSplit: "浙江",
+        iv: 0.2
+      },
+      {
+        id: 4,
+        featureField: "芝麻分",
+        binSplit: "芝麻分",
+        iv: 0.2
+      },
+      {
+        id: 5,
+        featureField: "年龄",
+        binSplit: "20-32",
+        iv: 0.5
+      },
+      {
+        id: 6,
+        featureField: "星座",
+        binSplit: "巨蟹",
+        iv: 0.5
+      }
+    ];
+    const filterTable = this.filterTable(data, dataType);
+    this.dataSource = filterTable;
   },
+
   methods: {
+    //过滤报表数据
+    filterTable(data, featureType) {
+      // console.log(data, dataType);
+      const type = featureType.map(({ featurename, value }) => {
+        return {
+          a: value,
+          b: [],
+          c: []
+        };
+      });
+      data.forEach(item => {
+        type.forEach(t => {
+          if (item["featureField"] === t["a"]) {
+            t.b.push(item["binSplit"]);
+            t.c.push(item["iv"]);
+          }
+        });
+      });
+
+      console.log(type);
+      return type;
+    },
     // 过滤图表数据
     filterData(data, dataType) {
       let types = dataType.map(({ featurename, value }) => {

@@ -21,7 +21,7 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
-          <div ref="chart2" style="width:1900px;height: 500px;left:-110px;" v-loading="chartLoading"></div>
+          <div ref="chart2" style="width:1280px;height: 500px;" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -236,6 +236,10 @@ export default {
           }
         ]
       });
+      //根据窗口的大小变动图表 --- 重点
+      // window.onresize = function() {
+      //   echart.resize();
+      // };
     },
     // 获取x轴标题
     getXAxisData(length) {

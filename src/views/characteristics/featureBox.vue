@@ -26,7 +26,7 @@
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>
                     <!-- <keep-alive> -->
-                       <ve-histogram :settings="chartSettings" :extend="extend"  :yAxis="yAxis" :grid="grid" :data="item" ref="chart2" :options="orgOptions"></ve-histogram>
+                       <ve-histogram :settings="chartSettings" :extend="chartExtend" :grid="grid" :data="item" ref="chart2"></ve-histogram>
                     <!-- </keep-alive> -->
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
@@ -55,31 +55,47 @@ import "echarts/lib/component/dataZoom"; //区域缩放组件
 export default {
   components: { myTable },
   data() {
-    this.xAxis = {
-      axisLabel: {
-        color: "#fff"
-      }
-    };
-    this.yAxis = {
-      axisLabel: {
-        color: "#fff"
+    this.chartExtend = {
+      series: {
+        color: "rgb(126, 203, 224)", //柱子背景颜色
+        label: {
+          show: true,
+          position: "top",
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      xAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      yAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      legend: {
+        textStyle: {
+          color: "rgb(126, 203, 224)" //图例字体颜色
+        }
       }
     };
     this.grid = {
-      show: true,
-      top: 50,
-      left: 10,
-      backgroundColor: "#041332",
-      borderColor: "#000"
+      // show: true,
+      // top: 50,
+      // left: 10,
+      // backgroundColor: "#041332",
+      // borderColor: "#000"
     };
     this.chartSettings = {
       labelMap: {
         c: "每箱iv值"
-      }
-    };
-    this.extend = {
-      series: {
-        label: { show: true, position: "top" }
       }
     };
     return {
@@ -257,7 +273,7 @@ export default {
   text-align: center;
   font-size: 14px;
   margin-top: -40px;
-  color: #fff;
+  color: rgb(126, 203, 224);
 }
 .table .bg {
   background-color: #041332;

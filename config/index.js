@@ -6,13 +6,10 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      '/api': {
-        // target: 'http://10.10.2.8:8080/',
+      '/api': { // shen
         target: ' http://10.10.2.8:3300/',
         // secure: false, // 如果是https接口，需要配置这个参数
         changeOrigin: true,
@@ -20,13 +17,14 @@ module.exports = {
           '^/api': ''
         }
       },
-      '/api2': {
-        target: 'http://10.10.1.168:8080',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/api2': ''
-        }
-      }
+      // '/api': { //yang
+      //   target: 'http://10.10.1.168:3300',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
+
     },
 
     // host: 'localhost',

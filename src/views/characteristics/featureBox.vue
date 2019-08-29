@@ -26,7 +26,7 @@
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>
                     <!-- <keep-alive> -->
-                       <ve-histogram :settings="chartSettings" :extend="chartExtend" :grid="grid" :data="item" ref="chart2"></ve-histogram>
+                       <ve-histogram :settings="chartSettings" :extend="chartExtend" :data="item" ref="chart2"></ve-histogram>
                     <!-- </keep-alive> -->
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
@@ -85,13 +85,6 @@ export default {
           color: "rgb(126, 203, 224)" //图例字体颜色
         }
       }
-    };
-    this.grid = {
-      // show: true,
-      // top: 50,
-      // left: 10,
-      // backgroundColor: "#041332",
-      // borderColor: "#000"
     };
     this.chartSettings = {
       labelMap: {
@@ -167,7 +160,9 @@ export default {
       ]
     };
   },
-  mounted() {},
+  mounted() {
+    this.queryTable();
+  },
   methods: {
     // 过滤图表数据
     filterData(data, dataType) {
@@ -209,16 +204,17 @@ export default {
     // 查询报表
     queryTable() {
       this.tableLoading = true;
-      let params = { pageIndex: 1, pageSize: 10 };
-      // getFeatureBox(params)
-      //   .then(res => {
-      //     this.tableLoading = false;
-      //     this.tableTotal = res.total;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      // let params = { pageIndex: 1, pageSize: 10 };
+      getFeatureBox()
+        .then(res => {
+          this.tableLoading = false;
+          console.log(res);
+          // this.tableTotal = res.total;
+          // this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //查询分箱图表
     queryEcharts() {

@@ -55,8 +55,8 @@ export default {
   // background: #1f2d3d;
   @include clearfix;
   position: relative;
-  height: 100%;
-  // height: 1120px;
+  // height: 100%;
+  height: auto;
   width: 100%;
 }
 .drawer-bg {

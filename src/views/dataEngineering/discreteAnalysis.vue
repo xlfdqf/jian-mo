@@ -8,19 +8,20 @@
               <el-input v-model="testForm.featureField"></el-input>
             </el-form-item>
             <el-form-item>
-              <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
+              <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
+              <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
       </el-card>
 
-      <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick">
+      <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
               :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
-        <el-tab-pane label="图表" name="2" class="bg">
+        <el-tab-pane label="图表" name="2">
           <div ref="chart2" style="width:1280px;height: 500px;" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
@@ -268,7 +269,27 @@ export default {
 </script>
 
 <style scoped>
-.table .bg {
-  background-color: #041332;
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #091938 !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.search {
+  position: relative;
+}
+.search:hover {
+  cursor: pointer;
+}
+.searchBtn {
+  position: absolute;
+  top: -4px;
+  left: 20px;
+  color: #7ecbe0;
 }
 </style>

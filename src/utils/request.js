@@ -64,15 +64,20 @@ axios.interceptors.response.use(
           setToken('');
           store.commit('SET_TOKEN', '');
           // 跳转登录页面，并将要浏览的页面fullPath传过去，登录成功后跳转需要访问的页面
-          setTimeout(() => {
-            this.$router.replace({
-              path: '/login',
-              query: {
-                redirect: router.currentRoute.fullPath
-              }
-            });
-          }, 1000);
-          // this.$router.push('/login')
+          // setTimeout(() => {
+          //   this.$router.replace({
+          //     path: '/login',
+          //     query: {
+          //       redirect: router.currentRoute.fullPath
+          //     }
+          //   });
+          // }, 1000);
+          router.replace({
+            path: '/login',
+            query: {
+              redirect: router.currentRoute.fullPath
+            }
+          });
           break;
         // 404请求不存在                
         case 404:

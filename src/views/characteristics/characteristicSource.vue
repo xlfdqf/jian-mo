@@ -13,7 +13,7 @@
           </el-form>
       </el-card>
 
-      <el-card class="box-card">
+      <el-card class="box-card2">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"
               :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>

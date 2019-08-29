@@ -1,8 +1,11 @@
 <!-- 身份证详情页面-->
 <template>
  <div class="table">
-   <el-card class="box-card">
-     <h4 style="text-align:center"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>手机号码:{{mobile | formatPhone}}</span></h4>
+   <el-card class="box-card" style="margin-bottom:40px">
+      <h4 style="text-align:center;color:#7ECBE0"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>手机号码:{{mobile | formatPhone}}</span></h4>
+   </el-card>
+
+   <el-card  class="box-card2">
      <div class="box">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
@@ -30,7 +33,7 @@
 
           <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
-               通讯信息<span style="margin-left:20px;" v-if="contactinSource">来源：{{contactinSource}}</span>
+               通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="contactinSource">来源：{{contactinSource}}</span>
             </template>
             <div>
               <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
@@ -42,7 +45,7 @@
 
         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
-               贷后邦<span style="margin-left:20px;" v-if="daihoubangSource">来源：{{daihoubangSource}}</span>
+               贷后邦<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="daihoubangSource">来源：{{daihoubangSource}}</span>
             </template>
              <el-row> 
                <el-col :span="6"><div class="blod">身份证号码:{{item.idcard}}</div></el-col>
@@ -50,8 +53,6 @@
                 <el-col :span="6"><div class="blod">性别:{{item.gender}}</div></el-col>
                 <el-col :span="6"><div class="blod">年龄:{{item.age}}</div></el-col>
                 <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
-                <!-- <el-col :span="6"><div class="blod">绑定身份证情况:{{item.binding_idcards}}</div></el-col> -->
-                <!-- <el-col :span="6"><div class="blod">绑定号码情况:{{item.binding_phones}}</div></el-col> -->
                 <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone | filterinTime}}</div></el-col>
                 <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
@@ -118,7 +119,7 @@
 
        <el-collapse-item title="常贷客" name="4" v-for="item in changdaike" :key="item.idcard">
             <template slot="title">
-               常贷客<span style="margin-left:20px;" v-if="changdaikeSource">来源：{{changdaikeSource}}</span>
+               常贷客<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="changdaikeSource">来源：{{changdaikeSource}}</span>
             </template>
              <el-row>
                 <el-col :span="6"><div class="blod">证件最近出现日期:{{item.idCardEndTime}}</div></el-col>
@@ -163,9 +164,11 @@
             </el-row>
        </el-collapse-item>
 
-       <el-collapse-item title="聚信立分析报告" name="5" v-loading="loading">
+       <el-collapse-item title="聚信立分析报告" name="5" 
+       element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="loading">
             <template slot="title">
-               聚信立分析报告<span style="margin-left:20px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
+               聚信立分析报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
             </template>
             <div class="jxlreport" v-for="item in report" :key="item.token">
               <h4 style="text-align:center">报告基本信息</h4>
@@ -195,9 +198,7 @@
                  <el-col :span="12"><div class="blod">居住地址可通过地图定位技术精确定位到:{{home_addr.check_addr}}</div></el-col>
                  <el-col :span="12"><div class="blod">{{home_addr.check_ebusiness}}</div></el-col>
                   <el-col :span="24"><div class="blod tit">家庭电话：{{home_phone.key_value}}</div></el-col>
-                   <el-col :span="12"><div class="blod">{{home_phone.check_mobile}}</div></el-col>
-                   <!-- <el-col :span="24"><div class="blod tit">联系人：</div></el-col> -->
-                     <!-- <el-col :span="24"><div class="blod tit">京东商城：</div></el-col> -->
+                  <el-col :span="12"><div class="blod">{{home_phone.check_mobile}}</div></el-col>
               </el-row>
              </div>
 
@@ -271,7 +272,7 @@
          
          <el-collapse-item title="大圣报告" name="6">
             <template slot="title">
-               大圣报告<span style="margin-left:20px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
+               大圣报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
             </template>
               <myTable :columns="ds_reportColumns" :dataSource="ds_report" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
@@ -418,40 +419,43 @@ export default {
             this.loading = false;
           }
           if (colleName === "contactinfo") {
-            if (res.data[0]) {
-              localStorage.setItem("contactinSource", res.data[0].source);
+            if (res.data.data) {
+              localStorage.setItem("contactinSource", res.data.data[1].source);
               this.contactinSource = localStorage.getItem("contactinSource"); //来源
-              this.emergency = res.data[0].emergency; //紧急联系人
-              this.contact = res.data[0].contact; //联系人
+              this.emergency = res.data.data[0].emergency; //紧急联系人
+              console.log(this.emergency);
+              this.contact = res.data.data[0].contact; //联系人
             } else {
               this.emergency = [];
               this.contact = [];
             }
           } else if (colleName === "daihoubang") {
-            if (res.data[0]) {
-              this.daihoubang = res.data;
-              localStorage.setItem("daihoubangSource", res.data[0].source);
+            if (res.data.data[0]) {
+              this.daihoubang = res.data.data;
+              localStorage.setItem("daihoubangSource", res.data.data[0].source);
+              this.bindidCardTable = res.data.data[0].binding_idcards; //绑定身份证
+              this.bindMobileTable = res.data.data[0].binding_phones; //绑定号码
+              console.log(this.bindidCardTable);
               this.daihoubangSource = localStorage.getItem("daihoubangSource"); //来源
-              this.bindidCardTable = res.data[0].binding_idcards; //绑定身份证
-              this.bindMobileTable = res.data[0].binding_phones; //绑定号码
             } else {
               this.daihoubang = [{}];
             }
           } else if (colleName === "changdaike") {
-            if (res.data[0]) {
-              localStorage.setItem("changdaikeSource", res.data[0].source);
+            if (res.data.data) {
+              localStorage.setItem("changdaikeSource", res.data.data[1].source);
               this.changdaikeSource = localStorage.getItem("changdaikeSource"); //来源
-              this.changdaike = [res.data[0].content];
-              this.platformDetails = res.data[0].content.platformDetails; //常贷客平台详情
+              this.changdaike = [res.data.data[0].content.res];
+              this.platformDetails =
+                res.data.data[0].content.res.platformDetails; //常贷客平台详情
             } else {
               this.changdaike = [{}];
               this.platformDetails = [];
             }
           } else if (colleName === "juxinli_operator_report") {
             this.loading = false;
-            if (res.data[0]) {
-              let content = res.data[0].content;
-              localStorage.setItem("juxinliSource", res.data[0].source);
+            if (res.data.data[0]) {
+              let content = res.data.data[0].content;
+              localStorage.setItem("juxinliSource", res.data.data[0].source);
               this.juxinliSource = localStorage.getItem("juxinliSource"); //来源
               this.report = [content.report]; //报告基本信息
               this.home_phone = content.home_phone.check_points; //用户申请表检测home_phone
@@ -524,12 +528,40 @@ export default {
 </script>
 
 <style scoped>
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
+}
+.table >>> .box-card2 {
+  background-color: #041334 !important;
+  border: 1px solid #0c234c !important;
+}
+.table >>> .el-card {
+  background-color: #080920;
+  border: none;
+}
+.table >>> .el-collapse-item__header {
+  background-color: #041334;
+  color: aqua;
+  border: none;
+}
+.table >>> .el-collapse {
+  border: none;
+}
+.table >>> .el-collapse-item__wrap {
+  background-color: #041334;
+  border: none;
+}
+.table >>> .el-collapse-item__content {
+  color: #7ecbe0;
+  border: none;
+}
 .box {
   width: auto;
   height: auto;
-  border: 1px solid #dddddd;
+  /* border: 1px solid #dddddd; */
   margin: 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
   box-sizing: border-box;
   margin-bottom: 30px;
 }
@@ -538,7 +570,7 @@ export default {
   padding-bottom: 20px;
 }
 .jxlreport {
-  border: 1px solid#dddddd;
+  /* border: 1px solid#dddddd; */
   margin-bottom: 10px;
 }
 .tit {

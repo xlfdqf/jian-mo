@@ -10,15 +10,6 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    // proxyTable: {
-    //   '/api': {
-    //     target: 'http://10.10.2.8:8080',
-    //     changeOrigin: true,
-    //     pathRewrite: {
-    //       '^/api': ''
-    //     }
-    //   }
-    // },
     proxyTable: {
       '/api': {
         // target: 'http://10.10.2.8:8080/',
@@ -27,6 +18,13 @@ module.exports = {
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
+        }
+      },
+      '/api2': {
+        target: 'http://10.10.1.168:8080',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/api2': ''
         }
       }
     },

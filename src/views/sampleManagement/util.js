@@ -129,19 +129,19 @@ export const platformDetailsColumns = [
     {
         prop: "platformNo",
         label: "平台序号",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "phoneTime",
         label: "手机出现日期",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "idCardTime",
         label: "证件出现日期",
-        width: 150,
+        // width: 150,
         isShow: true
     }
 ]
@@ -220,43 +220,43 @@ export const bindMobileColumns = [
     {
         prop: "last_appear_phone",
         label: "手机号最近出现时间",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "phone_province",
         label: "手机归属地省份",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "phone_operator",
         label: "手机运营商",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "other_names_cnt",
         label: "此号码绑定其他姓名个数",
-        width: 200,
+        // width: 200,
         isShow: true
     },
     {
         prop: "search_orgs_cnt",
         label: "查询此手机号的机构数",
-        width: 180,
+        // width: 180,
         isShow: true
     },
     {
         prop: "phone_city",
         label: "手机归属地城市",
-        width: 150,
+        // width: 150,
         isShow: true
     },
     {
         prop: "other_phone",
         label: "绑定其他手机号码",
-        width: 150,
+        // width: 150,
         isShow: true
     }
 ]

@@ -105,7 +105,7 @@ export default {
       chartLoading: false,
       dataEmpty: false, //暂无数据
       activeName: "1",
-      tableTotal: 100,
+      tableTotal: 0,
       chartTotal: 100,
       currentPage: 1,
       tab: "",
@@ -201,7 +201,9 @@ export default {
           { name: "籍贯省", b: "安徽", c: 26 }
         ];
         this.chartData = this.filterData(data, dataType);
-        console.log(this.chartData);
+        // console.log(this.chartData);
+      } else {
+        // this.queryTable();
       }
     },
     // 查询报表
@@ -211,7 +213,7 @@ export default {
       // getFeatureBox(params)
       //   .then(res => {
       //     this.tableLoading = false;
-      //     this.total = res.total;
+      //     this.tableTotal = res.total;
       //     this.dataSource = res.data;
       //   })
       //   .catch(error => {

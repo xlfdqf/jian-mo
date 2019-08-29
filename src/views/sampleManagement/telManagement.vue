@@ -14,7 +14,7 @@
         </el-form-item>
       </el-form>
      </el-card>
-   <el-card>
+   <el-card class="box-card2">
      <!-- 表格 -->
      <myTable :columns="columns" :dataSource="dataSource" :hasIndex="true" :hasSelection="false" :hasPagination="true"
        @handleSelectionChange="handleSelectionChange" :loading="loading"
@@ -119,33 +119,18 @@ export default {
 };
 </script>
 <style scoped>
-/* .box-card {
-  background-image: url("../../assets/images/home/topBg.png");
-  background-size: cover;
-}
-.table >>> .el-card {
-  background-color: #080920;
-  border: none;
-} */
 .box-card {
   background-image: url("../../assets/images/home/topBg.png");
   background-size: cover;
 }
 .table >>> .box-card2 {
-  background-color: #041434;
+  background-color: #091938 !important;
 }
 .table >>> .el-card {
   background-color: #080920;
   border: none;
 }
-.table >>> .el-input__inner {
-  background-color: #081d49;
-  border: 1px solid #27a2c6;
-  color: aqua;
-}
-.table >>> .el-form-item__label {
-  color: #27a2c6;
-}
+
 .search {
   position: relative;
 }
@@ -156,6 +141,9 @@ export default {
   position: absolute;
   top: -4px;
   left: 20px;
-  color: #27a2c6;
+  color: #7ecbe0;
+}
+.el-button--text {
+  color: #7ecbe0;
 }
 </style>

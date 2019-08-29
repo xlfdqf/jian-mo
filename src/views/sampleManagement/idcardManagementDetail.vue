@@ -33,7 +33,7 @@
 
           <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
-               通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="contactinSource">来源：{{contactinSource}}</span>
+               通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;margin-left:20px" v-if="contactinSource">来源：{{contactinSource}}</span>
             </template>
             <div>
               <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
@@ -164,7 +164,8 @@
             </el-row>
        </el-collapse-item>
 
-       <el-collapse-item title="聚信立分析报告" name="5" v-loading="loading">
+       <el-collapse-item title="聚信立分析报告" name="5"  element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="loading">
             <template slot="title">
                聚信立分析报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
             </template>

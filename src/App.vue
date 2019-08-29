@@ -153,7 +153,9 @@ html {
 .el-table__empty-block {
   background-color: #091938;
 }
-
+.el-table--enable-row-hover .el-table__body tr:hover > td {
+  background-color: #102347 !important;
+}
 /* tabs标签 */
 .el-tabs--border-card {
   border: none;

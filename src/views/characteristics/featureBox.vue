@@ -17,7 +17,7 @@
         <el-tab-pane label="报表" name="1">
           <!-- :height="height" -->
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
@@ -132,15 +132,7 @@ export default {
         }
       ],
       // 表格所需数据格式
-      dataSource: [
-        { a: "年龄", b: ["0-10", "10-19", "20-29"], c: [0.5, 0.32, 0.4] },
-        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
-        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] },
-        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
-        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] },
-        { a: "籍贯", b: ["北京", "上海", "浙江"], c: [0.5, 0.32, 0.4] },
-        { a: "星座", b: ["巨蟹", "双子", "天蝎"], c: [0.5, 0.32, 0.4] }
-      ],
+      dataSource: [],
       // echart所需数据格式
       chartData: [
         // {
@@ -162,71 +154,38 @@ export default {
     };
   },
   mounted() {
-    // this.queryTable();
-    const data = [
-      {
-        id: 1,
-        featureField: "年龄",
-        binSplit: "0-18",
-        iv: 0.5
-      },
-      {
-        id: 2,
-        featureField: "星座",
-        binSplit: "射手座",
-        iv: 0.3
-      },
-      {
-        id: 3,
-        featureField: "籍贯",
-        binSplit: "浙江",
-        iv: 0.2
-      },
-      {
-        id: 4,
-        featureField: "芝麻分",
-        binSplit: "芝麻分",
-        iv: 0.2
-      },
-      {
-        id: 5,
-        featureField: "年龄",
-        binSplit: "20-32",
-        iv: 0.5
-      },
-      {
-        id: 6,
-        featureField: "星座",
-        binSplit: "巨蟹",
-        iv: 0.5
-      }
-    ];
-    const filterTable = this.filterTable(data, dataType);
-    this.dataSource = filterTable;
+    this.queryTable();
+    // const data = [
+    //   {
+    //     featureField: "年龄",
+    //     group_concat_bin_split: "0-18,20-31",
+    //     group_concat_iv: "0.333,0.65"
+    //   },
+    //   {
+    //     featureField: "芝麻分",
+    //     binSplit: "0-100",
+    //     iv: "0.3"
+    //   },
+    //   {
+    //     featureField: "星座",
+    //     binSplit: "巨蟹,天蝎",
+    //     iv: "0.3,0.5"
+    //   }
+    // ];
+    // this.dataSource = this.filterTable(data);
   },
 
   methods: {
     //过滤报表数据
-    filterTable(data, featureType) {
-      // console.log(data, dataType);
-      const type = featureType.map(({ featurename, value }) => {
+    filterTable(data) {
+      const result = data.map(item => {
         return {
-          a: value,
-          b: [],
-          c: []
+          a: item["featureField"],
+          b: item.group_concat_bin_split.split(","),
+          c: item.group_concat_iv.split(",")
         };
       });
-      data.forEach(item => {
-        type.forEach(t => {
-          if (item["featureField"] === t["a"]) {
-            t.b.push(item["binSplit"]);
-            t.c.push(item["iv"]);
-          }
-        });
-      });
-
-      console.log(type);
-      return type;
+      return result;
     },
     // 过滤图表数据
     filterData(data, dataType) {
@@ -244,7 +203,6 @@ export default {
           }
         });
       });
-      // console.log(types);
       return types;
     },
     // 切换tab
@@ -262,19 +220,17 @@ export default {
         this.chartData = this.filterData(data, dataType);
         // console.log(this.chartData);
       } else {
-        // this.queryTable();
+        this.queryTable();
       }
     },
     // 查询报表
     queryTable() {
       this.tableLoading = true;
-      // let params = { pageIndex: 1, pageSize: 10 };
       getFeatureBox()
         .then(res => {
           this.tableLoading = false;
-          console.log(res);
           // this.tableTotal = res.total;
-          // this.dataSource = res.data;
+          this.dataSource = this.filterTable(res.data);
         })
         .catch(error => {
           console.log(error);

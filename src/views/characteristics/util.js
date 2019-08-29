@@ -22,9 +22,6 @@ export const featureType = [
     }, {
         featurename: 'constellation',
         value: "星座",
-    }, {
-        featurename: 'jiguan',
-        value: "籍贯",
     }]
 // 特征字段
 export const dataType = [
@@ -52,10 +49,10 @@ export const dataType = [
     //     featurename: 'province',
     //     value: "户籍省",
     // },
-    // {
-    //     featurename: 'native_province',
-    //     value: "籍贯省",
-    // },
+    {
+        featurename: 'native_province',
+        value: "籍贯省",
+    },
     // {
     //     featurename: 'sex',
     //     value: "性别",

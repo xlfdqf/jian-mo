@@ -16,7 +16,7 @@
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1">
           <!-- :height="height" -->
-             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
+             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
@@ -77,6 +77,8 @@ export default {
       },
       xAxis: {
         axisLabel: {
+          interval: 0,
+          rotate: 40, //x轴标题倾斜
           textStyle: {
             color: "rgb(126, 203, 224)"
           }
@@ -102,7 +104,7 @@ export default {
     };
     return {
       orgOptions: {},
-      // height: 200,
+      height: 650,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据
@@ -170,10 +172,11 @@ export default {
         };
       });
       data.forEach(item => {
+        // console.log(item);
         types.forEach(t => {
-          if (item["featureField"] === t["name"]) {
-            t.rows.push({ bucket: item.bucket, iv: item.iv });
-          }
+          // if (item["featureField"] === t["name"]) {
+          //   t.rows.push({ bucket: item.bucket, iv: item.iv });
+          // }
         });
       });
       return types;
@@ -208,6 +211,7 @@ export default {
           this.chartLoading = false;
           if (res.data) {
             this.chartData = this.filterData(res.data, dataType);
+            // console.log(this.chartData);
           } else {
             this.dataEmpty = true;
           }

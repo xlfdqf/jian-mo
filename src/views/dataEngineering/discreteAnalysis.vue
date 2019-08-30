@@ -117,7 +117,7 @@ export default {
   },
   mounted() {
     // console.log(tabType(1));
-    // this.query();
+    this.query();
     this.initEchart();
   },
   methods: {
@@ -129,16 +129,16 @@ export default {
     // 查询列表
     query() {
       this.tableLoading = true;
-      let params = { pageIndex: 1, pageSize: 10 };
-      // getDiscreteAnalysis(params)
-      //   .then(res => {
-      //     this.tableLoading = false;
-      //     this.total = res.total;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      getDiscreteAnalysis()
+        .then(res => {
+          console.log("数据：", res);
+          // this.tableLoading = false;
+          // this.total = res.total;
+          // this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
@@ -196,10 +196,11 @@ export default {
             type: "shadow"
           }
         },
+        //grid可以调整x，y轴的字与Zoom控件之间的间隔
         grid: {
           left: "10%",
           right: "10%",
-          bottom: "15%"
+          bottom: "20%"
         },
         xAxis: {
           type: "category",

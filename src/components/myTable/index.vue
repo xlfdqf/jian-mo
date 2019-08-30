@@ -3,7 +3,7 @@
     element-loading-spinner="el-icon-loading"
     element-loading-background="rgba(9, 25, 56, 0.8)">
   <el-table ref="multipleTable" :data="dataSource" @selection-change="handleSelectionChange" border highlight-current-row
-    :height="height" :header-cell-style="{background:'#F5F7FA'}" >
+    :height="height" :header-cell-style="{background:'#F5F7FA'}" stripe>
     <!--多选框-->
       <el-table-column  align="center" v-if="hasSelection" type="selection" width="55"></el-table-column>
       <!--数据源-->

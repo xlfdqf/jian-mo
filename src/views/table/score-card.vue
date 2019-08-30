@@ -193,7 +193,7 @@ export default {
           classification: "基本信息",
           featureName: "年龄",
           featureBox: ["0--18", "18--36", "36--60", "60--80"],
-          overdueBoxRate: [0.11, 0.23, 0.98, 1.23],
+          overdueBoxRate: [0.11],
           featureIV: [0.11, 0.23, 0.98, 1.23],
           boxIV: [0.11, 0.23, 0.98, 1.23],
           transferFactor: "无",

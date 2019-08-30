@@ -111,20 +111,17 @@ html {
 .el-pager li {
   background-color: #091938;
 }
+/* 表格样式 */
+.el-table {
+  border: none;
+  color: #7ecbe0;
+}
 .el-table::before {
   background-color: #091938;
 }
 .el-table--border::after,
 .el-table--group::after {
   background-color: #091938;
-}
-/* #app .sidebar-container .nest-menu .el-submenu > .el-submenu__title:focus,
-#app .sidebar-container .el-submenu .el-menu-item:focus {
-  background-color: #0e3659 !important;
-} */
-.el-table {
-  border: none;
-  color: #7ecbe0;
 }
 .el-table td,
 .el-table th.is-leaf {
@@ -140,7 +137,6 @@ html {
   background-color: #091938 !important;
 }
 .el-input__inner {
-  /* background-color: #081d49; */
   background-color: #061a41;
   border: 1px solid #165677;
   color: #41bde0;
@@ -163,6 +159,9 @@ html {
 }
 .el-table--enable-row-hover .el-table__body tr:hover > td {
   background-color: #102347 !important;
+}
+.el-table--striped .el-table__body tr.el-table__row--striped td {
+  background: #122345 !important;
 }
 /* tabs标签 */
 .el-tabs--border-card {
@@ -191,10 +190,14 @@ html {
 .el-menu-item.is-active {
   background-color: #0c2a4d !important;
 }
-
 .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active,
 .el-tabs--border-card > .el-tabs__header,
 .el-tabs--border-card > .el-tabs__header .el-tabs__item {
   border: none;
+}
+
+.el-table td,
+.el-table th {
+  vertical-align: top;
 }
 </style>

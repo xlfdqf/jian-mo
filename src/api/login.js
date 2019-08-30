@@ -40,9 +40,9 @@ export function getNewsDetail(params) {
 export function getFeatureSource(params) {
   // return post(`${api}/dsai/detail`, params);
 }
-// 特征离散分析
+// 特征离散分析表格
 export function getDiscreteAnalysis(params) {
-  // return post(`${api}/dsai/detail`, params);
+  return get(`${api}/aidiscrete`, params);
 }
 // 特征分箱报表
 export function getFeatureBox(params) {

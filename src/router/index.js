@@ -192,57 +192,57 @@ export const constantRouterMap = [
       //   meta: { title: 'testChart' }
       // }
     ]
-  }
+  },
   // 表格
-  // {
-  //   path: '/table',
-  //   component: Layout,
-  //   redirect: '/table/complex-table',
-  //   name: 'table',
-  //   meta: {
-  //     title: 'Table',
-  //     icon: 'table'
-  //   },
-  //   children: [
-  //     {
-  //       path: 'TestTable',
-  //       name: 'TestTable',
-  //       component: () => import('@/views/table/test-table'),
-  //       meta: { title: 'testTable' }
-  //     },
-  //     {
-  //       path: 'TestTableDeatil', // 封装表格详情页
-  //       name: 'TestTableDeatil',
-  //       component: () => import('@/views/table/test-table-detail'),
-  //       meta: { title: 'testTableDetail' },
-  //       hidden: true
-  //     },
-  //     {
-  //       path: 'complex-table',
-  //       name: 'complex-table',
-  //       component: () => import('@/views/table/complex-table'),
-  //       meta: { title: 'complexTable' }
-  //     },
-  //     {
-  //       path: 'fraud-judge',
-  //       name: 'fraud-judge',
-  //       component: () => import('@/views/table/fraud-judge'),
-  //       meta: { title: 'fraudJudge' }
-  //     },
-  //     {
-  //       path: 'transfer-matrix',
-  //       name: 'transfer-matrix',
-  //       component: () => import('@/views/table/transfer-matrix'),
-  //       meta: { title: 'transferMatrix' }
-  //     },
-  //     {
-  //       path: 'score-card',
-  //       name: 'score-card',
-  //       component: () => import('@/views/table/score-card'),
-  //       meta: { title: 'scoreCard' }
-  //     },
-  //   ]
-  // },
+  {
+    path: '/table',
+    component: Layout,
+    redirect: '/table/complex-table',
+    name: 'table',
+    meta: {
+      title: 'Table',
+      icon: 'table'
+    },
+    children: [
+      {
+        path: 'TestTable',
+        name: 'TestTable',
+        component: () => import('@/views/table/test-table'),
+        meta: { title: 'testTable' }
+      },
+      {
+        path: 'TestTableDeatil', // 封装表格详情页
+        name: 'TestTableDeatil',
+        component: () => import('@/views/table/test-table-detail'),
+        meta: { title: 'testTableDetail' },
+        hidden: true
+      },
+      {
+        path: 'complex-table',
+        name: 'complex-table',
+        component: () => import('@/views/table/complex-table'),
+        meta: { title: 'complexTable' }
+      },
+      {
+        path: 'fraud-judge',
+        name: 'fraud-judge',
+        component: () => import('@/views/table/fraud-judge'),
+        meta: { title: 'fraudJudge' }
+      },
+      {
+        path: 'transfer-matrix',
+        name: 'transfer-matrix',
+        component: () => import('@/views/table/transfer-matrix'),
+        meta: { title: 'transferMatrix' }
+      },
+      {
+        path: 'score-card',
+        name: 'score-card',
+        component: () => import('@/views/table/score-card'),
+        meta: { title: 'scoreCard' }
+      },
+    ]
+  },
 ]
 
 //实例化vue的时候只挂载constantRouter

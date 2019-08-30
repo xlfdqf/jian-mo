@@ -22,7 +22,8 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">  <!-- 需分页 -->
-           <div v-loading="chartLoading">
+           <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)">
              <el-row>
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>

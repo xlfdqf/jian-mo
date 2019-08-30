@@ -173,7 +173,7 @@ html {
   color: #7ecbe0;
 }
 .el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active {
-  background-color: #091938;
+  background-color: #0c2a4d;
   color: #00ffff;
 }
 .el-tabs--border-card > .el-tabs__header .el-tabs__item {
@@ -190,5 +190,11 @@ html {
 }
 .el-menu-item.is-active {
   background-color: #0c2a4d !important;
+}
+
+.el-tabs--border-card > .el-tabs__header .el-tabs__item.is-active,
+.el-tabs--border-card > .el-tabs__header,
+.el-tabs--border-card > .el-tabs__header .el-tabs__item {
+  border: none;
 }
 </style>

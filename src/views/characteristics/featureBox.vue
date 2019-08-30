@@ -50,7 +50,7 @@
 <script>
 import myTable from "@/components/myTable";
 import { getFeatureBox } from "@/api/login.js";
-import { tabType, dataType, featureType } from "./util.js";
+import { tabType, dataType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
@@ -106,26 +106,26 @@ export default {
       testForm: { featureField: "" },
       columns: [
         {
-          prop: "a",
+          prop: "featureField",
           label: "特征字段",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "group_concat_bin_split",
           label: "特征分箱结果",
           isShow: true,
           render: function(v, param) {
-            return param.row.b.map(item => {
+            return param.row.group_concat_bin_split.map(item => {
               return <div>{item}</div>;
             });
           }
         },
         {
-          prop: "c",
+          prop: "group_concat_iv",
           label: "每箱iv值",
           isShow: true,
           render: function(v, param) {
-            return param.row.c.map(item => {
+            return param.row.group_concat_iv.map(item => {
               return <div>{item}</div>;
             });
           }
@@ -135,60 +135,42 @@ export default {
       dataSource: [],
       // echart所需数据格式
       chartData: [
-        // {
-        //   name: "年龄",
-        //   columns: ["b", "c"],
-        //   rows: [{ b: "0-10岁", c: 10 }, { b: "11-20岁", c: 10 }]
-        // },
-        // {
-        //   name: "籍贯省",
-        //   columns: ["b", "c"],
-        //   rows: [{ b: "上海", c: 5 }, { b: "安徽", c: 10 }]
-        // },
-        // {
-        //   name: "星座",
-        //   columns: ["b", "c"],
-        //   rows: [{ b: "巨蟹", c: 5 }, { b: "天蝎", c: 10 }]
-        // }
+        {
+          name: "年龄",
+          columns: ["b", "c"],
+          rows: [{ b: "0-10岁", c: 10 }, { b: "11-20岁", c: 10 }]
+        },
+        {
+          name: "籍贯省",
+          columns: ["b", "c"],
+          rows: [{ b: "上海", c: 5 }, { b: "安徽", c: 10 }]
+        },
+        {
+          name: "星座",
+          columns: ["b", "c"],
+          rows: [{ b: "巨蟹", c: 5 }, { b: "天蝎", c: 10 }]
+        }
       ]
     };
   },
   mounted() {
     this.queryTable();
-    // const data = [
-    //   {
-    //     featureField: "年龄",
-    //     group_concat_bin_split: "0-18,20-31",
-    //     group_concat_iv: "0.333,0.65"
-    //   },
-    //   {
-    //     featureField: "芝麻分",
-    //     binSplit: "0-100",
-    //     iv: "0.3"
-    //   },
-    //   {
-    //     featureField: "星座",
-    //     binSplit: "巨蟹,天蝎",
-    //     iv: "0.3,0.5"
-    //   }
-    // ];
-    // this.dataSource = this.filterTable(data);
   },
-
   methods: {
     //过滤报表数据
     filterTable(data) {
       const result = data.map(item => {
         return {
-          a: item["featureField"],
-          b: item.group_concat_bin_split.split(","),
-          c: item.group_concat_iv.split(",")
+          featureField: item["featureField"],
+          group_concat_bin_split: item.group_concat_bin_split.split(","),
+          group_concat_iv: item.group_concat_iv.split(",")
         };
       });
       return result;
     },
     // 过滤图表数据
     filterData(data, dataType) {
+      console.log(data, dataType);
       let types = dataType.map(({ featurename, value }) => {
         return {
           name: value,
@@ -196,29 +178,28 @@ export default {
           rows: []
         };
       });
-      data.forEach(item => {
-        types.forEach(t => {
-          if (item["name"] === t["name"]) {
-            t.rows.push({ b: item.b, c: item.c });
-          }
-        });
-      });
-      return types;
+      // data.forEach(item => {
+      //   types.forEach(t => {
+      //     if (item["name"] === t["name"]) {
+      //       t.rows.push({ b: item.b, c: item.c });
+      //     }
+      //   });
+      // });
+      // return types;
     },
     // 切换tab
     handleClick(tab) {
       this.tab = tabType(tab.name);
       if (this.tab === "chart") {
-        let data = [
-          { name: "年龄", b: "0-10岁", c: 12 },
-          { name: "年龄", b: "11-20岁", c: 23 },
-          { name: "星座", b: "巨蟹", c: 54 },
-          { name: "星座", b: "天蝎", c: 26 },
-          { name: "籍贯省", b: "北京", c: 54 },
-          { name: "籍贯省", b: "安徽", c: 26 }
-        ];
-        this.chartData = this.filterData(data, dataType);
-        // console.log(this.chartData);
+        // let data = [
+        //   { name: "年龄", b: "0-10岁", c: 12 },
+        //   { name: "年龄", b: "11-20岁", c: 23 },
+        //   { name: "星座", b: "巨蟹", c: 54 },
+        //   { name: "星座", b: "天蝎", c: 26 },
+        //   { name: "籍贯省", b: "北京", c: 54 },
+        //   { name: "籍贯省", b: "安徽", c: 26 }
+        // ];
+        this.queryEcharts();
       } else {
         this.queryTable();
       }
@@ -238,15 +219,15 @@ export default {
     },
     //查询分箱图表
     queryEcharts() {
-      // this.chartLoading = true;
-      // getFeatureBoxChart(params)
-      //   .then(res => {
-      // this.chartLoading = false;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.chartLoading = true;
+      getFeatureBox()
+        .then(res => {
+          this.chartLoading = false;
+          this.chartData = this.filterData(res.data, dataType);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 表格页码切换
     pageChange(page) {
@@ -306,13 +287,14 @@ export default {
 }
 .search {
   position: relative;
+  padding-top: 5px;
 }
 .search:hover {
   cursor: pointer;
 }
 .searchBtn {
   position: absolute;
-  top: -4px;
+  top: 0px;
   left: 20px;
   color: #7ecbe0;
 }

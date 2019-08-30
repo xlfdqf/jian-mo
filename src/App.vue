@@ -140,9 +140,17 @@ html {
   background-color: #091938 !important;
 }
 .el-input__inner {
-  background-color: #081d49;
-  border: 1px solid #7ecbe0;
-  color: aqua;
+  /* background-color: #081d49; */
+  background-color: #061a41;
+  border: 1px solid #165677;
+  color: #41bde0;
+}
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus {
+  border-color: #41bde0;
+}
+.el-input__inner:hover {
+  border-color: #41bde0;
 }
 .el-form-item__label {
   color: #7ecbe0;
@@ -175,5 +183,12 @@ html {
   > .el-tabs__header
   .el-tabs__item:not(.is-disabled):hover {
   color: #00ffff;
+}
+
+.el-card__body {
+  padding-bottom: 0px;
+}
+.el-menu-item.is-active {
+  background-color: #0c2a4d !important;
 }
 </style>

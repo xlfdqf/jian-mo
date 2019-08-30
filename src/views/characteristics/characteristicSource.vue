@@ -115,13 +115,14 @@ export default {
 }
 .search {
   position: relative;
+  padding-top: 5px;
 }
 .search:hover {
   cursor: pointer;
 }
 .searchBtn {
   position: absolute;
-  top: -4px;
+  top: 0px;
   left: 20px;
   color: #7ecbe0;
 }

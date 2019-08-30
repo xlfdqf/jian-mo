@@ -173,6 +173,11 @@ export default {
       //     console.log(error);
       //   });
       echart.setOption({
+        dataZoom: [
+          {
+            xAxisData: [0]
+          }
+        ],
         title: [
           {
             text: "箱线图",
@@ -248,7 +253,12 @@ export default {
           {
             name: "outlier",
             type: "scatter",
-            data: this.outliers // 异常值数据
+            data: this.outliers, // 异常值数据
+            tooltip: {
+              formatter: function(param) {
+                return ["异常值 :" + param.data[1]].join("<br/>");
+              }
+            }
           }
         ]
       });

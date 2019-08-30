@@ -153,102 +153,95 @@ export const dataType = [
         featurename: 'lastamonthphoneapplicationtimerange',
         value: "手机1个月内查询平台数",
     },
-    //从这开始
     {
         featurename: 'lastamonthphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机1个月内查询次数级别",
     }, {
         featurename: 'lastfifteendayidcardapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "证件15天内查询平台数",
     },
     {
         featurename: 'lastfifteendayidcardapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "证件15天内查询次数级别",
     }, {
         featurename: 'lastfifteendayphoneapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "手机15天内查询平台数",
     }, {
         featurename: 'lastfifteendayphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机15天内查询次数级别",
     }, {
         featurename: 'lastsevendayidcardapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "证件7天内查询次数级别",
     }, {
         featurename: 'lastsevendayphoneapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "手机7天内查询平台数",
     },
     {
         featurename: 'lastsevendayphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机7天内查询次数级别",
     }, {
         featurename: 'lastthreedayidcardapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "证件3天内查平台数",
     }, {
         featurename: 'lastthreedayidcardapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "证件3天内查询次数级别",
     }, {
         featurename: 'lastthreedayphoneapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "手机3天内查询1平台数",
     }, {
         featurename: 'lastthreedayphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机3天内查询次数级别",
     }, {
         featurename: 'lastthreemonthidcardapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "证件3个月内查询平台数",
     }, {
         featurename: 'lastthreemonthidcardapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "证件3个月内平台数",
     },
     {
         featurename: 'lastthreemonthphoneapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "手机3个月内查询平台数",
     }, {
         featurename: 'lastthreemonthphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机3个月内查询次数级别",
     },
     {
         featurename: 'lasttwomonthidcardapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "证件2个月内查询平台数",
     }, {
         featurename: 'lasttwomonthidcardapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "证件2个月内查询次数级别",
     },
     {
         featurename: 'lasttwomonthphoneapplicationtimerange',
-        value: "手机1个月内查询平台数",
+        value: "手机2个月内查询平台数",
     }, {
         featurename: 'lasttwomonthphoneapplicationtimetype',
-        value: "手机1个月内查询平台数",
+        value: "手机2个月内查询次数级别",
     }, {
         featurename: 'marital_status',
-        value: "手机1个月内查询平台数",
+        value: "婚姻状况",
     }, {
         featurename: 'minutes',
-        value: "手机1个月内查询平台数",
+        value: "家庭电话通话时长",
     }, {
         featurename: 'namestatus',
-        value: "手机1个月内查询平台数",
+        value: "与运营商提供的姓名是否匹配",
     }, {
         featurename: 'offline_cash_loan_cnt',
-        value: "手机1个月内查询平台数",
+        value: "线下现金贷出现次数",
     }, {
         featurename: 'offline_installment_cnt',
-        value: "手机1个月内查询平台数",
+        value: "线下消费分期出现次数",
     }, {
         featurename: 'online_cash_loan_cnt',
-        value: "手机1个月内查询平台数",
+        value: "线上现金贷出现次数",
     }, {
         featurename: 'online_installment_cnt',
-        value: "手机1个月内查询平台数",
+        value: "线上消费分期出现次数",
     }, {
         featurename: 'org_cnt',
-        value: "手机1个月内查询平台数",
-    }, {
-        featurename: '',
-        value: "手机1个月内查询平台数",
-    }, {
-        featurename: '',
-        value: "手机1个月内查询平台数",
+        value: "历史查询总机构数",
     },
 
 

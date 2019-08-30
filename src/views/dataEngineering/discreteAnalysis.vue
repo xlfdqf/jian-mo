@@ -103,7 +103,7 @@ export default {
       ],
       //异常值数据
       outliers: [
-        [0, 650], // 0代表第几个字段
+        [0, 650, 620, 500], // 0代表第几个字段
         [1, 620],
         [2, 720],
         [3, 720],
@@ -114,6 +114,7 @@ export default {
   },
   mounted() {
     this.query();
+    this.initEchart();
   },
   methods: {
     // 切换tab
@@ -157,8 +158,20 @@ export default {
       const xAxisData = data.map(item => {
         return item.featureField;
       });
-      // console.log("xAxisData:", xAxisData);
-      return { chartData, xAxisData };
+      // console.log(data);
+      //未完成
+      const outliers = data.map((item, i) => {
+        const qutlierList = JSON.parse(item.qutlierList);
+        return qutlierList.map(q => {
+          console.log(i, q);
+          // q.map(qdata => {
+          //   console.log(qdata);
+          // });
+          return i, q;
+        });
+      });
+      // console.log("outliers:", outliers);
+      // return { chartData, xAxisData };
     },
     // 查询列表
     query() {

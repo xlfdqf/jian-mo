@@ -46,11 +46,11 @@ export function getDiscreteAnalysis(params) {
 }
 // 特征分箱报表
 export function getFeatureBox(params) {
-  return get(`${api}/aibin/getAiList`, params);
+  return post(`${api}/aibin/getAiList`, params);
 }
 //特征分箱图表
 export function getFeatureBoxChart(params) {
-  return get(`${api}/aibin/getCountList`, params);
+  return get(`${api}/aibin/page`, params);
 }
 // 特征IV值
 export function getIVvalue(params) {

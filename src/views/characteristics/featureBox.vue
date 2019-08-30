@@ -17,7 +17,7 @@
         <el-tab-pane label="报表" name="1">
           <!-- :height="height" -->
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
-              :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
@@ -193,11 +193,16 @@ export default {
     // 查询报表
     queryTable() {
       this.tableLoading = true;
-      getFeatureBox()
+      let params = {
+        current: 1,
+        size: 10
+      };
+      getFeatureBox(params)
         .then(res => {
+          console.log(res);
           this.tableLoading = false;
-          // this.tableTotal = res.total;
-          this.dataSource = this.filterTable(res.data);
+          this.tableTotal = res.total;
+          this.dataSource = this.filterTable(res.records);
         })
         .catch(error => {
           console.log(error);
@@ -209,12 +214,7 @@ export default {
       getFeatureBoxChart()
         .then(res => {
           this.chartLoading = false;
-          if (res.data) {
-            this.chartData = this.filterData(res.data, dataType);
-            // console.log(this.chartData);
-          } else {
-            this.dataEmpty = true;
-          }
+          this.chartData = this.filterData(res.records, dataType);
           // console.log(this.chartData);
         })
         .catch(error => {
@@ -223,15 +223,16 @@ export default {
     },
     // 表格页码切换
     pageChange(page) {
-      console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getFeatureBox(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      let params = { current: page.currentPage, size: page.pageSize };
+      getFeatureBox(params)
+        .then(res => {
+          this.tableLoading = false;
+          this.tableTotal = res.total;
+          this.dataSource = this.filterTable(res.records);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 图表分页
     handleCurrentChange(e) {

@@ -2,22 +2,21 @@
 <template>
     <div class="table">
      <!-- 表单 -->
-      <el-card class="box-card" style="margin-bottom:20px">
+      <!-- <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
             <el-form-item label="特征字段:" prop="featureField">
               <el-input v-model="testForm.featureField"></el-input>
             </el-form-item>
             <el-form-item>
-              <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
               <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
-      </el-card>
+      </el-card> -->
 
       <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
-              :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="tableTotal" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
@@ -41,7 +40,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 650,
+      height: 750,
       tableLoading: false,
       chartLoading: false,
       activeName: "1",
@@ -107,9 +106,6 @@ export default {
       outliers: [
         // [0, 650, 620, 500], // 0代表第几个字段
         // [1, 620],
-        // [2, 720],
-        // [3, 720],
-        // [4, 950]
       ],
       xAxisData: []
     };
@@ -133,7 +129,6 @@ export default {
       const result = data.map(item => {
         return {
           featureField: item.name, //特征字段
-          // feature_name:item["featureField"],//中文
           featureFieldTotal: item.featureFieldTotal, //特征样本个数
           missingTotal: item.missingTotal, //特征样本缺失个数
           mode: item.mode, //众数
@@ -143,7 +138,6 @@ export default {
           edgeLow: item.edgeLow //最小值
         };
       });
-      // console.log(result);
       return result;
     },
     // 过滤图表数据
@@ -160,15 +154,12 @@ export default {
       const xAxisData = data.map(item => {
         return item.name;
       });
-      // console.log(data);
-      //未完成
       const outliers = data.map((item, i) => {
         const qutlierList = JSON.parse(item.qutlierList);
         return qutlierList.map(q => {
           return [i, q];
         });
       });
-      // console.log("outliers:", outliers);
       return { chartData, xAxisData, outliers };
     },
     // 查询列表
@@ -182,33 +173,15 @@ export default {
         .then(res => {
           this.tableLoading = false;
           this.dataSource = this.filterTable(res.data.records);
-          // console.log("数据：", res.data.records);
         })
         .catch(error => {
           console.log(error);
         });
     },
-    // 页码切换
-    pageChange(page) {
-      console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getDiscreteAnalysis(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-    },
-    // 搜索
-    onSubmit(testForm) {
-      // console.log(testForm);
-    },
     // 初始化相信图
     initEchart() {
       this.chartLoading = true;
-      let xAxisData = this.getXAxisData(this.chartDataOne.length);
-
+      // let xAxisData = this.getXAxisData(this.chartDataOne.length);
       let chart2 = this.$refs.chart2;
       let echart = echarts.init(chart2);
       // 获取箱线图数据
@@ -219,8 +192,8 @@ export default {
       getDiscreteAnalysis(params)
         .then(res => {
           this.chartLoading = false;
-          this.chartDataOne = this.filterData(res.data.records).chartData;
-          this.xAxisData = this.filterData(res.data.records).xAxisData;
+          this.chartDataOne = this.filterData(res.data.records).chartData; //数据
+          this.xAxisData = this.filterData(res.data.records).xAxisData; //x轴标题
           const outliers = this.filterData(res.data.records).outliers;
           const data = [];
           outliers.forEach(item => {
@@ -228,8 +201,7 @@ export default {
               data.push(i);
             });
           });
-          console.log("异常值：", data);
-          this.outliers = data;
+          this.outliers = data; //异常值
         })
         .catch(error => {
           console.log(error);
@@ -325,18 +297,6 @@ export default {
           }
         ]
       });
-      //根据窗口的大小变动图表 --- 重点
-      // window.onresize = function() {
-      //   echart.resize();
-      // };
-    },
-    // 获取x轴标题
-    getXAxisData(length) {
-      let xAxisData = [];
-      for (let i = 0; i < length; i++) {
-        xAxisData.push("名称" + i);
-      }
-      return xAxisData;
     }
   }
 };

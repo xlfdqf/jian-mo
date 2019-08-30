@@ -32,24 +32,24 @@ export default {
     return {
       height: 600,
       loading: false,
-      total: 100,
+      total: 0,
       activeName: "first",
       testForm: {
         datasource: ""
       },
       columns: [
         {
-          prop: "a",
+          prop: "featureName",
           label: "特征字段",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "sourceKey",
           label: "接口名称",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "sourceName",
           label: "数据来源",
           isShow: true
         }
@@ -57,41 +57,45 @@ export default {
       dataSource: [],
       //所需格式
       dataSource: [
-        { a: "年龄", b: "四要素", c: "同盾" },
-        { a: "芝麻分", b: "四要素", c: "同盾" },
-        { a: "星座", b: "四要素", c: "同盾" }
+        // { a: "年龄", b: "四要素", c: "同盾" },
+        // { a: "芝麻分", b: "四要素", c: "同盾" },
+        // { a: "星座", b: "四要素", c: "同盾" }
       ]
     };
   },
   created() {
-    // this.query();
+    this.query();
   },
   methods: {
     // 查询列表
     query() {
       this.loading = true;
-      let params = { pageIndex: 1, pageSize: 10 };
-      // getFeatureSource(params)
-      //   .then(res => {
-      //     this.loading = false;
-      //     this.total = res.total;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      let params = { current: 1, size: 10 };
+      getFeatureSource(params)
+        .then(res => {
+          console.log(res);
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
       console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getFeatureSource(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      let params = { current: page.currentPage, size: page.pageSize };
+      getFeatureSource(params)
+        .then(res => {
+          console.log(res);
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //搜索
     onSubmit(testForm) {

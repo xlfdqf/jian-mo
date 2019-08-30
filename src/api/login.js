@@ -38,7 +38,7 @@ export function getNewsDetail(params) {
 }
 // 特征来源
 export function getFeatureSource(params) {
-  // return post(`${api}/dsai/detail`, params);
+  return get(`${api}/featureconfig/page`, params);
 }
 // 特征离散分析表格
 export function getDiscreteAnalysis(params) {

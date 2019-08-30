@@ -16,13 +16,14 @@
 
       <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
         <el-tab-pane label="报表" name="1">
-             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
+             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
-          <div ref="chart2" style="width:1600px;height: 500px;" v-loading="chartLoading"></div>
+          <div ref="chart2" style="width:1600px;height: 500px;" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -40,6 +41,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      height: 650,
       tableLoading: false,
       chartLoading: false,
       activeName: "1",
@@ -54,7 +56,7 @@ export default {
         {
           prop: "featureField",
           label: "特征字段",
-          width: 200,
+          width: 300,
           isShow: true
         },
         {
@@ -103,11 +105,11 @@ export default {
       ],
       //异常值数据
       outliers: [
-        [0, 650, 620, 500], // 0代表第几个字段
-        [1, 620],
-        [2, 720],
-        [3, 720],
-        [4, 950]
+        // [0, 650, 620, 500], // 0代表第几个字段
+        // [1, 620],
+        // [2, 720],
+        // [3, 720],
+        // [4, 950]
       ],
       xAxisData: []
     };
@@ -130,7 +132,7 @@ export default {
     filterTable(data) {
       const result = data.map(item => {
         return {
-          featureField: item.featureField, //特征字段
+          featureField: item.name, //特征字段
           // feature_name:item["featureField"],//中文
           featureFieldTotal: item.featureFieldTotal, //特征样本个数
           missingTotal: item.missingTotal, //特征样本缺失个数
@@ -156,22 +158,18 @@ export default {
         ];
       });
       const xAxisData = data.map(item => {
-        return item.featureField;
+        return item.name;
       });
       // console.log(data);
       //未完成
       const outliers = data.map((item, i) => {
         const qutlierList = JSON.parse(item.qutlierList);
         return qutlierList.map(q => {
-          console.log(i, q);
-          // q.map(qdata => {
-          //   console.log(qdata);
-          // });
-          return i, q;
+          return [i, q];
         });
       });
       // console.log("outliers:", outliers);
-      // return { chartData, xAxisData };
+      return { chartData, xAxisData, outliers };
     },
     // 查询列表
     query() {
@@ -223,7 +221,15 @@ export default {
           this.chartLoading = false;
           this.chartDataOne = this.filterData(res.data.records).chartData;
           this.xAxisData = this.filterData(res.data.records).xAxisData;
-          console.log(this.chartDataOne, this.xAxisData);
+          const outliers = this.filterData(res.data.records).outliers;
+          const data = [];
+          outliers.forEach(item => {
+            item.forEach(i => {
+              data.push(i);
+            });
+          });
+          console.log("异常值：", data);
+          this.outliers = data;
         })
         .catch(error => {
           console.log(error);

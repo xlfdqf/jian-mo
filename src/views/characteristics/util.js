@@ -23,7 +23,7 @@ export function tabType(tab) {
 //         featurename: 'constellation',
 //         value: "星座",
 //     }]
-// 特征字段
+// 图表特征字段
 export const dataType = [
     {
         featurename: "age",

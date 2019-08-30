@@ -32,13 +32,13 @@
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
-              <el-pagination
+              <!-- <el-pagination
                 @current-change="handleCurrentChange"
                 :currentPage="currentPage"
                 layout="prev, pager, next"
                 :total="chartTotal"
                 align="right">
-              </el-pagination>
+              </el-pagination> -->
            </div>
         </el-tab-pane>
         <!-- 柱状图表 end -->
@@ -49,13 +49,20 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getFeatureBox } from "@/api/login.js";
+import { getFeatureBox, getFeatureBoxChart } from "@/api/login.js";
 import { tabType, dataType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
   components: { myTable },
   data() {
+    this.dataZoom = [
+      {
+        type: "slider",
+        start: 0,
+        end: 50
+      }
+    ];
     this.chartExtend = {
       series: {
         color: "rgb(126, 203, 224)", //柱子背景颜色
@@ -89,7 +96,7 @@ export default {
     };
     this.chartSettings = {
       labelMap: {
-        c: "每箱iv值"
+        iv: "每箱iv值"
       }
     };
     return {
@@ -111,11 +118,11 @@ export default {
           isShow: true
         },
         {
-          prop: "group_concat_bin_split",
+          prop: "group_concat_bucket",
           label: "特征分箱结果",
           isShow: true,
           render: function(v, param) {
-            return param.row.group_concat_bin_split.map(item => {
+            return param.row.group_concat_bucket.map(item => {
               return <div>{item}</div>;
             });
           }
@@ -134,23 +141,7 @@ export default {
       // 表格所需数据格式
       dataSource: [],
       // echart所需数据格式
-      chartData: [
-        {
-          name: "年龄",
-          columns: ["b", "c"],
-          rows: [{ b: "0-10岁", c: 10 }, { b: "11-20岁", c: 10 }]
-        },
-        {
-          name: "籍贯省",
-          columns: ["b", "c"],
-          rows: [{ b: "上海", c: 5 }, { b: "安徽", c: 10 }]
-        },
-        {
-          name: "星座",
-          columns: ["b", "c"],
-          rows: [{ b: "巨蟹", c: 5 }, { b: "天蝎", c: 10 }]
-        }
-      ]
+      chartData: []
     };
   },
   mounted() {
@@ -162,7 +153,7 @@ export default {
       const result = data.map(item => {
         return {
           featureField: item["featureField"],
-          group_concat_bin_split: item.group_concat_bin_split.split(","),
+          group_concat_bucket: item.group_concat_bucket.split(","),
           group_concat_iv: item.group_concat_iv.split(",")
         };
       });
@@ -170,35 +161,26 @@ export default {
     },
     // 过滤图表数据
     filterData(data, dataType) {
-      console.log(data, dataType);
-      let types = dataType.map(({ featurename, value }) => {
+      const types = dataType.map(({ featurename, value }) => {
         return {
           name: value,
-          columns: ["b", "c"],
+          columns: ["bucket", "iv"],
           rows: []
         };
       });
-      // data.forEach(item => {
-      //   types.forEach(t => {
-      //     if (item["name"] === t["name"]) {
-      //       t.rows.push({ b: item.b, c: item.c });
-      //     }
-      //   });
-      // });
-      // return types;
+      data.forEach(item => {
+        types.forEach(t => {
+          if (item["featureField"] === t["name"]) {
+            t.rows.push({ bucket: item.bucket, iv: item.iv });
+          }
+        });
+      });
+      return types;
     },
     // 切换tab
     handleClick(tab) {
       this.tab = tabType(tab.name);
       if (this.tab === "chart") {
-        // let data = [
-        //   { name: "年龄", b: "0-10岁", c: 12 },
-        //   { name: "年龄", b: "11-20岁", c: 23 },
-        //   { name: "星座", b: "巨蟹", c: 54 },
-        //   { name: "星座", b: "天蝎", c: 26 },
-        //   { name: "籍贯省", b: "北京", c: 54 },
-        //   { name: "籍贯省", b: "安徽", c: 26 }
-        // ];
         this.queryEcharts();
       } else {
         this.queryTable();
@@ -220,10 +202,15 @@ export default {
     //查询分箱图表
     queryEcharts() {
       this.chartLoading = true;
-      getFeatureBox()
+      getFeatureBoxChart()
         .then(res => {
           this.chartLoading = false;
-          this.chartData = this.filterData(res.data, dataType);
+          if (res.data) {
+            this.chartData = this.filterData(res.data, dataType);
+          } else {
+            this.dataEmpty = true;
+          }
+          // console.log(this.chartData);
         })
         .catch(error => {
           console.log(error);

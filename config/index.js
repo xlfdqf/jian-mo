@@ -9,21 +9,21 @@ module.exports = {
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
     proxyTable: {
-      // '/api': { // shen
-      //   target: ' http://10.10.2.8:3300/',
-      //   // secure: false, // 如果是https接口，需要配置这个参数
-      //   changeOrigin: true,
-      //   pathRewrite: {
-      //     '^/api': ''
-      //   }
-      // },
-      '/api': { //yang
-        target: 'http://10.10.1.168:3300',
+      '/api': { // shen
+        target: ' http://10.10.2.8:3300/',
+        // secure: false, // 如果是https接口，需要配置这个参数
         changeOrigin: true,
         pathRewrite: {
           '^/api': ''
         }
-      }
+      },
+      // '/api': { //yang
+      //   target: 'http://10.10.1.168:3300',
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/api': ''
+      //   }
+      // }
 
     },
 

@@ -42,7 +42,7 @@ export function getFeatureSource(params) {
 }
 // 特征离散分析表格
 export function getDiscreteAnalysis(params) {
-  return get(`${api}/aidiscrete`, params);
+  return get(`${api}/aidiscrete/page`, params);
 }
 // 特征分箱报表
 export function getFeatureBox(params) {

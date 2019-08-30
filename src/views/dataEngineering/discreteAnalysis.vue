@@ -17,12 +17,12 @@
       <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
-          <div ref="chart2" style="width:1280px;height: 500px;" v-loading="chartLoading"></div>
+          <div ref="chart2" style="width:1600px;height: 500px;" v-loading="chartLoading"></div>
         </el-tab-pane>
         <!-- 箱线图表 end -->
       </el-tabs>
@@ -52,56 +52,54 @@ export default {
       },
       columns: [
         {
-          prop: "a",
+          prop: "featureField",
           label: "特征字段",
+          width: 200,
           isShow: true
         },
         {
-          prop: "b",
+          prop: "featureFieldTotal",
           label: "特征样本个数",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "missingTotal",
           label: "特征样本缺失个数",
           isShow: true
         },
         {
-          prop: "d",
+          prop: "mode",
           label: "众数",
           isShow: true
         },
         {
-          prop: "e",
+          prop: "average",
           label: "平均数",
           isShow: true,
           render: function(v, param) {
-            return param.row.e;
+            return param.row.average;
           }
         },
         {
-          prop: "f",
+          prop: "median",
           label: "中位数",
           isShow: true
         },
         {
-          prop: "g",
+          prop: "edgeUp",
           label: "最大值",
           isShow: true
         },
         {
-          prop: "h",
+          prop: "edgeLow",
           label: "最小值",
           isShow: true
         }
       ],
       dataSource: [],
       chartDataOne: [
-        [655, 850, 940, 980, 1070], //[655, 850, 940, 980, 1070]分别是表示下边缘,下四分位数，中位数，上四位数，上边缘
-        [760, 800, 845, 885, 960],
-        [780, 840, 855, 880, 940],
-        [720, 767.5, 815, 865, 920],
-        [740, 807.5, 810, 870, 950]
+        // [655, 850, 940, 980, 1070], //[655, 850, 940, 980, 1070]分别是表示下边缘,下四分位数，中位数，上四分位数，上边缘
+        // [760, 800, 845, 885, 960],
       ],
       //异常值数据
       outliers: [
@@ -111,30 +109,69 @@ export default {
         [3, 720],
         [4, 950]
       ],
-      // xAxisData: []
-      xAxisData: ["年龄", "籍贯", "星座", "芝麻分", "婚姻状况"]
+      xAxisData: []
     };
   },
   mounted() {
-    // console.log(tabType(1));
     this.query();
-    this.initEchart();
   },
   methods: {
     // 切换tab
     handleClick(tab) {
       this.tab = tabType(tab.name);
-      console.log(this.tab);
+      if (this.tab === "chart") {
+        this.initEchart();
+      } else {
+        this.query();
+      }
+    },
+    //过滤报表数据
+    filterTable(data) {
+      const result = data.map(item => {
+        return {
+          featureField: item.featureField, //特征字段
+          // feature_name:item["featureField"],//中文
+          featureFieldTotal: item.featureFieldTotal, //特征样本个数
+          missingTotal: item.missingTotal, //特征样本缺失个数
+          mode: item.mode, //众数
+          average: item.average, //平均数
+          median: item.median, //中位数
+          edgeUp: item.edgeUp, //最大值
+          edgeLow: item.edgeLow //最小值
+        };
+      });
+      // console.log(result);
+      return result;
+    },
+    // 过滤图表数据
+    filterData(data, dataType) {
+      const chartData = data.map(item => {
+        return [
+          item.edgeLow,
+          item.quantileLow,
+          item.median,
+          item.quantileUp,
+          item.edgeLow
+        ];
+      });
+      const xAxisData = data.map(item => {
+        return item.featureField;
+      });
+      // console.log("xAxisData:", xAxisData);
+      return { chartData, xAxisData };
     },
     // 查询列表
     query() {
       this.tableLoading = true;
-      getDiscreteAnalysis()
+      let params = {
+        orders: "ins_time",
+        size: 72
+      };
+      getDiscreteAnalysis(params)
         .then(res => {
-          console.log("数据：", res);
-          // this.tableLoading = false;
-          // this.total = res.total;
-          // this.dataSource = res.data;
+          this.tableLoading = false;
+          this.dataSource = this.filterTable(res.data.records);
+          // console.log("数据：", res.data.records);
         })
         .catch(error => {
           console.log(error);
@@ -158,20 +195,26 @@ export default {
     },
     // 初始化相信图
     initEchart() {
-      // this.chartLoading = true;
+      this.chartLoading = true;
       let xAxisData = this.getXAxisData(this.chartDataOne.length);
 
       let chart2 = this.$refs.chart2;
       let echart = echarts.init(chart2);
       // 获取箱线图数据
-      // getxiangxiantu(params)
-      //   .then(res => {
-      // this.chartLoading = false;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      let params = {
+        orders: "ins_time",
+        size: 72
+      };
+      getDiscreteAnalysis(params)
+        .then(res => {
+          this.chartLoading = false;
+          this.chartDataOne = this.filterData(res.data.records).chartData;
+          this.xAxisData = this.filterData(res.data.records).xAxisData;
+          console.log(this.chartDataOne, this.xAxisData);
+        })
+        .catch(error => {
+          console.log(error);
+        });
       echart.setOption({
         dataZoom: [
           {

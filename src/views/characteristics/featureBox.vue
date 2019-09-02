@@ -17,7 +17,7 @@
         <el-tab-pane label="报表" name="1">
           <!-- :height="height" -->
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
-              :hasSelection="false" :hasPagination="true" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
@@ -26,7 +26,7 @@
          element-loading-background="rgba(9, 25, 56, 0.8)">
              <el-row>
                 <div v-for="item in chartData" :key='item.name'>
-                  <el-col :span="8"><div>
+                  <el-col :span="12"><div>
                     <!-- <keep-alive> -->
                        <ve-histogram :settings="chartSettings" :extend="chartExtend" :data="item" ref="chart2" :data-empty="dataEmpty"></ve-histogram>
                     <!-- </keep-alive> -->
@@ -103,7 +103,7 @@ export default {
     };
     return {
       orgOptions: {},
-      height: 650,
+      height: 630,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据
@@ -204,37 +204,29 @@ export default {
           iv: []
         };
       });
-      // const result = data.map(item => {
-      //   return {
-      //     featureField: item["featureField"],
-      //     group_concat_bucket: item.group_concat_bucket.split(","),
-      //     group_concat_iv: item.group_concat_iv.split(",")
-      //   };
-      // });
-      // return result;
       data.map(item => {
         types.forEach(t => {
-          if (item["featureField"] === t["name"]) {
+          if (item["feature_name"] === t["featureField"]) {
             t.bucket.push(item.bucket);
             t.iv.push(item.iv);
           }
         });
       });
-      // console.log(types);
-      // return types;
+      console.log(types);
+      return types;
     },
     // 过滤charts图表数据
     filterData(data, dataType) {
       const types = dataType.map(({ featurename, value }) => {
         return {
-          name: featurename,
+          name: value,
           columns: ["bucket", "iv"],
           rows: []
         };
       });
       data.forEach(item => {
         types.forEach(t => {
-          if (item["featureField"] === t["name"]) {
+          if (item["feature_name"] === t["name"]) {
             t.rows.push({ bucket: item.bucket, iv: item.iv });
           }
         });
@@ -252,13 +244,13 @@ export default {
       this.tableLoading = true;
       let params = {
         current: 1,
-        size: 20
+        size: 2000
       };
       getFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          this.tableTotal = res.total;
-          this.dataSource = this.filterTable(res.records, dataType);
+          this.tableTotal = res.data.total;
+          this.dataSource = this.filterTable(res.data.records, dataType);
         })
         .catch(error => {
           console.log(error);
@@ -267,7 +259,11 @@ export default {
     //查询分箱图表
     queryEcharts() {
       this.chartLoading = true;
-      getFeatureBoxChart()
+      let params = {
+        current: 1,
+        size: 2000
+      };
+      getFeatureBoxChart(params)
         .then(res => {
           this.chartLoading = false;
           this.chartData = this.filterData(res.data.records, dataType);
@@ -288,12 +284,12 @@ export default {
     },
     // 表格页码切换
     pageChange(page) {
-      let params = { current: page.currentPage, size: page.pageSize };
+      let params = { current: page.currentPage, size: 20 };
       getFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          this.tableTotal = res.total;
-          this.dataSource = this.filterTable(res.records, dataType);
+          this.tableTotal = res.data.total;
+          this.dataSource = this.filterTable(res.data.records, dataType);
         })
         .catch(error => {
           console.log(error);

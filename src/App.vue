@@ -196,8 +196,8 @@ html {
   border: none;
 }
 
-.el-table td,
+/* .el-table td,
 .el-table th {
   vertical-align: top;
-}
+} */
 </style>

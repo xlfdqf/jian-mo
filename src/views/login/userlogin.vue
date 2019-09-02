@@ -103,6 +103,7 @@ export default {
           this.$store
             .dispatch("Login", this.loginForm)
             .then(res => {
+              this.remenberPwd();
               this.$router.push({ path: "/dashboard/dashboard" });
             })
             .catch(err => {

@@ -20,19 +20,16 @@ export function logout() {
     method: 'post'
   })
 }
-// //测试接口 get
-// export function getNewsDetail(params) {
-//   return get(`/api/web/showNewBeforeModify`, { newNo: params });
-// }
+
 //登录
 export function getLogin(params) {
   return post(`${api}/auth/login`, params);
 }
-//身份证（手机号）管理 
+//身份证、手机号管理 
 export function getNewsList(params) {
   return post(`${api}/dsai/list`, params);
 }
-//身份证（手机号）管理详情
+//身份证、手机号管理详情
 export function getNewsDetail(params) {
   return post(`${api}/dsai/detail`, params);
 }

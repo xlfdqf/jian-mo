@@ -212,7 +212,6 @@ export default {
           }
         });
       });
-      console.log(types);
       return types;
     },
     // 过滤charts图表数据
@@ -242,15 +241,11 @@ export default {
     // 查询table报表
     queryTable() {
       this.tableLoading = true;
-      let params = {
-        current: 1,
-        size: 2000
-      };
-      getFeatureBox(params)
+      getFeatureBox()
         .then(res => {
           this.tableLoading = false;
           this.tableTotal = res.data.total;
-          this.dataSource = this.filterTable(res.data.records, dataType);
+          this.dataSource = this.filterTable(res.data.data, dataType);
         })
         .catch(error => {
           console.log(error);
@@ -259,14 +254,10 @@ export default {
     //查询分箱图表
     queryEcharts() {
       this.chartLoading = true;
-      let params = {
-        current: 1,
-        size: 2000
-      };
-      getFeatureBoxChart(params)
+      getFeatureBoxChart()
         .then(res => {
           this.chartLoading = false;
-          this.chartData = this.filterData(res.data.records, dataType);
+          this.chartData = this.filterData(res.data.data, dataType);
           // console.log(this.chartData);
         })
         .catch(error => {

@@ -43,11 +43,11 @@ export function getDiscreteAnalysis(params) {
 }
 // 特征分箱报表
 export function getFeatureBox(params) {
-  return get(`${api}/aibin/list`, params);
+  return get(`${api}/aibin/search`, params);
 }
 //特征分箱图表
 export function getFeatureBoxChart(params) {
-  return get(`${api}/aibin/list`, params);
+  return get(`${api}/aibin/search`, params);
 }
 // 特征IV值
 export function getIVvalue(params) {
@@ -59,5 +59,5 @@ export function getAnalysisDistribution(params) {
 }
 // 特征关联模型
 export function getCorrelationModel(params) {
-  // return post(`${api}/dsai/detail`, params);
+  return get(`${api}/featureconfig/modellist`, params);
 }

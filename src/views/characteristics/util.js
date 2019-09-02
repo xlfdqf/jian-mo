@@ -27,6 +27,14 @@ export function tabType(tab) {
 // 图表特征字段
 export const dataType = [
     {
+        featurename: "age",
+        value: "年龄",
+    },
+    {
+        featurename: "gender",
+        value: "性别",
+    },
+    {
         featurename: "race",
         value: "民族",
     }, {

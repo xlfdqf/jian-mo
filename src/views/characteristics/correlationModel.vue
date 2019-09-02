@@ -15,15 +15,13 @@
             </el-form-item>
             <el-form-item>
               <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
-              <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button>
-              <el-button type="default" @click="reset('testForm')">重置</el-button> -->
             </el-form-item>
           </el-form>
       </el-card>
 
       <el-card class="box-card2">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>
 
   </div>
@@ -32,7 +30,6 @@
 <script>
 import myTable from "@/components/myTable";
 import { getCorrelationModel } from "@/api/login.js";
-import {} from "./util.js";
 
 export default {
   components: { myTable },
@@ -47,79 +44,86 @@ export default {
       },
       columns: [
         {
-          prop: "a",
+          prop: "feature_name",
           label: "特征字段",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "a",
           label: "关联转移因子",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return "是";
+          }
         },
         {
-          prop: "c",
+          prop: "status",
           label: "关联相似度对比",
-          isShow: true
-        },
-        {
-          prop: "d",
-          label: "关联最终评分",
-          isShow: true
-        },
-        {
-          prop: "e",
-          label: "是否进入决策模型",
           isShow: true,
           render: function(v, param) {
             let html = "";
-            if (param.row.e === 1) {
+            if (param.row.status === 1) {
               html = "是";
             } else {
               html = "否";
             }
             return html;
           }
+        },
+        {
+          prop: "sum_of_iv",
+          label: "关联最终评分",
+          isShow: true,
+          render: function(v, param) {
+            let html = "";
+            if (param.row.sum_of_iv > 0.0) {
+              html = "是";
+            } else {
+              html = "否";
+            }
+            return html;
+          }
+        },
+        {
+          prop: "e",
+          label: "是否进入决策模型",
+          isShow: true
+          // render: function(v, param) {
+          //   let html = "";
+          //   if (param.row.e === 1) {
+          //     html = "是";
+          //   } else {
+          //     html = "否";
+          //   }
+          //   return html;
+          // }
         }
       ],
       dataSource: []
     };
   },
   created() {
-    // this.query();
+    this.query();
   },
   methods: {
     // 查询列表
     query() {
-      // this.loading = true;
-      // let params = { pageIndex: 1, pageSize: 10 };
-      // getCorrelationModel(params)
-      //   .then(res => {
-      //     this.loading = false;
-      //     this.total = res.total;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.loading = true;
+      getCorrelationModel()
+        .then(res => {
+          console.log(res);
+          this.loading = false;
+          // this.total = res.total;
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
-    pageChange(page) {
-      console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getCorrelationModel(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-    },
+    pageChange(page) {},
     onSubmit(testForm) {
       // console.log(testForm);
-    },
-    reset(formName) {
-      this.$refs[formName].resetFields();
-      // this.query();
     }
   }
 };

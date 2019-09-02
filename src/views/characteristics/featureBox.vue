@@ -28,7 +28,7 @@
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="8"><div>
                     <!-- <keep-alive> -->
-                       <ve-histogram :settings="chartSettings" :extend="chartExtend" :data="item" ref="chart2"></ve-histogram>
+                       <ve-histogram :settings="chartSettings" :extend="chartExtend" :data="item" ref="chart2" :data-empty="dataEmpty"></ve-histogram>
                     <!-- </keep-alive> -->
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
@@ -43,7 +43,6 @@
            </div>
         </el-tab-pane>
         <!-- 柱状图表 end -->
-
       </el-tabs>
   </div>
 </template>
@@ -77,8 +76,8 @@ export default {
       },
       xAxis: {
         axisLabel: {
-          interval: 0,
-          rotate: 40, //x轴标题倾斜
+          // interval: 0,
+          // rotate: 40, //x轴标题倾斜
           textStyle: {
             color: "rgb(126, 203, 224)"
           }
@@ -121,88 +120,145 @@ export default {
           isShow: true
         },
         {
-          prop: "group_concat_bucket",
+          prop: "bucket",
           label: "特征分箱结果",
           isShow: true,
           render: function(v, param) {
-            return param.row.group_concat_bucket.map(item => {
+            return param.row.bucket.map(item => {
               return <div>{item}</div>;
             });
           }
         },
         {
-          prop: "group_concat_iv",
+          prop: "iv",
           label: "每箱iv值",
           isShow: true,
           render: function(v, param) {
-            return param.row.group_concat_iv.map(item => {
+            return param.row.iv.map(item => {
               return <div>{item}</div>;
             });
           }
         }
       ],
       // 表格所需数据格式
-      dataSource: [],
+      dataSource: [
+        // {
+        //   featureField: "年龄",
+        //   group_concat_bucket: ["0-10", "20-30", "30-40"],
+        //   group_concat_iv: [0.3, 0.2, 0.55]
+        // },
+      ],
       // echart所需数据格式
-      chartData: []
+      chartData: [
+        // {
+        //   name: "年龄",
+        //   columns: ["bucket", "iv"],
+        //   rows: [
+        //     {
+        //       bucket: "0-10",
+        //       iv: 0.3
+        //     },
+        //     {
+        //       bucket: "20-30",
+        //       iv: 0.5
+        //     }
+        //   ]
+        // }
+      ]
     };
   },
   mounted() {
     this.queryTable();
   },
   methods: {
-    //过滤报表数据
-    filterTable(data) {
-      const result = data.map(item => {
+    //字段排序
+    // const getNumber = (val) => {
+    // 		const lists = val.split('-');
+    // 		let num = 0;
+    // 		for(let i = 0; i < lists.length; i++) {
+    // 			num += lists[i]
+    // 		}
+    // 		return num;
+    // 	},
+    // sortData(data) {
+    //   const sortData = [];
+    //   const otherData = [];
+    //   data.forEach((item, index) => {
+    //     if (item.featurename === "age") {
+    //       sortData.push(item);
+    //     } else {
+    //       otherData.push(item);
+    //     }
+    //   });
+    //   sortData.sort((a, b) => {
+    //     return getNumber(a.variate) - getNumber(b.variate);
+    //   });
+    //   return sortData.concat(otherData);
+    // },
+    //过滤table报表数据
+    filterTable(data, dataType) {
+      const types = dataType.map(({ featurename, value }) => {
         return {
-          featureField: item["featureField"],
-          group_concat_bucket: item.group_concat_bucket.split(","),
-          group_concat_iv: item.group_concat_iv.split(",")
+          featureField: value,
+          bucket: [],
+          iv: []
         };
       });
-      return result;
+      // const result = data.map(item => {
+      //   return {
+      //     featureField: item["featureField"],
+      //     group_concat_bucket: item.group_concat_bucket.split(","),
+      //     group_concat_iv: item.group_concat_iv.split(",")
+      //   };
+      // });
+      // return result;
+      data.map(item => {
+        types.forEach(t => {
+          if (item["featureField"] === t["name"]) {
+            t.bucket.push(item.bucket);
+            t.iv.push(item.iv);
+          }
+        });
+      });
+      // console.log(types);
+      // return types;
     },
-    // 过滤图表数据
+    // 过滤charts图表数据
     filterData(data, dataType) {
       const types = dataType.map(({ featurename, value }) => {
         return {
-          name: value,
+          name: featurename,
           columns: ["bucket", "iv"],
           rows: []
         };
       });
       data.forEach(item => {
-        // console.log(item);
         types.forEach(t => {
-          // if (item["featureField"] === t["name"]) {
-          //   t.rows.push({ bucket: item.bucket, iv: item.iv });
-          // }
+          if (item["featureField"] === t["name"]) {
+            t.rows.push({ bucket: item.bucket, iv: item.iv });
+          }
         });
       });
+      //过滤数据，后端未返回的则不显示
+      // Array.from(types).forEach((item, index) => {
+      //   if (item.rows.length === 0) {
+      //     types.splice(types[index], 1);
+      //   }
+      // });
       return types;
     },
-    // 切换tab
-    handleClick(tab) {
-      this.tab = tabType(tab.name);
-      if (this.tab === "chart") {
-        this.queryEcharts();
-      } else {
-        this.queryTable();
-      }
-    },
-    // 查询报表
+    // 查询table报表
     queryTable() {
       this.tableLoading = true;
       let params = {
         current: 1,
-        size: 10
+        size: 20
       };
       getFeatureBox(params)
         .then(res => {
-          console.log(res);
           this.tableLoading = false;
           this.tableTotal = res.total;
-          this.dataSource = this.filterTable(res.records);
+          this.dataSource = this.filterTable(res.records, dataType);
         })
         .catch(error => {
           console.log(error);
@@ -214,12 +270,21 @@ export default {
       getFeatureBoxChart()
         .then(res => {
           this.chartLoading = false;
-          this.chartData = this.filterData(res.records, dataType);
+          this.chartData = this.filterData(res.data.records, dataType);
           // console.log(this.chartData);
         })
         .catch(error => {
           console.log(error);
         });
+    },
+    // 切换tab
+    handleClick(tab) {
+      this.tab = tabType(tab.name);
+      if (this.tab === "chart") {
+        this.queryEcharts();
+      } else {
+        this.queryTable();
+      }
     },
     // 表格页码切换
     pageChange(page) {
@@ -228,7 +293,7 @@ export default {
         .then(res => {
           this.tableLoading = false;
           this.tableTotal = res.total;
-          this.dataSource = this.filterTable(res.records);
+          this.dataSource = this.filterTable(res.records, dataType);
         })
         .catch(error => {
           console.log(error);

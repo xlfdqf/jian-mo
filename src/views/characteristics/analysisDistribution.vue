@@ -9,9 +9,11 @@
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2">
+          <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)">
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
-                  <el-col :span="12"><div> <ve-histogram :extend="chartExtend" :settings="chartSettings" v-loading="chartLoading" :data-empty="dataEmpty" :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
+                  <el-col :span="12"><div> <ve-histogram :extend="chartExtend" :settings="chartSettings" v-loading="chartLoading"  :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>
               <!-- <el-pagination
@@ -21,6 +23,7 @@
                 :total="chartTotal"
                 align="right">
               </el-pagination> -->
+               </div>
         </el-tab-pane>
         <!-- 柱状图表 end -->
 

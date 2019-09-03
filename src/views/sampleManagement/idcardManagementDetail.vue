@@ -53,10 +53,10 @@
                 <el-col :span="6"><div class="blod">性别:{{item.gender}}</div></el-col>
                 <el-col :span="6"><div class="blod">年龄:{{item.age}}</div></el-col>
                 <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone | filterinTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone}}</div></el-col>
                 <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
-                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard | filterinTime}}</div></el-col>
+                <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机号记录天数:{{item.record_phone_days}}</div></el-col>
                 <el-col :span="6"><div class="blod">身份证户籍城市:{{item.idcard_city}}</div></el-col>
                 <el-col :span="6"><div class="blod">身份证户籍地区:{{item.idcard_region}}</div></el-col>

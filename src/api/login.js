@@ -51,7 +51,7 @@ export function getFeatureBoxChart(params) {
 }
 // 特征IV值
 export function getIVvalue(params) {
-  // return post(`${api}/dsai/detail`, params);
+  return get(`${api}/aibin/getSumIv`, params);
 }
 // 特征分布分析
 export function getAnalysisDistribution(params) {

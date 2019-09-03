@@ -22,21 +22,27 @@
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
-             <ve-bar :data="chartData" :settings="chartSettings" :extend="chartExtend"  v-loading="chartLoading"></ve-bar> <!--排序条形图-->
+             <ve-bar :data="chartData" :settings="chartSettings" :extend="chartExtend" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+         element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="chartLoading"></ve-bar> <!--排序条形图-->
           </div>
           </el-col>
           <!-- 图表 end -->
         </el-row>
-           
+        <el-pagination
+                @current-change="handleCurrentChange"
+                :currentPage="currentPage"
+                layout="total,prev, pager, next"
+                :total="chartTotal"
+                align="right">
+         </el-pagination> 
       </el-card>
-
   </div>
 </template>
 
 <script>
 import myTable from "@/components/myTable";
 import { getIVvalue } from "@/api/login.js";
-import {} from "../sampleManagement/util.js";
+import { tabType } from "../characteristics/util.js";
 
 export default {
   components: { myTable },
@@ -67,13 +73,11 @@ export default {
     };
     this.chartSettings = {
       labelMap: {
-        c: "每箱iv值"
-      }
-    };
-    this.chartSettings = {
-      metrics: ["IV值"],
+        sum_of_iv: "每箱iv值"
+      },
+      metrics: ["sum_of_iv"],
       dataOrder: {
-        label: "IV值",
+        label: "sum_of_iv",
         order: "desc"
       }
     };
@@ -85,81 +89,110 @@ export default {
     return {
       tableLoading: false,
       chartLoading: false,
-      total: 100,
+      total: 0,
+      chartTotal: 0,
+      currentPage: 1,
       testForm: {
         featureField: ""
       },
       columns: [
         {
-          prop: "a",
+          prop: "feature_name",
           label: "特征字段",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "feature_field",
           label: "字段名称",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "sum_of_iv",
           label: "IV值",
           isShow: true
         }
       ],
       dataSource: [],
       chartData: {
-        columns: ["特征字段", "IV值"],
-        rows: [
-          { 特征字段: "年龄", IV值: 0.3 },
-          { 特征字段: "籍贯", IV值: 0.2 },
-          { 特征字段: "芝麻分", IV值: 0.5 },
-          { 特征字段: "星座", IV值: 0.3 }
-        ]
+        columns: ["feature_name", "sum_of_iv"],
+        rows: []
       }
     };
   },
   created() {
-    // this.queryTable();
+    this.queryTable();
     this.queryEcharts();
   },
   methods: {
     // 查询列表
     queryTable() {
       this.tableLoading = true;
-      let params = { pageIndex: 1, pageSize: 10 };
-      // getIVvalue(params)
-      //   .then(res => {
-      //     this.tableLoading = false;
-      //     this.total = res.total;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      let params = { current: 1, size: 10 };
+      getIVvalue(params)
+        .then(res => {
+          this.tableLoading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //查询图表
     queryEcharts() {
-      // this.chartLoading = true;
-      // getIVvalueChart(params)
-      //   .then(res => {
-      //     this.chartLoading=false;
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.chartLoading = true;
+      let params = { current: 1, size: 10 };
+      getIVvalue(params)
+        .then(res => {
+          this.chartLoading = false;
+          const data = res.data.records;
+          data.forEach(item => {
+            this.chartData.rows.push({
+              feature_name: item.feature_name,
+              sum_of_iv: item.sum_of_iv
+            });
+          });
+          this.chartTotal = res.data.total;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
-    // 页码切换
+    // 表格页码切换
     pageChange(page) {
-      console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getIVvalue(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.tableLoading = true;
+      let params = { current: page.currentPage, size: page.pageSize };
+      getIVvalue(params)
+        .then(res => {
+          this.tableLoading = false;
+          this.chartTotal = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    // 图表页码切换
+    handleCurrentChange(current) {
+      this.currentPage = current;
+      this.chartLoading = true;
+      let params = { current: this.currentPage, size: 10 };
+      getIVvalue(params)
+        .then(res => {
+          this.chartLoading = false;
+          const data = res.data.records;
+          this.chartData.rows = [];
+          data.forEach(item => {
+            this.chartData.rows.push({
+              feature_name: item.feature_name,
+              sum_of_iv: item.sum_of_iv
+            });
+          });
+          this.chartTotal = res.data.total;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

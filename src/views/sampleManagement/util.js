@@ -620,7 +620,7 @@ export const trip_infoColumns = [
         isShow: true
     }
 ]
-//大圣报告表
+//贷后上报表
 export const ds_reportColumns = [
     {
         prop: "name",

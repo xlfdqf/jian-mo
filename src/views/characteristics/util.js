@@ -46,20 +46,24 @@ export const dataType = [
         featurename: 'customer_type',
         value: "是否为新客",
     },
-    // {
-    //     featurename: 'company_period',
-    //     value: "工作时长 （单位：年）",
-    // },
-    // {
-    //     featurename: 'product_type',
-    //     value: "产品类型 7：7天产品，14：14天产品",
-    // }, {
-    //     featurename: 'promotion_channel',
-    //     value: "是否为推广渠道 0.否 1.是",
-    // }, {
-    //     featurename: 'telecom_type',
-    //     value: "运营商类型 0 为聚信立，1为魔蝎 默认0",
-    // },
+    {
+        featurename: 'company_period',
+        value: "工作时长",
+        // value: "工作时长 （单位：年）",
+    },
+    {
+        featurename: 'product_type',
+        value: "产品类型",
+        // value: "产品类型 7：7天产品，14：14天产品",
+    }, {
+        featurename: 'promotion_channel',
+        value: "是否为推广渠道",
+        // value: "是否为推广渠道 0.否 1.是",
+    }, {
+        featurename: 'telecom_type',
+        value: "运营商类型",
+        // value: "运营商类型 0 为聚信立，1为魔蝎 默认0",
+    },
     {
         featurename: "binding_idcards",
         value: "绑定身份证情况",

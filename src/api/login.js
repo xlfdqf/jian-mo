@@ -55,7 +55,7 @@ export function getIVvalue(params) {
 }
 // 特征分布分析
 export function getAnalysisDistribution(params) {
-  // return post(`${api}/dsai/detail`, params);
+  return get(`${api}/aibin/analysis`, params);
 }
 // 特征关联模型
 export function getCorrelationModel(params) {

@@ -269,9 +269,9 @@
              </div> 
           </el-collapse-item>
          
-         <el-collapse-item title="大圣报告" name="6">
+         <el-collapse-item title="贷后上报" name="6">
             <template slot="title">
-               大圣报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
+               贷后上报<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="ds_reportSource">来源：{{ds_reportSource}}</span>
             </template>
               <myTable :columns="ds_reportColumns" :dataSource="ds_report" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
@@ -369,8 +369,8 @@ export default {
       main_service: [], //常用服务数据
       trip_info: [], //出行分析
       trip_infoColumns, //出行分析表
-      ds_reportColumns, //大圣报告表
-      ds_report: [], //大圣报告
+      ds_reportColumns, //贷后上报表
+      ds_report: [], //贷后上报
       contactinSource: localStorage.getItem("contactinSource"), //来源
       daihoubangSource: localStorage.getItem("daihoubangSource"),
       changdaikeSource: localStorage.getItem("changdaikeSource"),
@@ -508,9 +508,9 @@ export default {
             }
           } else if (colleName === "ds_report") {
             if (res.data) {
-              localStorage.setItem("ds_reportSource", res.data[0].source);
+              localStorage.setItem("ds_reportSource", res.data.data.source);
               this.ds_reportSource = localStorage.getItem("ds_reportSource"); //来源
-              this.ds_report = res.data;
+              this.ds_report = res.data.data;
             } else {
               this.ds_report = [];
             }

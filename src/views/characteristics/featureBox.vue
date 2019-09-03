@@ -206,13 +206,14 @@ export default {
       const types = dataType.map(({ featurename, value }) => {
         return {
           featureField: value,
+          featureFieldEng: featurename,
           bucket: [],
           iv: []
         };
       });
       data.map(item => {
         types.forEach(t => {
-          if (item["feature_name"] === t["featureField"]) {
+          if (item["featureField"] === t["featureFieldEng"]) {
             t.bucket.push(item.bucket);
             t.iv.push(item.iv);
           }
@@ -225,13 +226,14 @@ export default {
       const types = dataType.map(({ featurename, value }) => {
         return {
           name: value,
+          featureFieldEng: featurename,
           columns: ["bucket", "iv"],
           rows: []
         };
       });
       data.forEach(item => {
         types.forEach(t => {
-          if (item["feature_name"] === t["name"]) {
+          if (item["featureField"] === t["featureFieldEng"]) {
             t.rows.push({ bucket: item.bucket, iv: item.iv });
           }
         });

@@ -11,20 +11,8 @@ export function tabType(tab) {
     }
     return tab;
 }
-//表格特征字段
-// export const featureType = [
-//     {
-//         featurename: "age",
-//         value: "年龄",
-//     }, {
-//         featurename: "score",
-//         value: "芝麻分",
-//     }, {
-//         featurename: 'constellation',
-//         value: "星座",
-//     }]
 
-// 图表特征字段
+// 特征字段
 export const dataType = [
     {
         featurename: "age",
@@ -41,7 +29,6 @@ export const dataType = [
         featurename: "amount_max",
         value: "借款金额",
     },
-    // 问题：中文不能严谨判断
     {
         featurename: 'customer_type',
         value: "是否为新客",
@@ -49,20 +36,16 @@ export const dataType = [
     {
         featurename: 'company_period',
         value: "工作时长",
-        // value: "工作时长 （单位：年）",
     },
     {
         featurename: 'product_type',
         value: "产品类型",
-        // value: "产品类型 7：7天产品，14：14天产品",
     }, {
         featurename: 'promotion_channel',
         value: "是否为推广渠道",
-        // value: "是否为推广渠道 0.否 1.是",
     }, {
         featurename: 'telecom_type',
         value: "运营商类型",
-        // value: "运营商类型 0 为聚信立，1为魔蝎 默认0",
     },
     {
         featurename: "binding_idcards",
@@ -76,410 +59,409 @@ export const dataType = [
         value: "手机运营商",
     },
     {
-        featurename: '',
+        featurename: 'record_phone_days',
         value: "手机号记录天数",
     },
     {
-        featurename: '',
+        featurename: 'used_phones_cnt',
         value: "关联手机号数量",
     }, {
-        featurename: '',
+        featurename: 'idcard_validate',
         value: "身份证是否是有效身份证",
     }, {
-        featurename: '',
+        featurename: 'used_idcards_cnt',
         value: "关联身份证数量",
     }, {
-        featurename: '',
+        featurename: 'record_idcard_days',
         value: "身份证号记录天数",
     }, {
-        featurename: '',
+        featurename: 'sn_order2_blacklist_routers_cnt',
         value: "认识间接黑人的直接联系人个数",
     }, {
-        featurename: '',
+        featurename: 'sn_order2_blacklist_contacts_cnt',
         value: "间接联系人在黑名单中数量(间接黑人)",
     }, {
-        featurename: '',
+        featurename: 'sn_order1_contacts_cnt',
         value: "直接联系人",
     }, {
-        featurename: '',
+        featurename: 'sn_order2_blacklist_routers_pct',
         value: "认识间接黑人的直接联系人比例",
     }, {
-        featurename: '',
+        featurename: 'sn_score',
         value: "葫芦分",
     }, {
-        featurename: '',
+        featurename: 'in_court_blacklist',
         value: "是否命中法院黑名单",
     }, {
-        featurename: '',
+        featurename: 'in_p2p_blacklist',
         value: "是否命中网贷黑名单",
     }, {
-        featurename: '',
+        featurename: 'idcard_in_blacklist',
         value: "身份证是否命中黑名单",
     }, {
-        featurename: '',
+        featurename: 'phone_in_blacklist',
         value: "手机号是否命中黑名单",
     }, {
-        featurename: '',
+        featurename: 'in_bank_blacklist',
         value: "是否命中银行黑名单",
     }, {
-        featurename: '',
+        featurename: 'offline_cash_loan_cnt',
         value: "线下现金贷出现次数",
     }, {
-        featurename: '',
+        featurename: 'online_cash_loan_cnt',
         value: "线上现金贷出现次数",
     }, {
-        featurename: '',
+        featurename: 'online_installment_cnt',
         value: "线上消费分期出现次数",
     }, {
-        featurename: '',
+        featurename: 'payday_loan_cnt',
         value: "小额快速贷出现次数",
     }, {
-        featurename: '',
+        featurename: 'credit_card_repayment_cnt',
         value: "信用卡代还出现次数",
     }, {
-        featurename: '',
+        featurename: 'offline_installment_cnt',
         value: "线下消费分期出现次数",
     }, {
-        featurename: '',
+        featurename: 'others_cnt',
         value: "其他",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_180_days',
         value: "最近180天查询次数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_7_days',
         value: "最近7天查询次数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_180_days',
         value: "最近180天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_90_days',
         value: "最近90天查询次数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_60_days',
         value: "最近60天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_30_days',
         value: "最近30天查询次数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_14_days',
         value: "最近14天查询次数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_30_days',
         value: "最近30天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_7_days',
         value: "最近7天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_90_days',
         value: "最近90天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'org_cnt',
         value: "历史查询总机构数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt_recent_60_days',
         value: "最近60天查询次数",
     }, {
-        featurename: '',
+        featurename: 'search_cnt',
         value: "历史查询总次数",
     }, {
-        featurename: '',
+        featurename: 'idcardmptimestype',
         value: "证件查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lasttwomonthphoneapplicationtimetype',
         value: "手机2个月内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastamonthphoneapplicationtimerange',
         value: "手机1个月内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastsevendayidcardapplicationtimetype',
         value: "证件7天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastfifteendayphoneapplicationtimerange',
         value: "手机15天内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreedayidcardapplicationtimerange',
         value: "证件3天内查平台数",
     }, {
-        featurename: '',
+        featurename: 'todayidcardapplicationtimetype',
         value: "证件当日查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastthreedayphoneapplicationtimetype',
         value: "手机3天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastfifteendayidcardapplicationtimerange',
         value: "证件15天内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastamonthidcardapplicationtimerange',
         value: "证件1个月内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreemonthidcardapplicationtimetype',
         value: "证件3个月内平台数",
     }, {
-        featurename: '',
+        featurename: 'todayidcardapplicationtimerange',
         value: "证件当日查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lasttwomonthidcardapplicationtimerange',
         value: "证件2个月内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreemonthidcardapplicationtimerange',
         value: "证件3个月内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'todayphoneapplicationtimerange',
         value: "手机当日查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastamonthphoneapplicationtimetype',
         value: "手机1个月内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastsevendayphoneapplicationtimerange',
         value: "手机7天内查询平台数",
     }, {
         featurename: '',
         value: "证件1个月内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastamonthidcardapplicationtimetype',
         value: "手机当日查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastfifteendayphoneapplicationtimetype',
         value: "手机15天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'phonefirsttime',
         value: "手机最早出现日期",
     }, {
-        featurename: '',
+        featurename: 'phonemptimesrange',
         value: "手机查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreemonthphoneapplicationtimetype',
         value: "手机3个月内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastsevendayidcardapplicationtimerange',
         value: "证件7天内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreemonthphoneapplicationtimerange',
         value: "手机3个月内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastthreedayidcardapplicationtimetype',
         value: "证件3天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lasttwomonthphoneapplicationtimerange',
         value: "手机2个月内查询平台数",
-    },
-    {
-        featurename: '',
+    }, {
+        featurename: 'phonemptimestype',
         value: "手机查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lastthreedayphoneapplicationtimerange',
         value: "手机3天内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'idcardmptimesrange',
         value: "证件查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastfifteendayidcardapplicationtimetype',
         value: "证件15天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'cell_operator_zh',
         value: "运营商（中文）",
     },
     // 新增字段
     {
-        featurename: '',
+        featurename: 'cell_phone_arised',
         value: "cell_phone字段是否出现过",
     }, {
-        featurename: '',
+        featurename: 'city',
         value: "城市",
     }, {
-        featurename: '',
+        featurename: 'company_type_total_service_cnt_top1',
         value: "近六个月频繁服务企业类型TOP1",
     }, {
-        featurename: '',
+        featurename: 'company_type_total_service_cnt_top2',
         value: "近六个月频繁服务企业类型TOP2",
     }, {
-        featurename: '',
+        featurename: 'company_type_total_service_cnt_top3',
         value: "近六个月频繁服务企业类型TOP3",
     }, {
-        featurename: '',
+        featurename: 'contacts_class1_blacklist_cnt',
         value: "直接联系人中黑名单人数",
     }, {
-        featurename: '',
+        featurename: 'contacts_class1_cnt',
         value: "直接联系人人数",
     }, {
-        featurename: '',
+        featurename: 'contacts_class2_blacklist_cnt',
         value: "间接联系人中黑名单人数",
     }, {
-        featurename: '',
+        featurename: 'contacts_router_cnt',
         value: "引起间接黑名单人数",
     }, {
-        featurename: '',
+        featurename: 'contacts_router_ratio',
         value: "直接联系人中引起间接黑名单占比",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_calledminute',
         value: "贷款类平台被叫时长",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_calledtimes',
         value: "贷款类平台被叫次数",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_callingminutes',
         value: "贷款类平台主叫时长",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_callingtimes',
         value: "贷款类平台主叫次数",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_result',
         value: "贷款类号码联系情况 结果",
     }, {
-        featurename: '',
+        featurename: 'contact_loan_score',
         value: "贷款类号码联系情况 评分",
     }, {
-        featurename: '',
+        featurename: 'holiday_trip_amt',
         value: "节假日出行次数",
     }, {
-        featurename: '',
+        featurename: 'homephone_counts',
         value: "家庭电话通话记录次数",
     }, {
-        featurename: '',
+        featurename: 'idcardstatus',
         value: "与运营商提供的身份证是否匹配",
     }, {
-        featurename: '',
+        featurename: 'idcard_with_other_names_amt',
         value: "身份证组合过的其他姓名数量",
     }, {
-        featurename: '',
+        featurename: 'idcard_with_other_phones_amt',
         value: "身份证组合过其他电话数量",
     }, {
-        featurename: '',
+        featurename: 'id_card_arised',
         value: "身份证是否出现",
     }, {
-        featurename: '',
+        featurename: 'lastsevendayphoneapplicationtimetype',
         value: "手机7天内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'lasttwomonthidcardapplicationtimetype',
         value: "证件2个月内查询次数级别",
     }, {
-        featurename: '',
+        featurename: 'marital_status',
         value: "婚姻状况",
     }, {
-        featurename: '',
+        featurename: 'minutes',
         value: "家庭电话通话时长",
     }, {
-        featurename: '',
+        featurename: 'namestatus',
         value: "与运营商提供的姓名是否匹配",
     }, {
-        featurename: '',
+        featurename: 'org_cnt_recent_14_days',
         value: "最近14天查询机构数",
     }, {
-        featurename: '',
+        featurename: 'phone_gray_score',
         value: "用户号码联系黑中介分数",
     }, {
-        featurename: '',
+        featurename: 'phone_with_other_idcards_amt',
         value: "电话号码组合过其他身份证数量",
     }, {
-        featurename: '',
+        featurename: 'phone_with_other_names_amt',
         value: "电话号码组合过其他姓名数量",
     }, {
-        featurename: '',
+        featurename: 'present_period',
         value: "居住时长",
     }, {
-        featurename: '',
+        featurename: 'province',
         value: "省份",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_call_cnt',
         value: "近6个月月均呼叫次数",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_call_in_cnt',
         value: "近6个月月均被叫次数",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_call_in_time',
         value: "近6个月月均被叫时间",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_call_out_cnt',
         value: "近6个月月均主叫次数",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_call_out_time',
         value: "近6个月月均主叫时间",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_net_flow',
         value: "近6个月月均流量",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_sms_cnt',
         value: "近6个月月均短信数目",
     }, {
-        featurename: '',
+        featurename: 'recent_6m_avg_total_amount',
         value: "近6个月月均话费消费",
     }, {
-        featurename: '',
+        featurename: 'region',
         value: "区县",
     }, {
-        featurename: '',
+        featurename: 'register_org_cnt',
         value: "电话号码注册过的相关企业数量",
     }, {
-        featurename: '',
+        featurename: 'reliability',
         value: "实名认证",
     }, {
-        featurename: '',
+        featurename: 'searched_org_cnt',
         value: "查询过该用户的相关企业数量",
     }, {
-        featurename: '',
+        featurename: 'sn_order1_blacklist_contacts_cnt',
         value: "直接联系人在黑名单中数量(直接黑人)",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_phone_num',
         value: "近六个月通话时长TOP1",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_call_cnt',
         value: "近六个月通话时长TOP1通话次数",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_call_in_cnt',
         value: "近六个月通话时长TOP1呼入次数",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_call_in_len',
         value: "近六个月通话时长TOP1呼入时间",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_call_out_cnt',
         value: "近六个月通话时长TOP1呼出次数",
     }, {
-        featurename: '',
+        featurename: 'top1_call_len_call_out_len',
         value: "近六个月通话时长TOP1呼出时间",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_phone_num',
         value: "近六个月通话时长TOP2",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_call_cnt',
         value: "近六个月通话时长TOP2通话次数",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_call_in_cnt',
         value: "近六个月通话时长TOP2呼入次数",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_call_in_len',
         value: "近六个月通话时长TOP2呼入时间",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_call_out_cnt',
         value: "近六个月通话时长TOP2呼出次数",
     }, {
-        featurename: '',
+        featurename: 'top2_call_len_call_out_len',
         value: "近六个月通话时长TOP2呼出时间",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_phone_num',
         value: "近六个月通话时长TOP3",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_call_cnt',
         value: "近六个月通话时长TOP3通话次数",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_call_in_cnt',
         value: "近六个月通话时长TOP3呼入次数",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_call_in_len',
         value: "近六个月通话时长TOP3呼入时间",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_call_out_cnt',
         value: "近六个月通话时长TOP3呼出次数",
     }, {
-        featurename: '',
+        featurename: 'top3_call_len_call_out_len',
         value: "近六个月通话时长TOP3呼出时间",
     }, {
-        featurename: '',
+        featurename: 'website',
         value: "移动运营商",
     }, {
-        featurename: '',
+        featurename: 'weekday_trip_amt',
         value: "工作日出行次数",
     }, {
-        featurename: '',
+        featurename: 'weekend_trip_amt',
         value: "双休日出行次数",
     },
 ]

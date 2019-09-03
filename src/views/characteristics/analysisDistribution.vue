@@ -156,6 +156,7 @@ export default {
       const types = dataType.map(({ featurename, value }) => {
         return {
           featureName: value,
+          featureFieldEng: featurename,
           bucket: [],
           total: [],
           proportion: []
@@ -163,7 +164,7 @@ export default {
       });
       data.map(item => {
         types.forEach(t => {
-          if (item["featureName"] == t["featureName"]) {
+          if (item["featureField"] == t["featureFieldEng"]) {
             t.bucket.push(item.bucket);
             t.total.push(item.total);
             t.proportion.push(item.proportion);
@@ -177,13 +178,14 @@ export default {
       const types = dataType.map(({ featurename, value }) => {
         return {
           name: value,
+          featureFieldEng: featurename,
           columns: ["bucket", "total", "proportion"],
           rows: []
         };
       });
       data.forEach(item => {
         types.forEach(t => {
-          if (item["featureName"] === t["name"]) {
+          if (item["featureField"] === t["featureFieldEng"]) {
             t.rows.push({
               bucket: item.bucket,
               total: item.total,

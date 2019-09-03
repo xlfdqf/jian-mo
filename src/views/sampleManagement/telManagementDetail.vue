@@ -511,7 +511,7 @@ export default {
             }
           } else if (colleName === "ds_report") {
             if (res.data) {
-              localStorage.setItem("ds_reportSource", res.data.data.source);
+              localStorage.setItem("ds_reportSource", res.data.data[0].source);
               this.ds_reportSource = localStorage.getItem("ds_reportSource"); //来源
               this.ds_report = res.data.data;
             } else {

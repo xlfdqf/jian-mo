@@ -73,7 +73,6 @@ export default {
       let params = { current: 1, size: 10 };
       getFeatureSource(params)
         .then(res => {
-          console.log(res);
           this.loading = false;
           this.total = res.data.total;
           this.dataSource = res.data.records;
@@ -84,11 +83,10 @@ export default {
     },
     // 页码切换
     pageChange(page) {
-      console.log(page);
+      this.loading = true;
       let params = { current: page.currentPage, size: page.pageSize };
       getFeatureSource(params)
         .then(res => {
-          console.log(res);
           this.loading = false;
           this.total = res.data.total;
           this.dataSource = res.data.records;
@@ -99,7 +97,18 @@ export default {
     },
     //搜索
     onSubmit(testForm) {
-      // console.log(testForm);
+      console.log(testForm.datasource);
+      this.loading = true;
+      // let params = { current: page.currentPage, size: page.pageSize };
+      // getFeatureSource(params)
+      //   .then(res => {
+      //     this.loading = false;
+      //     this.total = res.data.total;
+      //     this.dataSource = res.data.records;
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
     }
   }
 };

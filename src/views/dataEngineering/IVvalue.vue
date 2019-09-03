@@ -28,13 +28,6 @@
           </el-col>
           <!-- 图表 end -->
         </el-row>
-        <el-pagination
-                @current-change="handleCurrentChange"
-                :currentPage="currentPage"
-                layout="total,prev, pager, next"
-                :total="chartTotal"
-                align="right">
-         </el-pagination> 
       </el-card>
   </div>
 </template>
@@ -90,8 +83,6 @@ export default {
       tableLoading: false,
       chartLoading: false,
       total: 0,
-      chartTotal: 0,
-      currentPage: 1,
       testForm: {
         featureField: ""
       },
@@ -161,24 +152,16 @@ export default {
     // 表格页码切换
     pageChange(page) {
       this.tableLoading = true;
+      this.chartLoading = true;
       let params = { current: page.currentPage, size: page.pageSize };
       getIVvalue(params)
         .then(res => {
+          //报表数据
           this.tableLoading = false;
+          this.chartLoading = false;
           this.chartTotal = res.data.total;
           this.dataSource = res.data.records;
-        })
-        .catch(error => {
-          console.log(error);
-        });
-    },
-    // 图表页码切换
-    handleCurrentChange(current) {
-      this.currentPage = current;
-      this.chartLoading = true;
-      let params = { current: this.currentPage, size: 10 };
-      getIVvalue(params)
-        .then(res => {
+          //图表数据
           this.chartLoading = false;
           const data = res.data.records;
           this.chartData.rows = [];
@@ -188,7 +171,6 @@ export default {
               sum_of_iv: item.sum_of_iv
             });
           });
-          this.chartTotal = res.data.total;
         })
         .catch(error => {
           console.log(error);

@@ -42,13 +42,13 @@ export const dataType = [
         value: "借款金额",
     },
     // 问题：中文不能严谨判断
-    // {
-    //     featurename: 'customer_type',
-    //     value: "是否为新客",
-    // },
+    {
+        featurename: 'customer_type',
+        value: "是否为新客",
+    },
     // {
     //     featurename: 'company_period',
-    //     value: "工作时长（单位：年）",
+    //     value: "工作时长 （单位：年）",
     // },
     // {
     //     featurename: 'product_type',

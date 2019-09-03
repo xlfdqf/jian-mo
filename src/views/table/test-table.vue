@@ -57,7 +57,6 @@
 <script>
 import myTable from "@/components/myTable";
 import moment from "moment";
-import _ from "lodash";
 import { getNewsList } from "@/api/login.js";
 
 export default {

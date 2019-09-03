@@ -125,7 +125,13 @@ export default {
           isShow: true,
           render: function(v, param) {
             return param.row.bucket.map(item => {
-              return <div>{item}</div>;
+              if (item === "true") {
+                return <div>是</div>;
+              } else if (item === "false") {
+                return <div>否</div>;
+              } else {
+                return <div>{item}</div>;
+              }
             });
           }
         },

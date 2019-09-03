@@ -20,7 +20,7 @@
       </el-card>
 
       <el-card class="box-card2">
-           <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
+           <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>
 
@@ -37,6 +37,7 @@ export default {
     return {
       loading: false,
       total: 100,
+      height: 680,
       testForm: {
         transferFactor: "",
         initialJudgment: "",
@@ -83,21 +84,12 @@ export default {
             }
             return html;
           }
-        },
-        {
-          prop: "e",
-          label: "是否进入决策模型",
-          isShow: true
-          // render: function(v, param) {
-          //   let html = "";
-          //   if (param.row.e === 1) {
-          //     html = "是";
-          //   } else {
-          //     html = "否";
-          //   }
-          //   return html;
-          // }
         }
+        // {
+        //   prop: "e",
+        //   label: "是否进入决策模型",
+        //   isShow: true
+        // }
       ],
       dataSource: []
     };

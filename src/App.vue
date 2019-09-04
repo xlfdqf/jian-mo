@@ -201,6 +201,6 @@ html {
   background-color: #091938;
 }
 .el-submenu__title i {
-  color: rgb(126, 203, 224);
+  color: rgb(126, 203, 224) !important;
 }
 </style>

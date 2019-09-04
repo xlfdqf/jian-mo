@@ -2,7 +2,7 @@
 <template>
     <div class="table">
      <!-- 表单 -->
-      <!-- <el-card class="box-card" style="margin-bottom:20px">
+      <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
             <el-form-item label="特征字段:" prop="featureField">
               <el-input v-model="testForm.featureField"></el-input>
@@ -11,7 +11,7 @@
               <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
-      </el-card> -->
+      </el-card>
 
       <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
         <el-tab-pane label="报表" name="1">
@@ -40,7 +40,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 750,
+      height: 650,
       tableLoading: false,
       chartLoading: false,
       activeName: "1",
@@ -99,7 +99,7 @@ export default {
       ],
       dataSource: [],
       chartDataOne: [
-        // [655, 850, 940, 980, 1070], //[655, 850, 940, 980, 1070]分别是表示下边缘,下四分位数，中位数，上四分位数，上边缘
+        // [655, 850, 940, 980, 1070], //分别是表示下边缘,下四分位数，中位数，上四分位数，上边缘
         // [760, 800, 845, 885, 960],
       ],
       //异常值数据
@@ -297,6 +297,20 @@ export default {
           }
         ]
       });
+    },
+    onSubmit(testForm) {
+      // let params = {
+      //   orders: "ins_time",
+      //   size: 72
+      // };
+      // getDiscreteAnalysis(params)
+      //   .then(res => {
+      //     this.tableLoading = false;
+      //     this.dataSource = this.filterTable(res.data.records);
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
     }
   }
 };

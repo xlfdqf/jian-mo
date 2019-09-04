@@ -184,15 +184,35 @@ export const constantRouterMap = [
         name: 'correlationModel',
         component: () => import('@/views/characteristics/correlationModel'),
         meta: { title: 'correlationModel' }
-      },
-      // {
-      //   path: 'testChart',
-      //   name: 'testChart',
-      //   component: () => import('@/views/characteristics/testChart'),
-      //   meta: { title: 'testChart' }
-      // }
+      }
     ]
   },
+  // 模型管理
+  {
+    path: '/modelManagement',
+    component: Layout,
+    redirect: '/modelManagement/similarityRatio',
+    name: 'modelManagement',
+    meta: {
+      title: 'modelManagement',
+      icon: 'characteristics'
+    },
+    children: [
+      {
+        path: 'similarityRatio',//相似度比对
+        name: 'similarityRatio',
+        component: () => import('@/views/modelManagement/similarityRatio'),
+        meta: { title: 'similarityRatio' }
+      }, {
+        path: 'transferMatrix',//转移矩阵
+        name: 'transferMatrix',
+        component: () => import('@/views/modelManagement/transferMatrix'),
+        meta: { title: 'transferMatrix' }
+      }
+    ]
+  },
+  //模型结果展示
+
   // 表格
   // {
   //   path: '/table',

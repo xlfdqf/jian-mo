@@ -84,7 +84,11 @@ export default {
     // 页码切换
     pageChange(page) {
       this.loading = true;
-      let params = { current: page.currentPage, size: page.pageSize };
+      let params = {
+        sourceName: this.testForm.datasource,
+        current: page.currentPage,
+        size: page.pageSize
+      };
       getFeatureSource(params)
         .then(res => {
           this.loading = false;
@@ -97,18 +101,18 @@ export default {
     },
     //搜索
     onSubmit(testForm) {
-      console.log(testForm.datasource);
       this.loading = true;
-      // let params = { current: page.currentPage, size: page.pageSize };
-      // getFeatureSource(params)
-      //   .then(res => {
-      //     this.loading = false;
-      //     this.total = res.data.total;
-      //     this.dataSource = res.data.records;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
+      this.testForm.datasource = testForm.datasource;
+      let params = { sourceName: this.testForm.datasource };
+      getFeatureSource(params)
+        .then(res => {
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

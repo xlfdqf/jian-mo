@@ -191,7 +191,7 @@ export const constantRouterMap = [
   {
     path: '/modelManagement',
     component: Layout,
-    redirect: '/modelManagement/similarityRatio',
+    redirect: '/modelManagement/scoreCard',
     name: 'modelManagement',
     meta: {
       title: 'modelManagement',
@@ -199,6 +199,11 @@ export const constantRouterMap = [
     },
     children: [
       {
+        path: 'scoreCard',//评分卡
+        name: 'scoreCard',
+        component: () => import('@/views/modelManagement/scoreCard'),
+        meta: { title: 'scoreCard' }
+      }, {
         path: 'similarityRatio',//相似度比对
         name: 'similarityRatio',
         component: () => import('@/views/modelManagement/similarityRatio'),
@@ -212,7 +217,39 @@ export const constantRouterMap = [
     ]
   },
   //模型结果展示
-
+  {
+    path: '/modelResults',
+    component: Layout,
+    redirect: '/modelResults/scoreCard2',
+    name: 'modelResults',
+    meta: {
+      title: 'modelResults',
+      icon: 'characteristics'
+    },
+    children: [
+      {
+        path: 'scoreCard2',//评分卡
+        name: 'scoreCard2',
+        component: () => import('@/views/modelResults/scoreCard2'),
+        meta: { title: 'scoreCard2' }
+      }, {
+        path: 'scoreCardDetails',//评分卡详情
+        name: 'scoreCardDetails',
+        component: () => import('@/views/modelResults/scoreCardDetails'),
+        meta: { title: 'scoreCardDetails' }
+      }, {
+        path: 'transferMatrix2',//转移矩阵
+        name: 'transferMatrix2',
+        component: () => import('@/views/modelResults/transferMatrix2'),
+        meta: { title: 'transferMatrix2' }
+      }, {
+        path: 'similarityRatio2',//相似度比对
+        name: 'similarityRatio2',
+        component: () => import('@/views/modelResults/similarityRatio2'),
+        meta: { title: 'similarityRatio2' }
+      }
+    ]
+  },
   // 表格
   // {
   //   path: '/table',

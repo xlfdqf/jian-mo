@@ -200,4 +200,7 @@ html {
 .el-table__expanded-cell {
   background-color: #091938;
 }
+.el-submenu__title i {
+  color: rgb(126, 203, 224);
+}
 </style>

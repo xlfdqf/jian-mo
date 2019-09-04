@@ -49,9 +49,17 @@ export function getFeatureBox(params) {
 export function getFeatureBoxChart(params) {
   return get(`${api}/aibin/search`, params);
 }
+// 特征分箱搜索
+export function searchFeatureBox(params) {
+  return post(`${api}/aibin/searchByFeatureBin`, params);
+}
 // 特征IV值
 export function getIVvalue(params) {
   return get(`${api}/aibin/getSumIv`, params);
+}
+//特征iv值搜索
+export function searchIVvalue(params) {
+  return post(`${api}/aibin/searchByFeatureIv`, params);
 }
 // 特征分布分析
 export function getAnalysisDistribution(params) {

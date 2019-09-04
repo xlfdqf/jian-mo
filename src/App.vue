@@ -196,8 +196,8 @@ html {
   border: none;
 }
 
-/* .el-table td,
-.el-table th {
-  vertical-align: top;
-} */
+.el-table,
+.el-table__expanded-cell {
+  background-color: #091938;
+}
 </style>

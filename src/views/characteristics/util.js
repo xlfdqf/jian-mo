@@ -216,7 +216,7 @@ export const dataType = [
         featurename: 'lastsevendayphoneapplicationtimerange',
         value: "手机7天内查询平台数",
     }, {
-        featurename: '',
+        featurename: 'lastamonthidcardapplicationtimetype',
         value: "证件1个月内查询次数级别",
     }, {
         featurename: 'lastamonthidcardapplicationtimetype',

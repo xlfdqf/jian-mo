@@ -4,11 +4,10 @@
      <!-- 表单 -->
       <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-            <el-form-item label="特征字段:" prop="featureField">
-              <el-input v-model="testForm.featureField"></el-input>
+            <el-form-item label="特征字段:" prop="feature_field">
+              <el-input v-model="testForm.feature_field"></el-input>
             </el-form-item>
             <el-form-item>
-              <!-- <el-button type="primary"  icon="el-icon-search" @click="onSubmit(testForm)">搜索</el-button> -->
                <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
             </el-form-item>
           </el-form>
@@ -18,7 +17,7 @@
         <el-row>
           <el-col :span="12"><div>
               <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="true"  @pageChange="pageChange" :total="total" :loading="tableLoading" > </myTable></div>
+              :hasSelection="false" :hasPagination="hasPagination"  @pageChange="pageChange" :total="total" :loading="tableLoading" > </myTable></div>
          </el-col>
          <!-- 报表 end -->
           <el-col :span="12"><div>
@@ -34,7 +33,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getIVvalue } from "@/api/login.js";
+import { getIVvalue, searchIVvalue } from "@/api/login.js";
 import { tabType } from "../characteristics/util.js";
 
 export default {
@@ -80,11 +79,12 @@ export default {
       }
     };
     return {
+      hasPagination: true,
       tableLoading: false,
       chartLoading: false,
       total: 0,
       testForm: {
-        featureField: ""
+        feature_field: ""
       },
       columns: [
         {
@@ -171,6 +171,21 @@ export default {
               sum_of_iv: item.sum_of_iv
             });
           });
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
+    onSubmit(testForm) {
+      this.tableLoading = true;
+      let params = { feature_field: testForm.feature_field };
+      searchIVvalue(params)
+        .then(res => {
+          this.tableLoading = false;
+          console.log(res);
+          //报表数据
+          this.dataSource = res.data;
+          this.hasPagination = false;
         })
         .catch(error => {
           console.log(error);

@@ -4,8 +4,8 @@
          <!-- 表单 -->
       <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-            <el-form-item label="特征字段:" prop="featureField">
-              <el-input v-model="testForm.featureField"></el-input>
+            <el-form-item label="特征字段:" prop="feature_field">
+              <el-input v-model="testForm.feature_field"></el-input>
             </el-form-item>
             <el-form-item>
              <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
@@ -49,7 +49,11 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getFeatureBox, getFeatureBoxChart } from "@/api/login.js";
+import {
+  getFeatureBox,
+  getFeatureBoxChart,
+  searchFeatureBox
+} from "@/api/login.js";
 import { tabType, dataType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
@@ -112,7 +116,7 @@ export default {
       chartTotal: 100,
       currentPage: 1,
       tab: "",
-      testForm: { featureField: "" },
+      testForm: { feature_field: "" },
       columns: [
         {
           prop: "featureField",
@@ -212,7 +216,7 @@ export default {
         };
       });
       data.map(item => {
-        types.forEach(t => {
+        types.forEach((t, i) => {
           if (item["featureField"] === t["featureFieldEng"]) {
             t.bucket.push(item.bucket);
             t.iv.push(item.iv);
@@ -252,7 +256,6 @@ export default {
       getFeatureBox()
         .then(res => {
           this.tableLoading = false;
-          this.tableTotal = res.data.total;
           this.dataSource = this.filterTable(res.data.data, dataType);
         })
         .catch(error => {
@@ -266,7 +269,6 @@ export default {
         .then(res => {
           this.chartLoading = false;
           this.chartData = this.filterData(res.data.data, dataType);
-          // console.log(this.chartData);
         })
         .catch(error => {
           console.log(error);
@@ -282,25 +284,21 @@ export default {
       }
     },
     // 表格页码切换
-    pageChange(page) {
-      let params = { current: page.currentPage, size: 20 };
-      getFeatureBox(params)
+    pageChange(page) {},
+    // 图表分页
+    handleCurrentChange(e) {},
+    onSubmit(testForm) {
+      this.tableLoading = true;
+      let params = { feature_field: testForm.feature_field };
+      searchFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          this.tableTotal = res.data.total;
-          this.dataSource = this.filterTable(res.data.records, dataType);
+          // this.height = 200;
+          this.dataSource = this.filterTable(res.data, dataType);
         })
         .catch(error => {
           console.log(error);
         });
-    },
-    // 图表分页
-    handleCurrentChange(e) {
-      console.log("当前页：", e);
-      let params = { pageSize: 9, pageIndex: e };
-    },
-    onSubmit(testForm) {
-      console.log(testForm);
     }
   },
   // 解决初次点击tab charts不显示问题

@@ -49,7 +49,7 @@ import {
   getAnalysisDistribution,
   searchAnalysisDistribution
 } from "@/api/login.js";
-import { tabType, dataType } from "./util.js";
+import { tabType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {

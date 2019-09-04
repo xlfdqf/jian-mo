@@ -141,7 +141,7 @@ export default {
       return result;
     },
     // 过滤图表数据
-    filterData(data, dataType) {
+    filterData(data) {
       const chartData = data.map(item => {
         return [
           item.edgeLow,

@@ -181,12 +181,54 @@ export default {
     this.queryTable();
   },
   methods: {
+    //去重对象数组
+    noRepeat(arr, type) {
+      var newArr = [];
+      var tArr = [];
+      if (arr.length == 0) {
+        return arr;
+      } else {
+        if (type) {
+          for (var i = 0; i < arr.length; i++) {
+            if (!tArr[arr[i][type]]) {
+              newArr.push(arr[i]);
+              tArr[arr[i][type]] = true;
+            }
+          }
+          return newArr;
+        } else {
+          for (var i = 0; i < arr.length; i++) {
+            if (!tArr[arr[i]]) {
+              newArr.push(arr[i]);
+              tArr[arr[i]] = true;
+            }
+          }
+          return newArr;
+        }
+      }
+    },
     //过滤table报表数据
-    filterTable(data, dataType) {
-      const types = dataType.map(({ featurename, value }) => {
+    filterTable(data) {
+      // const types = dataType.map(({ featurename, value }) => {
+      //   return {
+      //     featureField: value,
+      //     featureFieldEng: featurename,
+      //     bucket: [],
+      //     iv: []
+      //   };
+      // });
+      // data.map(item => {
+      //   types.forEach((t, i) => {
+      //     if (item["featureField"] === t["featureFieldEng"]) {
+      //       t.bucket.push(item.bucket);
+      //       t.iv.push(item.iv);
+      //     }
+      //   });
+      // });
+      const types = data.map(item => {
         return {
-          featureField: value,
-          featureFieldEng: featurename,
+          featureField: item.feature_name,
+          featureFieldEng: item.featureField,
           bucket: [],
           iv: []
         };
@@ -199,6 +241,7 @@ export default {
           }
         });
       });
+      // console.log(this.noRepeat(types, "featureFieldEng"));
       return types;
     },
     // 过滤charts图表数据
@@ -226,7 +269,8 @@ export default {
       getFeatureBox()
         .then(res => {
           this.tableLoading = false;
-          this.dataSource = this.filterTable(res.data.data, dataType);
+          const types = this.filterTable(res.data.data);
+          this.dataSource = this.noRepeat(types, "featureFieldEng");
         })
         .catch(error => {
           console.log(error);
@@ -263,22 +307,7 @@ export default {
       searchFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          const types = res.data.map(item => {
-            return {
-              featureField: item.feature_name,
-              featureFieldEng: item.featureField,
-              bucket: [],
-              iv: []
-            };
-          });
-          res.data.map(item => {
-            types.forEach((t, i) => {
-              if (item["featureField"] === t["featureFieldEng"]) {
-                t.bucket.push(item.bucket);
-                t.iv.push(item.iv);
-              }
-            });
-          });
+          const types = this.filterTable(res.data);
           this.dataSource = [types[0]];
         })
         .catch(error => {

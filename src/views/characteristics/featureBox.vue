@@ -209,22 +209,6 @@ export default {
     },
     //过滤table报表数据
     filterTable(data) {
-      // const types = dataType.map(({ featurename, value }) => {
-      //   return {
-      //     featureField: value,
-      //     featureFieldEng: featurename,
-      //     bucket: [],
-      //     iv: []
-      //   };
-      // });
-      // data.map(item => {
-      //   types.forEach((t, i) => {
-      //     if (item["featureField"] === t["featureFieldEng"]) {
-      //       t.bucket.push(item.bucket);
-      //       t.iv.push(item.iv);
-      //     }
-      //   });
-      // });
       const types = data.map(item => {
         return {
           featureField: item.feature_name,
@@ -245,17 +229,17 @@ export default {
       return types;
     },
     // 过滤charts图表数据
-    filterData(data, dataType) {
-      const types = dataType.map(({ featurename, value }) => {
+    filterData(data) {
+      const types = data.map(item => {
         return {
-          name: value,
-          featureFieldEng: featurename,
+          name: item.feature_name,
+          featureFieldEng: item.featureField,
           columns: ["bucket", "iv"],
           rows: []
         };
       });
-      data.forEach(item => {
-        types.forEach(t => {
+      data.map(item => {
+        types.forEach((t, i) => {
           if (item["featureField"] === t["featureFieldEng"]) {
             t.rows.push({ bucket: item.bucket, iv: item.iv });
           }
@@ -282,7 +266,8 @@ export default {
       getFeatureBoxChart()
         .then(res => {
           this.chartLoading = false;
-          this.chartData = this.filterData(res.data.data, dataType);
+          const types = this.filterData(res.data.data);
+          this.chartData = this.noRepeat(types, "featureFieldEng");
         })
         .catch(error => {
           console.log(error);
@@ -307,8 +292,12 @@ export default {
       searchFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          const types = this.filterTable(res.data);
-          this.dataSource = [types[0]];
+          //报表
+          const table = this.filterTable(res.data);
+          this.dataSource = [table[0]];
+          //图表
+          const chart = this.filterData(res.data);
+          this.chartData = [chart[0]];
         })
         .catch(error => {
           console.log(error);

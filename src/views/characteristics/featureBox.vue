@@ -154,8 +154,8 @@ export default {
       dataSource: [
         // {
         //   featureField: "年龄",
-        //   group_concat_bucket: ["0-10", "20-30", "30-40"],
-        //   group_concat_iv: [0.3, 0.2, 0.55]
+        //   bucket: ["0-10", "20-30", "30-40"],
+        //   iv: [0.3, 0.2, 0.55]
         // },
       ],
       // echart所需数据格式
@@ -181,30 +181,6 @@ export default {
     this.queryTable();
   },
   methods: {
-    //字段排序
-    // const getNumber = (val) => {
-    // 		const lists = val.split('-');
-    // 		let num = 0;
-    // 		for(let i = 0; i < lists.length; i++) {
-    // 			num += lists[i]
-    // 		}
-    // 		return num;
-    // 	},
-    // sortData(data) {
-    //   const sortData = [];
-    //   const otherData = [];
-    //   data.forEach((item, index) => {
-    //     if (item.featurename === "age") {
-    //       sortData.push(item);
-    //     } else {
-    //       otherData.push(item);
-    //     }
-    //   });
-    //   sortData.sort((a, b) => {
-    //     return getNumber(a.variate) - getNumber(b.variate);
-    //   });
-    //   return sortData.concat(otherData);
-    // },
     //过滤table报表数据
     filterTable(data, dataType) {
       const types = dataType.map(({ featurename, value }) => {
@@ -242,12 +218,6 @@ export default {
           }
         });
       });
-      //过滤数据，后端未返回的则不显示
-      // Array.from(types).forEach((item, index) => {
-      //   if (item.rows.length === 0) {
-      //     types.splice(types[index], 1);
-      //   }
-      // });
       return types;
     },
     // 查询table报表
@@ -293,8 +263,23 @@ export default {
       searchFeatureBox(params)
         .then(res => {
           this.tableLoading = false;
-          // this.height = 200;
-          this.dataSource = this.filterTable(res.data, dataType);
+          const types = res.data.map(item => {
+            return {
+              featureField: item.feature_name,
+              featureFieldEng: item.featureField,
+              bucket: [],
+              iv: []
+            };
+          });
+          res.data.map(item => {
+            types.forEach((t, i) => {
+              if (item["featureField"] === t["featureFieldEng"]) {
+                t.bucket.push(item.bucket);
+                t.iv.push(item.iv);
+              }
+            });
+          });
+          this.dataSource = [types[0]];
         })
         .catch(error => {
           console.log(error);

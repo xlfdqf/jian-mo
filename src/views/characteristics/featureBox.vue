@@ -54,7 +54,7 @@ import {
   getFeatureBoxChart,
   searchFeatureBox
 } from "@/api/login.js";
-import { tabType, dataType } from "./util.js";
+import { tabType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
@@ -225,7 +225,6 @@ export default {
           }
         });
       });
-      // console.log(this.noRepeat(types, "featureFieldEng"));
       return types;
     },
     // 过滤charts图表数据

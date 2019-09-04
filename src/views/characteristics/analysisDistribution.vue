@@ -1,6 +1,18 @@
 <!--特征分布分析页面 -->
 <template>
   <div class="table">
+     <!-- 表单 -->
+      <el-card class="box-card" style="margin-bottom:20px">
+          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+            <el-form-item label="特征字段:" prop="feature_field">
+              <el-input v-model="testForm.feature_field"></el-input>
+            </el-form-item>
+            <el-form-item>
+             <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
+            </el-form-item>
+          </el-form>
+      </el-card>
+      
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
@@ -33,7 +45,10 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getAnalysisDistribution } from "@/api/login.js";
+import {
+  getAnalysisDistribution,
+  searchAnalysisDistribution
+} from "@/api/login.js";
 import { tabType, dataType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
@@ -91,9 +106,12 @@ export default {
       chartTotal: 100,
       currentPage: 1,
       tab: "",
+      testForm: {
+        feature_field: ""
+      },
       columns: [
         {
-          prop: "featureName",
+          prop: "featureField",
           label: "特征字段",
           isShow: true
         },
@@ -147,24 +165,48 @@ export default {
   },
   created() {
     this.queryTable();
-    // this.queryEcharts();
   },
   methods: {
+    //去重对象数组
+    noRepeat(arr, type) {
+      var newArr = [];
+      var tArr = [];
+      if (arr.length == 0) {
+        return arr;
+      } else {
+        if (type) {
+          for (var i = 0; i < arr.length; i++) {
+            if (!tArr[arr[i][type]]) {
+              newArr.push(arr[i]);
+              tArr[arr[i][type]] = true;
+            }
+          }
+          return newArr;
+        } else {
+          for (var i = 0; i < arr.length; i++) {
+            if (!tArr[arr[i]]) {
+              newArr.push(arr[i]);
+              tArr[arr[i]] = true;
+            }
+          }
+          return newArr;
+        }
+      }
+    },
     //过滤table报表数据
-    filterTable(data, dataType) {
-      console.log;
-      const types = dataType.map(({ featurename, value }) => {
+    filterTable(data) {
+      const types = data.map(item => {
         return {
-          featureName: value,
-          featureFieldEng: featurename,
+          featureField: item.featureName,
+          featureFieldEng: item.featureField,
           bucket: [],
           total: [],
           proportion: []
         };
       });
       data.map(item => {
-        types.forEach(t => {
-          if (item["featureField"] == t["featureFieldEng"]) {
+        types.forEach((t, i) => {
+          if (item["featureField"] === t["featureFieldEng"]) {
             t.bucket.push(item.bucket);
             t.total.push(item.total);
             t.proportion.push(item.proportion);
@@ -174,17 +216,17 @@ export default {
       return types;
     },
     // 过滤charts图表数据
-    filterData(data, dataType) {
-      const types = dataType.map(({ featurename, value }) => {
+    filterData(data) {
+      const types = data.map(item => {
         return {
-          name: value,
-          featureFieldEng: featurename,
+          name: item.featureName,
+          featureFieldEng: item.featureField,
           columns: ["bucket", "total", "proportion"],
           rows: []
         };
       });
-      data.forEach(item => {
-        types.forEach(t => {
+      data.map(item => {
+        types.forEach((t, i) => {
           if (item["featureField"] === t["featureFieldEng"]) {
             t.rows.push({
               bucket: item.bucket,
@@ -194,7 +236,6 @@ export default {
           }
         });
       });
-
       return types;
     },
     // 切换tab
@@ -212,7 +253,8 @@ export default {
       getAnalysisDistribution()
         .then(res => {
           this.tableLoading = false;
-          this.dataSource = this.filterTable(res.data, dataType);
+          const types = this.filterTable(res.data);
+          this.dataSource = this.noRepeat(types, "featureFieldEng");
         })
         .catch(error => {
           console.log(error);
@@ -224,28 +266,34 @@ export default {
       getAnalysisDistribution()
         .then(res => {
           this.chartLoading = false;
-          this.chartData = this.filterData(res.data, dataType);
+          const types = this.filterData(res.data);
+          this.chartData = this.noRepeat(types, "featureFieldEng");
         })
         .catch(error => {
           console.log(error);
         });
     },
     // 页码切换
-    pageChange(page) {
-      console.log(page);
-      let params = { pageIndex: page.currentPage, pageSize: page.pageSize };
-      // getNewsList(params)
-      //   .then(res => {
-      //     this.dataSource = res.data;
-      //   })
-      //   .catch(error => {
-      //     console.log(error);
-      //   });
-    },
+    pageChange(page) {},
     // 图表分页
-    handleCurrentChange(e) {
-      // console.log(e);
-      let params = { pageSize: 9, pageIndex: e };
+    handleCurrentChange(e) {},
+    onSubmit(testForm) {
+      this.tableLoading = true;
+      let params = { feature_field: testForm.feature_field };
+      searchAnalysisDistribution(params)
+        .then(res => {
+          console.log(res);
+          this.tableLoading = false;
+          //报表
+          const table = this.filterTable(res.data);
+          this.dataSource = [table[0]];
+          //图表
+          const chart = this.filterData(res.data);
+          this.chartData = [chart[0]];
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   },
   // 解决初次点击tab charts不显示问题
@@ -271,6 +319,10 @@ export default {
   font-size: 14px;
   margin-top: -40px;
   color: rgb(126, 203, 224);
+}
+.box-card {
+  background-image: url("../../assets/images/home/topBg.png");
+  background-size: cover;
 }
 .table >>> .box-card2 {
   background-color: #091938 !important;

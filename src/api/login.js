@@ -65,6 +65,10 @@ export function searchIVvalue(params) {
 export function getAnalysisDistribution(params) {
   return get(`${api}/aibin/analysis`, params);
 }
+// 特征分布分析搜索
+export function searchAnalysisDistribution(params) {
+  return post(`${api}/aibin/searchAnalysisByFeature`, params);
+}
 // 特征关联模型
 export function getCorrelationModel(params) {
   return get(`${api}/featureconfig/modellist`, params);

@@ -73,3 +73,7 @@ export function searchAnalysisDistribution(params) {
 export function getCorrelationModel(params) {
   return get(`${api}/featureconfig/modellist`, params);
 }
+//模型管理相似度对比
+export function getSimilarityRatio(params) {
+  // return get(`${api}/featureconfig/modellist`, params);
+}

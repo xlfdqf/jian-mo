@@ -203,4 +203,24 @@ html {
 .el-submenu__title i {
   color: rgb(126, 203, 224) !important;
 }
+.el-button--text {
+  color: rgb(126, 203, 224);
+}
+/* 对话框 */
+.el-dialog {
+  background: #091938;
+}
+.el-dialog__title {
+  color: aqua;
+  text-align: center;
+}
+.el-button--info {
+  background: #0c2a4d;
+  border: none;
+  color: #eee;
+}
+.el-button--primary {
+  background: #040510;
+  border: none;
+}
 </style>

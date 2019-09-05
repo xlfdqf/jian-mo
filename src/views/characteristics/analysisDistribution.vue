@@ -22,7 +22,7 @@
 
         <el-tab-pane label="图表" name="2">
           <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
-         element-loading-background="rgba(9, 25, 56, 0.8)">
+         element-loading-background="rgba(9, 25, 56, 0.8)" style="height:750px;">
              <el-row >
                 <div v-for="item in chartData" :key="item.id">
                   <el-col :span="12"><div> <ve-histogram :extend="chartExtend" :settings="chartSettings" v-loading="chartLoading"  :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
@@ -40,11 +40,15 @@
         <!-- 柱状图表 end -->
 
       </el-tabs>
+      <el-tooltip placement="top" content="回到顶部">
+      <nx-back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></nx-back-to-top>
+    </el-tooltip>
   </div>
 </template>
 
 <script>
 import myTable from "@/components/myTable";
+import nxBackToTop from "@/components/nx-back-to-top";
 import {
   getAnalysisDistribution,
   searchAnalysisDistribution
@@ -53,7 +57,7 @@ import { tabType } from "./util.js";
 import "echarts/lib/component/dataZoom"; //区域缩放组件
 
 export default {
-  components: { myTable },
+  components: { myTable, nxBackToTop },
   data() {
     this.chartExtend = {
       series: {
@@ -97,7 +101,16 @@ export default {
       }
     };
     return {
-      height: 750,
+      myBackToTopStyle: {
+        right: "50px",
+        bottom: "50px",
+        width: "40px",
+        height: "40px",
+        "border-radius": "4px",
+        "line-height": "45px", // 请保持与高度一致以垂直居中 Please keep consistent with height to center vertically
+        background: "#e7eaf1" // 按钮的背景颜色 The background color of the button
+      },
+      height: 650,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据

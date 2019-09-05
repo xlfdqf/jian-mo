@@ -60,17 +60,17 @@ export default {
           isShow: true
         },
         {
-          prop: "",
+          prop: "a",
           label: "关联转移因子",
           isShow: true
         },
         {
-          prop: "",
+          prop: "b",
           label: "关联初次判断",
           isShow: true
         },
         {
-          prop: "",
+          prop: "c",
           label: "关联最终评分",
           isShow: true
         }

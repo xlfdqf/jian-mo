@@ -236,7 +236,8 @@ export const constantRouterMap = [
         path: 'scoreCardDetails',//评分卡详情
         name: 'scoreCardDetails',
         component: () => import('@/views/modelResults/scoreCardDetails'),
-        meta: { title: 'scoreCardDetails' }
+        meta: { title: 'scoreCardDetails' },
+        hidden: true
       }, {
         path: 'transferMatrix2',//转移矩阵
         name: 'transferMatrix2',

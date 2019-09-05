@@ -4,12 +4,12 @@
      <!-- 表单 -->
  <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-            <el-form-item label="准入规则:" prop="accessRules">
-              <el-input v-model="testForm.accessRules"></el-input>
+            <el-form-item label="准入规则:" prop="status">
+              <el-input v-model="testForm.status"></el-input>
             </el-form-item>
-             <el-form-item label="非准入规则:" prop="noAccessRules">
-              <el-input v-model="testForm.noAccessRules"></el-input>
-            </el-form-item>
+             <!-- <el-form-item label="非准入规则:" prop="status">
+              <el-input v-model="testForm.status"></el-input>
+            </el-form-item> -->
             <el-form-item>
               <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
                <div class="search" @click="add" style="float:left;margin-left:20px;"><img src="@/assets/images/home/sbtn.png" style="width:130px;height:35px;object-fit:fill;"/><span class="searchBtn">添加非准入规则</span> </div>
@@ -60,8 +60,7 @@ export default {
       loading: false,
       total: 0,
       testForm: {
-        accessRules: "",
-        noAccessRules: ""
+        status: ""
       },
       form: {
         checkAll: false,
@@ -72,38 +71,36 @@ export default {
       formLabelWidth: "120px",
       columns: [
         {
-          prop: "a",
+          prop: "featureName",
           label: "特征字段",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "status",
           label: "准入特征",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.status === 1) {
+              return "是";
+            } else if (param.row.status === 2) {
+              return "否";
+            }
+          }
         },
         {
-          prop: "c",
+          prop: "",
           label: "非准入特征",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.status === 1) {
+              return "否";
+            } else if (param.row.status === 2) {
+              return "是";
+            }
+          }
         }
       ],
-      dataSource: [
-        {
-          a: "年龄",
-          b: "是",
-          c: "否"
-        },
-        {
-          a: "性别",
-          b: "是",
-          c: "否"
-        },
-        {
-          a: "籍贯",
-          b: "否",
-          c: "否"
-        }
-      ]
+      dataSource: []
     };
   },
   created() {
@@ -112,27 +109,48 @@ export default {
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
-      let params = { current: 1, size: 10 };
-      //   getSimilarityRatio(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      // let params = { current: 1, size: 10 };
+      getSimilarityRatio()
+        .then(res => {
+          this.loading = true;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+          const data = this.dataSource;
+          //过滤数据，status===0则删除数据
+          Array.from(data).forEach((item, index) => {
+            if (item.status === 0) {
+              console.log(item, index);
+              data.splice(data[index], 1);
+            }
+          });
+          console.log(this.dataSource);
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
-      //   this.loading = true;
-      let params = {};
-      //   getFeatureSource(params)
-      //     .then(res => {})
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      let params = { current: page.currentPage, size: page.pageSize };
+      getSimilarityRatio(params)
+        .then(res => {
+          this.loading = true;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+          const data = this.dataSource;
+          //过滤数据，status===0则删除数据
+          Array.from(data).forEach((item, index) => {
+            if (item.status === 0) {
+              console.log(item, index);
+              data.splice(data[index], 1);
+            }
+          });
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //查询非准入规则
     queryNonAccessRules() {},

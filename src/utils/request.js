@@ -145,4 +145,30 @@ export function post(url, params) {
   });
 }
 
+export function deletes(url, params) {
+  return new Promise((resolve, reject) => {
+    axios.delete(url, {
+      data: params
+    })
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  });
+}
+
+export function put(url, params) {
+  return new Promise((resolve, reject) => {
+    axios.put(url, params)
+      .then(res => {
+        resolve(res.data);
+      })
+      .catch(err => {
+        reject(err.data)
+      })
+  });
+}
+
 export default axios;

@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { get, post } from '@/utils/request'
+import { get, post, deletes, put } from '@/utils/request'
 
 const api = process.env.NODE_ENV == "development" ? 'api' : '';
 
@@ -75,5 +75,13 @@ export function getCorrelationModel(params) {
 }
 //模型管理相似度对比
 export function getSimilarityRatio(params) {
-  // return get(`${api}/featureconfig/modellist`, params);
+  return get(`${api}/featureconfig/list`, params);
 }
+//模型管理相似度对比删除
+export function SimilarityRatioDelete(params) {
+  // return deletes(`${api}/featureconfig/id`, params);
+}
+//模型管理相似度对比添加
+// export function SimilarityRatioAdd(params) {
+//   return put(`${api}/featureconfig/id`, params);
+// }

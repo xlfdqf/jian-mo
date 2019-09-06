@@ -24,7 +24,6 @@
     <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
     <el-form-item class="login-btn" @click.native.prevent="handleLogin">
       <img src="@/assets/images/home/login-btn.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px">登录</span>
-      <!-- <el-button type="primary" size="small" @click.native.prevent="handleLogin" class="login-submit">登录</el-button> -->
     </el-form-item>
   </el-form>
 </template>
@@ -39,6 +38,19 @@ export default {
         this.loginForm.code = "";
         this.refreshCode();
         callback(new Error("请输入正确的验证码"));
+      } else {
+        callback();
+      }
+    };
+    const validatePwd = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error("请输入密码"));
+      }
+      if (
+        this.loginForm.username !== "payee" ||
+        this.loginForm.password !== "cGF5ZWU="
+      ) {
+        callback(new Error("用户名或密码不正确"));
       } else {
         callback();
       }
@@ -73,11 +85,18 @@ export default {
       },
       loginRules: {
         username: [
-          { required: true, message: "请输入用户名", trigger: "blur" }
+          {
+            required: true,
+            message: "请输入用户名",
+            trigger: "blur"
+          }
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, message: "密码长度最少为6位", trigger: "blur" }
+          {
+            required: true,
+            trigger: "blur",
+            validator: validatePwd
+          }
         ],
         code: [
           { required: true, message: "请输入验证码", trigger: "blur" },
@@ -89,8 +108,6 @@ export default {
     };
   },
   created() {},
-  mounted() {},
-  computed: {},
   methods: {
     showPassword() {
       this.passwordType === ""
@@ -107,8 +124,7 @@ export default {
               this.$router.push({ path: "/dashboard/dashboard" });
             })
             .catch(err => {
-              alert("登录失败！");
-              this.$message.error(err);
+              this.$message.error(err.msg);
             });
         }
       });

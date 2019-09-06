@@ -38,7 +38,7 @@
                 <el-checkbox :indeterminate="form.isIndeterminate" v-model="form.checkAll" @change="handleCheckAllChange(form.checkAll)">全选</el-checkbox>
                 <div style="margin: 15px 0;"></div>
                 <el-checkbox-group v-model="form.checkedCities" @change="handleCheckedCitiesChange(form.checkedCities)">
-                    <el-checkbox v-for="city in form.cities" :label="city" :key="city">{{city}}</el-checkbox>
+                    <el-checkbox v-for="city in form.cities" :label="city.id" :key="city.id">{{city.featureName}}</el-checkbox>
                 </el-checkbox-group>
             </el-form-item>
         </el-form>
@@ -168,7 +168,7 @@ export default {
           const data = res.data.records.map(item => {
             return item.featureName;
           });
-          this.form.cities = data;
+          this.form.cities = res.data.records;
         })
         .catch(error => {
           console.log(error);
@@ -192,9 +192,12 @@ export default {
     },
     //全选
     handleCheckAllChange(val) {
-      this.form.checkedCities = val ? this.form.cities : [];
-      console.log(this.form.checkedCities);
+      const data = this.form.cities.map(item => {
+        return item.id;
+      });
+      this.form.checkedCities = val ? data : [];
       this.form.isIndeterminate = false;
+      console.log("全选id：", this.form.checkedCities);
     },
     //多选
     handleCheckedCitiesChange(value) {
@@ -202,8 +205,7 @@ export default {
       this.form.checkAll = checkedCount === this.form.cities.length;
       this.form.isIndeterminate =
         checkedCount > 0 && checkedCount < this.form.cities.length;
-      //  this.form.checkedCities=value
-      console.log(value);
+      console.log("多选：", value);
     },
     // 提交对话框
     confirm(form) {

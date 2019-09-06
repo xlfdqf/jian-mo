@@ -38,7 +38,7 @@ export default {
   /* background-size: contain; */
   height: 1200px;
   /* margin-top: 100px; */
-  margin-left: 20px;
+  /* margin-left: 20px; */
 }
 </style>
 

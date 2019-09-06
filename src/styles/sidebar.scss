@@ -4,7 +4,7 @@
     margin-top:30px;
     // min-height: 100%;
     transition: margin-left .28s;
-    margin-left: 250px;
+    margin-left: 240px;
   } // 侧边栏
   .sidebar-container {
     transition: width 0.28s;
@@ -47,6 +47,7 @@
   .hideSidebar {
     .sidebar-container {
       width: 36px !important;
+      margin-left: 0px;
     }
     .main-container {
       margin-left: 36px;

@@ -107,8 +107,8 @@ export default {
         width: "40px",
         height: "40px",
         "border-radius": "4px",
-        "line-height": "45px", // 请保持与高度一致以垂直居中 Please keep consistent with height to center vertically
-        background: "#e7eaf1" // 按钮的背景颜色 The background color of the button
+        "line-height": "45px", // 请保持与高度一致以垂直居中
+        background: "#e7eaf1" // 按钮的背景颜色
       },
       height: 650,
       tableLoading: false,
@@ -161,19 +161,7 @@ export default {
       ],
       dataSource: [],
       // 循环所需数据格式
-      chartData: [
-        // {
-        //   id: 1,
-        //   name: "年龄",
-        //   columns: ["特征分箱结果", "每箱个数", "每箱比例"],
-        //   rows: [
-        //     { 特征分箱结果: "0-10岁", 每箱个数: 5, 每箱比例: 11.56 },
-        //     { 特征分箱结果: "11-20岁", 每箱个数: 10, 每箱比例: 78.54 },
-        //     { 特征分箱结果: "21-30岁", 每箱个数: 80, 每箱比例: 44.34 },
-        //     { 特征分箱结果: "31-40岁", 每箱个数: 53, 每箱比例: 99.9 }
-        //   ]
-        // },
-      ]
+      chartData: []
     };
   },
   created() {

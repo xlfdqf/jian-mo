@@ -57,7 +57,7 @@ export default {
         },
         {
           prop: "e",
-          label: "转移黑名单",
+          label: "转移劣质用户",
           isShow: true
         }
       ],

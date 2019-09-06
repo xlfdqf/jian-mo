@@ -223,4 +223,14 @@ html {
   background: #040510;
   border: none;
 }
+
+/* 多选框 */
+.el-checkbox {
+  color: rgb(126, 203, 224);
+  margin-left: 30px;
+}
+/* .el-checkbox + .el-checkbox {
+  margin-right: 30px;
+  margin-left: 0px;
+} */
 </style>

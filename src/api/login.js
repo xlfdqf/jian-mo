@@ -73,15 +73,15 @@ export function searchAnalysisDistribution(params) {
 export function getCorrelationModel(params) {
   return get(`${api}/featureconfig/modellist`, params);
 }
-//模型管理相似度对比
+//模型管理相似度对比查询列表
 export function getSimilarityRatio(params) {
   return get(`${api}/featureconfig/list`, params);
 }
-//模型管理相似度对比删除
-export function SimilarityRatioDelete(params) {
-  // return deletes(`${api}/featureconfig/id`, params);
+//模型管理相似度对比搜索、非准入规则查询
+export function searchSimilarityRatio(params) {
+  return get(`${api}/featureconfig/page`, params);
 }
-//模型管理相似度对比添加
-// export function SimilarityRatioAdd(params) {
-//   return put(`${api}/featureconfig/id`, params);
-// }
+//模型管理相似度对比删除、添加（修改状态）
+export function SimilarityRatioDelete(params) {
+  return put(`${api}/featureconfig`, params);
+}

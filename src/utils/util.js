@@ -1,3 +1,4 @@
+import { Message } from 'element-ui'
 /**
  * 动态插入css
  */
@@ -16,5 +17,14 @@ export const loadStyle = url => {
 export const setTitle = function (title) {
   title = title ? `${title}` : '大圣数据建模系统'
   window.document.title = title
+}
+
+//消息提示
+export function message(title, type) {
+  Message({
+    showClose: true,
+    message: title,
+    type: type
+  });
 }
 

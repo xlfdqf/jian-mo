@@ -20,7 +20,7 @@
          <i slot="prefix" class="icon-mima"></i> 
       </el-input>
     </el-form-item>
-    <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox>
+    <!-- <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox> -->
     <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
     <el-form-item class="login-btn" @click.native.prevent="handleLogin">
       <img src="@/assets/images/home/login-btn.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px">登录</span>
@@ -50,7 +50,7 @@ export default {
         this.loginForm.username !== "payee" ||
         this.loginForm.password !== "cGF5ZWU="
       ) {
-        callback(new Error("用户名或密码不正确"));
+        callback(new Error("用户名或密码错误"));
       } else {
         callback();
       }
@@ -107,7 +107,6 @@ export default {
       passwordType: "password"
     };
   },
-  created() {},
   methods: {
     showPassword() {
       this.passwordType === ""

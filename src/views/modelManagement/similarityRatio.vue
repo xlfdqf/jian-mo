@@ -4,12 +4,17 @@
      <!-- 表单 -->
  <el-card class="box-card" style="margin-bottom:20px">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
-            <el-form-item label="准入规则:" prop="status">
-              <el-input v-model="testForm.status"></el-input>
+            <el-form-item label="准入规则:">
+              <el-select v-model="value" placeholder="请选择" @change="selectVal">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
             </el-form-item>
-             <!-- <el-form-item label="非准入规则:" prop="status">
-              <el-input v-model="testForm.status"></el-input>
-            </el-form-item> -->
+             
             <el-form-item>
               <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
                <div class="search" @click="add" style="float:left;margin-left:20px;"><img src="@/assets/images/home/sbtn.png" style="width:130px;height:35px;object-fit:fill;"/><span class="searchBtn">添加非准入规则</span> </div>
@@ -18,7 +23,7 @@
       </el-card>
 
     <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
-      :total="total" @pageChange="pageChange">
+      :total="total" @pageChange="pageChange" :loading="loading">
        <el-table-column slot="operate" label="操作"  align="center">
           <template slot-scope="scope">
             <el-button type="text" @click="deletes(scope.row)">删除</el-button>
@@ -48,9 +53,15 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getSimilarityRatio } from "@/api/login.js";
+import {
+  getSimilarityRatio,
+  searchSimilarityRatio,
+  SimilarityRatioDelete
+} from "@/api/login.js";
+import { message } from "@/utils/util.js";
 
-const cityOptions = ["上海", "北京", "广州", "深圳"];
+// const cityOptions = ["上海", "北京", "广州", "深圳"];
+const cityOptions = [];
 export default {
   components: { myTable },
   data() {
@@ -65,15 +76,27 @@ export default {
       form: {
         checkAll: false,
         checkedCities: [],
-        cities: cityOptions,
+        cities: [],
         isIndeterminate: true
       },
+      options: [
+        {
+          value: "1",
+          label: "是"
+        },
+        {
+          value: "2",
+          label: "否"
+        }
+      ],
+      value: "",
       formLabelWidth: "120px",
       columns: [
         {
           prop: "featureName",
           label: "特征字段",
-          isShow: true
+          isShow: true,
+          width: 300
         },
         {
           prop: "status",
@@ -110,21 +133,13 @@ export default {
     // 查询列表
     query() {
       this.loading = true;
-      // let params = { current: 1, size: 10 };
+      let params = { current: 1, size: 10 };
       getSimilarityRatio()
         .then(res => {
-          this.loading = true;
+          this.loading = false;
           this.total = res.data.total;
           this.dataSource = res.data.records;
           const data = this.dataSource;
-          //过滤数据，status===0则删除数据
-          Array.from(data).forEach((item, index) => {
-            if (item.status === 0) {
-              console.log(item, index);
-              data.splice(data[index], 1);
-            }
-          });
-          console.log(this.dataSource);
         })
         .catch(error => {
           console.log(error);
@@ -136,36 +151,48 @@ export default {
       let params = { current: page.currentPage, size: page.pageSize };
       getSimilarityRatio(params)
         .then(res => {
-          this.loading = true;
+          this.loading = false;
           this.total = res.data.total;
           this.dataSource = res.data.records;
-          const data = this.dataSource;
-          //过滤数据，status===0则删除数据
-          Array.from(data).forEach((item, index) => {
-            if (item.status === 0) {
-              console.log(item, index);
-              data.splice(data[index], 1);
-            }
-          });
         })
         .catch(error => {
           console.log(error);
         });
     },
     //查询非准入规则
-    queryNonAccessRules() {},
-    //添加非准入规则
-    add() {
-      this.dialogFormVisible = true;
-      //   this.queryNonAccessRules();
+    queryNonAccessRules() {
+      this.loading = true;
+      searchSimilarityRatio()
+        .then(res => {
+          this.loading = false;
+          const data = res.data.records.map(item => {
+            return item.featureName;
+          });
+          this.form.cities = data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //删除
     deletes(row) {
-      console.log(row);
+      let params = { id: row.id, status: 0 };
+      SimilarityRatioDelete(params)
+        .then(res => {
+          if (res.code === 0) {
+            message("删除成功!", "success");
+            this.query();
+          } else {
+            message("删除失败!", "error");
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //全选
     handleCheckAllChange(val) {
-      this.form.checkedCities = val ? cityOptions : [];
+      this.form.checkedCities = val ? this.form.cities : [];
       console.log(this.form.checkedCities);
       this.form.isIndeterminate = false;
     },
@@ -175,19 +202,51 @@ export default {
       this.form.checkAll = checkedCount === this.form.cities.length;
       this.form.isIndeterminate =
         checkedCount > 0 && checkedCount < this.form.cities.length;
+      //  this.form.checkedCities=value
       console.log(value);
     },
     // 提交对话框
     confirm(form) {
-      //  this.dialogFormVisible = false;
-      console.log(form);
+      console.log(form.checkedCities);
+      //  let params = { id: row.id, status: 0 };
+      // SimilarityRatioDelete(params)
+      //   .then(res => {
+      //     if (res.code === 0) {
+      //       message("删除成功!", "success");
+      //       this.query();
+      //     } else {
+      //       message("删除失败!", "error");
+      //     }
+      //   })
+      //   .catch(error => {
+      //     console.log(error);
+      //   });
+    },
+    //添加非准入规则
+    add() {
+      this.dialogFormVisible = true;
+      this.queryNonAccessRules();
     },
     cancel() {
       this.dialogFormVisible = false;
     },
+    selectVal(val) {
+      this.val = val;
+    },
     //搜索
     onSubmit(testForm) {
-      console.log(testForm);
+      this.loading = true;
+      let params = { status: this.value };
+      searchSimilarityRatio(params)
+        .then(res => {
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+          const data = this.dataSource;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     }
   }
 };

@@ -92,6 +92,15 @@ export default {
       }
     };
     return {
+      myBackToTopStyle: {
+        right: "50px",
+        bottom: "50px",
+        width: "40px",
+        height: "40px",
+        "border-radius": "4px",
+        "line-height": "45px", // 请保持与高度一致以垂直居中
+        background: "#e7eaf1" // 按钮的背景颜色
+      },
       hasPagination: true,
       tableLoading: false,
       chartLoading: false,
@@ -145,7 +154,6 @@ export default {
     //查询图表
     queryEcharts() {
       this.chartLoading = true;
-      // let params = { current: 1, size: 10 };
       getIVvalue()
         .then(res => {
           this.chartLoading = false;
@@ -156,8 +164,6 @@ export default {
               sum_of_iv: item.sum_of_iv
             });
           });
-          console.log(this.chartData);
-          // this.chartTotal = res.data.total;
         })
         .catch(error => {
           console.log(error);

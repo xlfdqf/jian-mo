@@ -15,7 +15,7 @@
             <el-row>
                 <el-col :span="6"><div class="blod">手机号:{{item.mobile | formatPhone}}</div></el-col>
                 <el-col :span="6"><div class="blod">借款金额:{{item.amount_max}}</div></el-col>
-                <el-col :span="6"><div class="blod">银行卡号:{{item.bank_no}}</div></el-col>
+                <el-col :span="6"><div class="blod">银行卡号:{{item.bank_no | formatBankcard}}</div></el-col>
                 <el-col :span="6"><div class="blod">民族:{{item.race}}</div></el-col>
                 <el-col :span="6"><div class="blod">工作时长:{{item.company_period | filterCompanyPeriod}}</div></el-col>
                 <el-col :span="6"><div class="blod">是否新客户:{{item.customer_type | iscustomer}}</div></el-col>
@@ -31,7 +31,7 @@
             </el-row>
           </el-collapse-item>
 
-          <el-collapse-item title="通讯信息" name="2">
+        <!--  <el-collapse-item title="通讯信息" name="2">
             <template slot="title">
                通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="contactinSource">来源：{{contactinSource}}</span>
             </template>
@@ -41,7 +41,7 @@
               <myTable :columns="contactColumns" :dataSource="contact" :hasIndex="false" 
               :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
            </div>
-          </el-collapse-item>
+          </el-collapse-item>  -->
 
         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
@@ -295,6 +295,7 @@ import moment from "moment";
 import {
   formatPhone,
   formatIdcard,
+  formatBankcard,
   contactColumns, //联系人表
   emergencyColumns,
   platformDetailsColumns,
@@ -383,6 +384,7 @@ export default {
   filters: {
     formatPhone,
     formatIdcard,
+    formatBankcard,
     filterMarital,
     filterCompanyPeriod,
     iscustomer,

@@ -1,12 +1,16 @@
 import moment from "moment";
-
+//手机号加密
 export function formatPhone(phone) {
     return phone.replace(/(\d{3})\d{4}(\d{4})/, "$1****$2");
 }
+//身份证加密
 export function formatIdcard(idcard) {
     return idcard.replace(/(\d{4})\d*([0-9a-zA-Z]{4})/, "$1******$2");
 }
-
+//银行卡加密
+export function formatBankcard(bankcard) {
+    return bankcard.replace(/^(\d{4})\d+(\d{4})$/, "$1***********$2");
+}
 export function filterMarital(marital) {
     switch (marital) {
         case 1:

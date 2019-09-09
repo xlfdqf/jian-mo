@@ -19,7 +19,7 @@
                 <el-col :span="6"><div class="blod">民族:{{item.race}}</div></el-col>
                 <el-col :span="6"><div class="blod">工作时长:{{item.company_period | filterCompanyPeriod}}</div></el-col>
                 <el-col :span="6"><div class="blod">是否新客户:{{item.customer_type | iscustomer}}</div></el-col>
-                <el-col :span="6"><div class="blod">借款发生时间戳:{{item.date}}</div></el-col>
+                <el-col :span="6"><div class="blod">借款发生时间:{{item.date}}</div></el-col>
                 <el-col :span="6"><div class="blod">婚姻状况:{{item.marital_status | filterMarital}}</div></el-col>
                 <el-col :span="6"><div class="blod">居住地:{{item.location}}</div></el-col>
                 <el-col :span="6"><div class="blod">居住时长:{{item.present_period | filterCompanyPeriod}}</div></el-col>

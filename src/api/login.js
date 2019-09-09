@@ -75,7 +75,7 @@ export function getCorrelationModel(params) {
 }
 //模型管理评分卡
 export function getScoreCard(params) {
-  // return get(`${api}/aitransfer/list`, params);
+  return get(`${api}/featureconfig/modelpage`, params);
 }
 //模型管理相似度对比查询列表
 export function getSimilarityRatio(params) {

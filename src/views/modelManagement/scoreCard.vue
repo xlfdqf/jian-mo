@@ -20,7 +20,7 @@
       </el-card>
 
       <el-card class="box-card2">
-           <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"
+           <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
       </el-card>
 
@@ -35,7 +35,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 600,
+      height: 650,
       loading: false,
       total: 0,
       testForm: {
@@ -50,29 +50,48 @@ export default {
           isShow: true
         },
         {
-          prop: "iv",
+          prop: "sum_of_iv",
           label: "IV值",
           isShow: true
         },
         {
-          prop: "bucket",
+          prop: "buckets",
           label: "分箱结果",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return param.row.buckets.map(item => {
+              return <div>{item}</div>;
+            });
+          }
         },
         {
           prop: "a",
           label: "关联转移因子",
-          isShow: true
+          isShow: false
         },
         {
           prop: "b",
           label: "关联初次判断",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.sum_of_iv > 0) {
+              return "是";
+            } else {
+              return "否";
+            }
+          }
         },
         {
-          prop: "c",
+          prop: "status",
           label: "关联最终评分",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.status > 1) {
+              return "是";
+            } else {
+              return "否";
+            }
+          }
         }
       ],
       dataSource: []
@@ -84,23 +103,23 @@ export default {
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
-      let params = { current: 1, size: 10 };
-      //   getFeatureSource(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      // let params = { current: 1, size: 10 };
+      getScoreCard()
+        .then(res => {
+          this.loading = false;
+          // this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
       //   this.loading = true;
       let params = {};
-      //   getFeatureSource(params)
+      //   getScoreCard(params)
       //     .then(res => {})
       //     .catch(error => {
       //       console.log(error);

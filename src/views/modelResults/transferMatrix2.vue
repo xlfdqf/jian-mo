@@ -22,7 +22,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getSimilarityRatio } from "@/api/login.js";
+import { getTransferMatrix2 } from "@/api/login.js";
 
 export default {
   components: { myTable },
@@ -80,7 +80,7 @@ export default {
     query() {
       //   this.loading = true;
       let params = { current: 1, size: 10 };
-      //   getSimilarityRatio(params)
+      //   getTransferMatrix2(params)
       //     .then(res => {
       //       this.loading = false;
       //       this.total = res.data.total;

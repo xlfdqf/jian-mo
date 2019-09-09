@@ -29,7 +29,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import {} from "@/api/login.js";
+import { getScoreCard } from "@/api/login.js";
 
 export default {
   components: { myTable },

@@ -15,7 +15,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import {} from "@/api/login.js";
+import { getScoreCard2Details } from "@/api/login.js";
 
 export default {
   components: { myTable },
@@ -64,7 +64,7 @@ export default {
     query() {
       //   this.loading = true;
       let params = { current: 1, size: 10 };
-      //   getSimilarityRatio(params)
+      //   getScoreCard2Details(params)
       //     .then(res => {
       //       this.loading = false;
       //       this.total = res.data.total;
@@ -78,7 +78,7 @@ export default {
     pageChange(page) {
       //   this.loading = true;
       let params = {};
-      //   getFeatureSource(params)
+      //   getScoreCard2Details(params)
       //     .then(res => {})
       //     .catch(error => {
       //       console.log(error);

@@ -22,7 +22,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import { getSimilarityRatio } from "@/api/login.js";
+import { getSimilarityRatio2 } from "@/api/login.js";
 
 export default {
   components: { myTable },
@@ -57,12 +57,12 @@ export default {
         }
       ],
       dataSource: [
-        {
-          a: "张三",
-          b: "优质用户",
-          c: "0",
-          d: "0"
-        }
+        // {
+        //   a: "张三",
+        //   b: "优质用户",
+        //   c: "0",
+        //   d: "0"
+        // }
       ]
     };
   },

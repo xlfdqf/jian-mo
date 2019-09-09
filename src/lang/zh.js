@@ -82,10 +82,10 @@ export default {
     modelManagement: '模型管理',
     similarityRatio: '相似度对比',
     modelResults: '模型结果展示',
-    scoreCard2: '评分卡',
+    scoreCard2: '评分卡结果',
     scoreCardDetails: '评分卡详情',
-    transferMatrix2: '转移矩阵',
-    similarityRatio2: '相似度比对'
+    transferMatrix2: '转移矩阵结果',
+    similarityRatio2: '相似度比对结果'
   },
   permission: {
     roles: '你的权限',

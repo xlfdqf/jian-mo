@@ -85,3 +85,7 @@ export function searchSimilarityRatio(params) {
 export function SimilarityRatioDelete(params) {
   return put(`${api}/featureconfig`, params);
 }
+//模型管理转移矩阵
+export function getTransferMatrix(params) {
+  return get(`${api}/aitransfer/list`, params);
+}

@@ -3,17 +3,16 @@
  <div class="table">
    <el-card class="box-card">
    <div class="text item">
-       <el-table
+<el-table
     :data="tableData"
     style="width: 100%"
     stripe
-   border>
+    element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+    element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="loading">
    <el-table-column
       prop="type"
       align="center"
-      width="120"
-     :formatter="formatType"
-    >
+      width="120">
     </el-table-column>
     <el-table-column
       prop="good"
@@ -32,7 +31,8 @@
         prop="bad"
         label="坏人"
         align="center"
-        :formatter="formatBad">
+         :formatter="formatBad"
+       >
       </el-table-column>
       
   </el-table>
@@ -42,9 +42,11 @@
 </template>
 
 <script>
+import { getTransferMatrix } from "@/api/login.js";
 export default {
   data() {
     return {
+      loading: false,
       tableData: [
         //好人
         {
@@ -55,9 +57,9 @@ export default {
         },
         {
           type: "计算说明",
-          good: 0.5,
-          grey: 0.5,
-          bad: 0.5
+          good: "",
+          grey: "",
+          bad: ""
         },
         //灰名单
         {
@@ -68,28 +70,48 @@ export default {
         },
         {
           type: "计算说明",
-          good: 0.5,
-          grey: 0.5,
-          bad: 0.5
+          good: "",
+          grey: "",
+          bad: ""
         },
         //坏人
         {
           type: "坏人",
           good: "从坏人到好人的个数比",
-          grey: "从坏人到的个数比",
+          grey: "从坏人到灰名单的个数比",
           bad: "保持坏人不变的个数比"
         },
         {
           type: "计算说明",
-          good: 0.5,
-          grey: 0.5,
-          bad: [0.1, 0.2, 0.3]
+          good: "",
+          grey: "",
+          bad: ""
         }
       ]
     };
   },
-  created() {},
   methods: {
+    //查询列表
+    queryList() {
+      this.loading = true;
+      getTransferMatrix()
+        .then(res => {
+          this.loading = false;
+          const data = res.data;
+          this.tableData[1].good = data.gd2gd;
+          this.tableData[1].grey = data.gd2gr;
+          this.tableData[1].bad = data.gd2b;
+          this.tableData[3].good = data.gr2gd;
+          this.tableData[3].grey = data.gr2gr;
+          this.tableData[3].bad = data.gr2b;
+          this.tableData[5].good = data.b2gd;
+          this.tableData[5].grey = data.b2gr;
+          this.tableData[5].bad = data.b2b;
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    },
     //类型格式化
     formatType(row) {
       if (row.type === "计算说明") {
@@ -100,7 +122,7 @@ export default {
     },
     // 好人格式化
     formatGood(row) {
-      if (row.good === 0.5) {
+      if (typeof row.good === "number" && !isNaN(row.good)) {
         return <div style="color:red">{row.good}</div>;
       } else {
         return <div>{row.good}</div>;
@@ -108,23 +130,23 @@ export default {
     },
     //灰名单格式化
     formatGrey(row) {
-      if (row.grey === 0.5) {
-        return <div style="color:red">{row.bad}</div>;
+      if (typeof row.grey === "number" && !isNaN(row.grey)) {
+        return <div style="color:red">{row.grey}</div>;
       } else {
         return <div>{row.grey}</div>;
       }
     },
     // 坏人格式化
     formatBad(row) {
-      console.log(row);
-      //   row.bad.map(item => {
-      //     if (row.bad === 0.5) {
-      //       return <div style="color:red">{row.bad}</div>;
-      //     } else {
-      //       return <div>{row.bad}</div>;
-      //     }
-      //   });
+      if (typeof row.bad === "number" && !isNaN(row.bad)) {
+        return <div style="color:red">{row.bad}</div>;
+      } else {
+        return <div>{row.bad}</div>;
+      }
     }
+  },
+  created() {
+    this.queryList();
   }
 };
 </script>

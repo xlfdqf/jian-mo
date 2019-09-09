@@ -104,11 +104,11 @@ export default {
     // 查询列表
     query() {
       this.loading = true;
-      // let params = { current: 1, size: 10 };
+      let params = { current: 1, size: 10 };
       getScoreCard()
         .then(res => {
           this.loading = false;
-          // this.total = res.data.total;
+          this.total = res.data.total;
           this.dataSource = res.data.records;
         })
         .catch(error => {
@@ -117,13 +117,17 @@ export default {
     },
     // 页码切换
     pageChange(page) {
-      //   this.loading = true;
-      let params = {};
-      //   getScoreCard(params)
-      //     .then(res => {})
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      let params = { current: page.currentPage, size: page.pageSize };
+      getScoreCard(params)
+        .then(res => {
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //搜索
     onSubmit(testForm) {}

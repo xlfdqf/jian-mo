@@ -13,8 +13,8 @@
           </el-form>
       </el-card>
 
-    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
-      :total="total" @pageChange="pageChange">
+    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false"
+      :total="total" @pageChange="pageChange" v-loading="loading">
      </myTable>
      
   </div>
@@ -36,34 +36,27 @@ export default {
       },
       columns: [
         {
-          prop: "a",
+          prop: "name",
           label: "姓名",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "judgment",
           label: "初级判断",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "nonAccessCount",
           label: "撞库非准入规则次数",
           isShow: true
         },
         {
-          prop: "d",
+          prop: "accessCount",
           label: "撞库准入规则次数",
           isShow: true
         }
       ],
-      dataSource: [
-        // {
-        //   a: "张三",
-        //   b: "优质用户",
-        //   c: "0",
-        //   d: "0"
-        // }
-      ]
+      dataSource: []
     };
   },
   created() {
@@ -72,23 +65,24 @@ export default {
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
-      let params = { current: 1, size: 10 };
-      //   getSimilarityRatio(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      let params = {};
+      getSimilarityRatio2(params)
+        .then(res => {
+          this.loading = false;
+          console.log(res);
+          // this.total = res.data.total;
+          this.dataSource = res.data;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
       //   this.loading = true;
       let params = {};
-      //   getFeatureSource(params)
+      //   getSimilarityRatio2(params)
       //     .then(res => {})
       //     .catch(error => {
       //       console.log(error);

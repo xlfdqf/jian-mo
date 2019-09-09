@@ -96,7 +96,7 @@ export function getTransferMatrix(params) {
 
 //模型结果展示相似度比对结果
 export function getSimilarityRatio2(params) {
-  // return get(`${api}/aitransfer/list`, params);
+  return post(`${api}/ScoreCard/Literacy`, params);
 }
 //模型结果展示转移矩阵结果
 export function getTransferMatrix2(params) {

@@ -26,22 +26,10 @@
                 <el-col :span="6"><div class="blod">产品编号:{{item.product_id}}</div></el-col>
                 <el-col :span="6"><div class="blod">产品类型:{{item.product_type | filterProType}}</div></el-col>
                 <el-col :span="6"><div class="blod">是否为推广渠道:{{item.promotion_channel | isTrue}}</div></el-col>
-                <el-col :span="6"><div class="blod">运营商类型:{{item.telecom_type | filterTelecomType}}</div></el-col>
+                <!-- <el-col :span="6"><div class="blod">运营商类型:{{item.telecom_type | filterTelecomType}}</div></el-col> -->
                 <el-col :span="6"><div class="blod">入库时间:{{item.ins_time | filterinTime}}</div></el-col>
             </el-row>
           </el-collapse-item>
-
-       <!--   <el-collapse-item title="通讯信息" name="2">
-            <template slot="title">
-               通讯信息<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;margin-left:20px" v-if="contactinSource">来源：{{contactinSource}}</span>
-            </template>
-            <div>
-              <myTable :columns="emergencyColumns" :dataSource="emergency" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="false"> </myTable>
-              <myTable :columns="contactColumns" :dataSource="contact" :hasIndex="false" 
-              :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
-           </div>
-          </el-collapse-item> -->
 
         <el-collapse-item title="贷后邦" name="3" v-for="item in daihoubang" :key="item.name">
             <template slot="title">
@@ -55,7 +43,7 @@
                 <el-col :span="6"><div class="blod">查询人手机号:{{item.mobile}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机号最近出现时间:{{item.last_appear_phone}}</div></el-col>
                 <el-col :span="6"><div class="blod">生日日期:{{item.birthday}}</div></el-col>
-                <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col>
+                <!-- <el-col :span="6"><div class="blod">手机运营商:{{item.phone_operator}}</div></el-col> -->
                 <el-col :span="6"><div class="blod">身份证最近出现时间:{{item.last_appear_idcard}}</div></el-col>
                 <el-col :span="6"><div class="blod">手机号记录天数:{{item.record_phone_days}}</div></el-col>
                 <el-col :span="6"><div class="blod">身份证户籍城市:{{item.idcard_city}}</div></el-col>
@@ -164,7 +152,7 @@
             </el-row>
        </el-collapse-item>
 
-       <el-collapse-item title="聚信立分析报告" name="5"  element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
+       <!-- <el-collapse-item title="聚信立分析报告" name="5"  element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
          element-loading-background="rgba(9, 25, 56, 0.8)" v-loading="loading">
             <template slot="title">
                聚信立分析报告<span style="margin-left:20px;padding:5px;background-color:#08284E;border-radius:5px;" v-if="juxinliSource">来源：{{juxinliSource}}</span>
@@ -172,7 +160,6 @@
             <div class="jxlreport" v-for="item in report" :key="item.token">
               <h4 style="text-align:center">报告基本信息</h4>
               <el-row>
-                  <!-- <el-col :span="6"><div class="blod">报告token:{{item.token}}</div></el-col> -->
                   <el-col :span="8"><div class="blod">报告编号:{{item.rpt_id}}</div></el-col>
                   <el-col :span="8"><div class="blod">报告版本:{{item.version}}</div></el-col>
                   <el-col :span="8"><div class="blod">报告生成时间:{{item.update_time|filterinTime}}</div></el-col>
@@ -183,7 +170,7 @@
               <h4 style="text-align:center">用户申请表检测</h4>
               <el-row>
                   <el-col :span="12"><div class="blod tit">姓名：{{username}}</div></el-col>
-                  <el-col :span="12"><div class="blod">身份证号{{idcard}}</div></el-col>
+                  <el-col :span="12"><div class="blod">身份证号{{idcard | formatIdcard}}</div></el-col>
                   <el-col :span="12"><div class="blod">{{id_card.gender}}/{{id_card.age}}/出生地：{{id_card.province}}{{id_card.city}}{{id_card.region}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在法院黑名单:{{court_blacklist.black_type}}</div></el-col>
                   <el-col :span="12"><div class="blod">姓名+身份证出现在金融服务类机构黑名单:{{financial_blacklist.black_type}}</div></el-col>
@@ -204,7 +191,7 @@
              <div  class="jxlreport" v-if="check_search_info || check_black_info">
               <h4 style="text-align:center">用户信息检测</h4>
                 <el-row>
-                    <el-col :span="24"><div class="blod tit">用户查询信息:</div></el-col>
+                    <el-col :span="24"><div class="blod">用户查询信息:</div></el-col>
                     <el-col :span="12" >查询过该用户的相关企业数量:<span class="blod">{{check_search_info.register_org_cnt}}</span></el-col>
                     <el-col :span="12">查询过该用户的相关企业类型：<span class="blod">{{check_search_info.searched_org_cnt}}</span></el-col>
                     <el-col :span="12">电话号码组合过其他姓名：<span class="blod" v-for="item in check_search_info.phone_with_other_names" :key="item.idcard">{{item}}</span></el-col>
@@ -236,7 +223,7 @@
               <h4 style="text-align:center">运营商数据整理</h4>
                 <myTable :columns="cell_behaviorColumns" :dataSource="cell_behavior" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
-             </div>
+             </div> 
 
                <div  class="jxlreport">
               <h4 style="text-align:center">联系人区域汇总</h4>
@@ -244,12 +231,7 @@
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
-            <!-- <h4 style="text-align:center">常用服务</h4>
-              <div  class="jxlreport" v-for="item in main_service" :key="item.company_name">
-                 服务企业类型：{{item.company_type}}<span style="margin-left:30px;">企业名称：{{item.company_name}}</span>
-                <myTable :columns="main_serviceColumns" :dataSource="item.service_details" :hasIndex="false" 
-                :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
-             </div>  -->
+             
               <h4 style="text-align:center">常用服务</h4>
               <div  class="jxlreport">
                 <myTable :columns="main_serviceColumns" :dataSource="main_service" :hasIndex="false" 
@@ -262,12 +244,12 @@
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
 
-             <div  class="jxlreport">
+              <div  class="jxlreport">
               <h4 style="text-align:center">运营商联系人通话详情</h4>
                 <myTable :columns="contact_listColumns" :dataSource="contact_list" :hasIndex="false" 
                 :hasSelection="false" :hasPagination="false"  style="margin-top:20px"> </myTable>
              </div> 
-          </el-collapse-item>
+          </el-collapse-item> -->
          
          <el-collapse-item title="贷后上报" name="6">
             <template slot="title">
@@ -336,8 +318,6 @@ export default {
       contactColumns,
       emergencyColumns,
       basic: [], //基本信息
-      emergency: [], //通讯录信息（紧急联系人）
-      contact: [], //通讯录信息（联系人）
       juxinli: [], //聚信立
       daihoubang: [{}], //贷后邦
       changdaike: [{}], //常贷客
@@ -421,9 +401,6 @@ export default {
             if (res.data.data) {
               localStorage.setItem("contactinSource", res.data.data[1].source);
               this.contactinSource = localStorage.getItem("contactinSource"); //来源
-              this.emergency = res.data.data[0].emergency; //紧急联系人
-              console.log(this.emergency);
-              this.contact = res.data.data[0].contact; //联系人
             } else {
               this.emergency = [];
               this.contact = [];
@@ -572,7 +549,7 @@ export default {
   /* border: 1px solid#dddddd; */
   margin-bottom: 10px;
 }
-.tit {
+/* .tit {
   font-weight: bold;
-}
+} */
 </style>

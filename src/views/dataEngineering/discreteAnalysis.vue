@@ -145,10 +145,10 @@ export default {
       const chartData = data.map(item => {
         return [
           item.edgeLow,
-          item.quantileLow,
-          item.median,
           item.quantileUp,
-          item.edgeLow
+          item.median,
+          item.quantileLow,
+          item.edgeUp
         ];
       });
       const xAxisData = data.map(item => {

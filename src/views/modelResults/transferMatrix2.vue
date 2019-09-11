@@ -62,13 +62,13 @@ export default {
         }
       ],
       dataSource: [
-        {
-          a: "张三",
-          b: "122",
-          c: "0.5",
-          d: "0.2",
-          e: "0.1"
-        }
+        // {
+        //   a: "张三",
+        //   b: "122",
+        //   c: "0.5",
+        //   d: "0.2",
+        //   e: "0.1"
+        // }
       ]
     };
   },
@@ -78,17 +78,18 @@ export default {
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
+      this.loading = true;
       let params = { current: 1, size: 10 };
-      //   getTransferMatrix2(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      getTransferMatrix2()
+        .then(res => {
+          this.loading = false;
+          console.log(res);
+          // this.total = res.data.total;
+          // this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {

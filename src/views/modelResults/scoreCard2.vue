@@ -41,40 +41,30 @@ export default {
       },
       columns: [
         {
-          prop: "a",
+          prop: "name",
           label: "姓名",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "total",
           label: "最终分数",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "transfer",
           label: "转移因子",
           isShow: true
         },
         {
-          prop: "d",
+          prop: "a",
           label: "相似度比对",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            return "是";
+          }
         }
       ],
-      dataSource: [
-        {
-          a: "张三",
-          b: "122",
-          c: "0.5",
-          d: "是"
-        },
-        {
-          a: "李四",
-          b: "122",
-          c: "0.5",
-          d: "否"
-        }
-      ]
+      dataSource: []
     };
   },
   created() {
@@ -83,35 +73,39 @@ export default {
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
+      this.loading = true;
       let params = { current: 1, size: 10 };
-      //   getScoreCard2(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      getScoreCard2()
+        .then(res => {
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {
-      //   this.loading = true;
-      let params = {};
-      //   getScoreCard2(params)
-      //     .then(res => {})
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      let params = { current: page.currentPage, size: page.pageSize };
+      getScoreCard2(params)
+        .then(res => {
+          this.loading = false;
+          this.total = res.data.total;
+          this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     //详情
     details(row) {
       console.log(row);
-      localStorage.setItem("row", JSON.stringify(row));
-      this.$router.push({
-        name: "scoreCardDetails"
-      });
+      // localStorage.setItem("row", JSON.stringify(row));
+      // this.$router.push({
+      //   name: "scoreCardDetails"
+      // });
     },
     //搜索
     onSubmit(testForm) {

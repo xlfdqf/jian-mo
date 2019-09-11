@@ -94,19 +94,19 @@ export function getTransferMatrix(params) {
   return get(`${api}/aitransfer/list`, params);
 }
 
-//模型结果展示相似度比对结果
+//模型结果展示相似度比对结果展示
 export function getSimilarityRatio2(params) {
   return post(`${api}/ScoreCard/Literacy`, params);
 }
-//模型结果展示转移矩阵结果
+//模型结果展示转移矩阵结果展示
 export function getTransferMatrix2(params) {
-  // return get(`${api}/aitransfer/list`, params);
+  return get(`${api}/ScoreCard/TransferMatrixF`, params);
 }
-//模型结果展示评分卡结果
+//模型结果展示评分卡结果展示
 export function getScoreCard2(params) {
-  // return get(`${api}/aitransfer/list`, params);
+  return get(`${api}/aiorderinfo/page`, params);
 }
-//模型结果展示评分卡详情
+//模型结果展示评分卡展示详情
 export function getScoreCard2Details(params) {
   // return get(`${api}/aitransfer/list`, params);
 }

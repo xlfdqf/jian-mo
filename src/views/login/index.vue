@@ -62,7 +62,7 @@ export default {
 .login-container {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   background: rgba(0, 0, 0, 0.2);
   position: relative;
   // height: 900px;
@@ -70,7 +70,7 @@ export default {
   height: 100%;
 }
 .login-container::before {
-  z-index: -999;
+  // z-index: -999;
   content: "";
   position: absolute;
   left: 0;
@@ -78,11 +78,14 @@ export default {
   width: 100%;
   height: 100%;
   // background-image: url("../../assets/images/top_images/login.png");
-  background-image: url("../../assets/images/top_images/loginBg.png");
+  background-image: url("../../assets/images/top_images/loginBg2.png");
   background-size: cover;
 }
 .login-info {
-  padding-left: 60px;
+  z-index: 9;
+  margin-right: 50px;
+  margin-top: 50px;
+  // padding-left: 60px;
 }
 .login-info-title {
   line-height: 90px;
@@ -91,19 +94,24 @@ export default {
   font-size: 14px;
 }
 .login-border {
-  background-image: url("../../assets/images/home/login-box.png");
+  background-image: url("../../assets/images/home/login-box2.png");
   display: flex;
   justify-content: center;
   flex-direction: column;
-  padding: 30px 50px 25px 50px;
-  // background-color: #fff;
+  // padding: 30px 50px 25px 50px;
   border-radius: 6px;
-  // box-shadow: 1px 1px 2px #eee;
+  width: 650px;
+  height: 630px;
+  position: relative;
+  margin-top: 50px;
+  margin-left: 25px;
 }
 .login-main {
   border-radius: 3px;
   box-sizing: border-box;
-  // background-color: #fff;
+  position: absolute;
+  top: 90px;
+  left: 180px;
 }
 .login-main > h3 {
   margin-bottom: 20px;

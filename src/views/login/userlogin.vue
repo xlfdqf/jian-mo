@@ -23,7 +23,7 @@
     <!-- <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox> -->
     <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
     <el-form-item class="login-btn" @click.native.prevent="handleLogin">
-      <img src="@/assets/images/home/login-btn.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px">登录</span>
+      <img src="@/assets/images/home/login-btn2.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px"></span>
     </el-form-item>
   </el-form>
 </template>

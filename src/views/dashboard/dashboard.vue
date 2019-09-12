@@ -71,6 +71,21 @@
             </div>
         </el-col>
       </el-row>
+      <!--第二部分 图表 -->
+       <el-row>
+         <el-col :span="12">
+            <div class="item">
+              <p>上个月样本反馈</p>
+               <ve-line :data="chartData" :settings="chartSettings" :extend="chartExtend"></ve-line>
+            </div>
+         </el-col>
+          <el-col :span="12">
+            <div class="item">
+              <p>全年数据统计</p>
+              <ve-histogram :data="chartData2" :settings="chartSettings2" :extend="chartExtend"></ve-histogram>
+            </div>
+         </el-col>
+       </el-row>
     </el-card>
   </div>
 </template>
@@ -79,10 +94,79 @@
 export default {
   name: "report",
   data() {
-    return {};
+    this.chartSettings = {
+      area: true,
+      axisSite: { right: ["bad"] },
+      xAxisName: ["日期"],
+      yAxisName: ["个数", "个数"],
+      labelMap: {
+        good: "好名单个数",
+        bad: "坏名单个数"
+      }
+    };
+    this.chartSettings2 = {
+      xAxisName: ["日期"],
+      yAxisName: ["个数"],
+      labelMap: {
+        good: "好名单",
+        grey: "灰名单",
+        bad: "黑名单"
+      }
+    };
+    this.chartExtend = {
+      xAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      yAxis: {
+        axisLabel: {
+          textStyle: {
+            color: "rgb(126, 203, 224)"
+          }
+        }
+      },
+      legend: {
+        textStyle: {
+          color: "rgb(126, 203, 224)" //图例字体颜色
+        }
+      }
+    };
+    return {
+      chartData: {
+        columns: ["date", "good", "bad"],
+        rows: [
+          { date: "1", good: 1, bad: 1093 },
+          { date: "2", good: 3530, bad: 3230 },
+          { date: "3", good: 2923, bad: 2623 },
+          { date: "4", good: 1723, bad: 1423 },
+          { date: "5", good: 3792, bad: 3492 },
+          { date: "6", good: 4593, bad: 4293 }
+        ]
+      },
+      chartData2: {
+        columns: ["date", "good", "grey", "bad"],
+        rows: [
+          { date: "1月", good: 1, grey: 555, bad: 1093 },
+          { date: "2月", good: 3530, grey: 1000, bad: 3230 },
+          { date: "3月", good: 2923, grey: 888, bad: 2623 },
+          { date: "4月", good: 1723, grey: 766, bad: 1423 },
+          { date: "5月", good: 3792, grey: 876, bad: 3492 },
+          { date: "6月", good: 4593, grey: 956, bad: 4293 },
+          { date: "7月", good: 1, grey: 555, bad: 1093 },
+          { date: "8月", good: 3530, grey: 1000, bad: 3230 },
+          { date: "9月", good: 2923, grey: 888, bad: 2623 },
+          { date: "10月", good: 1723, grey: 766, bad: 1423 },
+          { date: "11月", good: 3792, grey: 876, bad: 3492 },
+          { date: "12月", good: 4593, grey: 956, bad: 4293 }
+        ]
+      }
+    };
   },
   created() {},
-  computed: {}
+  methods: {}
 };
 </script>
 
@@ -91,13 +175,11 @@ export default {
   background-color: #091938;
   border: none;
 }
-
 .item {
   height: 400px;
   margin-bottom: 16px;
   border: 1px solid #091938;
   background-color: #080920;
-  margin-right: 20px;
 }
 .item p {
   text-align: center;
@@ -108,9 +190,6 @@ export default {
   content: "";
   display: block;
   clear: both;
-}
-.item-content {
-  /* border: 1px solid red; */
 }
 /* 镂空圆环效果 */
 .circle {
@@ -162,19 +241,14 @@ export default {
 .water {
   position: relative;
 }
-/* .water p {
-  position: absolute;
-  left: 15px;
-} */
 .container {
-  position: absolute;
+  margin: 0 auto;
   width: 100px;
   height: 100px;
   padding: 5px;
   border: 5px solid #34abff;
   top: 100px;
   left: 100px;
-  transform: translate(-50%, -50%);
   border-radius: 50%;
   overflow: hidden;
 }
@@ -185,7 +259,6 @@ export default {
   height: 100px;
   background-color: #9dd0f0;
   border-radius: 50%;
-  /* opacity: 0.7; */
 }
 .wave::before,
 .wave::after {

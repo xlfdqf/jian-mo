@@ -226,11 +226,30 @@ html {
 
 /* 多选框 */
 .el-checkbox {
-  color: rgb(126, 203, 224);
+  color: #40b1f9 !important;
   margin-left: 30px;
 }
-/* .el-checkbox + .el-checkbox {
-  margin-right: 30px;
-  margin-left: 0px;
-} */
+.el-checkbox__inner::after {
+  border: 1px solid #40b1f9;
+  -webkit-box-sizing: content-box;
+  box-sizing: content-box;
+  content: "";
+  border-left: 0;
+  border-top: 0;
+  height: 7px;
+  left: 4px;
+  position: absolute;
+  top: 1px;
+  -webkit-transform: rotate(45deg) scaleY(0);
+  transform: rotate(45deg) scaleY(0);
+  width: 3px;
+  -webkit-transition: -webkit-transform 0.15s
+    cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms;
+  transition: -webkit-transform 0.15s cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms;
+  transition: transform 0.15s cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms;
+  transition: transform 0.15s cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms,
+    -webkit-transform 0.15s cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+}
 </style>

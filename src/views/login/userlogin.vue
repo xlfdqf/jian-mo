@@ -2,7 +2,7 @@
   <el-form class="login-form" status-icon :rules="loginRules" ref="loginForm" :model="loginForm" label-width="0">
     <el-form-item prop="username" style="position:relative">
       <el-input size="small" @keyup.enter.native="handleLogin" v-model="loginForm.username" auto-complete="off" placeholder="请输入用户名">
-        <i slot="prefix" class="icon-yonghu"></i>
+        <i slot="prefix" class="icon-yonghu" style="color:#40B1F9"></i>
       </el-input>
        <!-- <img class="pwdimg" src="../../assets/images/toux.png"/> -->
         <!-- <el-select size="small" v-model="loginForm.username" placeholder="请选择用户" auto-complete="off">
@@ -16,12 +16,14 @@
     </el-form-item>
     <el-form-item prop="password" style="position:relative">
       <el-input size="small" @keyup.enter.native="handleLogin" :type="passwordType" v-model="loginForm.password" auto-complete="off" placeholder="请输入密码">
-        <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword"></i>
-         <i slot="prefix" class="icon-mima"></i> 
+        <i class="el-icon-view el-input__icon" slot="suffix" @click="showPassword" style="color:#40B1F9"></i>
+         <i slot="prefix" class="icon-mima" style="color:#40B1F9"></i> 
       </el-input>
     </el-form-item>
-    <!-- <el-checkbox v-model="record" @change="recordOpen">录制片头</el-checkbox> -->
-    <el-checkbox v-model="checked" @change="remenberPwd">记住密码</el-checkbox>
+    <el-form-item style="margin-bottom:0px;">
+    <el-checkbox v-model="record" @change="recordOpen" style="float:right;">录制片头</el-checkbox>
+    <el-checkbox v-model="checked" @change="remenberPwd" style="float:right;">记住密码</el-checkbox>
+    </el-form-item>
     <el-form-item class="login-btn" @click.native.prevent="handleLogin">
       <img src="@/assets/images/home/login-btn2.png" style="margin-top:20px;" /><span style="position:absolute;top:26px;left:126px;color:#1BC2D6;font-size:18px"></span>
     </el-form-item>
@@ -168,17 +170,17 @@ export default {
 .login-form >>> .el-input__inner {
   background-color: #152c6f;
   border: 1px solid #2060a2;
-  color: aqua;
+  color: #40b1f9;
 }
 .login-form >>> .el-checkbox__inner {
   background-color: #152c6f;
   border: 1px solid #2060a2;
-  color: aqua;
+  color: #40b1f9;
 }
 .login-form >>> .el-checkbox {
   color: #ccc;
 }
 .login-form >>> .el-checkbox__input.is-checked + .el-checkbox__label {
-  color: #1bc2d6;
+  color: #40b1f9;
 }
 </style>

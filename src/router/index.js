@@ -251,6 +251,30 @@ export const constantRouterMap = [
       }
     ]
   },
+  //模型评价
+  {
+    path: '/modelEvaluation',
+    component: Layout,
+    redirect: '/modelEvaluation/mxpj',
+    name: 'modelEvaluation',
+    meta: {
+      title: 'modelEvaluation',
+      icon: 'characteristics'
+    },
+    children: [
+      {
+        path: 'mxpj',//模型评价
+        name: 'mxpj',
+        component: () => import('@/views/modelEvaluation/mxpj'),
+        meta: { title: 'mxpj' }
+      }, {
+        path: 'modelWarning',//模型预警
+        name: 'modelWarning',
+        component: () => import('@/views/modelEvaluation/modelWarning'),
+        meta: { title: 'modelWarning' },
+      }
+    ]
+  },
   // 表格
   // {
   //   path: '/table',

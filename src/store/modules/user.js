@@ -10,7 +10,7 @@ const user = {
     token: getToken(),
     name: '',
     avatar: '',
-    browserHeaderTitle: '大圣数据建模系统'
+    browserHeaderTitle: 'DSAI数据中台系统'
   },
 
   mutations: {

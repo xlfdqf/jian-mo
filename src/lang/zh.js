@@ -85,7 +85,10 @@ export default {
     scoreCard2: '评分卡结果',
     scoreCardDetails: '评分卡详情',
     transferMatrix2: '转移矩阵结果',
-    similarityRatio2: '相似度比对结果'
+    similarityRatio2: '相似度比对结果',
+    modelEvaluation: "模型评价",
+    mxpj: "模型评价",
+    modelWarning: "模型预警"
   },
   permission: {
     roles: '你的权限',

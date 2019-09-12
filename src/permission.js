@@ -21,7 +21,7 @@ router.beforeEach((to, from, next) => {
   // 设置浏览器头部标题
   const browserHeaderTitle = to.name
   store.commit('SET_BROWSERHEADERTITLE', {
-    browserHeaderTitle: '大圣数据建模系统'
+    browserHeaderTitle: 'DSAI数据中台系统'
   })
   if (to.path === '/login') {
     next({ path: '/' })
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
   //   // 设置浏览器头部标题
   //   const browserHeaderTitle = to.name
   //   store.commit('SET_BROWSERHEADERTITLE', {
-  //     browserHeaderTitle: '大圣数据建模系统'
+  //     browserHeaderTitle: 'DSAI数据中台系统'
   //   })
   //   if (whiteList.indexOf(to.path) !== -1) {
   //     next()

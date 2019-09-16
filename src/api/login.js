@@ -100,7 +100,7 @@ export function getSimilarityRatio2(params) {
 }
 //模型结果展示转移矩阵结果展示
 export function getTransferMatrix2(params) {
-  return get(`${api}/ScoreCard/TransferMatrixF`, params);
+  return post(`${api}/ScoreCard/TransferMatrixF`, params);
 }
 //模型结果展示评分卡结果展示
 export function getScoreCard2(params) {

@@ -13,8 +13,7 @@
           </el-form>
       </el-card>
  <el-card class="box-card2">
-    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
-      :total="total" @pageChange="pageChange">
+    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading">
      </myTable>
  </el-card>   
   </div>
@@ -36,40 +35,32 @@ export default {
       },
       columns: [
         {
-          prop: "a",
+          prop: "name",
           label: "姓名",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "judgment",
           label: "初级判断",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "goodProbability",
           label: "转移优质用户",
           isShow: true
         },
         {
-          prop: "d",
+          prop: "goodToGray",
           label: "转移可疑用户",
           isShow: true
         },
         {
-          prop: "e",
+          prop: "goodToBad",
           label: "转移劣质用户",
           isShow: true
         }
       ],
-      dataSource: [
-        // {
-        //   a: "张三",
-        //   b: "122",
-        //   c: "0.5",
-        //   d: "0.2",
-        //   e: "0.1"
-        // }
-      ]
+      dataSource: []
     };
   },
   created() {
@@ -79,13 +70,12 @@ export default {
     // 查询列表
     query() {
       this.loading = true;
-      let params = { current: 1, size: 10 };
-      getTransferMatrix2()
+      let params = {};
+      getTransferMatrix2(params)
         .then(res => {
           this.loading = false;
-          console.log(res);
           // this.total = res.data.total;
-          // this.dataSource = res.data.records;
+          this.dataSource = res.data;
         })
         .catch(error => {
           console.log(error);

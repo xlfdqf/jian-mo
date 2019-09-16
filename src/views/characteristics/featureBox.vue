@@ -12,7 +12,8 @@
             </el-form-item>
           </el-form>
       </el-card>
-
+    
+     <el-card class="box-card2">
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1">
           <!-- :height="height" -->
@@ -44,6 +45,7 @@
         </el-tab-pane>
         <!-- 柱状图表 end -->
       </el-tabs>
+     </el-card>
     <el-tooltip placement="top" content="回到顶部">
       <nx-back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></nx-back-to-top>
     </el-tooltip>

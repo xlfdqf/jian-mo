@@ -13,6 +13,7 @@
           </el-form>
       </el-card>
 
+ <el-card class="box-card2">
     <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
       :total="total" @pageChange="pageChange">
        <el-table-column slot="operate" label="操作"  align="center">
@@ -21,7 +22,7 @@
           </template>
         </el-table-column>
      </myTable>
-     
+ </el-card>
   </div>
 </template>
 

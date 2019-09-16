@@ -21,7 +21,8 @@
             </el-form-item>
           </el-form>
       </el-card>
-
+      
+      <el-card class="box-card2">
     <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
       :total="total" @pageChange="pageChange" :loading="loading">
        <el-table-column slot="operate" label="操作"  align="center">
@@ -30,6 +31,7 @@
           </template>
         </el-table-column>
      </myTable>
+      </el-card>
      
      <!-- 对话框 -->
      <el-dialog title="添加非准入规则" :visible.sync="dialogFormVisible" center>

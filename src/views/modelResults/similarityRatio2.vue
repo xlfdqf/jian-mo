@@ -12,11 +12,11 @@
             </el-form-item>
           </el-form>
       </el-card>
-
+ <el-card class="box-card2">
     <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false"
       :total="total" @pageChange="pageChange" v-loading="loading">
      </myTable>
-     
+ </el-card>
   </div>
 </template>
 

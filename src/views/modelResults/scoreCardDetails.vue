@@ -6,10 +6,11 @@
       <h4 style="text-align:center;color:#7ECBE0"><span style="margin-right:30px">用户姓名：</span> <span style="margin-right:30px">身份证号:</span><span>最终得分:</span></h4>
     </el-card>
 
+ <el-card class="box-card2">
     <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="true"
       :total="total" @pageChange="pageChange">
      </myTable>
-     
+ </el-card> 
   </div>
 </template>
 

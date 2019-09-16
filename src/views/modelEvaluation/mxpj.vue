@@ -13,6 +13,7 @@
           </el-form>
       </el-card>
 
+ <el-card class="box-card2">
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1" ref="tab1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"
@@ -38,6 +39,7 @@
         </el-tab-pane>
         <!-- 柱状图表 end -->
       </el-tabs>
+ </el-card>
   </div>
 </template>
 

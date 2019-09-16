@@ -110,3 +110,11 @@ export function getScoreCard2(params) {
 export function getScoreCard2Details(params) {
   // return get(`${api}/aitransfer/list`, params);
 }
+//模型评价报表
+export function getMxpjTable(params) {
+  return get(`${api}/airoc/page`, params);
+}
+//模型评价曲线图表
+export function getMxpjChart(params) {
+  // return get(`${api}/aitransfer/list`, params);
+}

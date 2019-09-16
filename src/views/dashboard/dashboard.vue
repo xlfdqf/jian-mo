@@ -106,7 +106,7 @@ export default {
     };
     this.chartSettings2 = {
       xAxisName: ["日期"],
-      yAxisName: ["个数"],
+      yAxisName: ["个数", "个数"],
       labelMap: {
         good: "好名单",
         grey: "灰名单",
@@ -115,6 +115,9 @@ export default {
     };
     this.chartExtend = {
       xAxis: {
+        nameTextStyle: {
+          color: "rgb(126, 203, 224)"
+        },
         axisLabel: {
           textStyle: {
             color: "rgb(126, 203, 224)"
@@ -122,6 +125,9 @@ export default {
         }
       },
       yAxis: {
+        nameTextStyle: {
+          color: "rgb(126, 203, 224)"
+        },
         axisLabel: {
           textStyle: {
             color: "rgb(126, 203, 224)"

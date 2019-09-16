@@ -11,3 +11,14 @@ export function tabType(tab) {
     }
     return tab;
 }
+// 按月、年tab切换
+export function tabType2(tab) {
+    switch (tab) {
+        case '1':
+            tab = "month";
+            break;
+        default:
+            tab = "year";
+    }
+    return tab;
+}

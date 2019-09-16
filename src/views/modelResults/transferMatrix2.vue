@@ -45,19 +45,40 @@ export default {
           isShow: true
         },
         {
-          prop: "goodProbability",
+          prop: "toGood",
           label: "转移优质用户",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.judgment === "好人") {
+              return param.row.probability;
+            } else {
+              return param.row.toGood;
+            }
+          }
         },
         {
-          prop: "goodToGray",
+          prop: "toGray",
           label: "转移可疑用户",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.judgment === "灰名单") {
+              return param.row.probability;
+            } else {
+              return param.row.toGray;
+            }
+          }
         },
         {
-          prop: "goodToBad",
+          prop: "toBad",
           label: "转移劣质用户",
-          isShow: true
+          isShow: true,
+          render: function(v, param) {
+            if (param.row.judgment === "坏人") {
+              return param.row.probability;
+            } else {
+              return param.row.toBad;
+            }
+          }
         }
       ],
       dataSource: []

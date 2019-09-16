@@ -15,13 +15,13 @@
 
       <el-tabs v-model="activeName" @tab-click="handleClick"  type="border-card" class="box-card2">
         <el-tab-pane label="报表" name="1" ref="tab1">
-             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
+             <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"
               :hasSelection="false" :hasPagination="false" :total="tableTotal" @pageChange="pageChange" :loading="tableLoading"> </myTable>
         </el-tab-pane>
         <!-- 报表 end -->
 
         <el-tab-pane label="图表" name="2" ref="tab2"> 
-           <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" element-loading-background="rgba(9, 25, 56, 0.8)" style="height:750px;">
+           <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" element-loading-background="rgba(9, 25, 56, 0.8)">
               <!-- 按月、年统计tab -->
                <el-tabs v-model="activeName2" @tab-click="handleClick2"  type="border-card" class="box-card2">
                    <el-tab-pane label="按月统计" name="1">
@@ -38,27 +38,22 @@
         </el-tab-pane>
         <!-- 柱状图表 end -->
       </el-tabs>
-    <el-tooltip placement="top" content="回到顶部">
-      <nx-back-to-top transitionName="fade" :customStyle="myBackToTopStyle" :visibilityHeight="300" :backPosition="50"></nx-back-to-top>
-    </el-tooltip>
   </div>
 </template>
 
 <script>
 import myTable from "@/components/myTable";
-import nxBackToTop from "@/components/nx-back-to-top";
 import { getMxpjTable, getMxpjChart } from "@/api/login.js";
 import { tabType, tabType2 } from "../characteristics/util.js";
 import moment from "moment";
 
 export default {
-  components: { myTable, nxBackToTop },
+  components: { myTable },
   data() {
     this.chartSettings = {
       area: true,
       axisSite: { right: ["number"] },
       xAxisName: ["日期"],
-      //   xAxisNameTextStyle: "white",
       yAxisName: ["曲线面积", "个数"],
       labelMap: {
         area: "曲线面积",
@@ -93,16 +88,6 @@ export default {
       }
     };
     return {
-      myBackToTopStyle: {
-        right: "50px",
-        bottom: "50px",
-        width: "40px",
-        height: "40px",
-        "border-radius": "4px",
-        "line-height": "45px", // 请保持与高度一致以垂直居中
-        background: "#e7eaf1" // 按钮的背景颜色
-      },
-      height: 650,
       tableLoading: false,
       chartLoading: false,
       activeName: "1",

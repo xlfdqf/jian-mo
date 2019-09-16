@@ -27,22 +27,22 @@ export default {
       orderno: "",
       columns: [
         {
-          prop: "a",
+          prop: "name",
           label: "特征名称",
           isShow: true
         },
         {
-          prop: "b",
+          prop: "iv",
           label: "特征iv值",
           isShow: true
         },
         {
-          prop: "c",
+          prop: "score",
           label: "特征值",
           isShow: true
         },
         {
-          prop: "d",
+          prop: "sumScore",
           label: "获得分数",
           isShow: true
         }
@@ -63,7 +63,7 @@ export default {
       getScoreCard2Details(params)
         .then(res => {
           this.loading = false;
-          // this.dataSource = res.data.records;
+          this.dataSource = res.data;
         })
         .catch(error => {
           console.log(error);

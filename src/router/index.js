@@ -255,13 +255,19 @@ export const constantRouterMap = [
   {
     path: '/modelEvaluation',
     component: Layout,
-    redirect: '/modelEvaluation/mxpj',
+    redirect: '/modelEvaluation/thresholdValue',
     name: 'modelEvaluation',
     meta: {
       title: 'modelEvaluation',
       icon: 'characteristics'
     },
     children: [
+      {
+        path: 'thresholdValue',//阈值
+        name: 'thresholdValue',
+        component: () => import('@/views/modelEvaluation/thresholdValue'),
+        meta: { title: 'thresholdValue' }
+      },
       {
         path: 'mxpj',//模型评价
         name: 'mxpj',

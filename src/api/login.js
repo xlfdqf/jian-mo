@@ -110,6 +110,10 @@ export function getScoreCard2(params) {
 export function getScoreCard2Details(params) {
   // return get(`${api}/aitransfer/list`, params);
 }
+//模型阈值
+export function getThresholdValue(params) {
+  return get(`${api}/aithreshold/page`, params);
+}
 //模型评价报表
 export function getMxpjTable(params) {
   return get(`${api}/airoc/page`, params);

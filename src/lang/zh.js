@@ -87,6 +87,7 @@ export default {
     transferMatrix2: '转移矩阵结果',
     similarityRatio2: '相似度比对结果',
     modelEvaluation: "模型评价",
+    thresholdValue: "阈值",
     mxpj: "模型评价",
     modelWarning: "模型预警"
   },

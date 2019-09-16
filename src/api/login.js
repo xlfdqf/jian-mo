@@ -108,7 +108,7 @@ export function getScoreCard2(params) {
 }
 //模型结果展示评分卡展示详情
 export function getScoreCard2Details(params) {
-  // return get(`${api}/aitransfer/list`, params);
+  return post(`${api}/ScoreCard/ScoreDetail`, params);
 }
 //模型阈值
 export function getThresholdValue(params) {

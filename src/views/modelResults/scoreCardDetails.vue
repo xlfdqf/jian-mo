@@ -24,6 +24,7 @@ export default {
     return {
       loading: false,
       total: 0,
+      orderno: "",
       columns: [
         {
           prop: "a",
@@ -46,34 +47,27 @@ export default {
           isShow: true
         }
       ],
-      dataSource: [
-        {
-          a: "年龄",
-          b: "125",
-          c: "0.5",
-          d: "109"
-        }
-      ]
+      dataSource: []
     };
   },
   created() {
-    // this.query();
     let row = JSON.parse(localStorage.getItem("row"));
+    this.orderno = row.orderno;
+    this.query();
   },
   methods: {
     // 查询列表
     query() {
-      //   this.loading = true;
-      let params = { current: 1, size: 10 };
-      //   getScoreCard2Details(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total;
-      //       this.dataSource = res.data.records;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      let params = { orderno: this.orderno };
+      getScoreCard2Details(params)
+        .then(res => {
+          this.loading = false;
+          // this.dataSource = res.data.records;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     // 页码切换
     pageChange(page) {

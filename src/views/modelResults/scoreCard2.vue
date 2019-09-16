@@ -102,11 +102,10 @@ export default {
     },
     //详情
     details(row) {
-      console.log(row);
-      // localStorage.setItem("row", JSON.stringify(row));
-      // this.$router.push({
-      //   name: "scoreCardDetails"
-      // });
+      localStorage.setItem("row", JSON.stringify(row));
+      this.$router.push({
+        name: "scoreCardDetails"
+      });
     },
     //搜索
     onSubmit(testForm) {

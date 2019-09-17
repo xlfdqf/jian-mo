@@ -13,7 +13,7 @@
           </el-form>
       </el-card>
  <el-card class="box-card2">
-    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false"
+    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false" :height="height"
       :total="total" @pageChange="pageChange" v-loading="loading">
      </myTable>
  </el-card>
@@ -28,7 +28,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 600,
+      height: 650,
       loading: false,
       total: 0,
       testForm: {

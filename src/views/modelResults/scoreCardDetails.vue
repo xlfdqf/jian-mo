@@ -7,7 +7,7 @@
     </el-card>
 
  <el-card class="box-card2">
-    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false" :total="total" @pageChange="pageChange">
+    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false" :total="total" @pageChange="pageChange" :height="heihgt">
      </myTable>
  </el-card> 
   </div>
@@ -21,6 +21,7 @@ export default {
   components: { myTable },
   data() {
     return {
+      heihgt: 650,
       loading: false,
       total: 0,
       userName: "",

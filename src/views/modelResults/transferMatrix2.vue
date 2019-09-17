@@ -8,12 +8,12 @@
               <el-input v-model="testForm.judge"></el-input>
             </el-form-item>
             <el-form-item>
-              <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
+              <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/> </div>
             </el-form-item>
           </el-form>
       </el-card>
  <el-card class="box-card2">
-    <myTable :columns="columns" :dataSource="dataSource"  :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading">
+    <myTable :columns="columns" :dataSource="dataSource" :height="height" :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading">
      </myTable>
  </el-card>   
   </div>
@@ -27,7 +27,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 600,
+      height: 650,
       loading: false,
       total: 0,
       testForm: {

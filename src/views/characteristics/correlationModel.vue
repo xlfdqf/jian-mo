@@ -21,7 +21,7 @@
 
       <el-card class="box-card2">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
-              :hasSelection="false" :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
+              :hasSelection="false" :hasPagination="false" :total="total" @pageChange="pageChange" :loading="loading" style="margin-left:10px;"> </myTable>
       </el-card>
 
   </div>

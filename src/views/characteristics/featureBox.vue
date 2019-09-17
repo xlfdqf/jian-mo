@@ -24,8 +24,8 @@
 
         <el-tab-pane label="图表" name="2">  <!-- 需分页 -->
            <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
-         element-loading-background="rgba(9, 25, 56, 0.8)" style="height:750px;">
-             <el-row>
+         element-loading-background="rgba(9, 25, 56, 0.8)" style="height:650px;">
+             <el-row  style="overflow-y:auto;height:650px;overflow-x:hidden;">
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="12"><div>
                     <!-- <keep-alive> -->
@@ -122,7 +122,7 @@ export default {
         background: "#e7eaf1" // 按钮的背景颜色
       },
       orgOptions: {},
-      height: 650,
+      height: 600,
       tableLoading: false,
       chartLoading: false,
       dataEmpty: false, //暂无数据

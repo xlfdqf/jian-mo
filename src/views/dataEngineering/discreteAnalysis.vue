@@ -14,7 +14,7 @@
       </el-card>
 
  <el-card class="box-card2">
-      <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" class="box-card2">
+      <el-tabs type="border-card" v-model="activeName" @tab-click="handleClick" style="background-color:#091938;margin-left:13px;">
         <el-tab-pane label="报表" name="1">
              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" :height="height"
               :hasSelection="false" :hasPagination="false" :total="tableTotal" :loading="tableLoading"> </myTable>
@@ -41,7 +41,7 @@ export default {
   components: { myTable },
   data() {
     return {
-      height: 650,
+      height: 600,
       tableLoading: false,
       chartLoading: false,
       activeName: "1",
@@ -323,7 +323,9 @@ export default {
   background-size: cover;
 }
 .table >>> .box-card2 {
-  background-color: #091938 !important;
+  /* background-color: #091938 !important; */
+  background-image: url("../../assets/images/home/btmBg.png");
+  background-size: cover;
 }
 .table >>> .el-card {
   background-color: #080920;

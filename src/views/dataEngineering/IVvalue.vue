@@ -15,8 +15,8 @@
 
       <el-card class="box-card2">
         <el-row>
-          <el-col :span="12"><div>
-              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false" 
+          <el-col :span="12"><div style="margin-left:10px;">
+              <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"  :height="height"
               :hasSelection="false" :hasPagination="false"  @pageChange="pageChange" :total="total" :loading="tableLoading" > </myTable></div>
          </el-col>
          <!-- 报表 end -->
@@ -101,6 +101,7 @@ export default {
         "line-height": "45px", // 请保持与高度一致以垂直居中
         background: "#e7eaf1" // 按钮的背景颜色
       },
+      height: 600,
       hasPagination: true,
       tableLoading: false,
       chartLoading: false,

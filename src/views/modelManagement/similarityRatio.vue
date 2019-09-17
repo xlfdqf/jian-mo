@@ -262,7 +262,7 @@ export default {
   background-size: cover;
 }
 .table >>> .box-card2 {
-  background-image: url("../../assets/images/home/topBg2.png");
+  background-image: url("../../assets/images/home/btmBg.png");
   background-size: cover;
 }
 .table >>> .el-card {

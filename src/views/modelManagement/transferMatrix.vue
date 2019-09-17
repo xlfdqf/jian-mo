@@ -160,8 +160,8 @@ export default {
   background-color: #080920;
   border: none;
 }
-.table >>> .text {
-  background-image: url("../../assets/images/home/topBg2.png");
+.table >>> .el-card {
+  background-image: url("../../assets/images/home/btmBg.png");
   background-size: cover;
 }
 </style>

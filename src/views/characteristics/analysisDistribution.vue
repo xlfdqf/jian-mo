@@ -24,7 +24,7 @@
         <el-tab-pane label="图表" name="2">
           <div v-loading="chartLoading" element-loading-text="拼命加载中" element-loading-spinner="el-icon-loading" 
          element-loading-background="rgba(9, 25, 56, 0.8)" style="height:750px;">
-             <el-row >
+             <el-row  style="overflow-y:auto;height:720px;overflow-x:hidden;">
                 <div v-for="item in chartData" :key="item.id">
                   <el-col :span="12"><div> <ve-histogram :extend="chartExtend" :settings="chartSettings" v-loading="chartLoading"  :data="item" ref="chart2"></ve-histogram><p class="tit">{{item.name}}</p></div></el-col>
                 </div>

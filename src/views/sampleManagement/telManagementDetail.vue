@@ -6,7 +6,7 @@
    </el-card>
 
    <el-card  class="box-card2">
-     <div class="box">
+     <div class="box" style="height:600px;overflow-y:auto;margin-left:10px;">
        <el-collapse v-model="activeNames"  @change="handleChange">
           <el-collapse-item title="基本信息" name="1" v-for="item in basic" :key="item.mobile">
             <template slot="title">

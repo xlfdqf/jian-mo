@@ -324,7 +324,7 @@ export default {
   color: rgb(126, 203, 224);
 }
 .box-card {
-  background-image: url("../../assets/images/home/topBg.png");
+  background-image: url("../../assets/images/home/topBg2.png");
   background-size: cover;
 }
 .table >>> .box-card2 {

@@ -285,7 +285,6 @@ export default {
       let params = { feature_field: testForm.feature_field };
       searchAnalysisDistribution(params)
         .then(res => {
-          console.log(res);
           this.tableLoading = false;
           //报表
           const table = this.filterTable(res.data);

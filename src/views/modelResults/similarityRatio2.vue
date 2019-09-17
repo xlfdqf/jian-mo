@@ -70,7 +70,6 @@ export default {
       getSimilarityRatio2(params)
         .then(res => {
           this.loading = false;
-          console.log(res);
           // this.total = res.data.total;
           this.dataSource = res.data;
         })

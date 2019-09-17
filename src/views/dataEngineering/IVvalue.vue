@@ -203,7 +203,6 @@ export default {
       searchIVvalue(params)
         .then(res => {
           this.tableLoading = false;
-          console.log(res);
           //报表数据
           this.dataSource = res.data;
           this.hasPagination = false;

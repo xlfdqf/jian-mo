@@ -2,8 +2,8 @@
 <template>
   <div class="table">
      <!-- 表单 -->
-      <el-card class="box-card" style="margin-bottom:20px">
-          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+      <el-card class="box-card" style="margin-bottom:20px;height:138px;">
+          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline" style="margin-top:20px;">
             <el-form-item label="转移因子:" prop="transferFactor">
               <el-input v-model="testForm.transferFactor"></el-input>
             </el-form-item>
@@ -37,7 +37,7 @@ export default {
     return {
       loading: false,
       total: 100,
-      height: 680,
+      height: 650,
       testForm: {
         transferFactor: "",
         initialJudgment: "",

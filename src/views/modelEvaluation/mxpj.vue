@@ -103,10 +103,10 @@ export default {
         {
           prop: "dt",
           label: "日期",
-          isShow: true,
-          render: function(v, param) {
-            return moment(param.row.dt).format("YYYY-MM-DD");
-          }
+          isShow: true
+          // render: function(v, param) {
+          //   return moment(param.row.dt).format("YYYY-MM-DD");
+          // }
         },
         {
           prop: "areaUnderCurve",

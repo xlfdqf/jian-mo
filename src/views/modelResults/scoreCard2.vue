@@ -2,8 +2,8 @@
 <template>
   <div class="table">
      <!-- 表单 -->
- <el-card class="box-card" style="margin-bottom:20px">
-          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+ <el-card class="box-card" style="margin-bottom:20px:height:138px;">
+          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline" style="margin-top:20px;">
             <el-form-item label="初次判断:" prop="judge">
               <el-input v-model="testForm.judge"></el-input>
             </el-form-item>

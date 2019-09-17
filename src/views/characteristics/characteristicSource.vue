@@ -2,7 +2,7 @@
 <template>
   <div class="table">
      <!-- 表单 -->
-      <el-card class="box-card" style="margin-bottom:20px">
+      <el-card class="box-card" style="margin-bottom:20px;">
           <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
             <el-form-item label="数据来源:" prop="datasource">
               <el-input v-model="testForm.datasource"></el-input>
@@ -15,7 +15,7 @@
 
       <el-card class="box-card2">
            <myTable :columns="columns" :dataSource="dataSource" :hasIndex="false"
-              :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading"> </myTable>
+              :hasSelection="false" :hasPagination="true" :total="total" @pageChange="pageChange" :loading="loading" style="height:500px;"> </myTable>
       </el-card>
 
   </div>

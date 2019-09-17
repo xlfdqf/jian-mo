@@ -21,7 +21,7 @@
 
 <script>
 import myTable from "@/components/myTable";
-import {} from "@/api/login.js";
+import { getMxpjTable } from "@/api/login.js";
 
 export default {
   components: { myTable },
@@ -35,25 +35,34 @@ export default {
       },
       columns: [
         {
-          prop: "date",
+          prop: "dt",
           label: "日期",
           isShow: true
         },
         {
-          prop: "area",
+          prop: "areaUnderCurve",
           label: "roc曲线面积",
           isShow: true
         },
         {
           prop: "a",
           label: "预警强度",
-          isShow: true
-          //   render: function(v, param) {
-          //     return formatIdcard(param.row.idcard);
-          //   }
+          isShow: true,
+          render: function(v, param) {
+            const params = param.row.areaUnderCurve;
+            if (params < 0.15) {
+              return "严重预警";
+            } else if (0.15 < params < 0.3) {
+              return "中度预警";
+            } else if (0.3 < params < 0.5) {
+              return "轻度预警";
+            } else {
+              return "正常";
+            }
+          }
         }
       ],
-      dataSource: [{ date: "2019-12-10", area: 0.345, a: "严重预警" }]
+      dataSource: []
     };
   },
   mounted() {
@@ -61,17 +70,16 @@ export default {
   },
   methods: {
     query() {
-      //   this.loading = true;
-      let params = { pageIndex: 1, pageSize: 10 };
-      //   getNewsList(params)
-      //     .then(res => {
-      //       this.loading = false;
-      //       this.total = res.data.total.total;
-      //       this.dataSource = res.data.data;
-      //     })
-      //     .catch(error => {
-      //       console.log(error);
-      //     });
+      this.loading = true;
+      getMxpjTable()
+        .then(res => {
+          this.loading = false;
+          this.dataSource = res.data.records;
+          this.tableTotal = res.data.total;
+        })
+        .catch(error => {
+          console.log(error);
+        });
     },
     pageChange(page) {
       let params = { pageIndex: page.currentPage, pageSize: page.pageSize };

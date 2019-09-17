@@ -1,7 +1,7 @@
 <!-- 模型管理转移矩阵页面 -->
 <template>
  <div class="table">
-   <el-card class="box-card" style="height:528px;">
+   <el-card class="box-card" style="height:535px;">
    <div class="text item">
 <el-table
     :data="tableData"

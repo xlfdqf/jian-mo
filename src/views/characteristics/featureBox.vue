@@ -28,9 +28,9 @@
              <el-row  style="overflow-y:auto;height:650px;overflow-x:hidden;">
                 <div v-for="item in chartData" :key='item.name'>
                   <el-col :span="12"><div>
-                    <!-- <keep-alive> -->
+                    <keep-alive>
                        <ve-histogram :settings="chartSettings" :extend="chartExtend" :data="item" ref="chart2" :data-empty="dataEmpty"></ve-histogram>
-                    <!-- </keep-alive> -->
+                    </keep-alive>
                     <p class="tit">{{item.name}}</p></div></el-col>
                 </div>
               </el-row>

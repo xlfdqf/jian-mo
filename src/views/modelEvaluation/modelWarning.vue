@@ -88,7 +88,8 @@ export default {
   background-size: cover;
 }
 .table >>> .box-card2 {
-  background-color: #091938 !important;
+  background-image: url("../../assets/images/home/btmBg.png");
+  background-size: cover;
 }
 .table >>> .el-card {
   background-color: #080920;

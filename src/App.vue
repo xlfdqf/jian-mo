@@ -186,6 +186,7 @@ html {
 
 .el-card__body {
   padding-bottom: 0px;
+  padding: 20px 35px;
 }
 .el-menu-item.is-active {
   background-color: #0c2a4d !important;
@@ -251,5 +252,9 @@ html {
     -webkit-transform 0.15s cubic-bezier(0.71, -0.46, 0.88, 0.6) 50ms;
   -webkit-transform-origin: center;
   transform-origin: center;
+}
+.el-table,
+.el-table__expanded-cell {
+  margin-left: 10px;
 }
 </style>

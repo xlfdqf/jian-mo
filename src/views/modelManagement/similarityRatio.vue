@@ -16,8 +16,8 @@
             </el-form-item>
              
             <el-form-item>
-              <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
-               <div class="search" @click="add" style="float:left;margin-left:20px;"><img src="@/assets/images/home/sbtn.png" style="width:130px;height:35px;object-fit:fill;"/><span class="searchBtn">添加非准入规则</span> </div>
+              <div class="search" @click="onSubmit(testForm)" style="float:left"><img src="@/assets/images/home/sbtn.png"/></div>
+               <div class="search" @click="add" style="float:left;margin-left:20px;"><img src="@/assets/images/home/sbtn2.png" style="width:140px;height:40px;object-fit:fill;"/><span class="searchBtn">添加非准入规则</span> </div>
             </el-form-item>
           </el-form>
       </el-card>
@@ -277,8 +277,8 @@ export default {
 }
 .searchBtn {
   position: absolute;
-  top: 0px;
+  top: 5px;
   left: 20px;
-  color: #7ecbe0;
+  color: #21e9f5;
 }
 </style>

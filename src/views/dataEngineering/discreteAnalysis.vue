@@ -8,7 +8,7 @@
               <el-input v-model="testForm.featureField"></el-input>
             </el-form-item>
             <el-form-item>
-              <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/><span class="searchBtn">搜索</span> </div>
+              <div class="search" @click="onSubmit(testForm)"><img src="@/assets/images/home/sbtn.png"/> </div>
             </el-form-item>
           </el-form>
       </el-card>
@@ -329,17 +329,7 @@ export default {
   background-color: #080920;
   border: none;
 }
-.search {
-  position: relative;
-  padding-top: 5px;
-}
 .search:hover {
   cursor: pointer;
-}
-.searchBtn {
-  position: absolute;
-  top: 0px;
-  left: 20px;
-  color: #7ecbe0;
 }
 </style>

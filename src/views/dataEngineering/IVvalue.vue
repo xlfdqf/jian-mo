@@ -2,8 +2,8 @@
 <template>
   <div class="table">
      <!-- 表单 -->
-      <el-card class="box-card" style="margin-bottom:20px">
-          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+      <el-card class="box-card" style="margin-bottom:20px;height:138px;">
+          <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline" style="margin-top:20px;">
             <el-form-item label="特征字段:" prop="feature_field">
               <el-input v-model="testForm.feature_field"></el-input>
             </el-form-item>
@@ -146,7 +146,7 @@ export default {
         .then(res => {
           this.tableLoading = false;
           // this.total = res.data.total;
-          this.dataSource = res.data.data;
+          this.dataSource = res.data;
         })
         .catch(error => {
           console.log(error);
@@ -158,7 +158,7 @@ export default {
       getIVvalue()
         .then(res => {
           this.chartLoading = false;
-          const data = res.data.data;
+          const data = res.data;
           data.forEach(item => {
             this.chartData.rows.push({
               feature_name: item.feature_name,

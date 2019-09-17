@@ -130,11 +130,13 @@ html {
 .el-table th {
   border: none;
   color: #7ecbe0;
-  background-color: #091938 !important;
+  background-color: #122345 !important;
 }
 .el-table td {
   border: none;
-  background-color: #091938 !important;
+  /* background-color: #091938 !important; */
+
+  background-color: #041432;
 }
 .el-input__inner {
   background-color: #061a41;
@@ -256,5 +258,25 @@ html {
 .el-table,
 .el-table__expanded-cell {
   margin-left: 10px;
+}
+div::-webkit-scrollbar {
+  /*滚动条整体样式*/
+  width: 8px;
+  height: 8px;
+}
+div::-webkit-scrollbar-thumb {
+  /*滚动条里面小方块*/
+  border-radius: 5px;
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  background: #7ecbe0; /* 滚动条颜色 */
+}
+div::-webkit-scrollbar-track {
+  /*滚动条里面轨道*/
+  -webkit-box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #041432;
+}
+.el-table--border th.gutter:last-of-type {
+  border: none;
 }
 </style>

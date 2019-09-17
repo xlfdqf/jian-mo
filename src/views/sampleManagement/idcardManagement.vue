@@ -1,9 +1,9 @@
 <!-- 身份证管理页面-->
 <template>
  <div class="table">
-   <el-card class="box-card" style="margin-bottom:20px">
+   <el-card class="box-card" style="margin-bottom:20px;height:138px;">
       <!-- 表单 -->
-     <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline">
+     <el-form :inline="true" :model="testForm" ref="testForm" class="demo-form-inline" style="margin-top:20px;">
         <el-form-item label="身份证号:" prop="idCard">
           <el-input v-model="testForm.idCard"></el-input>
         </el-form-item>

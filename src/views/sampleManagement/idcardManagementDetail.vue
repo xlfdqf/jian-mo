@@ -1,8 +1,8 @@
 <!-- 身份证详情页面-->
 <template>
  <div class="table">
-   <el-card class="box-card" style="margin-bottom:40px">
-      <h4 style="text-align:center;color:#7ECBE0"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard | formatIdcard}}</span></h4>
+   <el-card class="box-card" style="margin-bottom:40px;height:138px;">
+      <h4 style="text-align:center;color:#7ECBE0;margin-top:40px;"><span style="margin-right:30px">用户姓名：{{username}}</span> <span>身份证号:{{idcard | formatIdcard}}</span></h4>
    </el-card>
 
    <el-card  class="box-card2">

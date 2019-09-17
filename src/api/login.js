@@ -55,7 +55,7 @@ export function searchFeatureBox(params) {
 }
 // 特征IV值
 export function getIVvalue(params) {
-  return get(`${api}/aibin/getSumIvNoPage`, params);
+  return get(`${api}/aibin/searchByIv`, params);
 }
 //特征iv值搜索
 export function searchIVvalue(params) {
